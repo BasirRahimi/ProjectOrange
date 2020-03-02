@@ -1,16 +1,20 @@
 <template>
   <div class="client-form">
-    ClientForm
+    <client-form-navigation></client-form-navigation>
   </div>
 </template>
 
 <script>
+import ClientFormNavigation from './ClientFormNavigation';
 export default {
-  name: 'ClientForm'
+  name: 'ClientForm',
+  components: {
+    ClientFormNavigation
+  }
 }
 </script>
 <style lang="scss" scoped>
 .client-form {
-  background-color: #F0F0F0;
+  position: relative;
 }
 </style>
