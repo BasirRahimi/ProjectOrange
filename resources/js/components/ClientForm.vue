@@ -16,5 +16,6 @@ export default {
 <style lang="scss" scoped>
 .client-form {
   position: relative;
+  padding-top: 60px;
 }
 </style>

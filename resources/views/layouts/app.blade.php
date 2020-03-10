@@ -17,6 +17,9 @@
 </head>
 <body>
     <div id="app">
+        @if(true)
+        <app-header></app-header>
+        @else
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -67,6 +70,7 @@
                 </div>
             </div>
         </nav>
+        @endif
 
         <main>
             @yield('content')
