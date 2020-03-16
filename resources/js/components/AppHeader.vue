@@ -36,11 +36,10 @@ export default {
     font-weight: 600;
     width: 210px;
     height: 100%;
-    padding: 16px 0;
+    padding: 20px 0;
     text-align: center;
     box-sizing: border-box;
     border-right: 1px solid #F0F0F0;
-    border-bottom: 1px solid #F0F0F0;
   }
   .title {
     display: inline-block;

@@ -1,5 +1,5 @@
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url('https://fonts.googleapis.com/css?family=Nunito:200,200i,400,400i,700,700i');
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
 @import '~@fortawesome/fontawesome-free/scss/regular';
 @import '~@fortawesome/fontawesome-free/scss/solid';
@@ -11,3 +11,6 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+@import 'buttons';
+@import 'global';

@@ -1,15 +1,18 @@
 <template>
   <div class="client-form">
     <client-form-navigation></client-form-navigation>
+    <client-form-widgets></client-form-widgets>
   </div>
 </template>
 
 <script>
-import ClientFormNavigation from './ClientFormNavigation';
+import ClientFormNavigation from './client-form/ClientFormNavigation';
+import ClientFormWidgets from './client-form/ClientFormWidgets';
 export default {
   name: 'ClientForm',
   components: {
-    ClientFormNavigation
+    ClientFormNavigation,
+    ClientFormWidgets
   }
 }
 </script>

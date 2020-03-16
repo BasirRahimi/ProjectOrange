@@ -17,7 +17,7 @@
 </head>
 <body>
     <div id="app">
-        @if(true)
+        @if(Auth::user())
         <app-header></app-header>
         @else
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">

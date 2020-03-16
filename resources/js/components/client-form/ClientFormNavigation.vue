@@ -13,7 +13,7 @@
     </button>
     <div class="section-collapse" :class="{'collapsed': !sectionsOpen}" :style="{height: `${sectionsOpenHeight}px`}" ref="sectionCollapse">
       <ul class="fa-ul mb-0">
-        <li class="py-1 section-link" :class="{'active': section.active}" v-for="(section,index) in sections" :key="index">
+        <li class="py-2 section-link" :class="{'active': section.active}" v-for="(section,index) in sections" :key="index">
           <a :tabindex="sectionsOpen ? 0 : -1" href="#" @click="sectionClick(index)">
             <span class="fa-li">
               <i :class="section.icon" class="mr-2 icon"></i>
@@ -159,6 +159,8 @@ export default {
 
 .client-form-navigation {
   position: fixed;
+  top: 60px;
+  left: 0;
   background-color: $white;
   padding: 20px;
   width: 210px;
@@ -196,7 +198,7 @@ export default {
     display: block;
     text-decoration: none;
     color: $body-color;
-    transition: .25s ease-in-out;
+    transition: .25s;
     &:hover {
       color: $primary;
     }

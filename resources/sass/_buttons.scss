@@ -1,0 +1,9 @@
+.btn-primary {
+    color: $white;
+    background-color: $primary;
+    padding: 12px;
+    &:hover {
+        background-color: $body-color;
+        color: $white;
+    }
+}
