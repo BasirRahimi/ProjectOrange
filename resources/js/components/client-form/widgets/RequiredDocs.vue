@@ -1,19 +1,19 @@
 <template>
-    <div class="required-docs shadow rounded">
+    <div class="required-docs shadow rounded" :class="{'inSideNav':inSideNav}">
         <div class="widget-title">SECTION ONE - REQUIRED DOCUMENTS</div>
         <p class="note">Below is a list of all required documents in this section, click on them to find them faster</p>
         <div class="doc-list">
-            <a class="doc">
+            <a href="#" @click.prevent class="doc">
                 <span class="status">1</span>
-                <a href="#" class="doc-name">Document that has nothing uploaded</a>
+                <div href="#" class="doc-name">Document that has nothing uploaded</div>
             </a>
-            <a class="doc done">
+            <a href="#" @click.prevent class="doc done">
                 <span class="status"><i class="fas fa-check"></i></span>
-                <a href="#" class="doc-name">Document has been selected</a>
+                <div href="#" class="doc-name">Document has been selected</div>
             </a>
-            <a class="doc active">
+            <a href="#" @click.prevent class="doc active">
                 <span class="status">3</span>
-                <a href="#" class="doc-name">Document has been clicked on and shown left</a>
+                <div href="#" class="doc-name">Document has been clicked on and shown left</div>
             </a>
         </div>
     </div>
@@ -21,7 +21,8 @@
 
 <script>
 export default {
-    name: 'RequiredDocs'
+    name: 'RequiredDocs',
+    props: ['inSideNav']
 }
 </script>
 
@@ -37,7 +38,7 @@ export default {
     margin-bottom: 16px;
 }
 .note {
-    color: rgba($color: #979A97, $alpha: .5);
+    color: $gray-500;
 }
 
 .doc-list {
@@ -45,7 +46,7 @@ export default {
         padding: 8px 0;
         display: flex;
         align-items: center;
-        
+        text-decoration: none;
         .status {
             position: relative;
             display: flex;
@@ -59,6 +60,7 @@ export default {
             height: 24px;
             background-color: $white;
             transition: .25s;
+            color: $body-color;
             .fas {
                 font-size: 10px;
             }
@@ -67,6 +69,7 @@ export default {
         &:not(:last-child) {
             .status::after {
                 content: ' ';
+                pointer-events: none;
                 width: 1px;
                 height: 100%;
                 background-color: $body-color;
@@ -107,7 +110,43 @@ export default {
             transition: .25s;
             flex: 1 1 0%;
             color: $body-color;
-            
+            width: 100%;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+    }
+}
+.inSideNav {
+    padding: 0;
+    .widget-title {
+        display: none;
+    }
+    .note {
+        display: none;
+    }
+    .doc-list {
+        margin-left: 2.5em;
+        .doc {
+            display: block;
+            position: relative;
+            .status {
+                position: absolute;
+                width: 16px;
+                height: 16px;
+                font-size: 12px;
+                padding: 1px 0px;
+                left: -2.1em;
+                line-height: 12px;
+            }
+            .doc-name {
+                display: inline-block;
+                vertical-align: middle;
+            }
+            &:not(:last-child) {
+                .status::after {
+                    height: 18px;
+                }
+            }
         }
     }
 }

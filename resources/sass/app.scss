@@ -9,8 +9,13 @@
 // Variables
 @import 'variables';
 
+// Mixins
+@import 'mixins';
+
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+@import '~bootstrap-vue/src/index.scss';
 
+@import 'fonticons.scss';
 @import 'buttons';
 @import 'global';

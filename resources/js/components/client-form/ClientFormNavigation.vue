@@ -1,5 +1,6 @@
 <template>
   <nav aria-label="form navigation" class="client-form-navigation shadow" :class="{'collapsed':navCollapsed}">
+
     <button class="nav-toggle" @click="navCollapsed = !navCollapsed">
       <div class="text" v-if="!navCollapsed">NAVIGATION</div>
       <div class="icons" :class="{'m-auto': navCollapsed}">
@@ -8,10 +9,29 @@
         <i v-if="navCollapsed" class="fas fa-chevron-right ml-1"></i>
       </div>
     </button>
+
+    <div class="d-xl-none">
+      <button class="section-toggle" :class="{'text-center': navCollapsed}" @click="toolsOpen = !toolsOpen">
+        <span v-if="!navCollapsed">TOOLS</span><i class="fas fa-chevron-right" :class="[{'active': toolsOpen}, {'ml-2': !navCollapsed}]"></i>
+      </button>
+      <div class="section-collapse" :class="{'collapsed': !toolsOpen || navCollapsed}"  ref="sectionCollapse"> <!-- :style="{height: `${toolsOpenHeight}px`}" -->
+        <a class="show-reminder-form py-2" href="#" @click.prevent="showReminderForm = !showReminderForm"><i class="fas mr-2" :class="[{'fa-plus':!showReminderForm},{'fa-minus':showReminderForm}]"></i>Set new reminder</a>
+        <create-reminder v-show="showReminderForm" class="py-2" :small="true"></create-reminder>
+      </div>
+    </div>
+    <div class="d-xl-none">
+      <button class="section-toggle" :class="{'text-center': navCollapsed}" @click="documentsOpen = !documentsOpen">
+        <span v-if="!navCollapsed">SECTION DOCUMENTS</span><i class="fas fa-chevron-right" :class="[{'active': documentsOpen}, {'ml-2': !navCollapsed}]"></i>
+      </button>
+      <div class="section-collapse" :class="{'collapsed': !documentsOpen}"  ref="sectionCollapse"> <!-- :style="{height: `${documentsOpenHeight}px`}" -->
+        <required-docs :inSideNav="true"></required-docs>
+      </div>
+    </div>
+
     <button class="section-toggle" :class="{'text-center': navCollapsed}" @click="sectionsOpen = !sectionsOpen">
       <span v-if="!navCollapsed">SECTIONS</span><i class="fas fa-chevron-right" :class="[{'active': sectionsOpen}, {'ml-2': !navCollapsed}]"></i>
     </button>
-    <div class="section-collapse" :class="{'collapsed': !sectionsOpen}" :style="{height: `${sectionsOpenHeight}px`}" ref="sectionCollapse">
+    <div class="section-collapse" :class="{'collapsed': !sectionsOpen}"  ref="sectionCollapse"> <!-- :style="{height: `${sectionsOpenHeight}px`}" -->
       <ul class="fa-ul mb-0">
         <li class="py-2 section-link" :class="{'active': section.active}" v-for="(section,index) in sections" :key="index">
           <a :tabindex="sectionsOpen ? 0 : -1" href="#" @click="sectionClick(index)">
@@ -33,14 +53,21 @@
   </nav>
 </template>
 <script>
+import CreateReminder from './CreateReminder';
+import RequiredDocs from './widgets/RequiredDocs';
+
 export default {
   name: 'ClientFormNavigation',
+  components: {
+    CreateReminder,
+    RequiredDocs
+  },
   data() {
     return {
       sections: [
         {
           label:'About',
-          icon: 'fas fa-user',
+          icon: 'po-icon-person',
           active: true
         },
         {
@@ -50,12 +77,12 @@ export default {
         },
         {
           label:'Will & Marital Status',
-          icon: 'fas fa-ring',
+          icon: 'po-icon-ring',
           active: false
         },
         {
           label:'Lifetime gifts',
-          icon: 'fas fa-gift',
+          icon: 'po-icon-present',
           active: false
         },
         {
@@ -65,93 +92,103 @@ export default {
         },
         {
           label:'UK & British Isles',
-          icon: 'fas fa-flag',
+          icon: 'po-icon-flag',
           active: false
         },
         {
           label:'Tax Havens',
-          icon: 'fas fa-globe-europe',
+          icon: 'po-icon-world',
           active: false
         },
         {
           label:'Nil-Rate band',
-          icon: 'fas fa-pound-sign',
+          icon: 'po-icon-pound',
           active: false
         },
         {
           label:'Business interests',
-          icon: 'fas fa-briefcase',
+          icon: 'po-icon-briefcase',
           active: false
         },
         {
           label:'Received inheritance',
-          icon: 'fas fa-credit-card',
+          icon: 'po-icon-debit-card',
           active: false
         },
         {
           label:'Trusts',
-          icon: 'fas fa-handshake',
+          icon: 'po-icon-handshake',
           active: false
         },
         {
           label:'Pensions',
-          icon: 'fas fa-piggy-bank',
+          icon: 'po-icon-piggybank',
           active: false
         },
         {
           label:'Life Assurance',
-          icon: 'fas fa-life-ring',
+          icon: 'po-icon-lifebuoy',
           active: false
         },
         {
           label:'Joint held assets',
-          icon: 'fas fa-user-friends',
+          icon: 'po-icon-people',
           active: false
         },
         {
           label:'Stocks & Shares',
-          icon: 'fas fa-chart-area',
+          icon: 'po-icon-graph',
           active: false
         },
         {
           label:'Bank and savings',
-          icon: 'fas fa-dollar-sign',
+          icon: 'po-icon-dollar',
           active: false
         },
         {
           label:'Personal belongings',
-          icon: 'fas fa-tv',
+          icon: 'po-icon-tv',
           active: false
         },
         {
           label:'Assets',
-          icon: 'fas fa-home',
+          icon: 'po-icon-house',
           active: false
         },
         {
           label:'Liabilities',
-          icon: 'fas fa-car',
+          icon: 'po-icon-car',
           active: false
         },
         {
           label:'Other information',
-          icon: 'fas fa-info-circle',
+          icon: 'po-icon-information',
           active: false
         },
       ],
       sectionsOpen: true,
-      sectionsOpenHeight: '620',
-      navCollapsed: false
+      // sectionsOpenHeight: '620',
+      toolsOpen: true,
+      // toolsOpenHeight: '60',
+      documentsOpen: true,
+      navCollapsed: false,
+      showReminderForm: false
     }
-  },
-  mounted() {
   },
   methods: {
     sectionClick(index) {
       this.sections.find(x=>x.active == true).active = false;
       this.sections[index].active = true;
     }
-  }
+  },
+  watch: {
+    navCollapsed(newVal) {
+      this.$emit('navToggled', newVal);
+    },
+    // showReminderForm(newVal) {
+    //   this.toolsOpenHeight = 
+    // }
+  },
 }
 </script>
 <style lang="scss" scoped>
@@ -164,9 +201,13 @@ export default {
   background-color: $white;
   padding: 20px;
   width: 210px;
+  height: calc(100% - 60px);
   transition: .25s;
-  overflow: hidden;
+  overflow-y: scroll;
   white-space: nowrap;
+  &::-webkit-scrollbar {
+    width: 0;
+  }
   &.collapsed {
     width: 35px;
     padding-left: 0;
@@ -201,13 +242,32 @@ export default {
     transition: .25s;
     &:hover {
       color: $primary;
+      //po icons
+      .icon {
+        &::before {
+          color: $primary;
+        }
+      }
+    }
+    //po icons
+    .icon {
+      &::before {
+        transition: .25s;
+        color: $body-color;
+      }
     }
   }
   &.active {
     a {
       color: $primary;
+      //po icons
+      .icon {
+        &::before {
+          color: $primary;
+        }
+      }
     }
-  }
+  }  
 }
 .section-collapse {
   transition: .25s;
@@ -231,6 +291,19 @@ export default {
     flex-grow: 1;
   }
   .icons {
+    font-size: 12px;
+  }
+}
+.show-reminder-form {
+  transition: .25s;
+  color: $body-color;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  &:hover {
+    color: $primary;
+  }
+  .fas {
     font-size: 12px;
   }
 }
