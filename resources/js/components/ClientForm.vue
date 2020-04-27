@@ -3,16 +3,7 @@
     <client-form-navigation @navToggled="navToggled"></client-form-navigation>
     <client-form-widgets></client-form-widgets>
     <div class="form-content">
-      <div class="section shadow rounded mb-3">
-      </div>
-      <div class="section shadow rounded mb-3">
-      </div>
-      <div class="section shadow rounded mb-3">
-      </div>
-      <div class="section shadow rounded mb-3">
-      </div>
-      <div class="section shadow rounded mb-3">
-      </div>
+      <router-view></router-view>
     </div>
   </div>
 </template>
@@ -39,7 +30,6 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import '~@/_variables.scss';
 @import '~@/_mixins.scss';
 
 .client-form {
@@ -60,11 +50,5 @@ export default {
   padding-top: 64px;
   padding-left: 24px;
   padding-right: 24px;
-}
-.section {
-  max-width: 900px;
-  margin: auto;
-  background-color: $white;
-  height: 300px;
 }
 </style>

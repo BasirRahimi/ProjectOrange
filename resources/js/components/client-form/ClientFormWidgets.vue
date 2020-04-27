@@ -18,8 +18,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~@/_variables.scss';
-@import '~@/_mixins.scss';
+@import '~@/_mixins.scss'; 
 
 .widgets-container {
   position: fixed;
@@ -30,6 +29,7 @@ export default {
   width: 380px;
   height: calc(100% - 60px);
   overflow-y: scroll;
+  z-index: 1;
   &::-webkit-scrollbar {
     width: 0;
   }

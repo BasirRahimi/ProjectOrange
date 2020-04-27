@@ -51,7 +51,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~@/_variables.scss';
+@import '~@/_variables.scss'; 
 
 label {
     font-weight: bold;

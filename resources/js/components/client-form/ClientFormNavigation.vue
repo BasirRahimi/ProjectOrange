@@ -28,13 +28,37 @@
       </div>
     </div>
 
+    <button class="section-toggle" :class="{'text-center': navCollapsed}" @click="caseDetailsOpen = !caseDetailsOpen">
+      <span v-if="!navCollapsed">CASE DETAILS</span><i class="fas fa-chevron-right" :class="[{'active': caseDetailsOpen}, {'ml-2': !navCollapsed}]"></i>
+    </button>
+    <div class="section-collapse" :class="{'collapsed': !caseDetailsOpen}"> <!-- :style="{height: `${caseDetailsOpenHeight}px`}" -->
+      <ul class="fa-ul mb-0">
+        <li class="py-2 section-link" :class="{'active': 'section1' == currentRouteName}">
+          <a href="#" @click.prevent="$router.push({name:'section1'})">
+            <span class="fa-li">
+              <i class="mr-2 icon po-icon-person"></i>
+            </span>
+            About
+          </a>
+        </li>
+        <li class="py-2 section-link" :class="{'active': 'section2' == currentRouteName}">
+          <a href="#" @click.prevent="$router.push({name:'section2'})">
+            <!-- <span class="fa-li">
+              <i :class="section.icon" class="mr-2 icon"></i>
+            </span> -->
+            Executors
+          </a>
+        </li>
+      </ul>
+    </div>
+
     <button class="section-toggle" :class="{'text-center': navCollapsed}" @click="sectionsOpen = !sectionsOpen">
       <span v-if="!navCollapsed">SECTIONS</span><i class="fas fa-chevron-right" :class="[{'active': sectionsOpen}, {'ml-2': !navCollapsed}]"></i>
     </button>
     <div class="section-collapse" :class="{'collapsed': !sectionsOpen}"  ref="sectionCollapse"> <!-- :style="{height: `${sectionsOpenHeight}px`}" -->
       <ul class="fa-ul mb-0">
-        <li class="py-2 section-link" :class="{'active': section.active}" v-for="(section,index) in sections" :key="index">
-          <a :tabindex="sectionsOpen ? 0 : -1" href="#" @click="sectionClick(index)">
+        <li class="py-2 section-link" :class="{'active': section.routeName == currentRouteName}" v-for="(section,index) in sections" :key="index">
+          <a :tabindex="sectionsOpen ? 0 : -1" href="#" @click.prevent="$router.push({name: section.routeName})">
             <span class="fa-li">
               <i :class="section.icon" class="mr-2 icon"></i>
             </span>
@@ -66,119 +90,121 @@ export default {
     return {
       sections: [
         {
-          label:'About',
-          icon: 'po-icon-person',
-          active: true
-        },
-        {
           label:'Powers of Attorney',
           icon: 'fas fa-pen-nib',
-          active: false
+          routeName: 'section3'
         },
         {
           label:'Will & Marital Status',
           icon: 'po-icon-ring',
-          active: false
+          routeName: 'section4'
         },
         {
           label:'Lifetime gifts',
           icon: 'po-icon-present',
-          active: false
+          routeName: 'section5'
         },
         {
           label:'Gifts',
           icon: 'fas fa-gifts',
-          active: false
+          routeName: 'section6'
         },
         {
           label:'UK & British Isles',
           icon: 'po-icon-flag',
-          active: false
+          routeName: 'section7'
         },
         {
           label:'Tax Havens',
           icon: 'po-icon-world',
-          active: false
+          routeName: 'section8'
         },
         {
           label:'Nil-Rate band',
           icon: 'po-icon-pound',
-          active: false
+          routeName: 'section9'
         },
         {
           label:'Business interests',
           icon: 'po-icon-briefcase',
-          active: false
+          routeName: 'section10'
         },
         {
           label:'Received inheritance',
           icon: 'po-icon-debit-card',
-          active: false
+          routeName: 'section11'
         },
         {
           label:'Trusts',
           icon: 'po-icon-handshake',
-          active: false
+          routeName: 'section12'
         },
         {
           label:'Pensions',
           icon: 'po-icon-piggybank',
-          active: false
+          routeName: 'section13'
         },
         {
           label:'Life Assurance',
           icon: 'po-icon-lifebuoy',
-          active: false
+          routeName: 'section14'
         },
         {
           label:'Joint held assets',
           icon: 'po-icon-people',
-          active: false
+          routeName: 'section15'
         },
         {
           label:'Stocks & Shares',
           icon: 'po-icon-graph',
-          active: false
+          routeName: 'section16'
         },
         {
           label:'Bank and savings',
           icon: 'po-icon-dollar',
-          active: false
+          routeName: 'section17'
         },
         {
           label:'Personal belongings',
           icon: 'po-icon-tv',
-          active: false
+          routeName: 'section18'
         },
         {
           label:'Assets',
           icon: 'po-icon-house',
-          active: false
+          routeName: 'section19'
         },
         {
           label:'Liabilities',
           icon: 'po-icon-car',
-          active: false
+          routeName: 'section20'
         },
         {
           label:'Other information',
           icon: 'po-icon-information',
-          active: false
+          routeName: 'section21'
         },
       ],
+      caseDetailsOpen: true,
       sectionsOpen: true,
       // sectionsOpenHeight: '620',
       toolsOpen: true,
       // toolsOpenHeight: '60',
       documentsOpen: true,
       navCollapsed: false,
-      showReminderForm: false
+      showReminderForm: false,
+    }
+  },
+  computed: {
+    currentRouteName() {
+        return this.$route.name;
     }
   },
   methods: {
     sectionClick(index) {
       this.sections.find(x=>x.active == true).active = false;
       this.sections[index].active = true;
+      this.$router.push(`section${index}`);
     }
   },
   watch: {
@@ -192,7 +218,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import '~@/_variables.scss';
+@import '~@/_variables.scss'; 
 
 .client-form-navigation {
   position: fixed;
@@ -205,6 +231,7 @@ export default {
   transition: .25s;
   overflow-y: scroll;
   white-space: nowrap;
+  z-index: 1;
   &::-webkit-scrollbar {
     width: 0;
   }

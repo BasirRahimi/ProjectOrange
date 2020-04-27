@@ -14,3 +14,66 @@
 .text-gray-500 {
     color: $gray-500;
 }
+.icon-xs {
+    font-size: smaller;
+}
+.pointer {
+    cursor: pointer;
+}
+/****---- CUSTOM RADIO ----****/
+.custom-radio[type="radio"]:checked,
+.custom-radio[type="radio"]:not(:checked) {
+    position: absolute;
+    left: -9999px;
+}
+.custom-radio[type="radio"]:checked + label,
+.custom-radio[type="radio"]:not(:checked) + label
+{
+    position: relative;
+    padding-left: 28px;
+    cursor: pointer;
+    line-height: 20px;
+    display: inline-block;
+    color: #666;
+}
+.custom-radio[type="radio"]:checked + label:before,
+.custom-radio[type="radio"]:not(:checked) + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 18px;
+    height: 18px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    background: #fff;
+}
+.custom-radio[type="radio"]:checked + label:after,
+.custom-radio[type="radio"]:not(:checked) + label:after {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    font-size: 12px;
+    color: $white;
+    text-align: center;
+    content: '\f00c';
+    width: 18px;
+    height: 18px;
+    background:$primary;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 4px;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+.custom-radio[type="radio"]:not(:checked) + label:after {
+    opacity: 0;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+}
+.custom-radio[type="radio"]:checked + label:after {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}
+/****---- /CUSTOM RADIO ----****/

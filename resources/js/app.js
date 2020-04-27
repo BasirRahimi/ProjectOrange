@@ -4,12 +4,16 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+
 require('./bootstrap');
 
 window.Vue = require('vue');
 
 import { ModalPlugin } from 'bootstrap-vue';
 Vue.use(ModalPlugin);
+
+import { CollapsePlugin } from 'bootstrap-vue';
+Vue.use(CollapsePlugin)
 
 /**
  * The following block of code may be used to automatically register your
@@ -24,12 +28,17 @@ Vue.use(ModalPlugin);
 
 Vue.component('client-form', require('./components/ClientForm.vue').default);
 Vue.component('app-header', require('./components/AppHeader.vue').default);
+Vue.component('content-box', require('./components/client-form/ContentBox.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+
+import router from './router';
+
 const app = new Vue({
     el: '#app',
+    router,
 });

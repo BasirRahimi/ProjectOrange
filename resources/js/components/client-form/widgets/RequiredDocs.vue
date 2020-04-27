@@ -27,7 +27,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~@/_variables.scss';
+@import '~@/_variables.scss'; 
 
 .required-docs {
     padding: 24px;
@@ -144,7 +144,7 @@ export default {
             }
             &:not(:last-child) {
                 .status::after {
-                    height: 18px;
+                    height: 30px;
                 }
             }
         }

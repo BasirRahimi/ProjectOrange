@@ -5,7 +5,7 @@ $body-color: #4C4C4C;
 // Typography
 $font-family-sans-serif: 'Nunito', sans-serif;
 $font-size-base: 0.9rem;
-$line-height-base: 1.1;
+$line-height-base: 1.4;
 
 // Shades
 $white:    #fff !default;
@@ -45,8 +45,8 @@ $border-radius: 4px;
 $input-placeholder-color: $gray-500 !default;
 
 // Buttons
-$input-btn-padding-y: .75rem !default;
-$input-btn-padding-x: .75rem !default;
+$input-btn-padding-y: .5rem !default;
+$input-btn-padding-x: 1rem !default;
 
 // Grid breakpoints
 $grid-breakpoints: (
