@@ -2321,6 +2321,51 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/client-form/form-snippets/Honorific.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/babel-loader/lib??ref--11-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/client-form/form-snippets/Honorific.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'Honorific',
+  data: function data() {
+    return {
+      honorific: ''
+    };
+  },
+  methods: {
+    updateHonorific: function updateHonorific(event) {
+      if (typeof event == 'string') {
+        this.honorific = event;
+      } else {
+        this.honorific = event.target.value;
+      }
+
+      this.$emit('update', this.honorific);
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/client-form/sections/section1.vue?vue&type=script&lang=js&":
 /*!***********************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/babel-loader/lib??ref--11-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/client-form/sections/section1.vue?vue&type=script&lang=js& ***!
@@ -3214,15 +3259,172 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _base_components_BaseFileUpload_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../base-components/BaseFileUpload.vue */ "./resources/js/components/base-components/BaseFileUpload.vue");
+/* harmony import */ var _form_snippets_Honorific_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../form-snippets/Honorific.vue */ "./resources/js/components/client-form/form-snippets/Honorific.vue");
+/* harmony import */ var vuejs_datepicker__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuejs-datepicker */ "./node_modules/vuejs-datepicker/dist/vuejs-datepicker.esm.js");
 //
 //
 //
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    BaseFileUpload: _base_components_BaseFileUpload_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+    Honorific: _form_snippets_Honorific_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    Datepicker: vuejs_datepicker__WEBPACK_IMPORTED_MODULE_2__["default"]
+  },
   data: function data() {
-    return {};
+    return {
+      formData: {
+        query1: {
+          answer: null
+        },
+        query2: {
+          answer: null
+        },
+        query3: {
+          answer: null,
+          answer2: null,
+          forename: '',
+          surname: '',
+          phone: '',
+          email: '',
+          honorific: ''
+        },
+        query4: {
+          answer: null,
+          deathDate: null,
+          marriageDate: null,
+          forename: '',
+          surname: ''
+        }
+      }
+    };
   }
 });
 
@@ -78316,6 +78518,100 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/client-form/form-snippets/Honorific.vue?vue&type=template&id=defe7ee6&":
+/*!**************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/client-form/form-snippets/Honorific.vue?vue&type=template&id=defe7ee6& ***!
+  \**************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "row no-gutters" }, [
+    _c("div", { staticClass: "col-12 col-lg-6 mb-4 d-flex" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-outline-secondary active-primary mr-3 col",
+          class: { active: _vm.honorific == "Mr." },
+          on: {
+            click: function($event) {
+              return _vm.updateHonorific("Mr.")
+            }
+          }
+        },
+        [_c("b", [_vm._v("Mr.")])]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-outline-secondary active-primary mr-3 col",
+          class: { active: _vm.honorific == "Mrs." },
+          on: {
+            click: function($event) {
+              return _vm.updateHonorific("Mrs.")
+            }
+          }
+        },
+        [_c("b", [_vm._v("Mrs.")])]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-outline-secondary active-primary mr-3 col",
+          class: { active: _vm.honorific == "Miss" },
+          on: {
+            click: function($event) {
+              return _vm.updateHonorific("Miss")
+            }
+          }
+        },
+        [_c("b", [_vm._v("Miss")])]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-outline-secondary active-primary mr-lg-3 col",
+          class: { active: _vm.honorific == "Ms" },
+          on: {
+            click: function($event) {
+              return _vm.updateHonorific("Ms")
+            }
+          }
+        },
+        [_c("b", [_vm._v("Ms")])]
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-12 col-lg-6 mb-4" }, [
+      _c("input", {
+        staticClass: "form-control",
+        attrs: { type: "text", placeholder: "Other" },
+        on: {
+          input: function($event) {
+            return _vm.updateHonorific($event)
+          }
+        }
+      })
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/client-form/sections/section1.vue?vue&type=template&id=c2f857ae&scoped=true&":
 /*!********************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/client-form/sections/section1.vue?vue&type=template&id=c2f857ae&scoped=true& ***!
@@ -81173,7 +81469,675 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "section4" })
+  return _c(
+    "div",
+    [
+      _c(
+        "content-box",
+        { attrs: { title: "Section 3 - Other Information" } },
+        [
+          _c("div", { staticClass: "row" }, [
+            _c(
+              "div",
+              { staticClass: "col-12 mb-3" },
+              [
+                _c("label", [_vm._v("Did the deceased make a Will?")]),
+                _c("br"),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass:
+                      "btn btn-outline-secondary active-primary mr-3 mb-3",
+                    class: { active: _vm.formData.query1.answer === true },
+                    on: {
+                      click: function($event) {
+                        _vm.formData.query1.answer = true
+                      }
+                    }
+                  },
+                  [_vm._v("Yes")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass:
+                      "btn btn-outline-secondary active-primary mr-3 mb-3",
+                    class: { active: _vm.formData.query1.answer === false },
+                    on: {
+                      click: function($event) {
+                        _vm.formData.query1.answer = false
+                      }
+                    }
+                  },
+                  [_vm._v("No")]
+                ),
+                _c("br"),
+                _vm._v(" "),
+                _c(
+                  "b-collapse",
+                  { attrs: { visible: _vm.formData.query1.answer === true } },
+                  [_c("base-file-upload", { staticClass: "mb-3" })],
+                  1
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "col-12 mb-3" },
+              [
+                _c("label", [_vm._v("Did the deceased make any Codicils?")]),
+                _c("br"),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass:
+                      "btn btn-outline-secondary active-primary mr-3 mb-3",
+                    class: { active: _vm.formData.query2.answer === true },
+                    on: {
+                      click: function($event) {
+                        _vm.formData.query2.answer = true
+                      }
+                    }
+                  },
+                  [_vm._v("Yes")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass:
+                      "btn btn-outline-secondary active-primary mr-3 mb-3",
+                    class: { active: _vm.formData.query2.answer === false },
+                    on: {
+                      click: function($event) {
+                        _vm.formData.query2.answer = false
+                      }
+                    }
+                  },
+                  [_vm._v("No")]
+                ),
+                _c("br"),
+                _vm._v(" "),
+                _c(
+                  "b-collapse",
+                  { attrs: { visible: _vm.formData.query2.answer === true } },
+                  [_c("base-file-upload", { staticClass: "mb-3" })],
+                  1
+                )
+              ],
+              1
+            )
+          ]),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              directives: [
+                {
+                  name: "b-toggle",
+                  rawName: "v-b-toggle.collapse1",
+                  modifiers: { collapse1: true }
+                }
+              ],
+              staticClass: "pointer"
+            },
+            [
+              _vm._v("Tip"),
+              _c("i", { staticClass: "icon-xs fas fa-chevron-down ml-2" })
+            ]
+          ),
+          _vm._v(" "),
+          _c("b-collapse", { attrs: { visible: "", id: "collapse1" } }, [
+            _c("p", { staticClass: "text-gray-500 mt-2" }, [
+              _vm._v(
+                "If you hold the original Will (and any codicils), nothing should be pinned, clipped or fastened to it at any time."
+              )
+            ])
+          ])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "content-box",
+        { attrs: { title: "3.2 The Will (‘Foreign Wills’)" } },
+        [
+          _c(
+            "div",
+            { staticClass: "row" },
+            [
+              _c("div", { staticClass: "col-12 mb-4" }, [
+                _c("label", [
+                  _vm._v("Did the deceased make a Will under a different law?")
+                ]),
+                _c("br"),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass:
+                      "btn btn-outline-secondary active-primary mr-3",
+                    class: { active: _vm.formData.query3.answer === true },
+                    on: {
+                      click: function($event) {
+                        _vm.formData.query3.answer = true
+                      }
+                    }
+                  },
+                  [_vm._v("Yes")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass:
+                      "btn btn-outline-secondary active-primary mr-3",
+                    class: { active: _vm.formData.query3.answer === false },
+                    on: {
+                      click: function($event) {
+                        _vm.formData.query3.answer = false
+                      }
+                    }
+                  },
+                  [_vm._v("No")]
+                )
+              ]),
+              _vm._v(" "),
+              _c(
+                "b-collapse",
+                {
+                  staticClass: "col-12",
+                  attrs: { visible: _vm.formData.query3.answer === true }
+                },
+                [
+                  _c("div", { staticClass: "mb-4" }, [
+                    _c("label", [
+                      _vm._v(
+                        "Is there another lawyer advising on the non-UK process?"
+                      )
+                    ]),
+                    _c("br"),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass:
+                          "btn btn-outline-secondary active-primary mr-3",
+                        class: { active: _vm.formData.query3.answer2 === true },
+                        on: {
+                          click: function($event) {
+                            _vm.formData.query3.answer2 = true
+                          }
+                        }
+                      },
+                      [_vm._v("Yes")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass:
+                          "btn btn-outline-secondary active-primary mr-3",
+                        class: {
+                          active: _vm.formData.query3.answer2 === false
+                        },
+                        on: {
+                          click: function($event) {
+                            _vm.formData.query3.answer2 = false
+                          }
+                        }
+                      },
+                      [_vm._v("No")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "b-collapse",
+                    {
+                      attrs: { visible: _vm.formData.query3.answer2 === true }
+                    },
+                    [
+                      _c("honorific", {
+                        on: {
+                          update: function(x) {
+                            _vm.formData.query3.honorific = x
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "mb-4" }, [
+                        _c("label", { attrs: { for: "forename" } }, [
+                          _vm._v("Forename")
+                        ]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.formData.query3.forename,
+                              expression: "formData.query3.forename"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            type: "text",
+                            id: "forename",
+                            placeholder: "John"
+                          },
+                          domProps: { value: _vm.formData.query3.forename },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.formData.query3,
+                                "forename",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "mb-4" }, [
+                        _c("label", { attrs: { for: "surname" } }, [
+                          _vm._v("Surname")
+                        ]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.formData.query3.surname,
+                              expression: "formData.query3.surname"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            type: "text",
+                            id: "surname",
+                            placeholder: "Doe"
+                          },
+                          domProps: { value: _vm.formData.query3.surname },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.formData.query3,
+                                "surname",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-12 col-lg-6 mb-4" }, [
+                          _c("label", { attrs: { for: "phone" } }, [
+                            _vm._v("Phone number")
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.formData.query3.phone,
+                                expression: "formData.query3.phone"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: {
+                              type: "text",
+                              id: "phone",
+                              placeholder: "+44 012345 67890"
+                            },
+                            domProps: { value: _vm.formData.query3.phone },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.formData.query3,
+                                  "phone",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-12 col-lg-6 mb-4" }, [
+                          _c("label", { attrs: { for: "email" } }, [
+                            _vm._v("Email Address")
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.formData.query3.email,
+                                expression: "formData.query3.email"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: {
+                              type: "text",
+                              id: "email",
+                              placeholder: "John.doe@doe.co.uk"
+                            },
+                            domProps: { value: _vm.formData.query3.email },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.formData.query3,
+                                  "email",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          })
+                        ])
+                      ])
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "content-box",
+        { attrs: { title: "3.3 If the deceased was a widow or widower" } },
+        [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-12" }, [
+              _c("label", [_vm._v("Was the deceased a widow or widower?")]),
+              _c("br"),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-outline-secondary active-primary mr-3",
+                  class: { active: _vm.formData.query4.answer === true },
+                  on: {
+                    click: function($event) {
+                      _vm.formData.query4.answer = true
+                    }
+                  }
+                },
+                [_vm._v("Yes")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-outline-secondary active-primary mr-3",
+                  class: { active: _vm.formData.query4.answer === false },
+                  on: {
+                    click: function($event) {
+                      _vm.formData.query4.answer = false
+                    }
+                  }
+                },
+                [_vm._v("No")]
+              ),
+              _c("br")
+            ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "b-collapse",
+            { attrs: { visible: _vm.formData.query4.answer === true } },
+            [
+              _c("label", { staticClass: "my-4" }, [
+                _vm._v(
+                  "Please add the following details of the spouse who died first:"
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "row" }, [
+                _c(
+                  "div",
+                  { staticClass: "col-lg-4 mb-4" },
+                  [
+                    _c("label", [_vm._v("Date of death")]),
+                    _vm._v(" "),
+                    _c("datepicker", {
+                      attrs: {
+                        "input-class": "form-control bg-white",
+                        placeholder: "Date",
+                        format: "dd / MM / yy"
+                      },
+                      model: {
+                        value: _vm.formData.query4.deathDate,
+                        callback: function($$v) {
+                          _vm.$set(_vm.formData.query4, "deathDate", $$v)
+                        },
+                        expression: "formData.query4.deathDate"
+                      }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "col-lg-4 mb-4" },
+                  [
+                    _c("label", [_vm._v("Date of marriage")]),
+                    _vm._v(" "),
+                    _c("datepicker", {
+                      attrs: {
+                        "input-class": "form-control bg-white",
+                        placeholder: "Date",
+                        format: "dd / MM / yy"
+                      },
+                      model: {
+                        value: _vm.formData.query4.marriageDate,
+                        callback: function($$v) {
+                          _vm.$set(_vm.formData.query4, "marriageDate", $$v)
+                        },
+                        expression: "formData.query4.marriageDate"
+                      }
+                    })
+                  ],
+                  1
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "mb-4" }, [
+                _c("label", { attrs: { for: "forename" } }, [
+                  _vm._v("Forename")
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.formData.query4.forename,
+                      expression: "formData.query4.forename"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { type: "text", id: "forename", placeholder: "John" },
+                  domProps: { value: _vm.formData.query4.forename },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(
+                        _vm.formData.query4,
+                        "forename",
+                        $event.target.value
+                      )
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "mb-4" }, [
+                _c("label", { attrs: { for: "surname" } }, [_vm._v("Surname")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.formData.query4.surname,
+                      expression: "formData.query4.surname"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { type: "text", id: "surname", placeholder: "Doe" },
+                  domProps: { value: _vm.formData.query4.surname },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(
+                        _vm.formData.query4,
+                        "surname",
+                        $event.target.value
+                      )
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("label", [
+                _vm._v(
+                  "Please attach the following documents related to the first spouse:"
+                )
+              ]),
+              _vm._v(" "),
+              _c("p", { staticClass: "text-gray-500 mb-3" }, [
+                _vm._v(
+                  "All of these documents are necessary to claim Transferable Nil Rate Band. Sometimes the Grant of Probate and Estate accounts are not available, if you cannot locate them, please search."
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "row mb-1" }, [
+                _c(
+                  "div",
+                  { staticClass: "col-6 col-lg-3 d-flex align-items-center" },
+                  [_vm._v("A marriage certificate")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "col-6 col-lg-3 d-flex align-items-center" },
+                  [_c("base-file-upload", { staticClass: "mb-3" })],
+                  1
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "row mb-1" }, [
+                _c(
+                  "div",
+                  { staticClass: "col-6 col-lg-3 d-flex align-items-center" },
+                  [_vm._v("Death certificate")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "col-6 col-lg-3 d-flex align-items-center" },
+                  [_c("base-file-upload", { staticClass: "mb-3" })],
+                  1
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "row mb-1" }, [
+                _c(
+                  "div",
+                  { staticClass: "col-6 col-lg-3 d-flex align-items-center" },
+                  [_vm._v("Copy of Will")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "col-6 col-lg-3 d-flex align-items-center" },
+                  [_c("base-file-upload", { staticClass: "mb-3" })],
+                  1
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "row mb-1" }, [
+                _c(
+                  "div",
+                  { staticClass: "col-6 col-lg-3 d-flex align-items-center" },
+                  [_vm._v("Copy of Codicil(s)")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "col-6 col-lg-3 d-flex align-items-center" },
+                  [_c("base-file-upload", { staticClass: "mb-3" })],
+                  1
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "row mb-1" }, [
+                _c(
+                  "div",
+                  { staticClass: "col-6 col-lg-3 d-flex align-items-center" },
+                  [_vm._v("Grant of Probate")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "col-6 col-lg-3 d-flex align-items-center" },
+                  [_c("base-file-upload", { staticClass: "mb-3" })],
+                  1
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "row mb-1" }, [
+                _c(
+                  "div",
+                  { staticClass: "col-6 col-lg-3 d-flex align-items-center" },
+                  [_vm._v("Estate accounts")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "col-6 col-lg-3 d-flex align-items-center" },
+                  [_c("base-file-upload", { staticClass: "mb-3" })],
+                  1
+                )
+              ])
+            ]
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -99763,6 +100727,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateReminder_vue_vue_type_template_id_9be6df3c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateReminder_vue_vue_type_template_id_9be6df3c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/client-form/form-snippets/Honorific.vue":
+/*!*************************************************************************!*\
+  !*** ./resources/js/components/client-form/form-snippets/Honorific.vue ***!
+  \*************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Honorific_vue_vue_type_template_id_defe7ee6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Honorific.vue?vue&type=template&id=defe7ee6& */ "./resources/js/components/client-form/form-snippets/Honorific.vue?vue&type=template&id=defe7ee6&");
+/* harmony import */ var _Honorific_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Honorific.vue?vue&type=script&lang=js& */ "./resources/js/components/client-form/form-snippets/Honorific.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Honorific_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Honorific_vue_vue_type_template_id_defe7ee6___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Honorific_vue_vue_type_template_id_defe7ee6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/client-form/form-snippets/Honorific.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/client-form/form-snippets/Honorific.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************!*\
+  !*** ./resources/js/components/client-form/form-snippets/Honorific.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_babel_loader_lib_index_js_ref_11_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Honorific_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/babel-loader/lib??ref--11-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Honorific.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/client-form/form-snippets/Honorific.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_babel_loader_lib_index_js_ref_11_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Honorific_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/client-form/form-snippets/Honorific.vue?vue&type=template&id=defe7ee6&":
+/*!********************************************************************************************************!*\
+  !*** ./resources/js/components/client-form/form-snippets/Honorific.vue?vue&type=template&id=defe7ee6& ***!
+  \********************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Honorific_vue_vue_type_template_id_defe7ee6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Honorific.vue?vue&type=template&id=defe7ee6& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/client-form/form-snippets/Honorific.vue?vue&type=template&id=defe7ee6&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Honorific_vue_vue_type_template_id_defe7ee6___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Honorific_vue_vue_type_template_id_defe7ee6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
