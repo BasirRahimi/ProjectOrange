@@ -3607,13 +3607,31 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _form_snippets_YesNo_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../form-snippets/YesNo.vue */ "./resources/js/components/client-form/form-snippets/YesNo.vue");
 //
 //
 //
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    YesNo: _form_snippets_YesNo_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
   data: function data() {
     return {};
   }
@@ -3630,13 +3648,49 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _form_snippets_YesNo_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../form-snippets/YesNo.vue */ "./resources/js/components/client-form/form-snippets/YesNo.vue");
 //
 //
 //
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    YesNo: _form_snippets_YesNo_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
   data: function data() {
     return {};
   }
@@ -82745,7 +82799,80 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "section6" })
+  return _c(
+    "div",
+    { staticClass: "section6" },
+    [
+      _c(
+        "content-box",
+        { attrs: { title: "Section 5 - Gifts with reservation of benefit" } },
+        [
+          _c("p", { staticClass: "text-gray-500" }, [
+            _vm._v(
+              "There is established anti-avoidance legislation which removes any tax advantage if a person has given away an asset but retained an interest in it. An example of this is where a parent might transfer the title of their home to a son or daughter but remain in occupation of it after the transfer takes place. This is known as a ‘gift with reservation of benefit’ (GWRoB) and Executors have a duty to make fullest enquiries and make full disclosure to HMRC."
+            )
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "text-gray-500" }, [
+            _vm._v(
+              "It does not matter whether seven-years have elapsed since the original transfer of the title."
+            )
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "content-box",
+        { attrs: { title: "5.2 Anti-avoidance legislation" } },
+        [
+          _c(
+            "yes-no",
+            {
+              attrs: {
+                label:
+                  "Did the deceased transfer any assets to any individual, trust, company or other organisation during their lifetime where the recipient did not take full possession of them?",
+                collapse: ""
+              }
+            },
+            [
+              _c("textarea", {
+                staticClass: "form-control mt-3",
+                attrs: {
+                  rows: "4",
+                  placeholder:
+                    "We shall review this information and ask for further details as appropriate to ensure you make full disclosure to HMRC."
+                }
+              })
+            ]
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "content-box",
+        {
+          staticClass: "p-0 text-right",
+          attrs: { shadow: false, whiteBg: false }
+        },
+        [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary shadow",
+              on: {
+                click: function($event) {
+                  return _vm.$router.push({ name: "section7" })
+                }
+              }
+            },
+            [_vm._v("Next section")]
+          )
+        ]
+      )
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -82769,7 +82896,185 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "section7" })
+  return _c(
+    "div",
+    { staticClass: "section7" },
+    [
+      _c(
+        "content-box",
+        {
+          attrs: {
+            title:
+              "Section 6 - England & Wales and he rest of the UK and British Isles"
+          }
+        },
+        [
+          _c(
+            "div",
+            { staticClass: "mb-3" },
+            [
+              _c(
+                "a",
+                {
+                  directives: [
+                    {
+                      name: "b-toggle",
+                      rawName: "v-b-toggle.collapse1",
+                      modifiers: { collapse1: true }
+                    }
+                  ],
+                  staticClass: "pointer"
+                },
+                [
+                  _vm._v("Tip"),
+                  _c("i", { staticClass: "icon-xs fas fa-chevron-down ml-2" })
+                ]
+              ),
+              _vm._v(" "),
+              _c("b-collapse", { attrs: { visible: "", id: "collapse1" } }, [
+                _c("p", { staticClass: "text-gray-500 mt-2 mb-0" }, [
+                  _vm._v(
+                    "Certain investments can be placed with investment institutions in these jurisdictions. They each have separate legal systems and you may be required to apply for a similar Grant of Probate there."
+                  )
+                ])
+              ])
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            [
+              _c(
+                "a",
+                {
+                  directives: [
+                    {
+                      name: "b-toggle",
+                      rawName: "v-b-toggle.collapse2",
+                      modifiers: { collapse2: true }
+                    }
+                  ],
+                  staticClass: "pointer"
+                },
+                [
+                  _vm._v("Tip"),
+                  _c("i", { staticClass: "icon-xs fas fa-chevron-down ml-2" })
+                ]
+              ),
+              _vm._v(" "),
+              _c("b-collapse", { attrs: { visible: "", id: "collapse2" } }, [
+                _c("p", { staticClass: "text-gray-500 mt-2 mb-0" }, [
+                  _vm._v(
+                    "You should take care that the deceased had regularised their affairs with HMRC. For example, the Jersey Disclosure Facility provides for a voluntary disclosure facility to UK residents from 6 April 2013 to 30 September 2016 for UK residents with a beneficial interest in Jersey “relevant property”, with undisclosed UK tax liabilities, with a chance to regularise their UK tax affairs in a controlled manner on beneficial terms."
+                  )
+                ])
+              ])
+            ],
+            1
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "content-box",
+        {
+          attrs: {
+            title:
+              "6.1 - England & Wales and the rest of the UK and British Isles"
+          }
+        },
+        [
+          _c(
+            "yes-no",
+            {
+              staticClass: "mb-4",
+              attrs: {
+                label: "Did the deceased have any assets in Jersey?",
+                collapse: ""
+              }
+            },
+            [
+              _c("textarea", {
+                staticClass: "form-control mt-3",
+                attrs: {
+                  rows: "4",
+                  placeholder:
+                    "Please include a full overview of relevant details to this question"
+                }
+              })
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "yes-no",
+            {
+              staticClass: "mb-4",
+              attrs: {
+                label: "Did the deceased have any assets in Guernsey?",
+                collapse: ""
+              }
+            },
+            [
+              _c("textarea", {
+                staticClass: "form-control mt-3",
+                attrs: {
+                  rows: "4",
+                  placeholder:
+                    "Please include a full overview of relevant details to this question"
+                }
+              })
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "yes-no",
+            {
+              staticClass: "mb-4",
+              attrs: {
+                label: "Did the deceased have any assets in Isle of Man?",
+                collapse: ""
+              }
+            },
+            [
+              _c("textarea", {
+                staticClass: "form-control mt-3",
+                attrs: {
+                  rows: "4",
+                  placeholder:
+                    "Please include a full overview of relevant details to this question"
+                }
+              })
+            ]
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "content-box",
+        {
+          staticClass: "p-0 text-right",
+          attrs: { shadow: false, whiteBg: false }
+        },
+        [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary shadow",
+              on: {
+                click: function($event) {
+                  return _vm.$router.push({ name: "section8" })
+                }
+              }
+            },
+            [_vm._v("Next section")]
+          )
+        ]
+      )
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
