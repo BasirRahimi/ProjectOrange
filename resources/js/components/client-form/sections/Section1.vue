@@ -161,9 +161,9 @@
                 </div>
             </div>
         </content-box>
-        <div class="text-right mb-3">
+        <content-box class="p-0 text-right" :shadow="false" :whiteBg="false">
             <button class="btn btn-primary shadow" @click="$router.push({name:'section2'})">Next section</button>
-        </div>
+        </content-box>
     </div>
 </template>
 

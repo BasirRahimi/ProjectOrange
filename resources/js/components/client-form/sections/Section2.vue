@@ -105,13 +105,16 @@
             </div>
         </div>
     </content-box>
-    <div class="d-flex mb-3 align-items-center" :class="[
-    {'justify-content-between': executors.length < 4},
-    {'justify-content-end': executors.length == 4}
-    ]">
-        <a href="#" @click.prevent="addExecutor" v-show="executors.length < 4">Add executor +</a>
-        <button class="btn btn-primary shadow" @click="$router.push({name:'section3'})">Next section</button>
-    </div>
+
+    <content-box class="p-0 text-right" :shadow="false" :whiteBg="false">
+        <div class="d-flex mb-3 align-items-center" :class="[
+        {'justify-content-between': executors.length < 4},
+        {'justify-content-end': executors.length == 4}
+        ]">
+            <a href="#" @click.prevent="addExecutor" v-show="executors.length < 4">Add executor +</a>
+            <button class="btn btn-primary shadow" @click="$router.push({name:'section3'})">Next section</button>
+        </div>
+    </content-box>
   </div>
 </template>
 

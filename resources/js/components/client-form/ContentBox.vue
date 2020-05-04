@@ -1,6 +1,6 @@
 <template>
-    <div class="content-box shadow rounded mb-3">
-        <p class="title h5 text-center"><b>{{title}}</b></p>
+    <div class="content-box rounded mb-3" :class="[{'shadow': shadow},{'bg-white': whiteBg}]">
+        <p v-if="title" class="title h5 text-center"><b>{{title}}</b></p>
         <slot></slot>
     </div>
 </template>
@@ -8,7 +8,20 @@
 <script>
 export default {
     name: 'ContentBox',
-    props: ['title']
+    props: {
+        title: {
+            type: String,
+            default: ''
+        },
+        shadow: {
+            type: Boolean,
+            default: true
+        },
+        whiteBg: {
+            type: Boolean,
+            default: true
+        }
+    }
 }
 </script>
 
@@ -16,7 +29,6 @@ export default {
 .content-box {
   max-width: 900px;
   margin: auto;
-  background-color: #fff;
   padding: 40px;
 }
 .title {

@@ -122,6 +122,9 @@
                 </div>
             </b-collapse>
         </content-box>
+        <content-box class="p-0 text-right" :shadow="false" :whiteBg="false">
+            <button class="btn btn-primary shadow" @click="$router.push({name:'section5'})">Next section</button>
+        </content-box>
     </div>
 </template>
 

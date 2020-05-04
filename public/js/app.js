@@ -2255,7 +2255,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'ContentBox',
-  props: ['title']
+  props: {
+    title: {
+      type: String,
+      "default": ''
+    },
+    shadow: {
+      type: Boolean,
+      "default": true
+    },
+    whiteBg: {
+      type: Boolean,
+      "default": true
+    }
+  }
 });
 
 /***/ }),
@@ -2360,6 +2373,61 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       this.$emit('update', this.honorific);
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/client-form/form-snippets/YesNo.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/babel-loader/lib??ref--11-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/client-form/form-snippets/YesNo.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'YesNo',
+  props: {
+    label: {
+      type: String,
+      "default": 'No question given'
+    },
+    collapse: {
+      type: Boolean,
+      "default": false
+    },
+    collapseOn: {
+      type: Boolean,
+      "default": true
+    }
+  },
+  data: function data() {
+    return {
+      answer: null
+    };
+  },
+  methods: {
+    yes: function yes() {
+      this.answer = true;
+      this.$emit('update', this.answer);
+    },
+    no: function no() {
+      this.answer = false;
+      this.$emit('update', this.answer);
     }
   }
 });
@@ -2950,6 +3018,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3052,6 +3123,10 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _base_components_BaseFileUpload_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../base-components/BaseFileUpload.vue */ "./resources/js/components/base-components/BaseFileUpload.vue");
+//
+//
+//
+//
 //
 //
 //
@@ -3389,6 +3464,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 
@@ -3439,15 +3517,82 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _form_snippets_YesNo_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../form-snippets/YesNo.vue */ "./resources/js/components/client-form/form-snippets/YesNo.vue");
 //
 //
 //
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    YesNo: _form_snippets_YesNo_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
   data: function data() {
-    return {};
+    return {
+      slide: 1
+    };
+  },
+  methods: {
+    nextSlide: function nextSlide() {
+      if (this.slide < 5) {
+        this.slide++;
+      }
+    },
+    prevSlide: function prevSlide() {
+      if (this.slide > 1) {
+        this.slide--;
+      }
+    }
   }
 });
 
@@ -45380,7 +45525,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.content-box[data-v-4ca7b566] {\n  max-width: 900px;\n  margin: auto;\n  background-color: #fff;\n  padding: 40px;\n}\n.title[data-v-4ca7b566] {\n    margin-bottom: 40px;\n}\n", ""]);
+exports.push([module.i, "\n.content-box[data-v-4ca7b566] {\n  max-width: 900px;\n  margin: auto;\n  padding: 40px;\n}\n.title[data-v-4ca7b566] {\n    margin-bottom: 40px;\n}\n", ""]);
 
 // exports
 
@@ -78254,11 +78399,16 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "content-box shadow rounded mb-3" },
+    {
+      staticClass: "content-box rounded mb-3",
+      class: [{ shadow: _vm.shadow }, { "bg-white": _vm.whiteBg }]
+    },
     [
-      _c("p", { staticClass: "title h5 text-center" }, [
-        _c("b", [_vm._v(_vm._s(_vm.title))])
-      ]),
+      _vm.title
+        ? _c("p", { staticClass: "title h5 text-center" }, [
+            _c("b", [_vm._v(_vm._s(_vm.title))])
+          ])
+        : _vm._e(),
       _vm._v(" "),
       _vm._t("default")
     ],
@@ -78604,6 +78754,74 @@ var render = function() {
       })
     ])
   ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/client-form/form-snippets/YesNo.vue?vue&type=template&id=34cb4fb4&":
+/*!**********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/client-form/form-snippets/YesNo.vue?vue&type=template&id=34cb4fb4& ***!
+  \**********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c("label", [_vm._v(_vm._s(_vm.label))]),
+      _c("br"),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-outline-secondary active-primary mr-3",
+          class: { active: _vm.answer === true },
+          on: {
+            click: function($event) {
+              return _vm.yes()
+            }
+          }
+        },
+        [_vm._v("Yes")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-outline-secondary active-primary mr-3",
+          class: { active: _vm.answer === false },
+          on: {
+            click: function($event) {
+              return _vm.no()
+            }
+          }
+        },
+        [_vm._v("No")]
+      ),
+      _vm._v(" "),
+      _vm.collapse
+        ? _c(
+            "b-collapse",
+            { attrs: { visible: _vm.answer === _vm.collapseOn } },
+            [_vm._t("default")],
+            2
+          )
+        : _vm._e()
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -79684,20 +79902,27 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "text-right mb-3" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-primary shadow",
-            on: {
-              click: function($event) {
-                return _vm.$router.push({ name: "section2" })
+      _c(
+        "content-box",
+        {
+          staticClass: "p-0 text-right",
+          attrs: { shadow: false, whiteBg: false }
+        },
+        [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary shadow",
+              on: {
+                click: function($event) {
+                  return _vm.$router.push({ name: "section2" })
+                }
               }
-            }
-          },
-          [_vm._v("Next section")]
-        )
-      ])
+            },
+            [_vm._v("Next section")]
+          )
+        ]
+      )
     ],
     1
   )
@@ -80512,48 +80737,57 @@ var render = function() {
       }),
       _vm._v(" "),
       _c(
-        "div",
+        "content-box",
         {
-          staticClass: "d-flex mb-3 align-items-center",
-          class: [
-            { "justify-content-between": _vm.executors.length < 4 },
-            { "justify-content-end": _vm.executors.length == 4 }
-          ]
+          staticClass: "p-0 text-right",
+          attrs: { shadow: false, whiteBg: false }
         },
         [
           _c(
-            "a",
+            "div",
             {
-              directives: [
+              staticClass: "d-flex mb-3 align-items-center",
+              class: [
+                { "justify-content-between": _vm.executors.length < 4 },
+                { "justify-content-end": _vm.executors.length == 4 }
+              ]
+            },
+            [
+              _c(
+                "a",
                 {
-                  name: "show",
-                  rawName: "v-show",
-                  value: _vm.executors.length < 4,
-                  expression: "executors.length < 4"
-                }
-              ],
-              attrs: { href: "#" },
-              on: {
-                click: function($event) {
-                  $event.preventDefault()
-                  return _vm.addExecutor($event)
-                }
-              }
-            },
-            [_vm._v("Add executor +")]
-          ),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-primary shadow",
-              on: {
-                click: function($event) {
-                  return _vm.$router.push({ name: "section3" })
-                }
-              }
-            },
-            [_vm._v("Next section")]
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.executors.length < 4,
+                      expression: "executors.length < 4"
+                    }
+                  ],
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.addExecutor($event)
+                    }
+                  }
+                },
+                [_vm._v("Add executor +")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary shadow",
+                  on: {
+                    click: function($event) {
+                      return _vm.$router.push({ name: "section3" })
+                    }
+                  }
+                },
+                [_vm._v("Next section")]
+              )
+            ]
           )
         ]
       )
@@ -81442,6 +81676,28 @@ var render = function() {
           ])
         ],
         1
+      ),
+      _vm._v(" "),
+      _c(
+        "content-box",
+        {
+          staticClass: "p-0 text-right",
+          attrs: { shadow: false, whiteBg: false }
+        },
+        [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary shadow",
+              on: {
+                click: function($event) {
+                  return _vm.$router.push({ name: "section4" })
+                }
+              }
+            },
+            [_vm._v("Next section")]
+          )
+        ]
       )
     ],
     1
@@ -82134,6 +82390,28 @@ var render = function() {
           )
         ],
         1
+      ),
+      _vm._v(" "),
+      _c(
+        "content-box",
+        {
+          staticClass: "p-0 text-right",
+          attrs: { shadow: false, whiteBg: false }
+        },
+        [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary shadow",
+              on: {
+                click: function($event) {
+                  return _vm.$router.push({ name: "section5" })
+                }
+              }
+            },
+            [_vm._v("Next section")]
+          )
+        ]
       )
     ],
     1
@@ -82161,7 +82439,289 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "section5" })
+  return _c(
+    "div",
+    [
+      _c("content-box", { attrs: { title: "Section 4 - Lifetime Gifs" } }, [
+        _c("p", { staticClass: "text-gray-500" }, [
+          _vm._v(
+            "There is an obligation upon the Executors to make the fullest enquiries as appear to be relevant to establish whether any lifetime gifts were made on of after 18th March 1986. The Executors need to be able to prove that they made fullest enquiries and so this means that the Executors should seek information from those individuals who appear to be obvious recipients of gifts from the deceased (e.g. close relative, etc) but also consider less obvious recipients of gifts (e.g. friend, employee, housekeeper, distant relative, etc)."
+          )
+        ]),
+        _vm._v(" "),
+        _c("p", { staticClass: "text-gray-500" }, [
+          _c("b", [
+            _vm._v(
+              "HMRC has made it clear that it will, in some circumstances, examine closely the activities of an Executor making enquiries and will hold them to account for failure to disclose gifts."
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("p", { staticClass: "text-gray-500" }, [
+          _vm._v(
+            "The principle is that a gift of an asset will reduce the value of a person’s estate. Since Inheritance Tax could have been payable if the asset was retained, there are rules which allow HMRC to take gifts, normally made within seven years of death, to be taken into account in determining whether Inheritance tax is due."
+          )
+        ]),
+        _vm._v(" "),
+        _c("ul", { staticClass: "text-gray-500 m-0 pl-4" }, [
+          _c("li", [
+            _vm._v(
+              "Gifts to spouses or civil partners do not need to be disclosed."
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _vm._v("Small cash gifts of £250 do not need to be disclosed.")
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _vm._v(
+              "Other gifts in total of £3,000 do not need to be disclosed."
+            )
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "content-box",
+        { attrs: { title: "4.2 Details of lifetime videos" } },
+        [
+          _c(
+            "yes-no",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.slide === 1,
+                  expression: "slide === 1"
+                }
+              ],
+              staticClass: "mb-3",
+              attrs: {
+                label:
+                  "Did the deceased make any gifts or transfer assets to or for the benefit of another individual, charity or other organisation?",
+                collapse: ""
+              }
+            },
+            [
+              _c("textarea", {
+                staticClass: "form-control mt-3",
+                attrs: {
+                  rows: "4",
+                  placeholder:
+                    "Please include a full overview of relevant details to this question"
+                }
+              })
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "yes-no",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.slide === 2,
+                  expression: "slide === 2"
+                }
+              ],
+              staticClass: "mb-3",
+              attrs: {
+                label: "Did the deceased create a trust or settlement?",
+                collapse: ""
+              }
+            },
+            [
+              _c("textarea", {
+                staticClass: "form-control mt-3",
+                attrs: {
+                  rows: "4",
+                  placeholder:
+                    "Please include a full overview of relevant details to this question"
+                }
+              })
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "yes-no",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.slide === 3,
+                  expression: "slide === 3"
+                }
+              ],
+              staticClass: "mb-3",
+              attrs: {
+                label:
+                  "Did the deceased transfer/gift additional assets to an existing trust or settlement?",
+                collapse: ""
+              }
+            },
+            [
+              _c("textarea", {
+                staticClass: "form-control mt-3",
+                attrs: {
+                  rows: "4",
+                  placeholder:
+                    "Please include a full overview of relevant details to this question"
+                }
+              })
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "yes-no",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.slide === 4,
+                  expression: "slide === 4"
+                }
+              ],
+              staticClass: "mb-3",
+              attrs: {
+                label:
+                  "Did the deceased pay a premium on any life insurance policy to for the benefit of someone else?",
+                collapse: ""
+              }
+            },
+            [
+              _c("textarea", {
+                staticClass: "form-control mt-3",
+                attrs: {
+                  rows: "4",
+                  placeholder:
+                    "Please include a full overview of relevant details to this question"
+                }
+              })
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "yes-no",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.slide === 5,
+                  expression: "slide === 5"
+                }
+              ],
+              staticClass: "mb-3",
+              attrs: {
+                label:
+                  "Was the deceased entitled to benefit from any assets held in trust or in a settlement which during their life had come to an end either in whole or in part?",
+                collapse: ""
+              }
+            },
+            [
+              _c("textarea", {
+                staticClass: "form-control mt-3",
+                attrs: {
+                  rows: "4",
+                  placeholder:
+                    "Please include a full overview of relevant details to this question"
+                }
+              })
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "d-flex align-items-center justify-content-between"
+            },
+            [
+              _c("div", [_vm._v("Step " + _vm._s(_vm.slide) + "/5")]),
+              _vm._v(" "),
+              _c("div", [
+                _vm.slide > 1
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-outline-secondary mr-3",
+                        on: { click: _vm.prevSlide }
+                      },
+                      [_vm._v("Previous")]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.slide < 5
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-outline-secondary",
+                        on: { click: _vm.nextSlide }
+                      },
+                      [_vm._v("Next")]
+                    )
+                  : _vm._e()
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              directives: [
+                {
+                  name: "b-toggle",
+                  rawName: "v-b-toggle.collapse2",
+                  modifiers: { collapse2: true }
+                }
+              ],
+              staticClass: "pointer"
+            },
+            [
+              _vm._v("Tip"),
+              _c("i", { staticClass: "icon-xs fas fa-chevron-down ml-2" })
+            ]
+          ),
+          _vm._v(" "),
+          _c("b-collapse", { attrs: { visible: "", id: "collapse2" } }, [
+            _c("p", { staticClass: "text-gray-500 mt-2" }, [
+              _vm._v(
+                "Domicile and residence is relevant because it affects the law that governs succession. Since 17.8.2016 a new European Regulation affects succession within EU member states. The UK and Eire have not opted in to the Regulation (Denmark has opted out) but it will nonetheless affect individuals connected with the EU. If you are a beneficiary of this estate and there are non-UK assets involved, you should consider your own Will now. Do not wait until the estate has been administered."
+              )
+            ])
+          ])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "content-box",
+        {
+          staticClass: "p-0 text-right",
+          attrs: { shadow: false, whiteBg: false }
+        },
+        [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary shadow",
+              on: {
+                click: function($event) {
+                  return _vm.$router.push({ name: "section6" })
+                }
+              }
+            },
+            [_vm._v("Next section")]
+          )
+        ]
+      )
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -100796,6 +101356,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Honorific_vue_vue_type_template_id_defe7ee6___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Honorific_vue_vue_type_template_id_defe7ee6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/client-form/form-snippets/YesNo.vue":
+/*!*********************************************************************!*\
+  !*** ./resources/js/components/client-form/form-snippets/YesNo.vue ***!
+  \*********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _YesNo_vue_vue_type_template_id_34cb4fb4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./YesNo.vue?vue&type=template&id=34cb4fb4& */ "./resources/js/components/client-form/form-snippets/YesNo.vue?vue&type=template&id=34cb4fb4&");
+/* harmony import */ var _YesNo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./YesNo.vue?vue&type=script&lang=js& */ "./resources/js/components/client-form/form-snippets/YesNo.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _YesNo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _YesNo_vue_vue_type_template_id_34cb4fb4___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _YesNo_vue_vue_type_template_id_34cb4fb4___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/client-form/form-snippets/YesNo.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/client-form/form-snippets/YesNo.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************!*\
+  !*** ./resources/js/components/client-form/form-snippets/YesNo.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_babel_loader_lib_index_js_ref_11_0_node_modules_vue_loader_lib_index_js_vue_loader_options_YesNo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/babel-loader/lib??ref--11-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./YesNo.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/client-form/form-snippets/YesNo.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_babel_loader_lib_index_js_ref_11_0_node_modules_vue_loader_lib_index_js_vue_loader_options_YesNo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/client-form/form-snippets/YesNo.vue?vue&type=template&id=34cb4fb4&":
+/*!****************************************************************************************************!*\
+  !*** ./resources/js/components/client-form/form-snippets/YesNo.vue?vue&type=template&id=34cb4fb4& ***!
+  \****************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_YesNo_vue_vue_type_template_id_34cb4fb4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./YesNo.vue?vue&type=template&id=34cb4fb4& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/client-form/form-snippets/YesNo.vue?vue&type=template&id=34cb4fb4&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_YesNo_vue_vue_type_template_id_34cb4fb4___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_YesNo_vue_vue_type_template_id_34cb4fb4___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
