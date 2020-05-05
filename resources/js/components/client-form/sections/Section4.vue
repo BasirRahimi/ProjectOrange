@@ -41,7 +41,7 @@
                     </div>
 
                     <b-collapse :visible="formData.query3.answer2 === true">
-                        <honorific @update="(x)=>{formData.query3.honorific = x}" />
+                        <honorific v-model="formData.query3.honorific" />
                         <div class="mb-4">
                             <label for="forename">Forename</label>
                             <input type="text" id="forename" class="form-control" placeholder="John" v-model="formData.query3.forename">

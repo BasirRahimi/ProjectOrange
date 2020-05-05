@@ -14,6 +14,9 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <!-- Fonts -->
+    <link rel="stylesheet" href="https://use.typekit.net/lxw2fcr.css">
 </head>
 <body>
     <div id="app">

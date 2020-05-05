@@ -15,6 +15,12 @@
 <script>
 export default {
     name: 'Honorific',
+    props: {
+        value: {
+            type: String,
+            default: ''
+        }
+    },
     data() {
         return {
             honorific: ''
@@ -27,8 +33,11 @@ export default {
             } else {
                 this.honorific = event.target.value;
             }
-            this.$emit('update', this.honorific);
+            this.$emit('input', this.honorific);
         }
+    },
+    beforeMount() {
+        this.honorific = this.value;
     }
 }
 </script>
