@@ -5971,7 +5971,7 @@ readers do not read off random characters that represent icons */
   --breakpoint-md: 768px;
   --breakpoint-lg: 992px;
   --breakpoint-xl: 1280px;
-  --font-family-sans-serif: "neuzeit-grotesk", "Nunito", sans-serif;
+  --font-family-sans-serif: "neue-haas-unica", "Nunito", sans-serif;
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
@@ -6003,7 +6003,7 @@ section {
 
 body {
   margin: 0;
-  font-family: "neuzeit-grotesk", "Nunito", sans-serif;
+  font-family: "neue-haas-unica", "Nunito", sans-serif;
   font-size: 0.9rem;
   font-weight: 400;
   line-height: 1.4;
@@ -8233,7 +8233,7 @@ textarea.form-control {
 }
 
 .form-group {
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .form-text {
@@ -12315,7 +12315,7 @@ a.close.disabled {
   z-index: 1070;
   display: block;
   margin: 0;
-  font-family: "neuzeit-grotesk", "Nunito", sans-serif;
+  font-family: "neue-haas-unica", "Nunito", sans-serif;
   font-style: normal;
   font-weight: 400;
   line-height: 1.4;
@@ -12536,7 +12536,7 @@ a.close.disabled {
   z-index: 1060;
   display: block;
   max-width: 276px;
-  font-family: "neuzeit-grotesk", "Nunito", sans-serif;
+  font-family: "neue-haas-unica", "Nunito", sans-serif;
   font-style: normal;
   font-weight: 400;
   line-height: 1.4;
@@ -19847,6 +19847,20 @@ button:focus {
   color: #fff;
   background-color: #FB952C;
   border-color: #FB952C;
+}
+
+.same-width-buttons-container {
+  display: flex;
+  margin-left: -0.5rem;
+  margin-right: -0.5rem;
+}
+
+.same-width-buttons-container .btn {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  flex-basis: 0;
+  flex-grow: 1;
+  max-width: 100%;
 }
 
 .modal-body {

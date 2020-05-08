@@ -1,24 +1,12 @@
 <template>
     <div>
         <content-box title="Section 2 - Powers of Attorney and non-UK elements">
-            <div class="row">
-                <div class="col-12 mb-3">
-                    <label>Did the deceased make an ENDURING power of attorney?</label><br />
-                    <button class="btn btn-outline-secondary active-primary mr-3 mb-3" :class="{'active': formData.query1.answer === true}" @click="formData.query1.answer = true">Yes</button>
-                    <button class="btn btn-outline-secondary active-primary mr-3 mb-3" :class="{'active': formData.query1.answer === false}" @click="formData.query1.answer = false">No</button><br />
-                    <b-collapse :visible="formData.query1.answer === true">
-                        <base-file-upload class="mb-3"></base-file-upload>
-                    </b-collapse>
-                </div>
-                <div class="col-12 mb-3">
-                    <label>Did the deceased make a LASTING power of attorney?</label><br />
-                    <button class="btn btn-outline-secondary active-primary mr-3 mb-3" :class="{'active': formData.query2.answer === true}" @click="formData.query2.answer = true">Yes</button>
-                    <button class="btn btn-outline-secondary active-primary mr-3 mb-3" :class="{'active': formData.query2.answer === false}" @click="formData.query2.answer = false">No</button><br />
-                    <b-collapse :visible="formData.query2.answer === true">
-                        <base-file-upload class="mb-3"></base-file-upload>
-                    </b-collapse>
-                </div>
-            </div>
+            <yes-no class="form-group" label="Did the deceased make an ENDURING power of attorney?" collapse>
+                <base-file-upload class="mt-3"></base-file-upload>
+            </yes-no>
+            <yes-no class="form-group" label="Did the deceased make a LASTING power of attorney?" collapse>
+                <base-file-upload class="mt-3"></base-file-upload>
+            </yes-no>
             
             <a v-b-toggle.collapse1 class="pointer">Tip<i class="icon-xs fas fa-chevron-down ml-2"></i></a>
             <b-collapse visible id="collapse1">
@@ -27,13 +15,8 @@
         </content-box>
 
         <content-box title="2.2 Domicile, residence and non-UK assets">
-
-            <label>Was the deceased born in the UK and did they spend all of their life as a UK resident?</label><br />
-            <button class="btn btn-outline-secondary active-primary mr-3 mb-3" :class="{'active': formData.query3.answer === true}" @click="formData.query3.answer = true">Yes</button>
-            <button class="btn btn-outline-secondary active-primary mr-3 mb-3" :class="{'active': formData.query3.answer === false}" @click="formData.query3.answer = false">No</button><br />
-
-            <b-collapse :visible="formData.query3.answer === false">
-                <div class="form-group">
+            <yes-no collapse label="Was the deceased born in the UK and did they spend all of their life as a UK resident?">
+                <div class="form-group mt-4">
                     <label for="query3q1">In what City/Country was the deceased born?</label>
                     <input type="text" name="birthCountry" id="query3q1" class="form-control" placeholder="Paris, France">
                 </div>
@@ -41,19 +24,11 @@
                     <label for="query3q2">What was their father’s domicile when the deceased was born?</label>
                     <input type="text" name="fathersDomicile" id="query3q2" class="form-control" placeholder="French">
                 </div>
-                <div class="form-group">
-                    <label>Was the deceased treated as a UK resident for Income Tax purposes?</label><br />
-                    <button class="btn btn-outline-secondary active-primary mr-3 mb-3" :class="{'active': formData.query3.question3.answer === 'yes'}" @click="formData.query3.question3.answer = 'yes'">Yes</button>
-                    <button class="btn btn-outline-secondary active-primary mr-3 mb-3" :class="{'active': formData.query3.question3.answer === 'no'}" @click="formData.query3.question3.answer = 'no'">No</button>
-                    <button class="btn btn-outline-secondary active-primary mr-3 mb-3" :class="{'active': formData.query3.question3.answer === 'unsure'}" @click="formData.query3.question3.answer = 'unsure'">Unsure</button>
-                </div>    
-                <div class="form-group">
-                    <label>Do you know if Sharia Law applies to this estate?</label><br />
-                    <button class="btn btn-outline-secondary active-primary mr-3 mb-3" :class="{'active': formData.query3.question4.answer === 'yes'}" @click="formData.query3.question4.answer = 'yes'">Yes</button>
-                    <button class="btn btn-outline-secondary active-primary mr-3 mb-3" :class="{'active': formData.query3.question4.answer === 'no'}" @click="formData.query3.question4.answer = 'no'">No</button>
-                    <button class="btn btn-outline-secondary active-primary mr-3 mb-3" :class="{'active': formData.query3.question4.answer === 'unsure'}" @click="formData.query3.question4.answer = 'unsure'">Unsure</button>
-                </div>                
-            </b-collapse>
+                
+                <button-group class="form-group" label="Was the deceased treated as a UK resident for Income Tax purposes?" :options="['Yes', 'No', 'Unsure']" v-model="formData.query3.question3.answer"></button-group>
+                
+                <button-group class="form-group" label="Do you know if Sharia Law applies to this estate?" :options="['Yes', 'No', 'Unsure']" v-model="formData.query3.question4.answer"></button-group>
+            </yes-no>
         </content-box>
 
         <content-box title="2.3 A brief narrative of the life of the deceased">
@@ -83,16 +58,13 @@
             </div>    
             <div v-show="formData.query4.slide === 5">
                 <p>Estate Duty and Capital Transfer Tax details:</p>
-                <div class="form-group">
-                    <label>Was the deceased female?</label><br />
-                    <button class="btn btn-outline-secondary active-primary mr-3 mb-3" :class="{'active': formData.query4.slide5.answer === true}" @click="formData.query4.slide5.answer = true">Yes</button>
-                    <button class="btn btn-outline-secondary active-primary mr-3 mb-3" :class="{'active': formData.query4.slide5.answer === false}" @click="formData.query4.slide5.answer = false">No</button><br />
-                </div>
-                <div class="form-group">
-                    <label>Was the deceased born before 1/2/1974?</label><br />
-                    <button class="btn btn-outline-secondary active-primary mr-3 mb-3" :class="{'active': formData.query4.slide5.answer2 === true}" @click="formData.query4.slide5.answer2 = true">Yes</button>
-                    <button class="btn btn-outline-secondary active-primary mr-3 mb-3" :class="{'active': formData.query4.slide5.answer2 === false}" @click="formData.query4.slide5.answer2 = false">No</button><br />
-                </div>
+
+                <yes-no class="form-group" label="Was the deceased female?" v-model="formData.query4.slide5.answer">
+                </yes-no>
+                
+                <yes-no class="form-group" label="Was the deceased born before 1/2/1974?" v-model="formData.query4.slide5.answer2">
+                </yes-no>
+                
                 <b-collapse :visible="formData.query4.slide5.answer === true">
                     <div class="form-group">
                         <label for="husbandbirthplace">Where was their husband born?</label>
@@ -107,7 +79,7 @@
                         <input id="husbanddeathnationality" type="text" class="form-control" placeholder="French">
                     </div>
                 </b-collapse>
-            </div>    
+            </div>
             <div v-show="formData.query4.slide === 6">
                 <div class="form-group">
                     <label for="ukvisitdetails">Details of visits to the UK and the length of those visits</label>
@@ -150,9 +122,13 @@
 
 <script>
 import BaseFileUpload from '../../base-components/BaseFileUpload.vue';
+import YesNo from '../form-snippets/YesNo.vue';
+import ButtonGroup from '../form-snippets/ButtonGroup.vue';
 export default {
     components: {
-        BaseFileUpload
+        BaseFileUpload,
+        YesNo,
+        ButtonGroup
     },
     data() {
         return {

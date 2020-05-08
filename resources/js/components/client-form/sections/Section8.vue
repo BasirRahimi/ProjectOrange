@@ -8,11 +8,11 @@
         </content-box>
 
         <content-box title="7.1 Swiss and assets in other ‘tax havens’">
-            <yes-no class="mb-4" label="Did the deceased have any assets in Switzerland?" collapse>
+            <yes-no class="form-group" label="Did the deceased have any assets in Switzerland?" collapse>
                 <textarea class="form-control mt-3" rows="4" placeholder="Please include a full overview of relevant details to this question"></textarea>
             </yes-no>
 
-            <yes-no class="mb-4" label="Did the deceased have any assets in a tax haven?" collapse>
+            <yes-no class="form-group" label="Did the deceased have any assets in a tax haven?" collapse>
                 <textarea class="form-control mt-3" rows="4" placeholder="Please include a full overview of relevant details to this question"></textarea>
             </yes-no>
         </content-box>

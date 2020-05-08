@@ -3,8 +3,7 @@ $body-bg: #F0F0F0;
 $body-color: #4C4C4C;
 
 // Typography
-$font-family-sans-serif: 'neuzeit-grotesk', 'Nunito', sans-serif;
-// $font-family-sans-serif: 'bilo', 'Nunito', sans-serif;
+$font-family-sans-serif: 'neue-haas-unica', 'Nunito', sans-serif;
 $font-size-base: 0.9rem;
 $line-height-base: 1.4;
 
@@ -44,6 +43,7 @@ $border-radius: 4px;
 
 // Forms
 $input-placeholder-color: $gray-500 !default;
+$form-group-margin-bottom: 1.5rem !default;
 
 // Buttons
 $input-btn-padding-y: .5rem !default;

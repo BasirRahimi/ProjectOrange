@@ -12,23 +12,23 @@
         </content-box>
 
         <content-box title="4.2 Details of lifetime videos">
-            <yes-no v-show="slide === 1" class="mb-3" label="Did the deceased make any gifts or transfer assets to or for the benefit of another individual, charity or other organisation?" collapse>
+            <yes-no v-show="slide === 1" class="form-group flash-label" label="Did the deceased make any gifts or transfer assets to or for the benefit of another individual, charity or other organisation?" collapse>
                 <textarea class="form-control mt-3" rows="4" placeholder="Please include a full overview of relevant details to this question"></textarea>
             </yes-no>
 
-            <yes-no v-show="slide === 2" class="mb-3" label="Did the deceased create a trust or settlement?" collapse>
+            <yes-no v-show="slide === 2" class="form-group flash-label" label="Did the deceased create a trust or settlement?" collapse>
                 <textarea class="form-control mt-3" rows="4" placeholder="Please include a full overview of relevant details to this question"></textarea>
             </yes-no>
 
-            <yes-no v-show="slide === 3" class="mb-3" label="Did the deceased transfer/gift additional assets to an existing trust or settlement?" collapse>
+            <yes-no v-show="slide === 3" class="form-group flash-label" label="Did the deceased transfer/gift additional assets to an existing trust or settlement?" collapse>
                 <textarea class="form-control mt-3" rows="4" placeholder="Please include a full overview of relevant details to this question"></textarea>
             </yes-no>
 
-            <yes-no v-show="slide === 4" class="mb-3" label="Did the deceased pay a premium on any life insurance policy to for the benefit of someone else?" collapse>
+            <yes-no v-show="slide === 4" class="form-group flash-label" label="Did the deceased pay a premium on any life insurance policy to for the benefit of someone else?" collapse>
                 <textarea class="form-control mt-3" rows="4" placeholder="Please include a full overview of relevant details to this question"></textarea>
             </yes-no>
 
-            <yes-no v-show="slide === 5" class="mb-3" label="Was the deceased entitled to benefit from any assets held in trust or in a settlement which during their life had come to an end either in whole or in part?" collapse>
+            <yes-no v-show="slide === 5" class="form-group flash-label" label="Was the deceased entitled to benefit from any assets held in trust or in a settlement which during their life had come to an end either in whole or in part?" collapse>
                 <textarea class="form-control mt-3" rows="4" placeholder="Please include a full overview of relevant details to this question"></textarea>
             </yes-no>
 
@@ -67,12 +67,22 @@ export default {
         nextSlide() {
             if(this.slide < 5) {
                 this.slide++;
+                this.flashLabel();
             }
         },
         prevSlide() {
             if(this.slide > 1) {
                 this.slide--;
+                this.flashLabel();
             }
+        },
+        flashLabel() {
+            let label = $($('.flash-label > label')[this.slide - 1]);
+            label.css('background-color', 'yellow');
+            setTimeout(() => {
+                label.css('transition', 'all .9s');
+                label.css('background-color', 'transparent');
+            }, 100);
         }
     }
 }

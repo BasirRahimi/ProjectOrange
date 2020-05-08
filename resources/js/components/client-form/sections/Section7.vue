@@ -16,15 +16,15 @@
         </content-box>
 
         <content-box title="6.1 - England & Wales and the rest of the UK and British Isles">
-            <yes-no class="mb-4" label="Did the deceased have any assets in Jersey?" collapse>
+            <yes-no class="form-group" label="Did the deceased have any assets in Jersey?" collapse>
                 <textarea class="form-control mt-3" rows="4" placeholder="Please include a full overview of relevant details to this question"></textarea>
             </yes-no>
 
-            <yes-no class="mb-4" label="Did the deceased have any assets in Guernsey?" collapse>
+            <yes-no class="form-group" label="Did the deceased have any assets in Guernsey?" collapse>
                 <textarea class="form-control mt-3" rows="4" placeholder="Please include a full overview of relevant details to this question"></textarea>
             </yes-no>
 
-            <yes-no class="mb-4" label="Did the deceased have any assets in Isle of Man?" collapse>
+            <yes-no class="form-group" label="Did the deceased have any assets in Isle of Man?" collapse>
                 <textarea class="form-control mt-3" rows="4" placeholder="Please include a full overview of relevant details to this question"></textarea>
             </yes-no>
         </content-box>

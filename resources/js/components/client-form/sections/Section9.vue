@@ -10,53 +10,53 @@
             </p>
         </content-box>
         
-        <content-box title="8.1 - Nil Rate Band Discretionary Trusts">
+        <content-box title="8.1 - Nil Rate Band Discretionary Trusts" v-for="(trust, key) in trusts" :key="key">
             <p class="text-gray-500">If you know details of any Nil Rate Band Discretionary Trust, then please provide the following information:-</p>
-            <honorific v-model="formData.honorific" />
-            <div class="mb-4">
+            <honorific v-model="trust.honorific" />
+            <div class="form-group">
                 <label for="forename">Forename</label>
-                <input type="text" id="forename" class="form-control" placeholder="John" v-model="formData.forename">
+                <input type="text" id="forename" class="form-control" placeholder="John" v-model="trust.forename">
             </div>
-            <div class="mb-4">
+            <div class="form-group">
                 <label for="surname">Surname</label>
-                <input type="text" id="surname" class="form-control" placeholder="Doe" v-model="formData.surname">
+                <input type="text" id="surname" class="form-control" placeholder="Doe" v-model="trust.surname">
             </div>
 
-            <yes-no class="mb-4" label="Did the deceased have any charge/debit arrangements with this trustee?" collapse>
+            <yes-no class="form-group" label="Did the deceased have any charge/debit arrangements with this trustee?" collapse>
                 <textarea class="form-control mt-3" rows="4" placeholder="Please include a full overview of relevant details to this question"></textarea>
             </yes-no>
 
             <label>Select dependent on which contact details you know:</label>
             <div class="mb-3">
-                <base-switch offText="The Trustee" onText="The trustee’s solicitors or accountants" v-model="formData.hasDependant"></base-switch>
+                <base-switch offText="The Trustee" onText="The trustee’s solicitors or accountants" v-model="trust.hasDependant"></base-switch>
             </div>
-            <b-collapse :visible="formData.hasDependant">
-                <honorific v-model="formData.dependant.honorific"/>
-                <div class="mb-4">
+            <b-collapse :visible="trust.hasDependant">
+                <honorific v-model="trust.dependant.honorific"/>
+                <div class="form-group">
                     <label for="forename">Forename</label>
-                    <input type="text" id="forename" class="form-control" placeholder="John" v-model="formData.dependant.forename">
+                    <input type="text" id="forename" class="form-control" placeholder="John" v-model="trust.dependant.forename">
                 </div>
-                <div class="mb-4">
+                <div class="form-group">
                     <label for="surname">Surname</label>
-                    <input type="text" id="surname" class="form-control" placeholder="Doe" v-model="formData.dependant.surname">
+                    <input type="text" id="surname" class="form-control" placeholder="Doe" v-model="trust.dependant.surname">
                 </div>
             </b-collapse>
 
             <div class="row">
-                <div class="col-12 col-lg-6 mb-4">
+                <div class="col-12 col-lg-6 form-group">
                     <label for="phone">Phone number</label>
-                    <input type="text" class="form-control" id="phone" placeholder="+44 012345 67890" v-model="formData.phone">
+                    <input type="text" class="form-control" id="phone" placeholder="+44 012345 67890" v-model="trust.phone">
                 </div>
-                <div class="col-12 col-lg-6 mb-4">
+                <div class="col-12 col-lg-6 form-group">
                     <label for="email">Email Address</label>
-                    <input type="text" class="form-control" id="email" placeholder="John.doe@doe.co.uk" v-model="formData.email">
+                    <input type="text" class="form-control" id="email" placeholder="John.doe@doe.co.uk" v-model="trust.email">
                 </div>
             </div>
         </content-box>
 
-        <content-box title="8.1 - Nil Rate Band Discretionary Trusts">
+        <content-box title="8.1 - Nil Rate Band Discretionary Trusts" v-if="trusts.length < 4">
            <div class="text-center">
-               <button class="btn btn-outline-secondary active-primary">Add trustee<i class="fas fa-plus ml-3"></i></button>
+               <button class="btn btn-outline-secondary active-primary" @click="addTrustee">Add trustee<i class="fas fa-plus ml-3"></i></button>
            </div>
         </content-box>
 
@@ -78,7 +78,12 @@ export default {
     },
     data() {
         return {
-            formData: {
+            trusts: []
+        }
+    },
+    methods: {
+        addTrustee() {
+            this.trusts.push({
                 honorific: '',
                 hasDependant: false,
                 forename: '',
@@ -90,7 +95,7 @@ export default {
                     forename: '',
                     surname: ''
                 }
-            }
+            });
         }
     }
 }

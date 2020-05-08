@@ -2389,6 +2389,105 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/client-form/form-snippets/ButtonGroup.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/babel-loader/lib??ref--11-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/client-form/form-snippets/ButtonGroup.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'ButtonGroup',
+  props: {
+    label: {
+      type: String,
+      "default": null
+    },
+    options: {
+      type: Array,
+      "default": function _default() {
+        return ['Yes', 'No'];
+      }
+    },
+    multichoice: {
+      type: Boolean,
+      "default": false
+    },
+    sameWidthButtons: {
+      type: Boolean,
+      "default": false
+    },
+    collapse: {
+      type: Boolean,
+      "default": false
+    },
+    collapseOn: {
+      type: String,
+      "default": 'Yes'
+    }
+  },
+  data: function data() {
+    return {
+      optionsCopy: []
+    };
+  },
+  beforeMount: function beforeMount() {
+    this.optionsCopy = this.options.map(function (x) {
+      return {
+        value: x,
+        active: false
+      };
+    });
+  },
+  methods: {
+    update: function update(index) {
+      var _this = this;
+
+      if (!this.multichoice) {
+        this.optionsCopy.forEach(function (x, i) {
+          if (i === index) {
+            x.active = true;
+
+            _this.$emit('input', x.value);
+          } else {
+            x.active = false;
+          }
+        });
+      } else {
+        this.optionsCopy[index].active = !this.optionsCopy[index].active;
+        this.$emit('input', this.optionsCopy);
+      }
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/client-form/form-snippets/Honorific.vue?vue&type=script&lang=js&":
 /*!*****************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/babel-loader/lib??ref--11-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/client-form/form-snippets/Honorific.vue?vue&type=script&lang=js& ***!
@@ -2477,6 +2576,10 @@ __webpack_require__.r(__webpack_exports__);
     collapseOn: {
       type: Boolean,
       "default": true
+    },
+    value: {
+      type: Boolean,
+      "default": null
     }
   },
   data: function data() {
@@ -2487,12 +2590,15 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     yes: function yes() {
       this.answer = true;
-      this.$emit('update', this.answer);
+      this.$emit('input', this.answer);
     },
     no: function no() {
       this.answer = false;
-      this.$emit('update', this.answer);
+      this.$emit('input', this.answer);
     }
+  },
+  beforeMount: function beforeMount() {
+    this.answer = this.value;
   }
 });
 
@@ -2508,15 +2614,8 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuejs_datepicker__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuejs-datepicker */ "./node_modules/vuejs-datepicker/dist/vuejs-datepicker.esm.js");
-//
-//
-//
-//
-//
-//
-//
-//
-//
+/* harmony import */ var _form_snippets_Honorific_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../form-snippets/Honorific.vue */ "./resources/js/components/client-form/form-snippets/Honorific.vue");
+/* harmony import */ var _form_snippets_ButtonGroup_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../form-snippets/ButtonGroup.vue */ "./resources/js/components/client-form/form-snippets/ButtonGroup.vue");
 //
 //
 //
@@ -2678,9 +2777,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    Datepicker: vuejs_datepicker__WEBPACK_IMPORTED_MODULE_0__["default"]
+    Datepicker: vuejs_datepicker__WEBPACK_IMPORTED_MODULE_0__["default"],
+    Honorific: _form_snippets_Honorific_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    ButtonGroup: _form_snippets_ButtonGroup_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   data: function data() {
     return {
@@ -2711,16 +2814,6 @@ __webpack_require__.r(__webpack_exports__);
       },
       addressInputType: 'manual'
     };
-  },
-  methods: {
-    updateHonorific: function updateHonorific(text) {
-      if (text) {
-        this.$refs.customHonorific.value = '';
-        this.formData.honorific = text;
-      } else {
-        this.formData.honorific = this.$refs.customHonorific.value;
-      }
-    }
   }
 });
 
@@ -2735,15 +2828,123 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _base_components_BaseFileUpload_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../base-components/BaseFileUpload.vue */ "./resources/js/components/base-components/BaseFileUpload.vue");
+/* harmony import */ var _form_snippets_YesNo_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../form-snippets/YesNo.vue */ "./resources/js/components/client-form/form-snippets/YesNo.vue");
+/* harmony import */ var _form_snippets_Honorific_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../form-snippets/Honorific.vue */ "./resources/js/components/client-form/form-snippets/Honorific.vue");
 //
 //
 //
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    YesNo: _form_snippets_YesNo_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    Honorific: _form_snippets_Honorific_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+    BaseFileUpload: _base_components_BaseFileUpload_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
   data: function data() {
-    return {};
+    return {
+      formData: {
+        accountant: {
+          honorific: ''
+        }
+      }
+    };
   }
 });
 
@@ -3187,228 +3388,8 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _base_components_BaseFileUpload_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../base-components/BaseFileUpload.vue */ "./resources/js/components/base-components/BaseFileUpload.vue");
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  components: {
-    BaseFileUpload: _base_components_BaseFileUpload_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
-  },
-  data: function data() {
-    return {
-      formData: {
-        query1: {
-          answer: null
-        },
-        query2: {
-          answer: null
-        },
-        query3: {
-          answer: null,
-          question3: {
-            answer: null
-          },
-          question4: {
-            answer: null
-          }
-        },
-        query4: {
-          slide: 1,
-          slide5: {
-            answer: null,
-            answer2: null
-          },
-          slide7: {
-            answer: null
-          }
-        }
-      }
-    };
-  },
-  methods: {
-    nextSlide: function nextSlide() {
-      if (this.formData.query4.slide < 7) {
-        this.formData.query4.slide++;
-      }
-    },
-    prevSlide: function prevSlide() {
-      if (this.formData.query4.slide > 1) {
-        this.formData.query4.slide--;
-      }
-    }
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/client-form/sections/section4.vue?vue&type=script&lang=js&":
-/*!***********************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/babel-loader/lib??ref--11-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/client-form/sections/section4.vue?vue&type=script&lang=js& ***!
-  \***********************************************************************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _base_components_BaseFileUpload_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../base-components/BaseFileUpload.vue */ "./resources/js/components/base-components/BaseFileUpload.vue");
-/* harmony import */ var _form_snippets_Honorific_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../form-snippets/Honorific.vue */ "./resources/js/components/client-form/form-snippets/Honorific.vue");
-/* harmony import */ var vuejs_datepicker__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuejs-datepicker */ "./node_modules/vuejs-datepicker/dist/vuejs-datepicker.esm.js");
-//
-//
-//
-//
-//
-//
-//
-//
+/* harmony import */ var _form_snippets_YesNo_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../form-snippets/YesNo.vue */ "./resources/js/components/client-form/form-snippets/YesNo.vue");
+/* harmony import */ var _form_snippets_ButtonGroup_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../form-snippets/ButtonGroup.vue */ "./resources/js/components/client-form/form-snippets/ButtonGroup.vue");
 //
 //
 //
@@ -3537,8 +3518,176 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     BaseFileUpload: _base_components_BaseFileUpload_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+    YesNo: _form_snippets_YesNo_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    ButtonGroup: _form_snippets_ButtonGroup_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+  },
+  data: function data() {
+    return {
+      formData: {
+        query1: {
+          answer: null
+        },
+        query2: {
+          answer: null
+        },
+        query3: {
+          answer: null,
+          question3: {
+            answer: null
+          },
+          question4: {
+            answer: null
+          }
+        },
+        query4: {
+          slide: 1,
+          slide5: {
+            answer: null,
+            answer2: null
+          },
+          slide7: {
+            answer: null
+          }
+        }
+      }
+    };
+  },
+  methods: {
+    nextSlide: function nextSlide() {
+      if (this.formData.query4.slide < 7) {
+        this.formData.query4.slide++;
+      }
+    },
+    prevSlide: function prevSlide() {
+      if (this.formData.query4.slide > 1) {
+        this.formData.query4.slide--;
+      }
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/client-form/sections/section4.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/babel-loader/lib??ref--11-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/client-form/sections/section4.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _base_components_BaseFileUpload_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../base-components/BaseFileUpload.vue */ "./resources/js/components/base-components/BaseFileUpload.vue");
+/* harmony import */ var _form_snippets_Honorific_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../form-snippets/Honorific.vue */ "./resources/js/components/client-form/form-snippets/Honorific.vue");
+/* harmony import */ var vuejs_datepicker__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuejs-datepicker */ "./node_modules/vuejs-datepicker/dist/vuejs-datepicker.esm.js");
+/* harmony import */ var _form_snippets_YesNo_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../form-snippets/YesNo.vue */ "./resources/js/components/client-form/form-snippets/YesNo.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    BaseFileUpload: _base_components_BaseFileUpload_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     Honorific: _form_snippets_Honorific_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    Datepicker: vuejs_datepicker__WEBPACK_IMPORTED_MODULE_2__["default"]
+    Datepicker: vuejs_datepicker__WEBPACK_IMPORTED_MODULE_2__["default"],
+    YesNo: _form_snippets_YesNo_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
   data: function data() {
     return {
@@ -3650,12 +3799,22 @@ __webpack_require__.r(__webpack_exports__);
     nextSlide: function nextSlide() {
       if (this.slide < 5) {
         this.slide++;
+        this.flashLabel();
       }
     },
     prevSlide: function prevSlide() {
       if (this.slide > 1) {
         this.slide--;
+        this.flashLabel();
       }
+    },
+    flashLabel: function flashLabel() {
+      var label = $($('.flash-label > label')[this.slide - 1]);
+      label.css('background-color', 'yellow');
+      setTimeout(function () {
+        label.css('transition', 'all .9s');
+        label.css('background-color', 'transparent');
+      }, 100);
     }
   }
 });
@@ -3900,7 +4059,12 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      formData: {
+      trusts: []
+    };
+  },
+  methods: {
+    addTrustee: function addTrustee() {
+      this.trusts.push({
         honorific: '',
         hasDependant: false,
         forename: '',
@@ -3912,8 +4076,8 @@ __webpack_require__.r(__webpack_exports__);
           forename: '',
           surname: ''
         }
-      }
-    };
+      });
+    }
   }
 });
 
@@ -79019,6 +79183,85 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/client-form/form-snippets/ButtonGroup.vue?vue&type=template&id=0dcc0599&":
+/*!****************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/client-form/form-snippets/ButtonGroup.vue?vue&type=template&id=0dcc0599& ***!
+  \****************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _vm.label ? _c("label", [_vm._v(_vm._s(_vm.label))]) : _vm._e(),
+      _c("br"),
+      _vm._v(" "),
+      _vm.sameWidthButtons
+        ? _c(
+            "div",
+            { staticClass: "same-width-buttons-container" },
+            _vm._l(_vm.optionsCopy, function(option, key) {
+              return _c(
+                "button",
+                {
+                  key: key,
+                  staticClass: "btn btn-outline-secondary active-primary",
+                  class: { active: option.active === true },
+                  on: {
+                    click: function($event) {
+                      return _vm.update(key)
+                    }
+                  }
+                },
+                [_vm._v(_vm._s(option.value))]
+              )
+            }),
+            0
+          )
+        : _vm._l(_vm.optionsCopy, function(option, key) {
+            return _c(
+              "button",
+              {
+                key: key,
+                staticClass: "btn btn-outline-secondary active-primary mr-3",
+                class: { active: option.active === true },
+                on: {
+                  click: function($event) {
+                    return _vm.update(key)
+                  }
+                }
+              },
+              [_vm._v(_vm._s(option.value))]
+            )
+          }),
+      _vm._v(" "),
+      _vm.collapse
+        ? _c(
+            "b-collapse",
+            { attrs: { visible: _vm.answer === _vm.collapseOn } },
+            [_vm._t("default")],
+            2
+          )
+        : _vm._e()
+    ],
+    2
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/client-form/form-snippets/Honorific.vue?vue&type=template&id=defe7ee6&":
 /*!**************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/client-form/form-snippets/Honorific.vue?vue&type=template&id=defe7ee6& ***!
@@ -79035,7 +79278,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "row no-gutters" }, [
-    _c("div", { staticClass: "col-12 col-lg-6 mb-4 d-flex" }, [
+    _c("div", { staticClass: "col-12 col-lg-6 form-group d-flex" }, [
       _c(
         "button",
         {
@@ -79093,7 +79336,7 @@ var render = function() {
       )
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "col-12 col-lg-6 mb-4" }, [
+    _c("div", { staticClass: "col-12 col-lg-6 form-group" }, [
       _c("input", {
         staticClass: "form-control",
         attrs: { type: "text", placeholder: "Other" },
@@ -79207,86 +79450,13 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _c("content-box", { attrs: { title: "About the Deceased" } }, [
-        _c("div", { staticClass: "row no-gutters mb-4" }, [
-          _c("div", { staticClass: "col-12 col-lg-6 d-flex" }, [
-            _c(
-              "button",
-              {
-                staticClass:
-                  "btn btn-outline-secondary active-primary mr-3 col",
-                class: { active: _vm.formData.honorific == "Mr." },
-                on: {
-                  click: function($event) {
-                    return _vm.updateHonorific("Mr.")
-                  }
-                }
-              },
-              [_c("b", [_vm._v("Mr.")])]
-            ),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass:
-                  "btn btn-outline-secondary active-primary mr-3 col",
-                class: { active: _vm.formData.honorific == "Mrs." },
-                on: {
-                  click: function($event) {
-                    return _vm.updateHonorific("Mrs.")
-                  }
-                }
-              },
-              [_c("b", [_vm._v("Mrs.")])]
-            ),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass:
-                  "btn btn-outline-secondary active-primary mr-3 col",
-                class: { active: _vm.formData.honorific == "Miss" },
-                on: {
-                  click: function($event) {
-                    return _vm.updateHonorific("Miss")
-                  }
-                }
-              },
-              [_c("b", [_vm._v("Miss")])]
-            ),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass:
-                  "btn btn-outline-secondary active-primary mr-lg-3 col",
-                class: { active: _vm.formData.honorific == "Ms" },
-                on: {
-                  click: function($event) {
-                    return _vm.updateHonorific("Ms")
-                  }
-                }
-              },
-              [_c("b", [_vm._v("Ms")])]
-            )
-          ]),
+      _c(
+        "content-box",
+        { attrs: { title: "About the Deceased" } },
+        [
+          _c("honorific"),
           _vm._v(" "),
-          _c("div", { staticClass: "col-12 col-lg-6" }, [
-            _c("input", {
-              ref: "customHonorific",
-              staticClass: "form-control",
-              attrs: { type: "text", placeholder: "Other" },
-              on: {
-                input: function($event) {
-                  return _vm.updateHonorific()
-                }
-              }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-12 mb-4" }, [
+          _c("div", { staticClass: "form-group" }, [
             _c("label", { attrs: { for: "forename" } }, [_vm._v("Forename")]),
             _vm._v(" "),
             _c("input", {
@@ -79312,7 +79482,7 @@ var render = function() {
             })
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-12 mb-4" }, [
+          _c("div", { staticClass: "form-group" }, [
             _c("label", { attrs: { for: "surname" } }, [_vm._v("Surname")]),
             _vm._v(" "),
             _c("input", {
@@ -79338,7 +79508,7 @@ var render = function() {
             })
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-12 mb-4" }, [
+          _c("div", { staticClass: "form-group" }, [
             _c("label", { attrs: { for: "aliases" } }, [
               _vm._v("Any aliases in which they held assets?")
             ]),
@@ -79370,7 +79540,7 @@ var render = function() {
             })
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-12 mb-4" }, [
+          _c("div", { staticClass: "form-group" }, [
             _c("label", [_vm._v("Last usual address")]),
             _c("br"),
             _vm._v(" "),
@@ -79444,224 +79614,233 @@ var render = function() {
                 [_vm._v("Add manually")]
               )
             ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "row" }, [
-          _c(
-            "div",
-            {
-              directives: [
-                {
-                  name: "show",
-                  rawName: "v-show",
-                  value: _vm.addressInputType == "postcode",
-                  expression: "addressInputType == 'postcode'"
-                }
-              ],
-              staticClass: "col-lg-5 mb-4"
-            },
-            [
-              _c("div", { staticClass: "input-group" }, [
-                _c("input", {
-                  staticClass: "form-control",
-                  attrs: { type: "text", placeholder: "E.g. TN30 6RN" }
-                }),
-                _vm._v(" "),
-                _c("div", { staticClass: "input-group-append" }, [
-                  _c("button", { staticClass: "btn btn-primary" }, [
-                    _c("i", { staticClass: "fas fa-search" })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "row" }, [
+            _c(
+              "div",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.addressInputType == "postcode",
+                    expression: "addressInputType == 'postcode'"
+                  }
+                ],
+                staticClass: "col-lg-5 form-group"
+              },
+              [
+                _c("div", { staticClass: "input-group" }, [
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: { type: "text", placeholder: "E.g. TN30 6RN" }
+                  }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "input-group-append" }, [
+                    _c("button", { staticClass: "btn btn-primary" }, [
+                      _c("i", { staticClass: "fas fa-search" })
+                    ])
                   ])
                 ])
-              ])
-            ]
-          ),
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.addressInputType == "manual",
+                    expression: "addressInputType == 'manual'"
+                  }
+                ],
+                staticClass: "col-12"
+              },
+              [
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-lg-5 form-group" }, [
+                    _c("label", { attrs: { for: "addressLine1" } }, [
+                      _vm._v("Address Line 1")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.formData.addressLine1,
+                          expression: "formData.addressLine1"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        id: "addressLine1",
+                        placeholder: "23 Acacia Avenue"
+                      },
+                      domProps: { value: _vm.formData.addressLine1 },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.formData,
+                            "addressLine1",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-lg-5 form-group" }, [
+                    _c("label", { attrs: { for: "addressLine2" } }, [
+                      _vm._v("Address Line 2")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.formData.addressLine2,
+                          expression: "formData.addressLine2"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        id: "addressLine2",
+                        placeholder: "Acacia Road"
+                      },
+                      domProps: { value: _vm.formData.addressLine2 },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.formData,
+                            "addressLine2",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-lg-5 form-group" }, [
+                    _c("label", { attrs: { for: "town" } }, [
+                      _vm._v("Town / City")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.formData.town,
+                          expression: "formData.town"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        id: "town",
+                        placeholder: "Acadia"
+                      },
+                      domProps: { value: _vm.formData.town },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.formData, "town", $event.target.value)
+                        }
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-lg-5 form-group" }, [
+                    _c("label", { attrs: { for: "postcode" } }, [
+                      _vm._v("Postcode")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.formData.postcode,
+                          expression: "formData.postcode"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        id: "postcode",
+                        placeholder: "TN28 PJ13"
+                      },
+                      domProps: { value: _vm.formData.postcode },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.formData,
+                            "postcode",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    })
+                  ])
+                ])
+              ]
+            )
+          ]),
           _vm._v(" "),
-          _c(
-            "div",
-            {
-              directives: [
-                {
-                  name: "show",
-                  rawName: "v-show",
-                  value: _vm.addressInputType == "manual",
-                  expression: "addressInputType == 'manual'"
-                }
-              ],
-              staticClass: "col-12"
-            },
-            [
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-lg-5 mb-4" }, [
-                  _c("label", { attrs: { for: "addressLine1" } }, [
-                    _vm._v("Address Line 1")
-                  ]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.formData.addressLine1,
-                        expression: "formData.addressLine1"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: {
-                      type: "text",
-                      id: "addressLine1",
-                      placeholder: "23 Acacia Avenue"
-                    },
-                    domProps: { value: _vm.formData.addressLine1 },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(
-                          _vm.formData,
-                          "addressLine1",
-                          $event.target.value
-                        )
-                      }
-                    }
-                  })
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-lg-5 mb-4" }, [
-                  _c("label", { attrs: { for: "addressLine2" } }, [
-                    _vm._v("Address Line 2")
-                  ]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.formData.addressLine2,
-                        expression: "formData.addressLine2"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: {
-                      type: "text",
-                      id: "addressLine2",
-                      placeholder: "Acacia Road"
-                    },
-                    domProps: { value: _vm.formData.addressLine2 },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(
-                          _vm.formData,
-                          "addressLine2",
-                          $event.target.value
-                        )
-                      }
-                    }
-                  })
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-lg-5 mb-4" }, [
-                  _c("label", { attrs: { for: "town" } }, [
-                    _vm._v("Town / City")
-                  ]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.formData.town,
-                        expression: "formData.town"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: { type: "text", id: "town", placeholder: "Acadia" },
-                    domProps: { value: _vm.formData.town },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(_vm.formData, "town", $event.target.value)
-                      }
-                    }
-                  })
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-lg-5 mb-4" }, [
-                  _c("label", { attrs: { for: "postcode" } }, [
-                    _vm._v("Postcode")
-                  ]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.formData.postcode,
-                        expression: "formData.postcode"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: {
-                      type: "text",
-                      id: "postcode",
-                      placeholder: "TN28 PJ13"
-                    },
-                    domProps: { value: _vm.formData.postcode },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(_vm.formData, "postcode", $event.target.value)
-                      }
-                    }
-                  })
-                ])
-              ])
-            ]
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "row" }, [
-          _c(
-            "div",
-            { staticClass: "col-lg-5 mb-4" },
-            [
-              _c("label", { attrs: { for: "aliases" } }, [
-                _vm._v("Date of Death")
-              ]),
-              _vm._v(" "),
-              _c("datepicker", {
-                attrs: {
-                  "input-class": "form-control bg-white",
-                  placeholder: "21 / 9 / 2020",
-                  format: "dd / MM / yy"
-                },
-                model: {
-                  value: _vm.formData.dateOfDeath,
-                  callback: function($$v) {
-                    _vm.$set(_vm.formData, "dateOfDeath", $$v)
+          _c("div", { staticClass: "row" }, [
+            _c(
+              "div",
+              { staticClass: "col-lg-5 form-group" },
+              [
+                _c("label", { attrs: { for: "aliases" } }, [
+                  _vm._v("Date of Death")
+                ]),
+                _vm._v(" "),
+                _c("datepicker", {
+                  attrs: {
+                    "input-class": "form-control bg-white",
+                    placeholder: "21 / 9 / 2020",
+                    format: "dd / MM / yy"
                   },
-                  expression: "formData.dateOfDeath"
-                }
-              })
-            ],
-            1
-          )
-        ])
-      ]),
+                  model: {
+                    value: _vm.formData.dateOfDeath,
+                    callback: function($$v) {
+                      _vm.$set(_vm.formData, "dateOfDeath", $$v)
+                    },
+                    expression: "formData.dateOfDeath"
+                  }
+                })
+              ],
+              1
+            )
+          ])
+        ],
+        1
+      ),
       _vm._v(" "),
       _c("content-box", { attrs: { title: "1.2 Key Information" } }, [
         _c("div", { staticClass: "row" }, [
@@ -79731,397 +79910,328 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _c("content-box", { attrs: { title: "1.3 Marital Status" } }, [
-        _c("div", { staticClass: "d-flex" }, [
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-outline-secondary active-primary col mr-3",
-              class: { active: _vm.formData.maritalStatus == "Married" },
-              on: {
-                click: function($event) {
-                  _vm.formData.maritalStatus = "Married"
-                }
-              }
-            },
-            [_vm._v("Married")]
-          ),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-outline-secondary active-primary col mr-3",
-              class: { active: _vm.formData.maritalStatus == "Batchelor" },
-              on: {
-                click: function($event) {
-                  _vm.formData.maritalStatus = "Batchelor"
-                }
-              }
-            },
-            [_vm._v("Batchelor")]
-          ),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-outline-secondary active-primary col mr-3",
-              class: { active: _vm.formData.maritalStatus == "Divorced" },
-              on: {
-                click: function($event) {
-                  _vm.formData.maritalStatus = "Divorced"
-                }
-              }
-            },
-            [_vm._v("Divorced")]
-          ),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-outline-secondary active-primary col mr-3",
-              class: { active: _vm.formData.maritalStatus == "Widowed" },
-              on: {
-                click: function($event) {
-                  _vm.formData.maritalStatus = "Widowed"
-                }
-              }
-            },
-            [_vm._v("Widowed")]
-          ),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass:
-                "btn btn-outline-secondary active-primary col mr-lg-3",
-              class: { active: _vm.formData.maritalStatus == "Spinster" },
-              on: {
-                click: function($event) {
-                  _vm.formData.maritalStatus = "Spinster"
-                }
-              }
-            },
-            [_vm._v("Spinster")]
-          )
-        ])
-      ]),
+      _c(
+        "content-box",
+        { attrs: { title: "1.3 Marital Status" } },
+        [
+          _c("button-group", {
+            attrs: {
+              options: [
+                "Married",
+                "Batchelor",
+                "Divorced",
+                "Widowed",
+                "Spinster"
+              ],
+              sameWidthButtons: ""
+            }
+          })
+        ],
+        1
+      ),
       _vm._v(" "),
-      _c("content-box", { attrs: { title: "1.4 Surviving Relatives" } }, [
-        _c("div", { staticClass: "d-flex mb-4" }, [
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-outline-secondary active-primary col mr-3",
-              class: { active: _vm.formData.survivingRelatives.spouse > 0 },
-              on: {
-                click: function($event) {
-                  _vm.formData.survivingRelatives.spouse === 0
-                    ? (_vm.formData.survivingRelatives.spouse = 1)
-                    : (_vm.formData.survivingRelatives.spouse = 0)
+      _c(
+        "content-box",
+        { attrs: { title: "1.4 Surviving Relatives" } },
+        [
+          _c("div", { staticClass: "same-width-buttons-container" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-outline-secondary active-primary",
+                class: { active: _vm.formData.survivingRelatives.spouse > 0 },
+                on: {
+                  click: function($event) {
+                    _vm.formData.survivingRelatives.spouse === 0
+                      ? (_vm.formData.survivingRelatives.spouse = 1)
+                      : (_vm.formData.survivingRelatives.spouse = 0)
+                  }
                 }
-              }
-            },
-            [_vm._v("Spouse")]
-          ),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-outline-secondary active-primary col mr-3",
-              class: { active: _vm.formData.survivingRelatives.parents > 0 },
-              on: {
-                click: function($event) {
-                  _vm.formData.survivingRelatives.parents === 0
-                    ? (_vm.formData.survivingRelatives.parents = 1)
-                    : (_vm.formData.survivingRelatives.parents = 0)
-                }
-              }
-            },
-            [_vm._v("Parents")]
-          ),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-outline-secondary active-primary col mr-3",
-              class: { active: _vm.formData.survivingRelatives.siblings > 0 },
-              on: {
-                click: function($event) {
-                  _vm.formData.survivingRelatives.siblings === 0
-                    ? (_vm.formData.survivingRelatives.siblings = 1)
-                    : (_vm.formData.survivingRelatives.siblings = 0)
-                }
-              }
-            },
-            [_vm._v("Siblings")]
-          ),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-outline-secondary active-primary col mr-3",
-              class: { active: _vm.formData.survivingRelatives.children > 0 },
-              on: {
-                click: function($event) {
-                  _vm.formData.survivingRelatives.children === 0
-                    ? (_vm.formData.survivingRelatives.children = 1)
-                    : (_vm.formData.survivingRelatives.children = 0)
-                }
-              }
-            },
-            [_vm._v("Children")]
-          ),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass:
-                "btn btn-outline-secondary active-primary col mr-lg-3",
-              class: {
-                active: _vm.formData.survivingRelatives.grandChildren > 0
               },
-              on: {
-                click: function($event) {
-                  _vm.formData.survivingRelatives.grandChildren === 0
-                    ? (_vm.formData.survivingRelatives.grandChildren = 1)
-                    : (_vm.formData.survivingRelatives.grandChildren = 0)
+              [_vm._v("Spouse")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-outline-secondary active-primary",
+                class: { active: _vm.formData.survivingRelatives.parents > 0 },
+                on: {
+                  click: function($event) {
+                    _vm.formData.survivingRelatives.parents === 0
+                      ? (_vm.formData.survivingRelatives.parents = 1)
+                      : (_vm.formData.survivingRelatives.parents = 0)
+                  }
                 }
+              },
+              [_vm._v("Parents")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-outline-secondary active-primary",
+                class: { active: _vm.formData.survivingRelatives.siblings > 0 },
+                on: {
+                  click: function($event) {
+                    _vm.formData.survivingRelatives.siblings === 0
+                      ? (_vm.formData.survivingRelatives.siblings = 1)
+                      : (_vm.formData.survivingRelatives.siblings = 0)
+                  }
+                }
+              },
+              [_vm._v("Siblings")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-outline-secondary active-primary",
+                class: { active: _vm.formData.survivingRelatives.children > 0 },
+                on: {
+                  click: function($event) {
+                    _vm.formData.survivingRelatives.children === 0
+                      ? (_vm.formData.survivingRelatives.children = 1)
+                      : (_vm.formData.survivingRelatives.children = 0)
+                  }
+                }
+              },
+              [_vm._v("Children")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-outline-secondary active-primary",
+                class: {
+                  active: _vm.formData.survivingRelatives.grandChildren > 0
+                },
+                on: {
+                  click: function($event) {
+                    _vm.formData.survivingRelatives.grandChildren === 0
+                      ? (_vm.formData.survivingRelatives.grandChildren = 1)
+                      : (_vm.formData.survivingRelatives.grandChildren = 0)
+                  }
+                }
+              },
+              [_vm._v("Grand Children")]
+            )
+          ]),
+          _vm._v(" "),
+          _c(
+            "b-collapse",
+            { attrs: { visible: _vm.formData.survivingRelatives.parents > 0 } },
+            [
+              _c("div", { staticClass: "row mt-4" }, [
+                _c("div", { staticClass: "col-lg-6" }, [
+                  _c("label", { attrs: { for: "noOfParents" } }, [
+                    _vm._v("Number of Surviving Parents")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: _vm.formData.survivingRelatives.parents,
+                        expression: "formData.survivingRelatives.parents",
+                        modifiers: { number: true }
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "number",
+                      id: "noOfParents",
+                      placeholder: "John"
+                    },
+                    domProps: {
+                      value: _vm.formData.survivingRelatives.parents
+                    },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.formData.survivingRelatives,
+                          "parents",
+                          _vm._n($event.target.value)
+                        )
+                      },
+                      blur: function($event) {
+                        return _vm.$forceUpdate()
+                      }
+                    }
+                  })
+                ])
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "b-collapse",
+            {
+              attrs: { visible: _vm.formData.survivingRelatives.siblings > 0 }
+            },
+            [
+              _c("div", { staticClass: "row mt-4" }, [
+                _c("div", { staticClass: "col-lg-6" }, [
+                  _c("label", { attrs: { for: "noOfSiblings" } }, [
+                    _vm._v("Number of Surviving Siblings")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: _vm.formData.survivingRelatives.siblings,
+                        expression: "formData.survivingRelatives.siblings",
+                        modifiers: { number: true }
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "number",
+                      id: "noOfSiblings",
+                      placeholder: "John"
+                    },
+                    domProps: {
+                      value: _vm.formData.survivingRelatives.siblings
+                    },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.formData.survivingRelatives,
+                          "siblings",
+                          _vm._n($event.target.value)
+                        )
+                      },
+                      blur: function($event) {
+                        return _vm.$forceUpdate()
+                      }
+                    }
+                  })
+                ])
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "b-collapse",
+            {
+              attrs: { visible: _vm.formData.survivingRelatives.children > 0 }
+            },
+            [
+              _c("div", { staticClass: "row mt-4" }, [
+                _c("div", { staticClass: "col-lg-6" }, [
+                  _c("label", { attrs: { for: "noOfChildren" } }, [
+                    _vm._v("Number of Surviving Children")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: _vm.formData.survivingRelatives.children,
+                        expression: "formData.survivingRelatives.children",
+                        modifiers: { number: true }
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "number",
+                      id: "noOfChildren",
+                      placeholder: "John"
+                    },
+                    domProps: {
+                      value: _vm.formData.survivingRelatives.children
+                    },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.formData.survivingRelatives,
+                          "children",
+                          _vm._n($event.target.value)
+                        )
+                      },
+                      blur: function($event) {
+                        return _vm.$forceUpdate()
+                      }
+                    }
+                  })
+                ])
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "b-collapse",
+            {
+              attrs: {
+                visible: _vm.formData.survivingRelatives.grandChildren > 0
               }
             },
-            [_vm._v("Grand Children")]
+            [
+              _c("div", { staticClass: "row mt-4" }, [
+                _c("div", { staticClass: "col-lg-6" }, [
+                  _c("label", { attrs: { for: "noOfGrandChildren" } }, [
+                    _vm._v("Number of Surviving Grand Children")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: _vm.formData.survivingRelatives.grandChildren,
+                        expression: "formData.survivingRelatives.grandChildren",
+                        modifiers: { number: true }
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "number",
+                      id: "noOfGrandChildren",
+                      placeholder: "John"
+                    },
+                    domProps: {
+                      value: _vm.formData.survivingRelatives.grandChildren
+                    },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.formData.survivingRelatives,
+                          "grandChildren",
+                          _vm._n($event.target.value)
+                        )
+                      },
+                      blur: function($event) {
+                        return _vm.$forceUpdate()
+                      }
+                    }
+                  })
+                ])
+              ])
+            ]
           )
-        ]),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: _vm.formData.survivingRelatives.parents > 0,
-                expression: "formData.survivingRelatives.parents > 0"
-              }
-            ],
-            staticClass: "row mb-4"
-          },
-          [
-            _c("div", { staticClass: "col-lg-6" }, [
-              _c("label", { attrs: { for: "noOfParents" } }, [
-                _vm._v("Number of Surviving Parents")
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model.number",
-                    value: _vm.formData.survivingRelatives.parents,
-                    expression: "formData.survivingRelatives.parents",
-                    modifiers: { number: true }
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: {
-                  type: "number",
-                  id: "noOfParents",
-                  placeholder: "John"
-                },
-                domProps: { value: _vm.formData.survivingRelatives.parents },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(
-                      _vm.formData.survivingRelatives,
-                      "parents",
-                      _vm._n($event.target.value)
-                    )
-                  },
-                  blur: function($event) {
-                    return _vm.$forceUpdate()
-                  }
-                }
-              })
-            ])
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: _vm.formData.survivingRelatives.siblings > 0,
-                expression: "formData.survivingRelatives.siblings > 0"
-              }
-            ],
-            staticClass: "row mb-4"
-          },
-          [
-            _c("div", { staticClass: "col-lg-6" }, [
-              _c("label", { attrs: { for: "noOfSiblings" } }, [
-                _vm._v("Number of Surviving Siblings")
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model.number",
-                    value: _vm.formData.survivingRelatives.siblings,
-                    expression: "formData.survivingRelatives.siblings",
-                    modifiers: { number: true }
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: {
-                  type: "number",
-                  id: "noOfSiblings",
-                  placeholder: "John"
-                },
-                domProps: { value: _vm.formData.survivingRelatives.siblings },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(
-                      _vm.formData.survivingRelatives,
-                      "siblings",
-                      _vm._n($event.target.value)
-                    )
-                  },
-                  blur: function($event) {
-                    return _vm.$forceUpdate()
-                  }
-                }
-              })
-            ])
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: _vm.formData.survivingRelatives.children > 0,
-                expression: "formData.survivingRelatives.children > 0"
-              }
-            ],
-            staticClass: "row mb-4"
-          },
-          [
-            _c("div", { staticClass: "col-lg-6" }, [
-              _c("label", { attrs: { for: "noOfChildren" } }, [
-                _vm._v("Number of Surviving Children")
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model.number",
-                    value: _vm.formData.survivingRelatives.children,
-                    expression: "formData.survivingRelatives.children",
-                    modifiers: { number: true }
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: {
-                  type: "number",
-                  id: "noOfChildren",
-                  placeholder: "John"
-                },
-                domProps: { value: _vm.formData.survivingRelatives.children },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(
-                      _vm.formData.survivingRelatives,
-                      "children",
-                      _vm._n($event.target.value)
-                    )
-                  },
-                  blur: function($event) {
-                    return _vm.$forceUpdate()
-                  }
-                }
-              })
-            ])
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: _vm.formData.survivingRelatives.grandChildren > 0,
-                expression: "formData.survivingRelatives.grandChildren > 0"
-              }
-            ],
-            staticClass: "row mb-4"
-          },
-          [
-            _c("div", { staticClass: "col-lg-6" }, [
-              _c("label", { attrs: { for: "noOfGrandChildren" } }, [
-                _vm._v("Number of Surviving Grand Children")
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model.number",
-                    value: _vm.formData.survivingRelatives.grandChildren,
-                    expression: "formData.survivingRelatives.grandChildren",
-                    modifiers: { number: true }
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: {
-                  type: "number",
-                  id: "noOfGrandChildren",
-                  placeholder: "John"
-                },
-                domProps: {
-                  value: _vm.formData.survivingRelatives.grandChildren
-                },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(
-                      _vm.formData.survivingRelatives,
-                      "grandChildren",
-                      _vm._n($event.target.value)
-                    )
-                  },
-                  blur: function($event) {
-                    return _vm.$forceUpdate()
-                  }
-                }
-              })
-            ])
-          ]
-        )
-      ]),
+        ],
+        1
+      ),
       _vm._v(" "),
       _c("content-box", { attrs: { title: "1.5 Income tax details" } }, [
         _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-12 col-lg-6 mb-4" }, [
+          _c("div", { staticClass: "col-12 col-lg-6 form-group" }, [
             _c("label", { attrs: { for: "NInumber" } }, [
               _vm._v("National insurance number")
             ]),
@@ -80153,7 +80263,7 @@ var render = function() {
             })
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-12 col-lg-6 mb-4" }, [
+          _c("div", { staticClass: "col-12 col-lg-6 form-group" }, [
             _c("label", { attrs: { for: "tax-ref" } }, [
               _vm._v("Income tax reference")
             ]),
@@ -80191,7 +80301,7 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-12 col-lg-6 mb-4" }, [
+          _c("div", { staticClass: "col-12 col-lg-6 form-group" }, [
             _c("label", { attrs: { for: "phone" } }, [_vm._v("Phone number")]),
             _vm._v(" "),
             _c("input", {
@@ -80221,7 +80331,7 @@ var render = function() {
             })
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-12 col-lg-6 mb-4" }, [
+          _c("div", { staticClass: "col-12 col-lg-6 form-group" }, [
             _c("label", { attrs: { for: "email" } }, [_vm._v("Email Address")]),
             _vm._v(" "),
             _c("input", {
@@ -80300,7 +80410,274 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "section10" })
+  return _c(
+    "div",
+    [
+      _c(
+        "content-box",
+        { attrs: { title: "Section 9 - Business interests or partnerships" } },
+        [
+          _c(
+            "yes-no",
+            {
+              staticClass: "form-group",
+              attrs: {
+                label: "Did the deceased own shares in a private company?",
+                collapse: ""
+              }
+            },
+            [
+              _c("div", { staticClass: "form-group mt-4" }, [
+                _c("label", [_vm._v("Company name")]),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "form-control",
+                  attrs: { type: "text", placeholder: "John Appleseed Ltd" }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", [_vm._v("Company number")]),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "form-control",
+                  attrs: { type: "text", placeholder: "1235 1235 08311" }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", [_vm._v("Business activity")]),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "form-control",
+                  attrs: { type: "text", placeholder: "Import & export" }
+                })
+              ]),
+              _vm._v(" "),
+              _c("label", { staticClass: "my-3" }, [
+                _vm._v("Company accountant details")
+              ]),
+              _vm._v(" "),
+              _c("honorific", {
+                model: {
+                  value: _vm.formData.accountant.honorific,
+                  callback: function($$v) {
+                    _vm.$set(_vm.formData.accountant, "honorific", $$v)
+                  },
+                  expression: "formData.accountant.honorific"
+                }
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", [_vm._v("Forename")]),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "form-control",
+                  attrs: { type: "text", placeholder: "John" }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", [_vm._v("Surname")]),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "form-control",
+                  attrs: { type: "text", placeholder: "Doe" }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-12 col-lg-6 form-group" }, [
+                  _c("label", [_vm._v("Phone number")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: { type: "text", placeholder: "+44 012345 67890" }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-12 col-lg-6 form-group" }, [
+                  _c("label", [_vm._v("Email Address")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: { type: "text", placeholder: "John.doe@doe.co.uk" }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("label", [
+                _vm._v(
+                  "If the company accountants have valued the shares in the business in line with HMRC guidelines then please provide a copy"
+                )
+              ]),
+              _c("br"),
+              _vm._v(" "),
+              _c("base-file-upload")
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              directives: [
+                {
+                  name: "b-toggle",
+                  rawName: "v-b-toggle.collapse1",
+                  modifiers: { collapse1: true }
+                }
+              ],
+              staticClass: "pointer"
+            },
+            [
+              _vm._v("Tip"),
+              _c("i", { staticClass: "icon-xs fas fa-chevron-down ml-2" })
+            ]
+          ),
+          _vm._v(" "),
+          _c("b-collapse", { attrs: { visible: "" } }, [
+            _c("p", { staticClass: "text-gray-500 mt-2 mb-0" }, [
+              _vm._v(
+                "You should take care that the deceased had regularised their affairs with HMRC. For example, the Jersey Disclosure Facility provides for a voluntary disclosure facility to UK residents from 6 April 2013 to 30 September 2016 for UK residents with a beneficial interest in Jersey “relevant property”, with undisclosed UK tax liabilities, with a chance to regularise their UK tax affairs in a controlled manner on beneficial terms."
+              )
+            ])
+          ])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "content-box",
+        { attrs: { title: "9.2 Partnerships" } },
+        [
+          _c(
+            "yes-no",
+            {
+              attrs: {
+                label: "Did the deceased a member of a partnership?",
+                collapse: ""
+              }
+            },
+            [
+              _c("div", { staticClass: "form-group mt-4" }, [
+                _c("label", [_vm._v("Company name")]),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "form-control",
+                  attrs: { type: "text", placeholder: "John Appleseed Ltd" }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", [_vm._v("Company number")]),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "form-control",
+                  attrs: { type: "text", placeholder: "1235 1235 08311" }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", [_vm._v("Business activity")]),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "form-control",
+                  attrs: { type: "text", placeholder: "Import & export" }
+                })
+              ]),
+              _vm._v(" "),
+              _c("label", { staticClass: "my-3" }, [
+                _vm._v("Company accountant details")
+              ]),
+              _vm._v(" "),
+              _c("honorific", {
+                model: {
+                  value: _vm.formData.accountant.honorific,
+                  callback: function($$v) {
+                    _vm.$set(_vm.formData.accountant, "honorific", $$v)
+                  },
+                  expression: "formData.accountant.honorific"
+                }
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", [_vm._v("Forename")]),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "form-control",
+                  attrs: { type: "text", placeholder: "John" }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", [_vm._v("Surname")]),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "form-control",
+                  attrs: { type: "text", placeholder: "Doe" }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-12 col-lg-6 form-group" }, [
+                  _c("label", [_vm._v("Phone number")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: { type: "text", placeholder: "+44 012345 67890" }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-12 col-lg-6 form-group" }, [
+                  _c("label", [_vm._v("Email Address")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: { type: "text", placeholder: "John.doe@doe.co.uk" }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("label", [
+                _vm._v(
+                  "If the company accountants have valued the shares in the business in line with HMRC guidelines then please provide a copy"
+                )
+              ]),
+              _c("br"),
+              _vm._v(" "),
+              _c("base-file-upload")
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "content-box",
+        {
+          staticClass: "p-0 text-right",
+          attrs: { shadow: false, whiteBg: false }
+        },
+        [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary shadow",
+              on: {
+                click: function($event) {
+                  return _vm.$router.push({ name: "section10" })
+                }
+              }
+            },
+            [_vm._v("Next section")]
+          )
+        ]
+      )
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -81225,107 +81602,31 @@ var render = function() {
           attrs: { title: "Section 2 - Powers of Attorney and non-UK elements" }
         },
         [
-          _c("div", { staticClass: "row" }, [
-            _c(
-              "div",
-              { staticClass: "col-12 mb-3" },
-              [
-                _c("label", [
-                  _vm._v("Did the deceased make an ENDURING power of attorney?")
-                ]),
-                _c("br"),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass:
-                      "btn btn-outline-secondary active-primary mr-3 mb-3",
-                    class: { active: _vm.formData.query1.answer === true },
-                    on: {
-                      click: function($event) {
-                        _vm.formData.query1.answer = true
-                      }
-                    }
-                  },
-                  [_vm._v("Yes")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass:
-                      "btn btn-outline-secondary active-primary mr-3 mb-3",
-                    class: { active: _vm.formData.query1.answer === false },
-                    on: {
-                      click: function($event) {
-                        _vm.formData.query1.answer = false
-                      }
-                    }
-                  },
-                  [_vm._v("No")]
-                ),
-                _c("br"),
-                _vm._v(" "),
-                _c(
-                  "b-collapse",
-                  { attrs: { visible: _vm.formData.query1.answer === true } },
-                  [_c("base-file-upload", { staticClass: "mb-3" })],
-                  1
-                )
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "col-12 mb-3" },
-              [
-                _c("label", [
-                  _vm._v("Did the deceased make a LASTING power of attorney?")
-                ]),
-                _c("br"),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass:
-                      "btn btn-outline-secondary active-primary mr-3 mb-3",
-                    class: { active: _vm.formData.query2.answer === true },
-                    on: {
-                      click: function($event) {
-                        _vm.formData.query2.answer = true
-                      }
-                    }
-                  },
-                  [_vm._v("Yes")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass:
-                      "btn btn-outline-secondary active-primary mr-3 mb-3",
-                    class: { active: _vm.formData.query2.answer === false },
-                    on: {
-                      click: function($event) {
-                        _vm.formData.query2.answer = false
-                      }
-                    }
-                  },
-                  [_vm._v("No")]
-                ),
-                _c("br"),
-                _vm._v(" "),
-                _c(
-                  "b-collapse",
-                  { attrs: { visible: _vm.formData.query2.answer === true } },
-                  [_c("base-file-upload", { staticClass: "mb-3" })],
-                  1
-                )
-              ],
-              1
-            )
-          ]),
+          _c(
+            "yes-no",
+            {
+              staticClass: "form-group",
+              attrs: {
+                label: "Did the deceased make an ENDURING power of attorney?",
+                collapse: ""
+              }
+            },
+            [_c("base-file-upload", { staticClass: "mt-3" })],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "yes-no",
+            {
+              staticClass: "form-group",
+              attrs: {
+                label: "Did the deceased make a LASTING power of attorney?",
+                collapse: ""
+              }
+            },
+            [_c("base-file-upload", { staticClass: "mt-3" })],
+            1
+          ),
           _vm._v(" "),
           _c(
             "a",
@@ -81360,47 +81661,17 @@ var render = function() {
         "content-box",
         { attrs: { title: "2.2 Domicile, residence and non-UK assets" } },
         [
-          _c("label", [
-            _vm._v(
-              "Was the deceased born in the UK and did they spend all of their life as a UK resident?"
-            )
-          ]),
-          _c("br"),
-          _vm._v(" "),
           _c(
-            "button",
+            "yes-no",
             {
-              staticClass: "btn btn-outline-secondary active-primary mr-3 mb-3",
-              class: { active: _vm.formData.query3.answer === true },
-              on: {
-                click: function($event) {
-                  _vm.formData.query3.answer = true
-                }
+              attrs: {
+                collapse: "",
+                label:
+                  "Was the deceased born in the UK and did they spend all of their life as a UK resident?"
               }
             },
-            [_vm._v("Yes")]
-          ),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-outline-secondary active-primary mr-3 mb-3",
-              class: { active: _vm.formData.query3.answer === false },
-              on: {
-                click: function($event) {
-                  _vm.formData.query3.answer = false
-                }
-              }
-            },
-            [_vm._v("No")]
-          ),
-          _c("br"),
-          _vm._v(" "),
-          _c(
-            "b-collapse",
-            { attrs: { visible: _vm.formData.query3.answer === false } },
             [
-              _c("div", { staticClass: "form-group" }, [
+              _c("div", { staticClass: "form-group mt-4" }, [
                 _c("label", { attrs: { for: "query3q1" } }, [
                   _vm._v("In what City/Country was the deceased born?")
                 ]),
@@ -81434,124 +81705,38 @@ var render = function() {
                 })
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "form-group" }, [
-                _c("label", [
-                  _vm._v(
-                    "Was the deceased treated as a UK resident for Income Tax purposes?"
-                  )
-                ]),
-                _c("br"),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass:
-                      "btn btn-outline-secondary active-primary mr-3 mb-3",
-                    class: {
-                      active: _vm.formData.query3.question3.answer === "yes"
-                    },
-                    on: {
-                      click: function($event) {
-                        _vm.formData.query3.question3.answer = "yes"
-                      }
-                    }
+              _c("button-group", {
+                staticClass: "form-group",
+                attrs: {
+                  label:
+                    "Was the deceased treated as a UK resident for Income Tax purposes?",
+                  options: ["Yes", "No", "Unsure"]
+                },
+                model: {
+                  value: _vm.formData.query3.question3.answer,
+                  callback: function($$v) {
+                    _vm.$set(_vm.formData.query3.question3, "answer", $$v)
                   },
-                  [_vm._v("Yes")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass:
-                      "btn btn-outline-secondary active-primary mr-3 mb-3",
-                    class: {
-                      active: _vm.formData.query3.question3.answer === "no"
-                    },
-                    on: {
-                      click: function($event) {
-                        _vm.formData.query3.question3.answer = "no"
-                      }
-                    }
-                  },
-                  [_vm._v("No")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass:
-                      "btn btn-outline-secondary active-primary mr-3 mb-3",
-                    class: {
-                      active: _vm.formData.query3.question3.answer === "unsure"
-                    },
-                    on: {
-                      click: function($event) {
-                        _vm.formData.query3.question3.answer = "unsure"
-                      }
-                    }
-                  },
-                  [_vm._v("Unsure")]
-                )
-              ]),
+                  expression: "formData.query3.question3.answer"
+                }
+              }),
               _vm._v(" "),
-              _c("div", { staticClass: "form-group" }, [
-                _c("label", [
-                  _vm._v("Do you know if Sharia Law applies to this estate?")
-                ]),
-                _c("br"),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass:
-                      "btn btn-outline-secondary active-primary mr-3 mb-3",
-                    class: {
-                      active: _vm.formData.query3.question4.answer === "yes"
-                    },
-                    on: {
-                      click: function($event) {
-                        _vm.formData.query3.question4.answer = "yes"
-                      }
-                    }
+              _c("button-group", {
+                staticClass: "form-group",
+                attrs: {
+                  label: "Do you know if Sharia Law applies to this estate?",
+                  options: ["Yes", "No", "Unsure"]
+                },
+                model: {
+                  value: _vm.formData.query3.question4.answer,
+                  callback: function($$v) {
+                    _vm.$set(_vm.formData.query3.question4, "answer", $$v)
                   },
-                  [_vm._v("Yes")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass:
-                      "btn btn-outline-secondary active-primary mr-3 mb-3",
-                    class: {
-                      active: _vm.formData.query3.question4.answer === "no"
-                    },
-                    on: {
-                      click: function($event) {
-                        _vm.formData.query3.question4.answer = "no"
-                      }
-                    }
-                  },
-                  [_vm._v("No")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass:
-                      "btn btn-outline-secondary active-primary mr-3 mb-3",
-                    class: {
-                      active: _vm.formData.query3.question4.answer === "unsure"
-                    },
-                    on: {
-                      click: function($event) {
-                        _vm.formData.query3.question4.answer = "unsure"
-                      }
-                    }
-                  },
-                  [_vm._v("Unsure")]
-                )
-              ])
-            ]
+                  expression: "formData.query3.question4.answer"
+                }
+              })
+            ],
+            1
           )
         ],
         1
@@ -81704,85 +81889,29 @@ var render = function() {
                 _vm._v("Estate Duty and Capital Transfer Tax details:")
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "form-group" }, [
-                _c("label", [_vm._v("Was the deceased female?")]),
-                _c("br"),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass:
-                      "btn btn-outline-secondary active-primary mr-3 mb-3",
-                    class: {
-                      active: _vm.formData.query4.slide5.answer === true
-                    },
-                    on: {
-                      click: function($event) {
-                        _vm.formData.query4.slide5.answer = true
-                      }
-                    }
+              _c("yes-no", {
+                staticClass: "form-group",
+                attrs: { label: "Was the deceased female?" },
+                model: {
+                  value: _vm.formData.query4.slide5.answer,
+                  callback: function($$v) {
+                    _vm.$set(_vm.formData.query4.slide5, "answer", $$v)
                   },
-                  [_vm._v("Yes")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass:
-                      "btn btn-outline-secondary active-primary mr-3 mb-3",
-                    class: {
-                      active: _vm.formData.query4.slide5.answer === false
-                    },
-                    on: {
-                      click: function($event) {
-                        _vm.formData.query4.slide5.answer = false
-                      }
-                    }
-                  },
-                  [_vm._v("No")]
-                ),
-                _c("br")
-              ]),
+                  expression: "formData.query4.slide5.answer"
+                }
+              }),
               _vm._v(" "),
-              _c("div", { staticClass: "form-group" }, [
-                _c("label", [_vm._v("Was the deceased born before 1/2/1974?")]),
-                _c("br"),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass:
-                      "btn btn-outline-secondary active-primary mr-3 mb-3",
-                    class: {
-                      active: _vm.formData.query4.slide5.answer2 === true
-                    },
-                    on: {
-                      click: function($event) {
-                        _vm.formData.query4.slide5.answer2 = true
-                      }
-                    }
+              _c("yes-no", {
+                staticClass: "form-group",
+                attrs: { label: "Was the deceased born before 1/2/1974?" },
+                model: {
+                  value: _vm.formData.query4.slide5.answer2,
+                  callback: function($$v) {
+                    _vm.$set(_vm.formData.query4.slide5, "answer2", $$v)
                   },
-                  [_vm._v("Yes")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass:
-                      "btn btn-outline-secondary active-primary mr-3 mb-3",
-                    class: {
-                      active: _vm.formData.query4.slide5.answer2 === false
-                    },
-                    on: {
-                      click: function($event) {
-                        _vm.formData.query4.slide5.answer2 = false
-                      }
-                    }
-                  },
-                  [_vm._v("No")]
-                ),
-                _c("br")
-              ]),
+                  expression: "formData.query4.slide5.answer2"
+                }
+              }),
               _vm._v(" "),
               _c(
                 "b-collapse",
@@ -82083,103 +82212,28 @@ var render = function() {
         "content-box",
         { attrs: { title: "Section 3 - Other Information" } },
         [
-          _c("div", { staticClass: "row" }, [
-            _c(
-              "div",
-              { staticClass: "col-12 mb-3" },
-              [
-                _c("label", [_vm._v("Did the deceased make a Will?")]),
-                _c("br"),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass:
-                      "btn btn-outline-secondary active-primary mr-3 mb-3",
-                    class: { active: _vm.formData.query1.answer === true },
-                    on: {
-                      click: function($event) {
-                        _vm.formData.query1.answer = true
-                      }
-                    }
-                  },
-                  [_vm._v("Yes")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass:
-                      "btn btn-outline-secondary active-primary mr-3 mb-3",
-                    class: { active: _vm.formData.query1.answer === false },
-                    on: {
-                      click: function($event) {
-                        _vm.formData.query1.answer = false
-                      }
-                    }
-                  },
-                  [_vm._v("No")]
-                ),
-                _c("br"),
-                _vm._v(" "),
-                _c(
-                  "b-collapse",
-                  { attrs: { visible: _vm.formData.query1.answer === true } },
-                  [_c("base-file-upload", { staticClass: "mb-3" })],
-                  1
-                )
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "col-12 mb-3" },
-              [
-                _c("label", [_vm._v("Did the deceased make any Codicils?")]),
-                _c("br"),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass:
-                      "btn btn-outline-secondary active-primary mr-3 mb-3",
-                    class: { active: _vm.formData.query2.answer === true },
-                    on: {
-                      click: function($event) {
-                        _vm.formData.query2.answer = true
-                      }
-                    }
-                  },
-                  [_vm._v("Yes")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass:
-                      "btn btn-outline-secondary active-primary mr-3 mb-3",
-                    class: { active: _vm.formData.query2.answer === false },
-                    on: {
-                      click: function($event) {
-                        _vm.formData.query2.answer = false
-                      }
-                    }
-                  },
-                  [_vm._v("No")]
-                ),
-                _c("br"),
-                _vm._v(" "),
-                _c(
-                  "b-collapse",
-                  { attrs: { visible: _vm.formData.query2.answer === true } },
-                  [_c("base-file-upload", { staticClass: "mb-3" })],
-                  1
-                )
-              ],
-              1
-            )
-          ]),
+          _c(
+            "yes-no",
+            {
+              staticClass: "form-group",
+              attrs: { collapse: "", label: "Did the deceased make a Will?" }
+            },
+            [_c("base-file-upload", { staticClass: "mt-3" })],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "yes-no",
+            {
+              staticClass: "form-group",
+              attrs: {
+                collapse: "",
+                label: "Did the deceased make any Codicils?"
+              }
+            },
+            [_c("base-file-upload", { staticClass: "mt-3" })],
+            1
+          ),
           _vm._v(" "),
           _c(
             "a",
@@ -82215,310 +82269,203 @@ var render = function() {
         { attrs: { title: "3.2 The Will (‘Foreign Wills’)" } },
         [
           _c(
-            "div",
-            { staticClass: "row" },
+            "yes-no",
+            {
+              attrs: {
+                collapse: "",
+                label: "Did the deceased make a Will under a different law?"
+              }
+            },
             [
-              _c("div", { staticClass: "col-12 mb-4" }, [
-                _c("label", [
-                  _vm._v("Did the deceased make a Will under a different law?")
-                ]),
-                _c("br"),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass:
-                      "btn btn-outline-secondary active-primary mr-3",
-                    class: { active: _vm.formData.query3.answer === true },
-                    on: {
-                      click: function($event) {
-                        _vm.formData.query3.answer = true
-                      }
-                    }
-                  },
-                  [_vm._v("Yes")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass:
-                      "btn btn-outline-secondary active-primary mr-3",
-                    class: { active: _vm.formData.query3.answer === false },
-                    on: {
-                      click: function($event) {
-                        _vm.formData.query3.answer = false
-                      }
-                    }
-                  },
-                  [_vm._v("No")]
-                )
-              ]),
-              _vm._v(" "),
               _c(
-                "b-collapse",
+                "yes-no",
                 {
-                  staticClass: "col-12",
-                  attrs: { visible: _vm.formData.query3.answer === true }
+                  staticClass: "mt-4",
+                  attrs: {
+                    collapse: "",
+                    label:
+                      "Is there another lawyer advising on the non-UK process?"
+                  }
                 },
                 [
-                  _c("div", { staticClass: "mb-4" }, [
-                    _c("label", [
-                      _vm._v(
-                        "Is there another lawyer advising on the non-UK process?"
-                      )
+                  _c("honorific", {
+                    staticClass: "mt-4",
+                    model: {
+                      value: _vm.formData.query3.honorific,
+                      callback: function($$v) {
+                        _vm.$set(_vm.formData.query3, "honorific", $$v)
+                      },
+                      expression: "formData.query3.honorific"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "forename" } }, [
+                      _vm._v("Forename")
                     ]),
-                    _c("br"),
                     _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass:
-                          "btn btn-outline-secondary active-primary mr-3",
-                        class: { active: _vm.formData.query3.answer2 === true },
-                        on: {
-                          click: function($event) {
-                            _vm.formData.query3.answer2 = true
-                          }
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.formData.query3.forename,
+                          expression: "formData.query3.forename"
                         }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        id: "forename",
+                        placeholder: "John"
                       },
-                      [_vm._v("Yes")]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass:
-                          "btn btn-outline-secondary active-primary mr-3",
-                        class: {
-                          active: _vm.formData.query3.answer2 === false
-                        },
-                        on: {
-                          click: function($event) {
-                            _vm.formData.query3.answer2 = false
+                      domProps: { value: _vm.formData.query3.forename },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
                           }
+                          _vm.$set(
+                            _vm.formData.query3,
+                            "forename",
+                            $event.target.value
+                          )
                         }
-                      },
-                      [_vm._v("No")]
-                    )
+                      }
+                    })
                   ]),
                   _vm._v(" "),
-                  _c(
-                    "b-collapse",
-                    {
-                      attrs: { visible: _vm.formData.query3.answer2 === true }
-                    },
-                    [
-                      _c("honorific", {
-                        model: {
-                          value: _vm.formData.query3.honorific,
-                          callback: function($$v) {
-                            _vm.$set(_vm.formData.query3, "honorific", $$v)
-                          },
-                          expression: "formData.query3.honorific"
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "surname" } }, [
+                      _vm._v("Surname")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.formData.query3.surname,
+                          expression: "formData.query3.surname"
                         }
-                      }),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "mb-4" }, [
-                        _c("label", { attrs: { for: "forename" } }, [
-                          _vm._v("Forename")
-                        ]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.formData.query3.forename,
-                              expression: "formData.query3.forename"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: {
-                            type: "text",
-                            id: "forename",
-                            placeholder: "John"
-                          },
-                          domProps: { value: _vm.formData.query3.forename },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.formData.query3,
-                                "forename",
-                                $event.target.value
-                              )
-                            }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        id: "surname",
+                        placeholder: "Doe"
+                      },
+                      domProps: { value: _vm.formData.query3.surname },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
                           }
-                        })
+                          _vm.$set(
+                            _vm.formData.query3,
+                            "surname",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-12 col-lg-6 form-group" }, [
+                      _c("label", { attrs: { for: "phone" } }, [
+                        _vm._v("Phone number")
                       ]),
                       _vm._v(" "),
-                      _c("div", { staticClass: "mb-4" }, [
-                        _c("label", { attrs: { for: "surname" } }, [
-                          _vm._v("Surname")
-                        ]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.formData.query3.surname,
-                              expression: "formData.query3.surname"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: {
-                            type: "text",
-                            id: "surname",
-                            placeholder: "Doe"
-                          },
-                          domProps: { value: _vm.formData.query3.surname },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.formData.query3,
-                                "surname",
-                                $event.target.value
-                              )
-                            }
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.formData.query3.phone,
+                            expression: "formData.query3.phone"
                           }
-                        })
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          id: "phone",
+                          placeholder: "+44 012345 67890"
+                        },
+                        domProps: { value: _vm.formData.query3.phone },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.formData.query3,
+                              "phone",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-12 col-lg-6 form-group" }, [
+                      _c("label", { attrs: { for: "email" } }, [
+                        _vm._v("Email Address")
                       ]),
                       _vm._v(" "),
-                      _c("div", { staticClass: "row" }, [
-                        _c("div", { staticClass: "col-12 col-lg-6 mb-4" }, [
-                          _c("label", { attrs: { for: "phone" } }, [
-                            _vm._v("Phone number")
-                          ]),
-                          _vm._v(" "),
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.formData.query3.phone,
-                                expression: "formData.query3.phone"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            attrs: {
-                              type: "text",
-                              id: "phone",
-                              placeholder: "+44 012345 67890"
-                            },
-                            domProps: { value: _vm.formData.query3.phone },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(
-                                  _vm.formData.query3,
-                                  "phone",
-                                  $event.target.value
-                                )
-                              }
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.formData.query3.email,
+                            expression: "formData.query3.email"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          id: "email",
+                          placeholder: "John.doe@doe.co.uk"
+                        },
+                        domProps: { value: _vm.formData.query3.email },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
                             }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "col-12 col-lg-6 mb-4" }, [
-                          _c("label", { attrs: { for: "email" } }, [
-                            _vm._v("Email Address")
-                          ]),
-                          _vm._v(" "),
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.formData.query3.email,
-                                expression: "formData.query3.email"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            attrs: {
-                              type: "text",
-                              id: "email",
-                              placeholder: "John.doe@doe.co.uk"
-                            },
-                            domProps: { value: _vm.formData.query3.email },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(
-                                  _vm.formData.query3,
-                                  "email",
-                                  $event.target.value
-                                )
-                              }
-                            }
-                          })
-                        ])
-                      ])
-                    ],
-                    1
-                  )
+                            _vm.$set(
+                              _vm.formData.query3,
+                              "email",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  ])
                 ],
                 1
               )
             ],
             1
           )
-        ]
+        ],
+        1
       ),
       _vm._v(" "),
       _c(
         "content-box",
         { attrs: { title: "3.3 If the deceased was a widow or widower" } },
         [
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-12" }, [
-              _c("label", [_vm._v("Was the deceased a widow or widower?")]),
-              _c("br"),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-outline-secondary active-primary mr-3",
-                  class: { active: _vm.formData.query4.answer === true },
-                  on: {
-                    click: function($event) {
-                      _vm.formData.query4.answer = true
-                    }
-                  }
-                },
-                [_vm._v("Yes")]
-              ),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-outline-secondary active-primary mr-3",
-                  class: { active: _vm.formData.query4.answer === false },
-                  on: {
-                    click: function($event) {
-                      _vm.formData.query4.answer = false
-                    }
-                  }
-                },
-                [_vm._v("No")]
-              ),
-              _c("br")
-            ])
-          ]),
-          _vm._v(" "),
           _c(
-            "b-collapse",
-            { attrs: { visible: _vm.formData.query4.answer === true } },
+            "yes-no",
+            {
+              attrs: {
+                collapse: "",
+                label: "Was the deceased a widow or widower?"
+              }
+            },
             [
               _c("label", { staticClass: "my-4" }, [
                 _vm._v(
@@ -82529,7 +82476,7 @@ var render = function() {
               _c("div", { staticClass: "row" }, [
                 _c(
                   "div",
-                  { staticClass: "col-lg-4 mb-4" },
+                  { staticClass: "col-lg-4 form-group" },
                   [
                     _c("label", [_vm._v("Date of death")]),
                     _vm._v(" "),
@@ -82553,7 +82500,7 @@ var render = function() {
                 _vm._v(" "),
                 _c(
                   "div",
-                  { staticClass: "col-lg-4 mb-4" },
+                  { staticClass: "col-lg-4 form-group" },
                   [
                     _c("label", [_vm._v("Date of marriage")]),
                     _vm._v(" "),
@@ -82576,7 +82523,7 @@ var render = function() {
                 )
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "mb-4" }, [
+              _c("div", { staticClass: "form-group" }, [
                 _c("label", { attrs: { for: "forename" } }, [
                   _vm._v("Forename")
                 ]),
@@ -82608,7 +82555,7 @@ var render = function() {
                 })
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "mb-4" }, [
+              _c("div", { staticClass: "form-group" }, [
                 _c("label", { attrs: { for: "surname" } }, [_vm._v("Surname")]),
                 _vm._v(" "),
                 _c("input", {
@@ -82660,7 +82607,7 @@ var render = function() {
                 _c(
                   "div",
                   { staticClass: "col-6 col-lg-3 d-flex align-items-center" },
-                  [_c("base-file-upload", { staticClass: "mb-3" })],
+                  [_c("base-file-upload", { staticClass: "mb-0" })],
                   1
                 )
               ]),
@@ -82675,7 +82622,7 @@ var render = function() {
                 _c(
                   "div",
                   { staticClass: "col-6 col-lg-3 d-flex align-items-center" },
-                  [_c("base-file-upload", { staticClass: "mb-3" })],
+                  [_c("base-file-upload", { staticClass: "mb-0" })],
                   1
                 )
               ]),
@@ -82690,7 +82637,7 @@ var render = function() {
                 _c(
                   "div",
                   { staticClass: "col-6 col-lg-3 d-flex align-items-center" },
-                  [_c("base-file-upload", { staticClass: "mb-3" })],
+                  [_c("base-file-upload", { staticClass: "mb-0" })],
                   1
                 )
               ]),
@@ -82705,7 +82652,7 @@ var render = function() {
                 _c(
                   "div",
                   { staticClass: "col-6 col-lg-3 d-flex align-items-center" },
-                  [_c("base-file-upload", { staticClass: "mb-3" })],
+                  [_c("base-file-upload", { staticClass: "mb-0" })],
                   1
                 )
               ]),
@@ -82720,7 +82667,7 @@ var render = function() {
                 _c(
                   "div",
                   { staticClass: "col-6 col-lg-3 d-flex align-items-center" },
-                  [_c("base-file-upload", { staticClass: "mb-3" })],
+                  [_c("base-file-upload", { staticClass: "mb-0" })],
                   1
                 )
               ]),
@@ -82735,7 +82682,7 @@ var render = function() {
                 _c(
                   "div",
                   { staticClass: "col-6 col-lg-3 d-flex align-items-center" },
-                  [_c("base-file-upload", { staticClass: "mb-3" })],
+                  [_c("base-file-upload", { staticClass: "mb-0" })],
                   1
                 )
               ])
@@ -82850,7 +82797,7 @@ var render = function() {
                   expression: "slide === 1"
                 }
               ],
-              staticClass: "mb-3",
+              staticClass: "form-group flash-label",
               attrs: {
                 label:
                   "Did the deceased make any gifts or transfer assets to or for the benefit of another individual, charity or other organisation?",
@@ -82880,7 +82827,7 @@ var render = function() {
                   expression: "slide === 2"
                 }
               ],
-              staticClass: "mb-3",
+              staticClass: "form-group flash-label",
               attrs: {
                 label: "Did the deceased create a trust or settlement?",
                 collapse: ""
@@ -82909,7 +82856,7 @@ var render = function() {
                   expression: "slide === 3"
                 }
               ],
-              staticClass: "mb-3",
+              staticClass: "form-group flash-label",
               attrs: {
                 label:
                   "Did the deceased transfer/gift additional assets to an existing trust or settlement?",
@@ -82939,7 +82886,7 @@ var render = function() {
                   expression: "slide === 4"
                 }
               ],
-              staticClass: "mb-3",
+              staticClass: "form-group flash-label",
               attrs: {
                 label:
                   "Did the deceased pay a premium on any life insurance policy to for the benefit of someone else?",
@@ -82969,7 +82916,7 @@ var render = function() {
                   expression: "slide === 5"
                 }
               ],
-              staticClass: "mb-3",
+              staticClass: "form-group flash-label",
               attrs: {
                 label:
                   "Was the deceased entitled to benefit from any assets held in trust or in a settlement which during their life had come to an end either in whole or in part?",
@@ -83287,7 +83234,7 @@ var render = function() {
           _c(
             "yes-no",
             {
-              staticClass: "mb-4",
+              staticClass: "form-group",
               attrs: {
                 label: "Did the deceased have any assets in Jersey?",
                 collapse: ""
@@ -83308,7 +83255,7 @@ var render = function() {
           _c(
             "yes-no",
             {
-              staticClass: "mb-4",
+              staticClass: "form-group",
               attrs: {
                 label: "Did the deceased have any assets in Guernsey?",
                 collapse: ""
@@ -83329,7 +83276,7 @@ var render = function() {
           _c(
             "yes-no",
             {
-              staticClass: "mb-4",
+              staticClass: "form-group",
               attrs: {
                 label: "Did the deceased have any assets in Isle of Man?",
                 collapse: ""
@@ -83442,7 +83389,7 @@ var render = function() {
           _c(
             "yes-no",
             {
-              staticClass: "mb-4",
+              staticClass: "form-group",
               attrs: {
                 label: "Did the deceased have any assets in Switzerland?",
                 collapse: ""
@@ -83463,7 +83410,7 @@ var render = function() {
           _c(
             "yes-no",
             {
-              staticClass: "mb-4",
+              staticClass: "form-group",
               attrs: {
                 label: "Did the deceased have any assets in a tax haven?",
                 collapse: ""
@@ -83564,142 +83511,218 @@ var render = function() {
         ]
       ),
       _vm._v(" "),
-      _c(
-        "content-box",
-        { attrs: { title: "8.1 - Nil Rate Band Discretionary Trusts" } },
-        [
-          _c("p", { staticClass: "text-gray-500" }, [
-            _vm._v(
-              "If you know details of any Nil Rate Band Discretionary Trust, then please provide the following information:-"
-            )
-          ]),
-          _vm._v(" "),
-          _c("honorific", {
-            model: {
-              value: _vm.formData.honorific,
-              callback: function($$v) {
-                _vm.$set(_vm.formData, "honorific", $$v)
-              },
-              expression: "formData.honorific"
-            }
-          }),
-          _vm._v(" "),
-          _c("div", { staticClass: "mb-4" }, [
-            _c("label", { attrs: { for: "forename" } }, [_vm._v("Forename")]),
+      _vm._l(_vm.trusts, function(trust, key) {
+        return _c(
+          "content-box",
+          {
+            key: key,
+            attrs: { title: "8.1 - Nil Rate Band Discretionary Trusts" }
+          },
+          [
+            _c("p", { staticClass: "text-gray-500" }, [
+              _vm._v(
+                "If you know details of any Nil Rate Band Discretionary Trust, then please provide the following information:-"
+              )
+            ]),
             _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.formData.forename,
-                  expression: "formData.forename"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "text", id: "forename", placeholder: "John" },
-              domProps: { value: _vm.formData.forename },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.formData, "forename", $event.target.value)
-                }
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "mb-4" }, [
-            _c("label", { attrs: { for: "surname" } }, [_vm._v("Surname")]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.formData.surname,
-                  expression: "formData.surname"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "text", id: "surname", placeholder: "Doe" },
-              domProps: { value: _vm.formData.surname },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.formData, "surname", $event.target.value)
-                }
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c(
-            "yes-no",
-            {
-              staticClass: "mb-4",
-              attrs: {
-                label:
-                  "Did the deceased have any charge/debit arrangements with this trustee?",
-                collapse: ""
-              }
-            },
-            [
-              _c("textarea", {
-                staticClass: "form-control mt-3",
-                attrs: {
-                  rows: "4",
-                  placeholder:
-                    "Please include a full overview of relevant details to this question"
-                }
-              })
-            ]
-          ),
-          _vm._v(" "),
-          _c("label", [
-            _vm._v("Select dependent on which contact details you know:")
-          ]),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "mb-3" },
-            [
-              _c("base-switch", {
-                attrs: {
-                  offText: "The Trustee",
-                  onText: "The trustee’s solicitors or accountants"
+            _c("honorific", {
+              model: {
+                value: trust.honorific,
+                callback: function($$v) {
+                  _vm.$set(trust, "honorific", $$v)
                 },
-                model: {
-                  value: _vm.formData.hasDependant,
-                  callback: function($$v) {
-                    _vm.$set(_vm.formData, "hasDependant", $$v)
-                  },
-                  expression: "formData.hasDependant"
+                expression: "trust.honorific"
+              }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { for: "forename" } }, [_vm._v("Forename")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: trust.forename,
+                    expression: "trust.forename"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text", id: "forename", placeholder: "John" },
+                domProps: { value: trust.forename },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(trust, "forename", $event.target.value)
+                  }
                 }
               })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "b-collapse",
-            { attrs: { visible: _vm.formData.hasDependant } },
-            [
-              _c("honorific", {
-                model: {
-                  value: _vm.formData.dependant.honorific,
-                  callback: function($$v) {
-                    _vm.$set(_vm.formData.dependant, "honorific", $$v)
-                  },
-                  expression: "formData.dependant.honorific"
-                }
-              }),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { for: "surname" } }, [_vm._v("Surname")]),
               _vm._v(" "),
-              _c("div", { staticClass: "mb-4" }, [
-                _c("label", { attrs: { for: "forename" } }, [
-                  _vm._v("Forename")
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: trust.surname,
+                    expression: "trust.surname"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text", id: "surname", placeholder: "Doe" },
+                domProps: { value: trust.surname },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(trust, "surname", $event.target.value)
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c(
+              "yes-no",
+              {
+                staticClass: "form-group",
+                attrs: {
+                  label:
+                    "Did the deceased have any charge/debit arrangements with this trustee?",
+                  collapse: ""
+                }
+              },
+              [
+                _c("textarea", {
+                  staticClass: "form-control mt-3",
+                  attrs: {
+                    rows: "4",
+                    placeholder:
+                      "Please include a full overview of relevant details to this question"
+                  }
+                })
+              ]
+            ),
+            _vm._v(" "),
+            _c("label", [
+              _vm._v("Select dependent on which contact details you know:")
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "mb-3" },
+              [
+                _c("base-switch", {
+                  attrs: {
+                    offText: "The Trustee",
+                    onText: "The trustee’s solicitors or accountants"
+                  },
+                  model: {
+                    value: trust.hasDependant,
+                    callback: function($$v) {
+                      _vm.$set(trust, "hasDependant", $$v)
+                    },
+                    expression: "trust.hasDependant"
+                  }
+                })
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "b-collapse",
+              { attrs: { visible: trust.hasDependant } },
+              [
+                _c("honorific", {
+                  model: {
+                    value: trust.dependant.honorific,
+                    callback: function($$v) {
+                      _vm.$set(trust.dependant, "honorific", $$v)
+                    },
+                    expression: "trust.dependant.honorific"
+                  }
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "forename" } }, [
+                    _vm._v("Forename")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: trust.dependant.forename,
+                        expression: "trust.dependant.forename"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "text",
+                      id: "forename",
+                      placeholder: "John"
+                    },
+                    domProps: { value: trust.dependant.forename },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          trust.dependant,
+                          "forename",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "surname" } }, [
+                    _vm._v("Surname")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: trust.dependant.surname,
+                        expression: "trust.dependant.surname"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text", id: "surname", placeholder: "Doe" },
+                    domProps: { value: trust.dependant.surname },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          trust.dependant,
+                          "surname",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  })
+                ])
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-12 col-lg-6 form-group" }, [
+                _c("label", { attrs: { for: "phone" } }, [
+                  _vm._v("Phone number")
                 ]),
                 _vm._v(" "),
                 _c("input", {
@@ -83707,146 +83730,86 @@ var render = function() {
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.formData.dependant.forename,
-                      expression: "formData.dependant.forename"
+                      value: trust.phone,
+                      expression: "trust.phone"
                     }
                   ],
                   staticClass: "form-control",
-                  attrs: { type: "text", id: "forename", placeholder: "John" },
-                  domProps: { value: _vm.formData.dependant.forename },
+                  attrs: {
+                    type: "text",
+                    id: "phone",
+                    placeholder: "+44 012345 67890"
+                  },
+                  domProps: { value: trust.phone },
                   on: {
                     input: function($event) {
                       if ($event.target.composing) {
                         return
                       }
-                      _vm.$set(
-                        _vm.formData.dependant,
-                        "forename",
-                        $event.target.value
-                      )
+                      _vm.$set(trust, "phone", $event.target.value)
                     }
                   }
                 })
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "mb-4" }, [
-                _c("label", { attrs: { for: "surname" } }, [_vm._v("Surname")]),
+              _c("div", { staticClass: "col-12 col-lg-6 form-group" }, [
+                _c("label", { attrs: { for: "email" } }, [
+                  _vm._v("Email Address")
+                ]),
                 _vm._v(" "),
                 _c("input", {
                   directives: [
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.formData.dependant.surname,
-                      expression: "formData.dependant.surname"
+                      value: trust.email,
+                      expression: "trust.email"
                     }
                   ],
                   staticClass: "form-control",
-                  attrs: { type: "text", id: "surname", placeholder: "Doe" },
-                  domProps: { value: _vm.formData.dependant.surname },
+                  attrs: {
+                    type: "text",
+                    id: "email",
+                    placeholder: "John.doe@doe.co.uk"
+                  },
+                  domProps: { value: trust.email },
                   on: {
                     input: function($event) {
                       if ($event.target.composing) {
                         return
                       }
-                      _vm.$set(
-                        _vm.formData.dependant,
-                        "surname",
-                        $event.target.value
-                      )
+                      _vm.$set(trust, "email", $event.target.value)
                     }
                   }
                 })
               ])
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-12 col-lg-6 mb-4" }, [
-              _c("label", { attrs: { for: "phone" } }, [
-                _vm._v("Phone number")
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.formData.phone,
-                    expression: "formData.phone"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: {
-                  type: "text",
-                  id: "phone",
-                  placeholder: "+44 012345 67890"
-                },
-                domProps: { value: _vm.formData.phone },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.formData, "phone", $event.target.value)
-                  }
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-12 col-lg-6 mb-4" }, [
-              _c("label", { attrs: { for: "email" } }, [
-                _vm._v("Email Address")
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.formData.email,
-                    expression: "formData.email"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: {
-                  type: "text",
-                  id: "email",
-                  placeholder: "John.doe@doe.co.uk"
-                },
-                domProps: { value: _vm.formData.email },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.formData, "email", $event.target.value)
-                  }
-                }
-              })
             ])
-          ])
-        ],
-        1
-      ),
+          ],
+          1
+        )
+      }),
       _vm._v(" "),
-      _c(
-        "content-box",
-        { attrs: { title: "8.1 - Nil Rate Band Discretionary Trusts" } },
-        [
-          _c("div", { staticClass: "text-center" }, [
-            _c(
-              "button",
-              { staticClass: "btn btn-outline-secondary active-primary" },
-              [
-                _vm._v("Add trustee"),
-                _c("i", { staticClass: "fas fa-plus ml-3" })
-              ]
-            )
-          ])
-        ]
-      ),
+      _vm.trusts.length < 4
+        ? _c(
+            "content-box",
+            { attrs: { title: "8.1 - Nil Rate Band Discretionary Trusts" } },
+            [
+              _c("div", { staticClass: "text-center" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-outline-secondary active-primary",
+                    on: { click: _vm.addTrustee }
+                  },
+                  [
+                    _vm._v("Add trustee"),
+                    _c("i", { staticClass: "fas fa-plus ml-3" })
+                  ]
+                )
+              ])
+            ]
+          )
+        : _vm._e(),
       _vm._v(" "),
       _c(
         "content-box",
@@ -83870,7 +83833,7 @@ var render = function() {
         ]
       )
     ],
-    1
+    2
   )
 }
 var staticRenderFns = []
@@ -102428,6 +102391,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateReminder_vue_vue_type_template_id_9be6df3c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateReminder_vue_vue_type_template_id_9be6df3c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/client-form/form-snippets/ButtonGroup.vue":
+/*!***************************************************************************!*\
+  !*** ./resources/js/components/client-form/form-snippets/ButtonGroup.vue ***!
+  \***************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ButtonGroup_vue_vue_type_template_id_0dcc0599___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ButtonGroup.vue?vue&type=template&id=0dcc0599& */ "./resources/js/components/client-form/form-snippets/ButtonGroup.vue?vue&type=template&id=0dcc0599&");
+/* harmony import */ var _ButtonGroup_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ButtonGroup.vue?vue&type=script&lang=js& */ "./resources/js/components/client-form/form-snippets/ButtonGroup.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _ButtonGroup_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ButtonGroup_vue_vue_type_template_id_0dcc0599___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ButtonGroup_vue_vue_type_template_id_0dcc0599___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/client-form/form-snippets/ButtonGroup.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/client-form/form-snippets/ButtonGroup.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************!*\
+  !*** ./resources/js/components/client-form/form-snippets/ButtonGroup.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_babel_loader_lib_index_js_ref_11_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonGroup_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/babel-loader/lib??ref--11-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./ButtonGroup.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/client-form/form-snippets/ButtonGroup.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_babel_loader_lib_index_js_ref_11_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonGroup_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/client-form/form-snippets/ButtonGroup.vue?vue&type=template&id=0dcc0599&":
+/*!**********************************************************************************************************!*\
+  !*** ./resources/js/components/client-form/form-snippets/ButtonGroup.vue?vue&type=template&id=0dcc0599& ***!
+  \**********************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonGroup_vue_vue_type_template_id_0dcc0599___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./ButtonGroup.vue?vue&type=template&id=0dcc0599& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/client-form/form-snippets/ButtonGroup.vue?vue&type=template&id=0dcc0599&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonGroup_vue_vue_type_template_id_0dcc0599___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonGroup_vue_vue_type_template_id_0dcc0599___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

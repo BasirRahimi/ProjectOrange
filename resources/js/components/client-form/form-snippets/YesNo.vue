@@ -24,7 +24,11 @@ export default {
         collapseOn: {
             type: Boolean,
             default: true
-        } 
+        },
+        value: {
+            type: Boolean,
+            default: null
+        }
     },
     data() {
         return {
@@ -34,12 +38,15 @@ export default {
     methods: {
         yes() {
             this.answer = true;
-            this.$emit('update', this.answer);
+            this.$emit('input', this.answer);
         },
         no() {
             this.answer = false;
-            this.$emit('update', this.answer);
+            this.$emit('input', this.answer);
         }
+    },
+    beforeMount() {
+        this.answer = this.value;
     }
 }
 </script>
