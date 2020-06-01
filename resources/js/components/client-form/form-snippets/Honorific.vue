@@ -1,13 +1,23 @@
 <template>
-    <div class="row no-gutters">
-        <div class="col-12 col-lg-6 form-group d-flex">
-            <button @click="updateHonorific('Mr.')" class="btn btn-outline-secondary active-primary mr-3 col" :class="{'active':honorific == 'Mr.'}"><b>Mr.</b></button>
-            <button @click="updateHonorific('Mrs.')" class="btn btn-outline-secondary active-primary mr-3 col" :class="{'active':honorific == 'Mrs.'}"><b>Mrs.</b></button>
-            <button @click="updateHonorific('Miss')" class="btn btn-outline-secondary active-primary mr-3 col" :class="{'active':honorific == 'Miss'}"><b>Miss</b></button>
-            <button @click="updateHonorific('Ms')" class="btn btn-outline-secondary active-primary mr-lg-3 col" :class="{'active':honorific == 'Ms'}"><b>Ms</b></button>
+    <div class="row no-gutters form-group">
+        <div class="col-12 col-lg-6 mb-md-2 mb-lg-0">
+            <div class="row no-gutters mr-lg-2 h-100">
+                <div class="col-6 col-md-3 mb-2 mb-md-0 pr-1">
+                    <base-button @click="updateHonorific('Mr.')" :class="{'active':honorific == 'Mr.'}" class="w-100 px-0 h-100" outline type="default">Mr.</base-button>
+                </div>
+                <div class="col-6 col-md-3 mb-2 mb-md-0 pl-1 px-md-1">
+                    <base-button @click="updateHonorific('Mrs.')" :class="{'active':honorific == 'Mrs.'}" class="w-100 px-0 h-100" outline type="default">Mrs.</base-button>
+                </div>
+                <div class="col-6 col-md-3 mb-2 mb-md-0 pr-1 px-md-1">
+                    <base-button @click="updateHonorific('Miss')" :class="{'active':honorific == 'Miss'}" class="w-100 px-0 h-100" outline type="default">Miss</base-button>
+                </div>
+                <div class="col-6 col-md-3 mb-2 mb-md-0 pl-1">
+                    <base-button @click="updateHonorific('Ms')" :class="{'active':honorific == 'Ms'}" class="w-100 px-0 h-100" outline type="default">Ms</base-button>
+                </div>
+            </div>
         </div>
-        <div class="col-12 col-lg-6 form-group">
-            <input type="text" class="form-control" placeholder="Other" @input="updateHonorific($event)"/>
+        <div class="col-12 col-lg-6">
+          <base-input placeholder="Other" v-model="customHonorific" :form-group="false"></base-input>
         </div>
     </div>
 </template>
@@ -23,21 +33,28 @@ export default {
     },
     data() {
         return {
-            honorific: ''
+            honorific: '',
+            customHonorific: ''
         }
     },
     methods: {
-        updateHonorific(event) {
-            if(typeof event == 'string') {
-                this.honorific = event;
-            } else {
-                this.honorific = event.target.value;
-            }
-            this.$emit('input', this.honorific);
+      updateHonorific(val) {
+        this.honorific = val;
+        if(this.honorific !== this.customHonorific) {
+          this.customHonorific = '';
         }
+        this.$emit('input', this.honorific);
+      }
     },
     beforeMount() {
         this.honorific = this.value;
+    },
+    watch: {
+      customHonorific(val) {
+        if(val) {
+          this.updateHonorific(val)
+        }
+      }
     }
 }
 </script>

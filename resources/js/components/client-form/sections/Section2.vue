@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <content-box title="Adding Executors">
       <p class="text-gray-500">Not every Executor may want to take on their role as an Executor for personal or other reasons. When this happens an Executor can choose one of the following:-</p>
       <p class="text-gray-500">

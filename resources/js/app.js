@@ -9,6 +9,13 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+import globalComponents from "./argon/plugins/globalComponents";
+import globalDirectives from "./argon/plugins/globalDirectives";
+import VueLazyload from "vue-lazyload";
+Vue.use(globalComponents);
+Vue.use(globalDirectives);
+Vue.use(VueLazyload);
+
 import { ModalPlugin } from 'bootstrap-vue';
 Vue.use(ModalPlugin);
 
@@ -27,6 +34,7 @@ Vue.use(CollapsePlugin)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('client-form', require('./components/ClientForm.vue').default);
+Vue.component('user-dashboard', require('./components/UserDashboard.vue').default);
 Vue.component('app-header', require('./components/AppHeader.vue').default);
 Vue.component('content-box', require('./components/client-form/ContentBox.vue').default);
 

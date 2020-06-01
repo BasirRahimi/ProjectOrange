@@ -27,8 +27,6 @@ export default {
 
 <style scoped>
 .content-box {
-  max-width: 900px;
-  margin: auto;
   padding: 40px;
 }
 .title {

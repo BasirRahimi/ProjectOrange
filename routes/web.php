@@ -22,6 +22,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/dashboard', 'HomeController@index')->name('dashboard');
+Route::get('/dashboard', 'HomeController@index');
 
-Route::get('/new-client', 'ClientController@index');
+Route::resource('clients', 'ClientController');
+
+Route::get('/clients/{id}/{vue_capture?}', 'ClientController@show')->where('vue_capture', '[\/\w\.-]*');

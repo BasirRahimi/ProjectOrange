@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container">
         <content-box title="Section 4 - Lifetime Gifs">
             <p class="text-gray-500">There is an obligation upon the Executors to make the fullest enquiries as appear to be relevant to establish whether any lifetime gifts were made on of after 18th March 1986. The Executors need to be able to prove that they made fullest enquiries and so this means that the Executors should seek information from those individuals who appear to be obvious recipients of gifts from the deceased (e.g. close relative, etc) but also consider less obvious recipients of gifts (e.g. friend, employee, housekeeper, distant relative, etc).</p>
             <p class="text-gray-500"><b>HMRC has made it clear that it will, in some circumstances, examine closely the activities of an Executor making enquiries and will hold them to account for failure to disclose gifts.</b></p>

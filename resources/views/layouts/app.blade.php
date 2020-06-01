@@ -9,21 +9,24 @@
 
     <title>{{ config('app.name', 'Laravel') }} @hasSection('title')- @yield('title') @endif</title>
 
+    @if($client_form_id ?? '')
+    <script>
+        window.clientFormId = {{$client_form_id ?? ''}};
+    </script>
+    @endif
+
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/argon.css') }}" rel="stylesheet">
 
     <!-- Fonts -->
     <link rel="stylesheet" href="https://use.typekit.net/lxw2fcr.css">
 </head>
 <body>
     <div id="app">
-        @if(Auth::user())
-        <app-header></app-header>
-        @else
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm sticky-top">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
@@ -73,7 +76,6 @@
                 </div>
             </div>
         </nav>
-        @endif
 
         <main>
             @yield('content')

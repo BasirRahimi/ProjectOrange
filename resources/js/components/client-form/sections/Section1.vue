@@ -1,33 +1,19 @@
 <template>
-    <div>
+    <div class="container">
         <content-box title="Welcome to Project Orange">
-            <p class="text-gray-500">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet</p>
+            <p class="text-muted m-0">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet</p>
         </content-box>
         <content-box title="About the Deceased">
-            <honorific />
+            <honorific v-model="formData.honorific"/>
+
+            <base-input placeholder="John" v-model="formData.forename" label="Forename"></base-input>
+            <base-input placeholder="Doe" v-model="formData.surname" label="Surname"></base-input>
+            <base-input placeholder="Johnathan Doe" v-model="formData.aliases" label="Any aliases in which they held assets?"></base-input>
 
             <div class="form-group">
-                <label for="forename">Forename</label>
-                <input type="text" id="forename" class="form-control" placeholder="John" v-model="formData.forename">
-            </div>
-            <div class="form-group">
-                <label for="surname">Surname</label>
-                <input type="text" id="surname" class="form-control" placeholder="Doe" v-model="formData.surname">
-            </div>
-            <div class="form-group">
-                <label for="aliases">Any aliases in which they held assets?</label>
-                <input type="text" id="aliases" class="form-control" placeholder="Johnathan Doe" v-model="formData.aliases">
-            </div>
-            <div class="form-group">
                 <label>Last usual address</label><br/>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input custom-radio" type="radio" name="addressInputType" id="findByPostcode" value="postcode" v-model="addressInputType">
-                    <label class="form-check-label" for="findByPostcode">Find with postcode</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input custom-radio" type="radio" name="addressInputType" id="addManually" value="manual" v-model="addressInputType" checked>
-                    <label class="form-check-label" for="addManually">Add manually</label>
-                </div>
+                <base-radio inline name="postcode" v-model="addressInputType" value="manual">Find with postcode</base-radio>
+                <base-radio inline name="manual" v-model="addressInputType" value="manual">Add manually</base-radio>
             </div>
 
             <div class="row">
@@ -67,7 +53,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-5 form-group">
+                <div class="col-lg-5">
                     <label for="aliases">Date of Death</label>
                     <datepicker input-class="form-control bg-white" v-model="formData.dateOfDeath" placeholder="21 / 9 / 2020" format="dd / MM / yy"></datepicker>
                 </div>
@@ -76,25 +62,36 @@
         <content-box title="1.2 Key Information">
             <div class="row">
                 <div class="col-12 col-lg-6">
-                    <label for="birthplace">Place of Birth</label>
-                    <input type="text" class="form-control" id="birthplace" v-model="formData.placeOfBirth" placeholder="Maidstone, Kent">
+                    <base-input 
+                        label="Place of Birth" 
+                        placeholder="Maidstone, Kent" 
+                        v-model="formData.placeOfBirth"
+                        :form-group="false"></base-input>
                 </div>
                 <div class="col-12 col-lg-6">
-                    <label for="deathplace">Place of Death</label>
-                    <input type="text" class="form-control" id="deathplace" v-model="formData.placeOfDeath" placeholder="Wandsworth, London">
+                    <base-input 
+                        label="Place of Death" 
+                        placeholder="Wandsworth, London" 
+                        v-model="formData.placeOfDeath"
+                        :form-group="false"></base-input>
                 </div>
             </div>
         </content-box>
         <content-box title="1.3 Marital Status">
-            <button-group :options="['Married','Batchelor','Divorced','Widowed','Spinster']" sameWidthButtons/>
+            <button-group :options="['Married','Batchelor','Divorced','Widowed','Spinster']" sameWidthButtons v-model="formData.maritalStatus"/>
         </content-box>
         <content-box title="1.4 Surviving Relatives">
-            <div class="same-width-buttons-container">
-                <button @click="formData.survivingRelatives.spouse === 0 ? formData.survivingRelatives.spouse = 1 : formData.survivingRelatives.spouse = 0" class="btn btn-outline-secondary active-primary" :class="{'active': formData.survivingRelatives.spouse > 0}">Spouse</button>
+            <div class="row no-gutters">
+                <base-button type="default" outline @click="updateSurvivingRelatives('spouse')" :class="{'active': formData.survivingRelatives.spouse > 0}" class="col mr-3">Spouse</base-button>
+                <base-button type="default" outline @click="updateSurvivingRelatives('parents')" :class="{'active': formData.survivingRelatives.parents > 0}" class="col mr-3">Parents</base-button>
+                <base-button type="default" outline @click="updateSurvivingRelatives('siblings')" :class="{'active': formData.survivingRelatives.siblings > 0}" class="col mr-3">Siblings</base-button>
+                <base-button type="default" outline @click="updateSurvivingRelatives('children')" :class="{'active': formData.survivingRelatives.children > 0}" class="col mr-3">Children</base-button>
+                <base-button type="default" outline @click="updateSurvivingRelatives('grandChildren')" :class="{'active': formData.survivingRelatives.grandChildren > 0}" class="col">Grand Children</base-button>
+                <!-- <button @click="formData.survivingRelatives.spouse === 0 ? formData.survivingRelatives.spouse = 1 : formData.survivingRelatives.spouse = 0" class="btn btn-outline-secondary active-primary" :class="{'active': formData.survivingRelatives.spouse > 0}">Spouse</button>
                 <button @click="formData.survivingRelatives.parents === 0 ? formData.survivingRelatives.parents = 1 : formData.survivingRelatives.parents = 0" class="btn btn-outline-secondary active-primary" :class="{'active': formData.survivingRelatives.parents > 0}">Parents</button>
                 <button @click="formData.survivingRelatives.siblings === 0 ? formData.survivingRelatives.siblings = 1 : formData.survivingRelatives.siblings = 0" class="btn btn-outline-secondary active-primary" :class="{'active': formData.survivingRelatives.siblings > 0}">Siblings</button>
                 <button @click="formData.survivingRelatives.children === 0 ? formData.survivingRelatives.children = 1 : formData.survivingRelatives.children = 0" class="btn btn-outline-secondary active-primary" :class="{'active': formData.survivingRelatives.children > 0}">Children</button>
-                <button @click="formData.survivingRelatives.grandChildren === 0 ? formData.survivingRelatives.grandChildren = 1 : formData.survivingRelatives.grandChildren = 0" class="btn btn-outline-secondary active-primary" :class="{'active': formData.survivingRelatives.grandChildren > 0}">Grand Children</button>
+                <button @click="formData.survivingRelatives.grandChildren === 0 ? formData.survivingRelatives.grandChildren = 1 : formData.survivingRelatives.grandChildren = 0" class="btn btn-outline-secondary active-primary" :class="{'active': formData.survivingRelatives.grandChildren > 0}">Grand Children</button> -->
             </div>
             <b-collapse :visible="formData.survivingRelatives.parents > 0">
                 <div class="row mt-4">
@@ -198,6 +195,16 @@ export default {
             addressInputType: 'manual'
         }
     },
+    methods: {
+        updateSurvivingRelatives(relative) {
+            if(this.survivingRelatives[relative] === 0) {
+                this.survivingRelatives[relative] = 1;
+            } else {
+                this.survivingRelatives[relative] = 0;
+            }
+
+        }
+    }
 }
 </script>
 

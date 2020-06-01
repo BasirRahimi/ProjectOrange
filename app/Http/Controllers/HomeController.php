@@ -23,6 +23,8 @@ class HomeController extends Controller
      */
     public function index()
     {
+        // get forms created by this user
+        
         return view('home');
     }
 }

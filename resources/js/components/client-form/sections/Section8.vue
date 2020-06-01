@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container">
         <content-box title="Section 7 - Swiss and assets in other ‘tax havens’">
             <a v-b-toggle.collapse1 class="pointer">Tip<i class="icon-xs fas fa-chevron-down ml-2"></i></a>
             <b-collapse visible id="collapse1">

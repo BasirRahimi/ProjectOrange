@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container">
         <content-box title="Section 3 - Other Information">
             <yes-no class="form-group" collapse label="Did the deceased make a Will?">
                 <base-file-upload class="mt-3"></base-file-upload>

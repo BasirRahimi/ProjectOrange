@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container">
         <content-box title="Section 9 - Business interests or partnerships">
             <yes-no class="form-group" label="Did the deceased own shares in a private company?" collapse>
                 <div class="form-group mt-4">
@@ -90,7 +90,7 @@
         </content-box>
 
         <content-box class="p-0 text-right" :shadow="false" :whiteBg="false">
-            <button class="btn btn-primary shadow" @click="$router.push({name:'section10'})">Next section</button>
+            <button class="btn btn-primary shadow" @click="$router.push({name:'section11'})">Next section</button>
         </content-box>
     </div>
 </template>

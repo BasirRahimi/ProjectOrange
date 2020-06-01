@@ -1,23 +1,30 @@
 <template>
     <div>
         <label v-if="label">{{label}}</label><br />
-        <div v-if="sameWidthButtons" class="same-width-buttons-container">
-            <button v-for="(option, key) in optionsCopy" :key="key"
+        <div v-if="sameWidthButtons" class="row no-gutters flex-wrap">
+            <base-button v-for="(option, key) in optionsCopy" :key="key"
+                type="default"
+                outline
+                class="col"
+                :class="[{'active': option.active === true},
+                    {'mr-3': key != optionsCopy.length - 1}]"
+                @click="update(key)">{{option.value}}</base-button>
+            <!-- <button v-for="(option, key) in optionsCopy" :key="key"
                 class="btn btn-outline-secondary active-primary"
                 :class="{'active': option.active === true}"
-                @click="update(key)">{{option.value}}</button>
+                @click="update(key)">{{option.value}}</button> -->
         </div>
         <template v-else>
-            <button v-for="(option, key) in optionsCopy" :key="key"
+            <base-button v-for="(option, key) in optionsCopy" :key="key"
+                type="default"
+                outline
+                :class="{'active': option.active === true}"
+                @click="update(key)">{{option.value}}</base-button>
+            <!-- <button v-for="(option, key) in optionsCopy" :key="key"
                 class="btn btn-outline-secondary active-primary mr-3"
                 :class="{'active': option.active === true}"
-                @click="update(key)">{{option.value}}</button>
+                @click="update(key)">{{option.value}}</button> -->
         </template>
-        
-        <b-collapse v-if="collapse" :visible="answer === collapseOn">
-            <!-- trying to figure out a collapse on buttonGroup -->
-            <slot></slot>
-        </b-collapse>
     </div>
 </template>
 
@@ -40,15 +47,7 @@ export default {
         sameWidthButtons: {
             type: Boolean,
             default: false
-        },
-        collapse: {
-            type: Boolean,
-            default: false
-        },
-        collapseOn: {
-            type: String,
-            default: 'Yes'
-        },
+        }
     },
     data() {
         return {

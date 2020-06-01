@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'New Client')
+@section('title', 'Client Form')
 @section('content')
 <client-form></client-form>
 @endsection

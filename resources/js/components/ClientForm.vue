@@ -1,8 +1,8 @@
 <template>
   <div class="client-form" :class="{'nav-collaped':navCollapsed}">
     <client-form-navigation @navToggled="navToggled"></client-form-navigation>
-    <client-form-widgets></client-form-widgets>
-    <div class="form-content">
+    <!-- <client-form-widgets></client-form-widgets> -->
+    <div class="router-view">
       <router-view></router-view>
     </div>
   </div>
@@ -35,15 +35,7 @@ export default {
 .client-form {
   position: relative;
   padding-top: 60px;
-  padding-left: 210px;
-  padding-right: 0px;
   transition: .25s;
-  &.nav-collaped {
-    padding-left: 35px;
-  }
-  @include for-desktop-up {
-    padding-right: 444px;
-  }
 }
 .form-content {
   width: 100%;

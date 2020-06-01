@@ -1,5 +1,5 @@
 <template>
-    <div class="section7">
+    <div class="container">
         <content-box title="Section 6 - England & Wales and he rest of the UK and British Isles">
             <div class="mb-3">
                 <a v-b-toggle.collapse1 class="pointer">Tip<i class="icon-xs fas fa-chevron-down ml-2"></i></a>

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container">
         <content-box title="Section 8 - Nil Rate Band Discretionary Trusts">
             <p class="text-gray-500">The nil rate band is also called the Inheritance tax threshold. It represents the first part of the estate which is taxed at 0%. On 5.4.2016 this threshold was £325,000.</p>
             <p class="text-gray-500">

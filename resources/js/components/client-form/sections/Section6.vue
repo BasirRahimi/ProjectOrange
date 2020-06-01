@@ -1,5 +1,5 @@
 <template>
-  <div class="section6">
+  <div class="container">
       <content-box title="Section 5 - Gifts with reservation of benefit">
             <p class="text-gray-500">There is established anti-avoidance legislation which removes any tax advantage if a person has given away an asset but retained an interest in it. An example of this is where a parent might transfer the title of their home to a son or daughter but remain in occupation of it after the transfer takes place. This is known as a ‘gift with reservation of benefit’ (GWRoB) and Executors have a duty to make fullest enquiries and make full disclosure to HMRC.</p>
             <p class="text-gray-500">It does not matter whether seven-years have elapsed since the original transfer of the title.</p>

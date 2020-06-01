@@ -36,16 +36,16 @@
         <li class="py-2 section-link" :class="{'active': 'section1' == currentRouteName}">
           <a href="#" @click.prevent="$router.push({name:'section1'})">
             <span class="fa-li">
-              <i class="mr-2 icon po-icon-person"></i>
+              <i class="mr-2 po-icon-person"></i>
             </span>
             About
           </a>
         </li>
         <li class="py-2 section-link" :class="{'active': 'section2' == currentRouteName}">
           <a href="#" @click.prevent="$router.push({name:'section2'})">
-            <!-- <span class="fa-li">
-              <i :class="section.icon" class="mr-2 icon"></i>
-            </span> -->
+            <span class="fa-li">
+              <i class="fas fa-user-tie mr-2"></i>
+            </span>
             Executors
           </a>
         </li>
@@ -60,7 +60,7 @@
         <li class="py-2 section-link" :class="{'active': section.routeName == currentRouteName}" v-for="(section,index) in sections" :key="index">
           <a :tabindex="sectionsOpen ? 0 : -1" href="#" @click.prevent="$router.push({name: section.routeName})">
             <span class="fa-li">
-              <i :class="section.icon" class="mr-2 icon"></i>
+              <i :class="section.icon" class="mr-2"></i>
             </span>
             {{section.label}}
           </a>
@@ -222,12 +222,12 @@ export default {
 
 .client-form-navigation {
   position: fixed;
-  top: 60px;
+  top: 68px;
   left: 0;
   background-color: $white;
   padding: 20px;
-  width: 210px;
-  height: calc(100% - 60px);
+  max-width: 300px;
+  height: calc(100% - 68px);
   transition: .25s;
   overflow-y: scroll;
   white-space: nowrap;
@@ -236,7 +236,7 @@ export default {
     width: 0;
   }
   &.collapsed {
-    width: 35px;
+    max-width: 40px;
     padding-left: 0;
     padding-right: 0;
   }
