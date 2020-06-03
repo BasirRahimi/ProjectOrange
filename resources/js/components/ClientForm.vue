@@ -1,21 +1,26 @@
 <template>
   <div class="client-form" :class="{'nav-collaped':navCollapsed}">
     <client-form-navigation @navToggled="navToggled"></client-form-navigation>
-    <!-- <client-form-widgets></client-form-widgets> -->
+    <client-form-widgets></client-form-widgets>
     <div class="router-view">
       <router-view></router-view>
     </div>
+
+    <client-form-utility-bar></client-form-utility-bar>
   </div>
 </template>
 
 <script>
 import ClientFormNavigation from './client-form/ClientFormNavigation';
 import ClientFormWidgets from './client-form/ClientFormWidgets';
+import ClientFormUtilityBar from './client-form/ClientFormUtilityBar';
+
 export default {
   name: 'ClientForm',
   components: {
     ClientFormNavigation,
-    ClientFormWidgets
+    ClientFormWidgets,
+    ClientFormUtilityBar
   },
   data() {
     return {
@@ -30,7 +35,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import '~@/_mixins.scss';
+@import '~@/argon/vue_sfc.scss'; 
 
 .client-form {
   position: relative;
@@ -42,5 +47,10 @@ export default {
   padding-top: 64px;
   padding-left: 24px;
   padding-right: 24px;
+}
+@include media-breakpoint-down(md) {
+    .client-form {
+        padding-bottom: 56px;
+    }
 }
 </style>

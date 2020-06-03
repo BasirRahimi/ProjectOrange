@@ -1,7 +1,7 @@
 <template>
-  <nav aria-label="form navigation" class="client-form-navigation shadow" :class="{'collapsed':navCollapsed}">
+  <nav aria-label="form navigation" class="client-form-navigation shadow" :class="[{'collapsed':navCollapsed},{'nav-hidden':navHidden}]">
 
-    <button class="nav-toggle" @click="navCollapsed = !navCollapsed">
+    <button class="nav-toggle" @click="navCollapsed = !navCollapsed" v-if="false">
       <div class="text" v-if="!navCollapsed">NAVIGATION</div>
       <div class="icons" :class="{'m-auto': navCollapsed}">
         <i v-if="!navCollapsed" class="fas fa-chevron-left mr-1"></i>
@@ -10,7 +10,7 @@
       </div>
     </button>
 
-    <div class="d-xl-none">
+    <div class="d-xl-none" v-if="false">
       <button class="section-toggle" :class="{'text-center': navCollapsed}" @click="toolsOpen = !toolsOpen">
         <span v-if="!navCollapsed">TOOLS</span><i class="fas fa-chevron-right" :class="[{'active': toolsOpen}, {'ml-2': !navCollapsed}]"></i>
       </button>
@@ -19,7 +19,7 @@
         <create-reminder v-show="showReminderForm" class="py-2" :small="true"></create-reminder>
       </div>
     </div>
-    <div class="d-xl-none">
+    <div class="d-xl-none" v-if="false">
       <button class="section-toggle" :class="{'text-center': navCollapsed}" @click="documentsOpen = !documentsOpen">
         <span v-if="!navCollapsed">SECTION DOCUMENTS</span><i class="fas fa-chevron-right" :class="[{'active': documentsOpen}, {'ml-2': !navCollapsed}]"></i>
       </button>
@@ -34,7 +34,7 @@
     <div class="section-collapse" :class="{'collapsed': !caseDetailsOpen}"> <!-- :style="{height: `${caseDetailsOpenHeight}px`}" -->
       <ul class="fa-ul mb-0">
         <li class="py-2 section-link" :class="{'active': 'section1' == currentRouteName}">
-          <a href="#" @click.prevent="$router.push({name:'section1'})">
+          <a href="#" @click.prevent="sectionClick('section1')">
             <span class="fa-li">
               <i class="mr-2 po-icon-person"></i>
             </span>
@@ -42,7 +42,7 @@
           </a>
         </li>
         <li class="py-2 section-link" :class="{'active': 'section2' == currentRouteName}">
-          <a href="#" @click.prevent="$router.push({name:'section2'})">
+          <a href="#" @click.prevent="sectionClick('section2')">
             <span class="fa-li">
               <i class="fas fa-user-tie mr-2"></i>
             </span>
@@ -58,7 +58,7 @@
     <div class="section-collapse" :class="{'collapsed': !sectionsOpen}"  ref="sectionCollapse"> <!-- :style="{height: `${sectionsOpenHeight}px`}" -->
       <ul class="fa-ul mb-0">
         <li class="py-2 section-link" :class="{'active': section.routeName == currentRouteName}" v-for="(section,index) in sections" :key="index">
-          <a :tabindex="sectionsOpen ? 0 : -1" href="#" @click.prevent="$router.push({name: section.routeName})">
+          <a :tabindex="sectionsOpen ? 0 : -1" href="#" @click.prevent="sectionClick(section.routeName)">
             <span class="fa-li">
               <i :class="section.icon" class="mr-2"></i>
             </span>
@@ -77,6 +77,8 @@
   </nav>
 </template>
 <script>
+import clientEB from '@@/clientEB.js';
+
 import CreateReminder from './CreateReminder';
 import RequiredDocs from './widgets/RequiredDocs';
 
@@ -192,6 +194,7 @@ export default {
       // toolsOpenHeight: '60',
       documentsOpen: true,
       navCollapsed: false,
+      navHidden: false,
       showReminderForm: false,
     }
   },
@@ -200,25 +203,45 @@ export default {
         return this.$route.name;
     }
   },
+    mounted() {
+        let _self = this;
+        let nav = $('.client-form-navigation');
+        if(window.innerWidth < 1500 && window.innerWidth > 991) {
+            _self.navCollapsed = true;
+            $(nav).hover(e=>{
+                // hover in
+                if(_self.navCollapsed) {
+                    _self.navCollapsed = false;
+                }
+            }, e=>{
+                // hover out
+                if(!_self.navCollapsed) {
+                    _self.navCollapsed = true;
+                }
+            })
+        } else if(window.innerWidth < 992) {
+            _self.navHidden = true;
+        }
+
+        clientEB.$on('toggle-nav', ()=>{
+            _self.navHidden = !_self.navHidden;
+        });
+    },
   methods: {
-    sectionClick(index) {
-      this.sections.find(x=>x.active == true).active = false;
-      this.sections[index].active = true;
-      this.$router.push(`section${index}`);
+    sectionClick(routeName) {
+        this.$router.push({name: routeName});
+        this.navHidden = true;
     }
   },
   watch: {
     navCollapsed(newVal) {
       this.$emit('navToggled', newVal);
     },
-    // showReminderForm(newVal) {
-    //   this.toolsOpenHeight = 
-    // }
   },
 }
 </script>
 <style lang="scss" scoped>
-@import '~@/_variables.scss'; 
+@import '~@/argon/vue_sfc.scss'; 
 
 .client-form-navigation {
   position: fixed;
@@ -333,5 +356,14 @@ export default {
   .fas {
     font-size: 12px;
   }
+}
+@include media-breakpoint-down(md) {
+    .client-form-navigation {
+        top: 42px;
+        height: calc(100% - 96px);
+        &.nav-hidden {
+            top: 100%;
+        }
+    }
 }
 </style>

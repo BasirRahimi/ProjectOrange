@@ -71,17 +71,17 @@ class ClientController extends Controller
     public function show($id)
     {
         $user = Auth::user();
-        if(!$user) {
-            abort(404);
-        }
+        if(!$user) { abort(404); }
 
         $client = Client::find($id);
 
         if($client) {
-            return view('client-form', ['client_form_id' => $id]);      
-        } else {
-            abort(404);
+            if($client->user_id === $user->id) {
+                return view('client-form', ['client_form_id' => $id]);      
+            }
         }
+
+        abort(404);
         
     }
 
