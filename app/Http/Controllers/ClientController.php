@@ -76,7 +76,7 @@ class ClientController extends Controller
         $client = Client::find($id);
 
         if($client) {
-            if($client->user_id === $user->id) {
+            if($client->user_id == $user->id) {
                 return view('client-form', ['client_form_id' => $id]);      
             }
         }
