@@ -1,0 +1,2 @@
+Make source bundle for deployment to AWS Elastic Beanstalk environment
+git archive -v -o projectorange.zip --format=zip HEAD
