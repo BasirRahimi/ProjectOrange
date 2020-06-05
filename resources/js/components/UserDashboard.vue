@@ -42,7 +42,6 @@ export default {
     mounted() {
         let _self = this;
         axios.get('/clients').then(response=>{
-            console.log(response);
             _self.clients = response.data;
         }).catch(error=>{
             console.log(error);

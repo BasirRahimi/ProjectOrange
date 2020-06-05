@@ -20,7 +20,7 @@ class ClientController extends Controller
         $user = Auth::user();
         if($user) {
             $clients = Client::where('user_id', $user->id)->get();
-            return response(json_encode($clients, 200));
+            return response($clients->toJson(), 200);
         } else {
             return response('Unauthenticated request', 401);
         }
