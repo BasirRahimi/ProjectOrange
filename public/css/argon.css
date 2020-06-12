@@ -2209,7 +2209,6 @@ pre code {
 .form-control {
   display: block;
   width: 100%;
-  height: calc(2.5rem + 2px);
   padding: 0.5rem 1rem;
   font-size: 1rem;
   line-height: 1.5;
@@ -14011,6 +14010,14 @@ a.btn-icon-only {
   background-color: #fcae5e;
 }
 
+.custom-toggle.coloured-dot input:checked + .custom-toggle-slider {
+  border: 1px solid #cad1d7;
+}
+
+.custom-toggle.coloured-dot .custom-toggle-slider::before {
+  background: #FB952C;
+}
+
 .custom-toggle-slider {
   position: absolute;
   cursor: pointer;
@@ -23153,5 +23160,35 @@ readers do not read off random characters that represent icons */
 
 .po-icon-world:before {
   content: "\E925";
+}
+
+.button-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  /* This is better for small screens, once min() is better supported */
+  /* grid-template-columns: repeat(auto-fill, minmax(min(200px, 100%), 1fr)); */
+  grid-gap: 1rem;
+  /* This is the standardized property now, but has slightly less support */
+  /* gap: 1rem */
+}
+
+.button-grid button:not(:last-child) {
+  margin: 0;
+}
+
+.button-grid.colsize-100 {
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+}
+
+.button-grid.colsize-150 {
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+}
+
+.button-grid.colsize-200 {
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+
+.text-gray-500 {
+  color: #adb5bd !important;
 }
 

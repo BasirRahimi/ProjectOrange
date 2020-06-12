@@ -1,8 +1,18 @@
 <template>
     <div>
-        <label>{{label}}</label><br />
-        <button class="btn btn-outline-secondary active-primary mr-3" :class="{'active': answer === true}" @click="yes()">Yes</button>
-        <button class="btn btn-outline-secondary active-primary mr-3" :class="{'active': answer === false}" @click="no()">No</button>
+        <label>{{label}}</label>
+        <div class="button-grid colsize-100">
+            <base-button 
+                type="default" 
+                outline 
+                :class="{'active': answer === true}" 
+                @click="yes()">Yes</base-button>
+            <base-button 
+                type="default" 
+                outline 
+                :class="{'active': answer === false}" 
+                @click="no()">No</base-button>
+        </div>
         <b-collapse v-if="collapse" :visible="answer === collapseOn">
             <slot></slot>
         </b-collapse>

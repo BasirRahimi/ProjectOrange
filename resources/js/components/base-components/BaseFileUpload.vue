@@ -1,5 +1,5 @@
 <template>
-    <label class="file btn btn-outline-secondary active-primary">
+    <label class="file btn btn-outline-default active-primary">
         <input type="file">
         Upload Copy +
     </label>

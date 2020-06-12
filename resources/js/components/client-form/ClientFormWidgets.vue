@@ -41,7 +41,7 @@ export default {
 .widgets-container {
     position: fixed;
     top: 65px;
-    right: -345px;
+    right: -380px;
     padding-top: 64px;
     padding-bottom: 50px;
     padding-right: 35px;

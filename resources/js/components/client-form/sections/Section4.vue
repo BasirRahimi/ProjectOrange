@@ -18,22 +18,23 @@
             <yes-no collapse label="Did the deceased make a Will under a different law?">
                 <yes-no class="mt-4" collapse label="Is there another lawyer advising on the non-UK process?">
                     <honorific v-model="formData.query3.honorific" class="mt-4" />
-                    <div class="form-group">
-                        <label for="forename">Forename</label>
-                        <input type="text" id="forename" class="form-control" placeholder="John" v-model="formData.query3.forename">
-                    </div>
-                    <div class="form-group">
-                        <label for="surname">Surname</label>
-                        <input type="text" id="surname" class="form-control" placeholder="Doe" v-model="formData.query3.surname">
-                    </div>
+                    <base-input
+                        label="Forename"
+                        placeholder="John"></base-input>
+                    <base-input
+                        label="Surname"
+                        placeholder="Doe"></base-input>
                     <div class="row">
-                        <div class="col-12 col-lg-6 form-group">
-                            <label for="phone">Phone number</label>
-                            <input type="text" class="form-control" id="phone" placeholder="+44 012345 67890" v-model="formData.query3.phone">
+                        <div class="col-12 col-lg-6">
+                            <base-input
+                                label="Phone number"
+                                placeholder="+44 012345 67890"></base-input>
                         </div>
-                        <div class="col-12 col-lg-6 form-group">
-                            <label for="email">Email Address</label>
-                            <input type="text" class="form-control" id="email" placeholder="John.doe@doe.co.uk" v-model="formData.query3.email">
+                        <div class="col-12 col-lg-6">
+                            <base-input
+                                label="Email Address"
+                                placeholder="John.doe@doe.co.uk"
+                                :form-group="false"></base-input>
                         </div>
                     </div>
                 </yes-no>
@@ -53,39 +54,39 @@
                         <datepicker input-class="form-control bg-white" v-model="formData.query4.marriageDate" placeholder="Date" format="dd / MM / yy"></datepicker>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="forename">Forename</label>
-                    <input type="text" id="forename" class="form-control" placeholder="John" v-model="formData.query4.forename">
-                </div>
-                <div class="form-group">
-                    <label for="surname">Surname</label>
-                    <input type="text" id="surname" class="form-control" placeholder="Doe" v-model="formData.query4.surname">
-                </div>
+                <base-input
+                        label="Forename"
+                        placeholder="John"></base-input>
+                    <base-input
+                        label="Surname"
+                        placeholder="Doe"></base-input>
+
                 <label>Please attach the following documents related to the first spouse:</label>
                 <p class="text-gray-500 mb-3">All of these documents are necessary to claim Transferable Nil Rate Band. Sometimes the Grant of Probate and Estate accounts are not available, if you cannot locate them, please search.</p>
-                <div class="row mb-1">
-                    <div class="col-6 col-lg-3 d-flex align-items-center">A marriage certificate</div>
-                    <div class="col-6 col-lg-3 d-flex align-items-center"><base-file-upload class="mb-0" /></div>
+                
+                <div class="row mb-2">
+                    <div class="col-12 col-sm-6 col-lg-3 d-flex align-items-center mb-1">A marriage certificate</div>
+                    <div class="col-12 col-sm-6 col-lg-3 d-flex align-items-center"><base-file-upload class="mb-0" /></div>
                 </div>
-                <div class="row mb-1">
-                    <div class="col-6 col-lg-3 d-flex align-items-center">Death certificate</div>
-                    <div class="col-6 col-lg-3 d-flex align-items-center"><base-file-upload class="mb-0" /></div>
+                <div class="row mb-2">
+                    <div class="col-12 col-sm-6 col-lg-3 d-flex align-items-center mb-1">Death certificate</div>
+                    <div class="col-12 col-sm-6 col-lg-3 d-flex align-items-center"><base-file-upload class="mb-0" /></div>
                 </div>
-                <div class="row mb-1">
-                    <div class="col-6 col-lg-3 d-flex align-items-center">Copy of Will</div>
-                    <div class="col-6 col-lg-3 d-flex align-items-center"><base-file-upload class="mb-0" /></div>
+                <div class="row mb-2">
+                    <div class="col-12 col-sm-6 col-lg-3 d-flex align-items-center mb-1">Copy of Will</div>
+                    <div class="col-12 col-sm-6 col-lg-3 d-flex align-items-center"><base-file-upload class="mb-0" /></div>
                 </div>
-                <div class="row mb-1">
-                    <div class="col-6 col-lg-3 d-flex align-items-center">Copy of Codicil(s)</div>
-                    <div class="col-6 col-lg-3 d-flex align-items-center"><base-file-upload class="mb-0" /></div>
+                <div class="row mb-2">
+                    <div class="col-12 col-sm-6 col-lg-3 d-flex align-items-center mb-1">Copy of Codicil(s)</div>
+                    <div class="col-12 col-sm-6 col-lg-3 d-flex align-items-center"><base-file-upload class="mb-0" /></div>
                 </div>
-                <div class="row mb-1">
-                    <div class="col-6 col-lg-3 d-flex align-items-center">Grant of Probate</div>
-                    <div class="col-6 col-lg-3 d-flex align-items-center"><base-file-upload class="mb-0" /></div>
+                <div class="row mb-2">
+                    <div class="col-12 col-sm-6 col-lg-3 d-flex align-items-center mb-1">Grant of Probate</div>
+                    <div class="col-12 col-sm-6 col-lg-3 d-flex align-items-center"><base-file-upload class="mb-0" /></div>
                 </div>
-                <div class="row mb-1">
-                    <div class="col-6 col-lg-3 d-flex align-items-center">Estate accounts</div>
-                    <div class="col-6 col-lg-3 d-flex align-items-center"><base-file-upload class="mb-0" /></div>
+                <div class="row">
+                    <div class="col-12 col-sm-6 col-lg-3 d-flex align-items-center mb-1">Estate accounts</div>
+                    <div class="col-12 col-sm-6 col-lg-3 d-flex align-items-center"><base-file-upload class="mb-0" /></div>
                 </div>
             </yes-no>
         </content-box>

@@ -32,12 +32,10 @@
                 <textarea class="form-control mt-3" rows="4" placeholder="Please include a full overview of relevant details to this question"></textarea>
             </yes-no>
 
-            <div class="d-flex align-items-center justify-content-between">
-                <div>Step {{slide}}/5</div>
-                <div>
-                    <button v-if="slide > 1" class="btn btn-outline-secondary mr-3" @click="prevSlide">Previous</button>
-                    <button v-if="slide < 5" class="btn btn-outline-secondary" @click="nextSlide">Next</button>
-                </div>
+            <div class="d-sm-flex align-items-center">
+                <div class="flex-grow-1">Step {{slide}}/5</div>
+                <base-button v-if="slide > 1" type="default" outline @click="prevSlide">Previous</base-button>
+                <base-button v-if="slide < 5" type="default" outline @click="nextSlide">Next</base-button>
             </div>
 
             <a v-b-toggle.collapse2 class="pointer">Tip<i class="icon-xs fas fa-chevron-down ml-2"></i></a>

@@ -1,6 +1,18 @@
 <template>
-    <div>
-        <label v-if="label">{{label}}</label><br />
+    <div v-if="cssGrid">
+        <label v-if="label">{{label}}</label>
+        <div class="button-grid" :class="`colsize-${gridColsize}`">
+            <base-button v-for="(option, key) in optionsCopy" :key="key"
+                type="default"
+                outline
+                class="m-0"
+                :class="{'active': option.active === true}"
+                @click="update(key)">{{option.value}}</base-button>
+        </div>
+    </div>
+    
+    <div v-else>
+        <label v-if="label">{{label}}</label>
         <div v-if="sameWidthButtons" class="row no-gutters flex-wrap">
             <base-button v-for="(option, key) in optionsCopy" :key="key"
                 type="default"
@@ -15,6 +27,7 @@
                 @click="update(key)">{{option.value}}</button> -->
         </div>
         <template v-else>
+            <br />
             <base-button v-for="(option, key) in optionsCopy" :key="key"
                 type="default"
                 outline
@@ -47,6 +60,14 @@ export default {
         sameWidthButtons: {
             type: Boolean,
             default: false
+        },
+        cssGrid: {
+            type: Boolean,
+            default: false
+        },
+        gridColsize: {
+            type: Number,
+            default: 150
         }
     },
     data() {
@@ -82,6 +103,5 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped lang="scss">
 </style>

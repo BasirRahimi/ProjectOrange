@@ -1,9 +1,9 @@
 <template>
-    <label class="custom-toggle">
+    <label class="custom-toggle" :class="{'coloured-dot':coloured}">
         <input type="checkbox"
-               v-model="model"
+               :value="value"
                v-bind="$attrs"
-               v-on="$listeners">
+               v-on="inputListeners">
         <span class="custom-toggle-slider rounded-circle"></span>
     </label>
 </template>
@@ -16,18 +16,42 @@ export default {
       type: Boolean,
       default: false,
       description: "Switch value"
+    },
+    coloured: {
+        type: Boolean,
+        default: false,
+        description: "coloured when in off state"
     }
   },
-  computed: {
-    model: {
-      get() {
-        return this.value;
-      },
-      set(value) {
-        this.$emit("input", value);
-      }
+    computed: {
+        inputListeners() {
+            var _self = this;
+            // `Object.assign` merges objects together to form a new object
+            return Object.assign({},
+                // We add all the listeners from the parent
+                this.$listeners,
+                // Then we can add custom listeners or override the
+                // behavior of some listeners.
+                {
+                    // This ensures that the component works with v-model
+                    input(event) {
+                        _self.$emit('input', event.target.value == 'false')
+                    }
+                }
+            )
+        },
+        // model: {
+        // get() {
+        //     if(typeof this.value == 'boolean'){
+
+        //         return this.value;
+        //     }
+        // },
+        // set(value) {
+        //     this.$emit("input", value);
+        // }
+        // }
     }
-  }
 };
 </script>
 <style>

@@ -62,7 +62,8 @@
         <content-box title="1.2 Key Information">
             <div class="row">
                 <div class="col-12 col-lg-6">
-                    <base-input 
+                    <base-input
+                        class="mb-3 mb-lg-0"
                         label="Place of Birth" 
                         placeholder="Maidstone, Kent" 
                         v-model="formData.placeOfBirth"
@@ -78,10 +79,17 @@
             </div>
         </content-box>
         <content-box title="1.3 Marital Status">
-            <button-group :options="['Married','Batchelor','Divorced','Widowed','Spinster']" sameWidthButtons v-model="formData.maritalStatus"/>
+            <div class="button-grid">
+                <base-button type="default" outline :class="{active: formData.maritalStatus == 'Married'}" @click="formData.maritalStatus = 'Married'">Married</base-button>
+                <base-button type="default" outline :class="{active: formData.maritalStatus == 'Batchelor'}" @click="formData.maritalStatus = 'Batchelor'">Batchelor</base-button>
+                <base-button type="default" outline :class="{active: formData.maritalStatus == 'Divorced'}" @click="formData.maritalStatus = 'Divorced'">Divorced</base-button>
+                <base-button type="default" outline :class="{active: formData.maritalStatus == 'Widowed'}" @click="formData.maritalStatus = 'Widowed'">Widowed</base-button>
+                <base-button type="default" outline :class="{active: formData.maritalStatus == 'Spinster'}" @click="formData.maritalStatus = 'Spinster'">Spinster</base-button>
+            </div>
+            <!-- <button-group cssGrid :options="['Married','Batchelor','Divorced','Widowed','Spinster']" sameWidthButtons v-model="formData.maritalStatus"/> -->
         </content-box>
         <content-box title="1.4 Surviving Relatives">
-            <div class="row no-gutters">
+            <div class="button-grid">
                 <base-button type="default" outline @click="updateSurvivingRelatives('spouse')" :class="{'active': formData.survivingRelatives.spouse > 0}" class="col mr-3">Spouse</base-button>
                 <base-button type="default" outline @click="updateSurvivingRelatives('parents')" :class="{'active': formData.survivingRelatives.parents > 0}" class="col mr-3">Parents</base-button>
                 <base-button type="default" outline @click="updateSurvivingRelatives('siblings')" :class="{'active': formData.survivingRelatives.siblings > 0}" class="col mr-3">Siblings</base-button>
@@ -197,10 +205,10 @@ export default {
     },
     methods: {
         updateSurvivingRelatives(relative) {
-            if(this.survivingRelatives[relative] === 0) {
-                this.survivingRelatives[relative] = 1;
+            if(this.formData.survivingRelatives[relative] === 0) {
+                this.formData.survivingRelatives[relative] = 1;
             } else {
-                this.survivingRelatives[relative] = 0;
+                this.formData.survivingRelatives[relative] = 0;
             }
 
         }

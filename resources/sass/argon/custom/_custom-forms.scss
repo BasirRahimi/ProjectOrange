@@ -158,6 +158,20 @@
             }
         }
     }
+    &.coloured-dot {
+        input {
+            &:checked {
+                + .custom-toggle-slider {
+                    border: $custom-control-indicator-border-width solid $input-border-color;
+                }
+            }
+        }
+        .custom-toggle-slider {
+            &::before {
+                background: $custom-toggle-checked-bg;
+            }
+        }
+    }
 }
 
 .custom-toggle-slider {
