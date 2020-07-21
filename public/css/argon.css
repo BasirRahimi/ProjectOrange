@@ -23337,3 +23337,57 @@ readers do not read off random characters that represent icons */
   color: #adb5bd !important;
 }
 
+.asset-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.asset-table thead th {
+  text-align: center;
+  padding: 0.5rem 0;
+  border: 1px solid #cad1d7;
+  border-left: 0;
+}
+
+.asset-table thead th:first-child {
+  border-left: 1px solid #cad1d7;
+  border-radius: 0.25rem 0 0 0.25rem;
+}
+
+.asset-table thead th:last-child {
+  border-radius: 0 0.25rem 0.25rem 0;
+}
+
+.asset-table tbody input,
+.asset-table tbody textarea {
+  background-color: #F0F0F0;
+  border: 0;
+  padding: 0.5rem 0;
+  text-align: center;
+}
+
+.asset-table tbody td {
+  padding: 2px 0px;
+}
+
+.asset-table tbody td:first-child input {
+  border-radius: 0.25rem 0 0 0.25rem;
+}
+
+.asset-table tbody td:last-child input {
+  border-radius: 0 0.25rem 0.25rem 0;
+}
+
+.asset-table tr.spacer {
+  height: 1rem;
+}
+
+.asset-table tr.spacer-sm {
+  height: 0.5rem;
+}
+
+.asset-table-edit textarea {
+  transition: none;
+}
+

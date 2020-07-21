@@ -4,7 +4,7 @@
 			<p class="text-gray-500 m-0">HMRC requires information from you about simple life policies and other investments as follows</p>
         </content-box>
 
-        <content-box title="14.2 Assets in joint names">
+        <content-box title="14.1 Assets in joint names">
             <yes-no collapse label="Did the deceased own any assets in the joint names with another person?" class="mb-4">
                 <table class="asset-table mt-4">
                     <thead>
@@ -73,55 +73,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~@/argon/vue_sfc.scss'; 
 
-.asset-table {
-    width: 100%;
-    border-collapse: separate; // so border-radius will work on th
-    border-spacing: 0;
-    thead {
-        th {
-            text-align: center;
-            padding: .5rem 0;
-            border: 1px solid $input-border-color;
-            border-left: 0;
-            &:first-child {
-                border-left: 1px solid $input-border-color;
-                border-radius: $border-radius 0 0 $border-radius;
-            }
-            &:last-child {
-                border-radius: 0 $border-radius $border-radius 0;
-            }
-        }
-    }
-    tbody {
-        input {
-            width: 100%;
-            background-color: $body-bg;
-            border: 0;
-            padding: .5rem 0;
-            text-align: center;
-        }
-        td {
-           &:first-child {
-                input {
-                    border-radius: $border-radius 0 0 $border-radius;
-                }
-            }
-            &:last-child {
-                input {
-                    border-radius: 0 $border-radius $border-radius 0;
-                }
-            } 
-        }
-    }
-    tr {
-        &.spacer {
-            height: 1rem;
-        }
-        &.spacer-sm {
-            height: .5rem;
-        }
-    }
-}
 </style>

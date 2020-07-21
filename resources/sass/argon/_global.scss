@@ -21,3 +21,63 @@ $colsizes: 100, 150, 200;
 .text-gray-500 {
   color: $gray-500 !important;
 }
+
+@import '~@/argon/vue_sfc.scss'; 
+
+.asset-table {
+    width: 100%;
+    border-collapse: separate; // so border-radius will work on th
+    border-spacing: 0;
+    thead {
+        th {
+            text-align: center;
+            padding: .5rem 0;
+            border: 1px solid $input-border-color;
+            border-left: 0;
+            &:first-child {
+                border-left: 1px solid $input-border-color;
+                border-radius: $border-radius 0 0 $border-radius;
+            }
+            &:last-child {
+                border-radius: 0 $border-radius $border-radius 0;
+            }
+        }
+    }
+    tbody {
+        input,
+        textarea {
+            // width: 100%;
+            background-color: $body-bg;
+            border: 0;
+            padding: .5rem 0;
+            text-align: center;
+        }
+        td {
+            padding: 2px 0px;
+            &:first-child {
+                input {
+                    border-radius: $border-radius 0 0 $border-radius;
+                }
+            }
+            &:last-child {
+                input {
+                    border-radius: 0 $border-radius $border-radius 0;
+                }
+            } 
+        }
+    }
+    tr {
+        &.spacer {
+            height: 1rem;
+        }
+        &.spacer-sm {
+            height: .5rem;
+        }
+    }
+}
+
+.asset-table-edit {
+    textarea {
+        transition: none;
+    }
+}

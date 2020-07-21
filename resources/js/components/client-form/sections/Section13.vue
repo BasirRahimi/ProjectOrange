@@ -4,7 +4,7 @@
 			<p class="text-gray-500 m-0">If the deceased received, or had made provision for, a pension or benefit from an employer or under a personal pension policy (other than the State Pension) you are required to submit details to HMRC.</p>
 		</content-box>
 
-		<content-box title="12.2 Pension Details">
+		<content-box title="12.1 Pension Details">
 			<yes-no collapse label="Other than small arrears of pension due to the date of death, did any payments under a pension scheme or personal pension policy continue after the death of the deceased?">
 				<div class="mt-4"></div>
                 <base-input
@@ -41,7 +41,7 @@
 			</yes-no>
 		</content-box>
 
-		<content-box title="12.3 Pension Payment">
+		<content-box title="12.2 Pension Payment">
 			<yes-no collapse label="Was a lump sum payable under the scheme as a result of the death of the deceased?">
 				<div class="mt-4"></div>
                 <base-input 
@@ -59,7 +59,7 @@
 			</yes-no>
 		</content-box>
 
-		<content-box title="12.4 Pension Payment">
+		<content-box title="12.3 Pension Payment">
 			<yes-no collapse label="Did the deceased, within two-years of their death, transfer or dispose of any benefits payable under a pension scheme or person pension policy?">
                 <div class="mt-4"></div>
                 <base-input

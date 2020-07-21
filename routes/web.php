@@ -27,3 +27,11 @@ Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 Route::resource('clients', 'ClientController');
 
 Route::get('/clients/{id}/{vue_capture?}', 'ClientController@show')->where('vue_capture', '[\/\w\.-]*');
+
+Route::get('/phpinfo', function() {
+    if(Auth::check()){
+        return phpinfo();
+    } else {
+        return redirect()->action('Auth\LoginController@showLoginForm');
+    }
+});
