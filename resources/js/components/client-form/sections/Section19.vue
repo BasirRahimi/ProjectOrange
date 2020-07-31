@@ -64,29 +64,6 @@
                         <tr class="spacer"></tr>
                     </thead>
                     <tbody>
-                        <!-- <tr>
-                            <td>
-                                <textarea style="resize:none;" readonly placeholder="e.g. The deceased’s freehold home at 12 Acacia Avenue London, England, EW1 123"></textarea>
-                            </td>
-                            <td>
-                                <input type="text" readonly placeholder="£300,000">
-                            </td>
-                            <td>
-                                <input type="text" readonly placeholder="£740,000">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <textarea style="resize:none;" readonly placeholder="e.g. Buy to let leasehold flat at 3a High Street, London England, SW12 09A"></textarea>
-                            </td>
-                            <td>
-                                <input type="text" readonly placeholder="£150,000">
-                            </td>
-                            <td>
-                                <input type="text" readonly placeholder="£340,000">
-                            </td>
-                        </tr>
-                       <tr></tr> -->
                         <template v-for="(row, i) in rows">
                             <tr :key="i">
                                 <td>{{row.description}}</td>
@@ -116,6 +93,10 @@
                     <base-button type="default" outline class="ml-auto d-block" @click="addRow" v-if="!viewData">Add</base-button>
                 </div>
             </yes-no>
+        </content-box>
+
+        <content-box class="p-0 text-right" :shadow="false" :whiteBg="false">
+            <button class="btn btn-primary shadow" @click="$router.push({name:'section20'})">Next section</button>
         </content-box>
   </div>
 </template>

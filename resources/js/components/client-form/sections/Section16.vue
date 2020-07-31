@@ -39,6 +39,10 @@
                 <base-button type="default" outline class="ml-auto d-block" @click="addRow">Add</base-button>
             </yes-no>
         </content-box>
+
+        <content-box class="p-0 text-right" :shadow="false" :whiteBg="false">
+            <button class="btn btn-primary shadow" @click="$router.push({name:'section17'})">Next section</button>
+        </content-box>
   </div>
 </template>
 

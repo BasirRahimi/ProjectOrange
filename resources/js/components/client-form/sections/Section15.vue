@@ -44,6 +44,10 @@
                 <p class="text-gray-500 mt-2 mb-0">If the deceased owned a property jointly with another person, include it here. If there is a mortgage on the property, also include details here.</p>
             </b-collapse>
         </content-box>
+
+        <content-box class="p-0 text-right" :shadow="false" :whiteBg="false">
+            <button class="btn btn-primary shadow" @click="$router.push({name:'section16'})">Next section</button>
+        </content-box>
     </div>
 </template>
 

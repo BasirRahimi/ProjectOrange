@@ -70,6 +70,10 @@
 				<textarea class="form-control mb-4" rows="4" placeholder="Please include a full overview of relevant details to this question"></textarea>
 			</yes-no>
 		</content-box>
+
+        <content-box class="p-0 text-right" :shadow="false" :whiteBg="false">
+            <button class="btn btn-primary shadow" @click="$router.push({name:'section14'})">Next section</button>
+        </content-box>
 	</div>
 </template>
 

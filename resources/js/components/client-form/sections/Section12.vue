@@ -28,7 +28,8 @@
                     <div class="col-md-4 form-group">
                         <base-input
                             type="number"
-                            placeholder="£240,000"></base-input>
+                            placeholder="£240,000"
+                            min="0"></base-input>
                     </div>
                 </div>
 
@@ -90,6 +91,10 @@
                     <p class="text-gray-500 mt-2 mb-0">Domicile and residence is relevant because it affects the law that governs succession. Since 17.8.2016 a new European Regulation affects succession within EU member states. The UK and Eire have not opted in to the Regulation (Denmark has opted out) but it will nonetheless affect individuals connected with the EU. If you are a beneficiary of this estate and there are non-UK assets involved, you should consider your own Will now. Do not wait until the estate has been administered.</p>
                 </b-collapse>
             </yes-no>
+        </content-box>
+
+        <content-box class="p-0 text-right" :shadow="false" :whiteBg="false">
+            <button class="btn btn-primary shadow" @click="$router.push({name:'section13'})">Next section</button>
         </content-box>
     </div>
 </template>

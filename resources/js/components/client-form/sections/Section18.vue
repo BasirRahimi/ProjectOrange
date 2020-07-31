@@ -36,6 +36,10 @@
                 <p class="text-gray-500 mt-2 mb-0">If the deceased was, for example, married and acquired furniture and household effects with their spouse, it could be the case that such items were owned jointly and so you should include jointly owned possessions in section 14. Unless the total value of the Chattels owned by the deceased is likely to exceed £1,000 there is usually no need to obtain a formal valuation. Include below Items such as cars, jewellery, etc.</p>
             </b-collapse>
         </content-box>
+
+        <content-box class="p-0 text-right" :shadow="false" :whiteBg="false">
+            <button class="btn btn-primary shadow" @click="$router.push({name:'section19'})">Next section</button>
+        </content-box>
   </div>
 </template>
 

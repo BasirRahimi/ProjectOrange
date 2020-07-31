@@ -36,6 +36,10 @@
                 <p class="text-gray-500 mt-2 mb-0">When you do not know the value of a liability at the time of completing this section, note ‘approximately’ by the figure</p>
             </b-collapse>
         </content-box>
+
+        <content-box class="p-0 text-right" :shadow="false" :whiteBg="false">
+            <button class="btn btn-primary shadow" @click="$router.push({name:'section21'})">Next section</button>
+        </content-box>
   </div>
 </template>
 
