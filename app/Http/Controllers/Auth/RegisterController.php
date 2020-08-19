@@ -8,6 +8,16 @@ use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Http\Request;
+
+use App\Helpers\RandomPasswordGenerator;
+use App\Mail\AccountCreatedWithTempPwdMail;
+use App\Notifications\SMSMobileVerification;
+use Carbon\Carbon;
+use Dotenv\Result\Success;
+use Illuminate\Http\Response;
 
 class RegisterController extends Controller
 {
@@ -69,5 +79,72 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+    }
+
+    protected function requestAccess(Request $request) {
+        $data = $request->validate([
+            'email' => 'required|email:rfc,dns'
+        ]);
+
+        $user = User::where('email', '=', $data['email'])->first();
+        if($user === null) {
+            $tempPassword = RandomPasswordGenerator::makeAlphaNumeric(16);
+            $user = User::create([
+                'email' => $data['email'],
+                'password' => Hash::make($tempPassword)
+            ]);
+            Mail::to($user->email)->send(new AccountCreatedWithTempPwdMail($tempPassword));
+            return response()->json([
+                'user' => $user
+            ]);
+        } else {
+            // this email already exists
+            return response()->json([
+                'errors' => ['This email is already in use.']
+            ]);
+        }
+    }
+
+    protected function smsVerification(Request $request) {
+        $data = $request->all();
+        $user = User::find($data['user']['id']);
+        if(array_key_exists('phone', $data)) {
+            $user->phone = $data['phone'];
+            $user->save();
+        }
+
+        $user->notify(new SMSMobileVerification());
+
+        return response()->json([
+            'user' => $user
+        ]);
+    }
+
+    protected function phoneVerified(Request $request) {
+        $data = $request->all();
+        $user = User::find($data['user']['id']);
+        $user->phone_verified_at = Carbon::now()->toDateTimeString();
+        $user->save();
+
+        return response()->json([
+            'user' => $user
+        ]);
+    }
+
+    protected function saveUserDetails(Request $request) {
+        $data = $request->all();
+        $user = User::find($data['user']['id']);
+        $user->name = $data['firstname'];
+        $user->surname = $data['lastname'];
+        $user->honorific = $data['title'];
+        $user->company = $data['company'];
+
+        if($user->save()) {
+            return response(200);
+        } else {
+            return response()->json([
+                'error' => 'User did not save'
+            ],500);
+        }
     }
 }

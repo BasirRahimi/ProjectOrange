@@ -27,7 +27,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~@/_variables.scss'; 
+@import '~@/argon/vue_sfc.scss'; 
 
 .required-docs {
     padding: 24px;

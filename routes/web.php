@@ -10,17 +10,36 @@
 |
 */
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
     if(Auth::check()){
         return redirect()->action('HomeController@index');
     } else {
-        return redirect()->action('Auth\LoginController@showLoginForm');
+        return response()->view('welcome');
     }
 });
 
-Auth::routes();
+Route::get('/request-access', function() {
+    if(Auth::check()) {
+        if(Auth::user()->email_verified_at) {
+            // email is verified
+            // check their user permissions and act appropriately
+        } else {
+            return response()->view('auth/access-pending');
+        }
+    } else {
+        return response()->view('auth/request-access');
+    }
+});
+
+Route::post('/request-access', 'Auth\RegisterController@requestAccess');
+Route::post('/request-access/sms-verification', 'Auth\RegisterController@smsVerification');
+Route::post('/request-access/phone-verified', 'Auth\RegisterController@phoneVerified');
+Route::post('/request-access/save-user-details', 'Auth\RegisterController@saveUserDetails');
+
+Auth::routes(['verify' => true]);
 
 Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 

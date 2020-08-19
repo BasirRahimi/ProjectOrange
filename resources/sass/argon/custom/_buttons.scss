@@ -159,6 +159,18 @@ $value in $brand-colors {
     }
 }
 
+@each $color,
+$value in $theme-colors {
+    .btn-#{$color} {
+        border-width: 2px;
+
+        &.hover-outline:hover {
+            background-color: transparent;
+            color: $value;
+        }
+    }
+}
+
 // Custom styles
 .btn-outline-default {
     border-color: #cad1d7;

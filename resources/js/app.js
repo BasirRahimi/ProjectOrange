@@ -37,7 +37,15 @@ Vue.component('client-form', require('./components/ClientForm.vue').default);
 Vue.component('user-dashboard', require('./components/UserDashboard.vue').default);
 Vue.component('app-header', require('./components/AppHeader.vue').default);
 Vue.component('content-box', require('./components/client-form/ContentBox.vue').default);
+Vue.component('request-access', require('./components/auth/RequestAccess.vue').default);
 
+Vue.mixin({
+    methods: {
+        validateEmail(email) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email); 
+        }
+    }
+});
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

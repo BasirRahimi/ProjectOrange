@@ -34,7 +34,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~@/_variables.scss'; 
+@import '~@/argon/vue_sfc.scss'; 
 
 .navigation {
     padding: 24px;

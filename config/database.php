@@ -1,9 +1,17 @@
 <?php
 
-define('RDS_HOSTNAME', $_SERVER['RDS_HOSTNAME']);
-define('RDS_USERNAME', $_SERVER['RDS_USERNAME']);
-define('RDS_PASSWORD', $_SERVER['RDS_PASSWORD']);
-define('RDS_DB_NAME', $_SERVER['RDS_DB_NAME']);
+if($_SERVER['HTTP_HOST'] == 'project-orange.eu-west-2.elasticbeanstalk.com') {
+    define('RDS_HOSTNAME', $_SERVER['RDS_HOSTNAME']);
+    define('RDS_USERNAME', $_SERVER['RDS_USERNAME']);
+    define('RDS_PASSWORD', $_SERVER['RDS_PASSWORD']);
+    define('RDS_DB_NAME', $_SERVER['RDS_DB_NAME']);
+}
+else {
+    define('RDS_HOSTNAME', env('RDS_HOSTNAME'));
+    define('RDS_USERNAME', env('RDS_USERNAME'));
+    define('RDS_PASSWORD', env('RDS_PASSWORD'));
+    define('RDS_DB_NAME', env('RDS_DB_NAME'));
+}
 
 use Illuminate\Support\Str;
 
