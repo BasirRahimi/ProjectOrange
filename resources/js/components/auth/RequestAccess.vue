@@ -8,8 +8,8 @@
                     <h3 class="display-2 m-0">Welcome. Request access here.</h3>
                     <p class="text-gray-600 my-4">We need your work email address to save your data and to continue registering your account with us.</p>
                     <form @submit.prevent="processEmail">
-                        <base-input placeholder="Your work email address" type="email" v-model="email" :formGroup="false"></base-input>
-                        <p class="text-danger text-center m-0" v-for="(error, i) in errors" :key="i"><small>{{error}}</small></p>
+                        <base-input placeholder="Your work email address" type="email" v-model="email" :formGroup="false" name="email"></base-input>
+                        <p class="text-danger text-center m-0" v-for="(error, i) in errors" :key="i"><small v-html="error" /></p>
                         <base-button 
                             class="hover-outline shadow w-75 d-block mx-auto mt-3"
                             :class="{'opacity-0': !emailValidity}"
@@ -157,6 +157,13 @@ export default {
         VueSlickCarousel,
         VueTelInput
     },
+    props: {
+        userProp: {
+            type: String,
+            default: null,
+            description: 'Json string'
+        }
+    },
     data() {
         return {
             working: false,
@@ -170,7 +177,8 @@ export default {
                 arrows: false,
                 draggable: false,
                 infinite: false,
-                swipe: false
+                swipe: false,
+                initialSlide: 0
             },
             mobileIsValid: false,
             verificationCode: '',
@@ -178,6 +186,34 @@ export default {
             firstname: '',
             lastname: '',
             company: ''
+        }
+    },
+    beforeMount() {
+        if(this.userProp) {
+            this.user = JSON.parse(this.userProp);
+            
+            if(!this.user.phone) {
+                
+                // no phone entered
+                this.slickSettings.initialSlide = 1;
+            
+            } else if(!this.user.phone_verified_at) {
+                
+                // phone not verfied
+                this.slickSettings.initialSlide = 2;
+                this.processMobile(true);
+            
+            } else if(!this.user.honorific || !this.user.name || !this.user.surname) {
+                
+                // personal details not entered 
+                this.slickSettings.initialSlide = 3;
+            
+            } else {
+                
+                // waiting for access
+                this.slickSettings.initialSlide = 4;
+
+            }
         }
     },
     mounted() {
@@ -283,6 +319,9 @@ export default {
         },
         prevSlide() {
             this.$refs.carousel.prev();
+        },
+        setSlide() {
+            this.$refs.carousel.slickGoTo();
         }
     }
 }

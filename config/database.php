@@ -1,16 +1,17 @@
 <?php
 
-if($_SERVER['HTTP_HOST'] == 'project-orange.eu-west-2.elasticbeanstalk.com') {
-    define('RDS_HOSTNAME', $_SERVER['RDS_HOSTNAME']);
-    define('RDS_USERNAME', $_SERVER['RDS_USERNAME']);
-    define('RDS_PASSWORD', $_SERVER['RDS_PASSWORD']);
-    define('RDS_DB_NAME', $_SERVER['RDS_DB_NAME']);
-}
-else {
-    define('RDS_HOSTNAME', env('RDS_HOSTNAME'));
-    define('RDS_USERNAME', env('RDS_USERNAME'));
-    define('RDS_PASSWORD', env('RDS_PASSWORD'));
-    define('RDS_DB_NAME', env('RDS_DB_NAME'));
+define('HOSTNAME', env('DB_HOSTNAME'));
+define('USERNAME', env('DB_USERNAME'));
+define('PASSWORD', env('DB_PASSWORD'));
+define('DB_NAME', env('DB_NAME'));
+
+if(isset($_SERVER['HTTP_HOST'])) {
+    if($_SERVER['HTTP_HOST'] == 'project-orange.eu-west-2.elasticbeanstalk.com') {
+        define('HOSTNAME', $_SERVER['RDS_HOSTNAME']);
+        define('USERNAME', $_SERVER['RDS_USERNAME']);
+        define('PASSWORD', $_SERVER['RDS_PASSWORD']);
+        define('DB_NAME', $_SERVER['RDS_DB_NAME']);
+    }
 }
 
 use Illuminate\Support\Str;
@@ -59,11 +60,11 @@ return [
         'mysql' => [
             'driver' => 'mysql',
             'url' => env('DATABASE_URL'),
-            'host' => RDS_HOSTNAME,
+            'host' => HOSTNAME,
             'port' => env('DB_PORT', '3306'),
-            'database' => RDS_DB_NAME,
-            'username' => RDS_USERNAME,
-            'password' => RDS_PASSWORD,
+            'database' => DB_NAME,
+            'username' => USERNAME,
+            'password' => PASSWORD,
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',

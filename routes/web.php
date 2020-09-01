@@ -12,27 +12,17 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 Route::get('/', function () {
     if(Auth::check()){
-        return redirect()->action('HomeController@index');
+        return redirect('dashboard');
     } else {
         return response()->view('welcome');
     }
 });
 
-Route::get('/request-access', function() {
-    if(Auth::check()) {
-        if(Auth::user()->email_verified_at) {
-            // email is verified
-            // check their user permissions and act appropriately
-        } else {
-            return response()->view('auth/access-pending');
-        }
-    } else {
-        return response()->view('auth/request-access');
-    }
-});
+Route::get('/request-access', 'Auth\RegisterController@showRequestAccess')->middleware('no.access');
 
 Route::post('/request-access', 'Auth\RegisterController@requestAccess');
 Route::post('/request-access/sms-verification', 'Auth\RegisterController@smsVerification');
@@ -41,11 +31,11 @@ Route::post('/request-access/save-user-details', 'Auth\RegisterController@saveUs
 
 Auth::routes(['verify' => true]);
 
-Route::get('/dashboard', 'HomeController@index')->name('dashboard');
+Route::get('/dashboard', 'HomeController@index')->name('dashboard')->middleware('has.access');
 
-Route::resource('clients', 'ClientController');
+Route::resource('clients', 'ClientController')->middleware('has.access');
 
-Route::get('/clients/{id}/{vue_capture?}', 'ClientController@show')->where('vue_capture', '[\/\w\.-]*');
+Route::get('/clients/{id}/{vue_capture?}', 'ClientController@show')->where('vue_capture', '[\/\w\.-]*')->middleware('has.access');
 
 Route::get('/phpinfo', function() {
     if(Auth::check()){

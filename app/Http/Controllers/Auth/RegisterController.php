@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 use App\Helpers\RandomPasswordGenerator;
@@ -48,7 +49,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        // $this->middleware('guest');
     }
 
     /**
@@ -81,6 +82,10 @@ class RegisterController extends Controller
         ]);
     }
 
+    protected function showRequestAccess() {
+        return response()->view('auth/request-access', ['user' => Auth::user()]);
+    }
+
     protected function requestAccess(Request $request) {
         $data = $request->validate([
             'email' => 'required|email:rfc,dns'
@@ -100,7 +105,7 @@ class RegisterController extends Controller
         } else {
             // this email already exists
             return response()->json([
-                'errors' => ['This email is already in use.']
+                'errors' => ['This email is already in use. Please check your email and <a href="/login">login.</a>']
             ]);
         }
     }

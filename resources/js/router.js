@@ -7,14 +7,6 @@ let routerOptions = {
   mode:'history'
 }
 
-let requestAccess = [
-    { 
-        path: '/',
-        component: require('./components/auth/RequestAccess.vue').default
-    }
-];
-
-
 let clientRoutes = [
     { path: '/', redirect: '/about' },
     {
@@ -135,18 +127,6 @@ if(window.location.pathname.match(regex)) {
     base: `/clients/${clientFormId}/`,
     mode: 'history',
     routes: clientRoutes,
-    scrollBehavior (to, from, savedPosition) {
-      return { x: 0, y: 0 }
-    }
-  }
-}
-
-var regex = /^\/request-access/;
-if(window.location.pathname.match(regex)) {
-  routerOptions = {
-    base: `/request-access/`,
-    mode: 'history',
-    routes: requestAccess,
     scrollBehavior (to, from, savedPosition) {
       return { x: 0, y: 0 }
     }

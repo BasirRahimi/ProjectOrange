@@ -26,7 +26,9 @@
 </head>
 <body>
     <div id="app">
-        @auth
+        <?php $user = Auth::user(); ?>
+        @if($user)
+        @if ($user->has_access)
         <nav class="navbar navbar-expand navbar-light bg-white shadow-sm sticky-top p-0 px-lg-3 py-lg-2">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -58,7 +60,7 @@
                         @else
                         <base-dropdown tag="li" class="nav-item" menu-classes="shadow" position="right">
                             <base-button slot="title" type="link" class="dropdown-toggle m-0 nav-link">
-                            {{ Auth::user()->name }} <span class="caret"></span>
+                            {{ $user->name }} <span class="caret"></span>
                             </base-button>
                             
                             <a href="{{ route('dashboard') }}" class="dropdown-item">{{ __('Dashboard') }}</a>
@@ -79,7 +81,8 @@
                 </div>
             </div>
         </nav>
-        @endauth
+        @endif
+        @endif
 
         <main>
             @yield('content')
