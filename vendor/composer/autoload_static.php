@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitf8e0bbbe7b8ab1ee7f90b4215bf4a949
+class ComposerStaticInitc1aafa050ef53e2b73ce2c9efc7de713
 {
     public static $files = array (
         'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
@@ -654,6 +654,8 @@ class ComposerStaticInitf8e0bbbe7b8ab1ee7f90b4215bf4a949
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
         'App\\Http\\Middleware\\CheckForMaintenanceMode' => __DIR__ . '/../..' . '/app/Http/Middleware/CheckForMaintenanceMode.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
+        'App\\Http\\Middleware\\HasAccess' => __DIR__ . '/../..' . '/app/Http/Middleware/HasAccess.php',
+        'App\\Http\\Middleware\\NoAccess' => __DIR__ . '/../..' . '/app/Http/Middleware/NoAccess.php',
         'App\\Http\\Middleware\\RedirectIfAuthenticated' => __DIR__ . '/../..' . '/app/Http/Middleware/RedirectIfAuthenticated.php',
         'App\\Http\\Middleware\\TrimStrings' => __DIR__ . '/../..' . '/app/Http/Middleware/TrimStrings.php',
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
@@ -1142,6 +1144,7 @@ class ComposerStaticInitf8e0bbbe7b8ab1ee7f90b4215bf4a949
         'Doctrine\\DBAL\\Driver\\AbstractPostgreSQLDriver' => __DIR__ . '/..' . '/doctrine/dbal/lib/Doctrine/DBAL/Driver/AbstractPostgreSQLDriver.php',
         'Doctrine\\DBAL\\Driver\\AbstractSQLAnywhereDriver' => __DIR__ . '/..' . '/doctrine/dbal/lib/Doctrine/DBAL/Driver/AbstractSQLAnywhereDriver.php',
         'Doctrine\\DBAL\\Driver\\AbstractSQLServerDriver' => __DIR__ . '/..' . '/doctrine/dbal/lib/Doctrine/DBAL/Driver/AbstractSQLServerDriver.php',
+        'Doctrine\\DBAL\\Driver\\AbstractSQLServerDriver\\PortWithoutHost' => __DIR__ . '/..' . '/doctrine/dbal/lib/Doctrine/DBAL/Driver/AbstractSQLServerDriver/PortWithoutHost.php',
         'Doctrine\\DBAL\\Driver\\AbstractSQLiteDriver' => __DIR__ . '/..' . '/doctrine/dbal/lib/Doctrine/DBAL/Driver/AbstractSQLiteDriver.php',
         'Doctrine\\DBAL\\Driver\\Connection' => __DIR__ . '/..' . '/doctrine/dbal/lib/Doctrine/DBAL/Driver/Connection.php',
         'Doctrine\\DBAL\\Driver\\DriverException' => __DIR__ . '/..' . '/doctrine/dbal/lib/Doctrine/DBAL/Driver/DriverException.php',
@@ -1152,6 +1155,7 @@ class ComposerStaticInitf8e0bbbe7b8ab1ee7f90b4215bf4a949
         'Doctrine\\DBAL\\Driver\\IBMDB2\\DB2Driver' => __DIR__ . '/..' . '/doctrine/dbal/lib/Doctrine/DBAL/Driver/IBMDB2/DB2Driver.php',
         'Doctrine\\DBAL\\Driver\\IBMDB2\\DB2Exception' => __DIR__ . '/..' . '/doctrine/dbal/lib/Doctrine/DBAL/Driver/IBMDB2/DB2Exception.php',
         'Doctrine\\DBAL\\Driver\\IBMDB2\\DB2Statement' => __DIR__ . '/..' . '/doctrine/dbal/lib/Doctrine/DBAL/Driver/IBMDB2/DB2Statement.php',
+        'Doctrine\\DBAL\\Driver\\IBMDB2\\DataSourceName' => __DIR__ . '/..' . '/doctrine/dbal/lib/Doctrine/DBAL/Driver/IBMDB2/DataSourceName.php',
         'Doctrine\\DBAL\\Driver\\Mysqli\\Driver' => __DIR__ . '/..' . '/doctrine/dbal/lib/Doctrine/DBAL/Driver/Mysqli/Driver.php',
         'Doctrine\\DBAL\\Driver\\Mysqli\\MysqliConnection' => __DIR__ . '/..' . '/doctrine/dbal/lib/Doctrine/DBAL/Driver/Mysqli/MysqliConnection.php',
         'Doctrine\\DBAL\\Driver\\Mysqli\\MysqliException' => __DIR__ . '/..' . '/doctrine/dbal/lib/Doctrine/DBAL/Driver/Mysqli/MysqliException.php',
@@ -1223,6 +1227,9 @@ class ComposerStaticInitf8e0bbbe7b8ab1ee7f90b4215bf4a949
         'Doctrine\\DBAL\\FetchMode' => __DIR__ . '/..' . '/doctrine/dbal/lib/Doctrine/DBAL/FetchMode.php',
         'Doctrine\\DBAL\\Id\\TableGenerator' => __DIR__ . '/..' . '/doctrine/dbal/lib/Doctrine/DBAL/Id/TableGenerator.php',
         'Doctrine\\DBAL\\Id\\TableGeneratorSchemaVisitor' => __DIR__ . '/..' . '/doctrine/dbal/lib/Doctrine/DBAL/Id/TableGeneratorSchemaVisitor.php',
+        'Doctrine\\DBAL\\Internal\\DependencyOrderCalculator' => __DIR__ . '/..' . '/doctrine/dbal/lib/Doctrine/DBAL/Internal/DependencyOrderCalculator.php',
+        'Doctrine\\DBAL\\Internal\\DependencyOrderEdge' => __DIR__ . '/..' . '/doctrine/dbal/lib/Doctrine/DBAL/Internal/DependencyOrderEdge.php',
+        'Doctrine\\DBAL\\Internal\\DependencyOrderNode' => __DIR__ . '/..' . '/doctrine/dbal/lib/Doctrine/DBAL/Internal/DependencyOrderNode.php',
         'Doctrine\\DBAL\\LockMode' => __DIR__ . '/..' . '/doctrine/dbal/lib/Doctrine/DBAL/LockMode.php',
         'Doctrine\\DBAL\\Logging\\DebugStack' => __DIR__ . '/..' . '/doctrine/dbal/lib/Doctrine/DBAL/Logging/DebugStack.php',
         'Doctrine\\DBAL\\Logging\\EchoSQLLogger' => __DIR__ . '/..' . '/doctrine/dbal/lib/Doctrine/DBAL/Logging/EchoSQLLogger.php',
@@ -4604,6 +4611,7 @@ class ComposerStaticInitf8e0bbbe7b8ab1ee7f90b4215bf4a949
         'PhpParser\\Node\\Expr\\StaticCall' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Expr/StaticCall.php',
         'PhpParser\\Node\\Expr\\StaticPropertyFetch' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Expr/StaticPropertyFetch.php',
         'PhpParser\\Node\\Expr\\Ternary' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Expr/Ternary.php',
+        'PhpParser\\Node\\Expr\\Throw_' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Expr/Throw_.php',
         'PhpParser\\Node\\Expr\\UnaryMinus' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Expr/UnaryMinus.php',
         'PhpParser\\Node\\Expr\\UnaryPlus' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Expr/UnaryPlus.php',
         'PhpParser\\Node\\Expr\\Variable' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Expr/Variable.php',
@@ -6052,10 +6060,10 @@ class ComposerStaticInitf8e0bbbe7b8ab1ee7f90b4215bf4a949
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitf8e0bbbe7b8ab1ee7f90b4215bf4a949::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitf8e0bbbe7b8ab1ee7f90b4215bf4a949::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInitf8e0bbbe7b8ab1ee7f90b4215bf4a949::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInitf8e0bbbe7b8ab1ee7f90b4215bf4a949::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitc1aafa050ef53e2b73ce2c9efc7de713::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitc1aafa050ef53e2b73ce2c9efc7de713::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitc1aafa050ef53e2b73ce2c9efc7de713::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInitc1aafa050ef53e2b73ce2c9efc7de713::$classMap;
 
         }, null, ClassLoader::class);
     }

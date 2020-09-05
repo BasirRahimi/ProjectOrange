@@ -1,13 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Log;
 
-Log::info(App::environment());
-Log::info([env('RDS_HOSTNAME'),env('RDS_USERNAME'),env('RDS_PASSWORD'),env('RDS_DB_NAME'),env('RDS_PORT')]);
-
-if(App::environment('staging')) {
+ if(getenv('RDS_HOSTNAME')) {
     define('HOSTNAME', env('RDS_HOSTNAME'));
     define('USERNAME', env('RDS_USERNAME'));
     define('PASSWORD', env('RDS_PASSWORD'));
