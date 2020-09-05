@@ -17,10 +17,12 @@ class NoAccess
     public function handle($request, Closure $next)
     {
         $user = Auth::user();
-        if($user->has_access) {
-            return redirect('dashboard');
+
+        if($user) {
+            if($user->has_access) {
+                return redirect('dashboard');
+            }
         }
-        
         return $next($request);
     }
 }
