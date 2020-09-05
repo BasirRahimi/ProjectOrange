@@ -1,20 +1,27 @@
 <?php
 
-define('HOSTNAME', env('DB_HOSTNAME'));
-define('USERNAME', env('DB_USERNAME'));
-define('PASSWORD', env('DB_PASSWORD'));
-define('DB_NAME', env('DB_NAME'));
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Str;
 
-if(isset($_SERVER['HTTP_HOST'])) {
-    if($_SERVER['HTTP_HOST'] == 'project-orange.eu-west-2.elasticbeanstalk.com') {
-        define('HOSTNAME', $_SERVER['RDS_HOSTNAME']);
-        define('USERNAME', $_SERVER['RDS_USERNAME']);
-        define('PASSWORD', $_SERVER['RDS_PASSWORD']);
-        define('DB_NAME', $_SERVER['RDS_DB_NAME']);
-    }
+if(App::environment('staging')) {
+    define('HOSTNAME', env('RDS_HOSTNAME'));
+    define('USERNAME', env('RDS_USERNAME'));
+    define('PASSWORD', env('RDS_PASSWORD'));
+    define('DB_NAME', env('RDS_DB_NAME'));
+    define('PORT', env('RDS_PORT'));
+} else {
+    define('HOSTNAME', env('DB_HOSTNAME'));
+    define('USERNAME', env('DB_USERNAME'));
+    define('PASSWORD', env('DB_PASSWORD'));
+    define('DB_NAME', env('DB_NAME'));
+    define('PORT', env('DB_PORT'));
 }
 
-use Illuminate\Support\Str;
+//RDS_HOSTNAME=aad6exfetsqe8o.civnzskeljsl.eu-west-2.rds.amazonaws.com
+//RDS_USERNAME=root
+//RDS_PASSWORD=wn8093enoa821l
+//RDS_DB_NAME=ebdb
+//RDS_PORT=3306
 
 return [
 
@@ -61,7 +68,7 @@ return [
             'driver' => 'mysql',
             'url' => env('DATABASE_URL'),
             'host' => HOSTNAME,
-            'port' => env('DB_PORT', '3306'),
+            'port' => PORT,
             'database' => DB_NAME,
             'username' => USERNAME,
             'password' => PASSWORD,
