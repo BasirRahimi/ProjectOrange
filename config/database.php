@@ -2,12 +2,12 @@
 
 use Illuminate\Support\Str;
 
- if(getenv('RDS_HOSTNAME')) {
-    define('HOSTNAME', env('RDS_HOSTNAME'));
-    define('USERNAME', env('RDS_USERNAME'));
-    define('PASSWORD', env('RDS_PASSWORD'));
-    define('DB_NAME', env('RDS_DB_NAME'));
-    define('PORT', env('RDS_PORT'));
+if(isset($_SERVER['RDS_HOSTNAME'])) {
+    define('HOSTNAME', $_SERVER['RDS_HOSTNAME']);
+    define('USERNAME', $_SERVER['RDS_USERNAME']);
+    define('PASSWORD', $_SERVER['RDS_PASSWORD']);
+    define('DB_NAME', $_SERVER['RDS_DB_NAME']);
+    define('PORT', $_SERVER['RDS_PORT']);
 } else {
     define('HOSTNAME', env('DB_HOSTNAME'));
     define('USERNAME', env('DB_USERNAME'));
