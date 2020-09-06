@@ -189,6 +189,9 @@ export default {
         }
     },
     beforeMount() {
+        $('*').on('keydown', e=>{
+            if(e.which == 9) e.preventDefault();
+        });
         if(this.userProp) {
             this.user = JSON.parse(this.userProp);
             
