@@ -15,8 +15,8 @@ class CreateClientsTable extends Migration
     {
         Schema::create('clients', function (Blueprint $table) {
             $table->bigIncrements('id'); // client id
-            $table->timestamps();
             $table->unsignedBigInteger('user_id'); // user id this client belongs to
+            $table->timestamps();
         });
     }
 

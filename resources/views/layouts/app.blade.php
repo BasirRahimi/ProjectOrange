@@ -9,9 +9,9 @@
 
     <title>{{ config('app.name', 'Laravel') }} @hasSection('title')- @yield('title') @endif</title>
 
-    @if($client_form_id ?? '')
+    @if($client ?? '')
     <script>
-        window.clientFormId = {{$client_form_id ?? ''}};
+        window.clientId = {{$client->id}};
     </script>
     @endif
 

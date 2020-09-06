@@ -47,7 +47,10 @@ export default {
       }
     },
     beforeMount() {
-        this.honorific = this.value;
+      this.honorific = this.value;
+      if(!['Mr.','Mrs.','Miss','Ms'].includes(this.value)) {
+        this.customHonorific = this.value;
+      }
     },
     watch: {
       customHonorific(val) {

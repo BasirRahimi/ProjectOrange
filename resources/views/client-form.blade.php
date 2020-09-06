@@ -2,5 +2,5 @@
 @section('title', 'Client Form')
 
 @section('content')
-<client-form></client-form>
+<client-form :client="{{$client}}"></client-form>
 @endsection

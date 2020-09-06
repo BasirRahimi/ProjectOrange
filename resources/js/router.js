@@ -121,10 +121,10 @@ let clientRoutes = [
     }
 ];
 
-var regex = /^\/clients/;
+let regex = /^\/clients/;
 if(window.location.pathname.match(regex)) {
   routerOptions = {
-    base: `/clients/${clientFormId}/`,
+    base: `/clients/${clientId}/`,
     mode: 'history',
     routes: clientRoutes,
     scrollBehavior (to, from, savedPosition) {

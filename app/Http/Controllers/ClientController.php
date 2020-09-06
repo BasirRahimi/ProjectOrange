@@ -45,20 +45,13 @@ class ClientController extends Controller
     public function store(Request $request)
     {
         // Using this method because we don't need any user input to create a client
-        
-        // Make sure a user is logged in
-        $user = Auth::user();
-        if($user) {
-            $client = new Client;
+        $client = new Client;
+        $client->user_id = Auth::user()->id;
 
-            $client->user_id = $user->id;
-    
-            if($client->save()) {
-                return response(json_encode($client), 200);
-            }
-            
+        if($client->save()) {
+            return response(json_encode($client), 200);
         } else {
-            return response('Unauthenticated request', 401);
+            return response('client didn\'t save', 500);
         }
     }
 
@@ -70,19 +63,15 @@ class ClientController extends Controller
      */
     public function show($id)
     {
-        $user = Auth::user();
-        if(!$user) { abort(404); }
-
         $client = Client::find($id);
 
-        if($client) {
-            if($client->user_id == $user->id) {
-                return view('client-form', ['client_form_id' => $id]);      
-            }
+        if(!$client) abort(404);
+        
+        if($client->user_id == Auth::user()->id) {
+            return view('client-form', ['client' => $client]);      
         }
 
         abort(404);
-        
     }
 
     /**
@@ -106,6 +95,21 @@ class ClientController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $client = Client::find($id);
+
+        if(!$client) {
+            return response('client not found', 400);
+        }
+
+        foreach ($request->all() as $key => $value) {
+            $client->$key = $value;
+        }
+
+        if($client->save()) {
+            return response('success');
+        } else {
+            return response('client didn\'t save', 500);
+        }
     }
 
     /**

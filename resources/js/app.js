@@ -53,8 +53,10 @@ Vue.mixin({
  */
 
 import router from './router';
+import store from './vuex';
 
 const app = new Vue({
     el: '#app',
     router,
+    store
 });

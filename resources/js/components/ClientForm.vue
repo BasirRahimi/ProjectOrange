@@ -22,10 +22,16 @@ export default {
     ClientFormWidgets,
     ClientFormUtilityBar
   },
+  props: {
+    client: {}
+  },
   data() {
     return {
       navCollapsed: false
     }
+  },
+  beforeMount() {
+    this.$store.commit('updateClient', this.client)
   },
   methods: {
     navToggled(val) {
