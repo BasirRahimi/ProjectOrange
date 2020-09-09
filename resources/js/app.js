@@ -43,7 +43,24 @@ Vue.mixin({
     methods: {
         validateEmail(email) {
             return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email); 
-        }
+        },
+        async saveSectionData(data, clientId) {
+            let result;
+            await axios.patch(`/clients/${clientId}`, data).then(response=>{
+                result = [true, response];
+            }).catch(response=>{
+                result = [false, response];
+            })
+            return result;
+        },
+        flashLabel() {
+            let label = $('.flashit');
+            label.css('background-color', '#FB952C');
+            setTimeout(() => {
+                label.css('transition', 'all .9s');
+                label.css('background-color', 'transparent');
+            }, 100);
+        },
     }
 });
 /**

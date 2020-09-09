@@ -10,9 +10,8 @@
       <p class="text-gray-500">Below is provision for the details of one executor to be inserted but there may be as many as four named in the Will and who may wish to take the Grant of Probate. In this case, click ‘add executor’ to add more.</p>
     </content-box>
 
-    <content-box v-for="(executor, key) in executors" :key="key" :title="`Executor ${key+1}`">
-        <p class="h5 text-center mb-4"><b></b></p>
-
+    <content-box class="relative" v-for="(executor, key) in executors" :key="key" :title="`Executor ${key+1}`">
+        <a class="remove-executor" href="#" v-if="executors.length > 1" @click.prevent="removeExecutor(key)">Remove Executor</a>
         <honorific v-model="executor.honorific"/>
 
         <base-input 
@@ -106,7 +105,7 @@
         {'justify-content-end': executors.length == 4}
         ]">
             <a href="#" @click.prevent="addExecutor" v-show="executors.length < 4">Add executor +</a>
-            <button class="btn btn-primary shadow" @click="$router.push({name:'section3'})">Next section</button>
+            <button class="btn btn-primary shadow" @click="nextSection">Next section</button>
         </div>
     </content-box>
   </div>
@@ -118,10 +117,42 @@ export default {
     components: {
         Honorific
     },
-  data() {
-    return {
-        executors: [
-            {
+    data() {
+        return {
+            executors: [
+                {
+                    honorific: "",
+                    forename: "",
+                    surname: "",
+                    addressLine1: "",
+                    addressLine2: "",
+                    town: "",
+                    postcode: "",
+                    niNumber: "",
+                    phone: "",
+                    email: "",
+                    addressInputType: "manual"
+                }
+            ],
+        };
+    },
+    beforeMount() {
+        if(this.$store.state.client) {
+            if(this.$store.state.client.executors) {
+                this.executors = JSON.parse(this.$store.state.client.executors);
+            }
+        }
+    },
+    methods: {
+        updateHonorific(key, event) {
+            if(typeof event == 'string') {
+                this.executors[key].honorific = event;
+            } else {
+                this.executors[key].honorific = event.target.value;
+            }
+        },
+        addExecutor() {
+            this.executors.push({
                 honorific: "",
                 forename: "",
                 surname: "",
@@ -132,37 +163,40 @@ export default {
                 niNumber: "",
                 phone: "",
                 email: "",
-                addressInputType: "manual"
-            }
-        ],
-    };
-  },
-  methods: {
-    updateHonorific(key, event) {
-        if(typeof event == 'string') {
-            this.executors[key].honorific = event;
-        } else {
-            this.executors[key].honorific = event.target.value;
+                addressInputType: "manual" 
+            })
+        },
+        removeExecutor(i) {
+            this.executors.splice(i,1);
+        },
+        nextSection() {
+            this.saveData();
+            this.$router.push({name:'section3'});
+        },
+        saveData() {
+            let data = {
+                'executors': JSON.stringify(this.executors)
+            };
+            this.saveSectionData(data, this.$store.state.client.id).then(response=>{
+                console.log(response)
+            });
         }
     },
-    addExecutor() {
-        this.executors.push({
-            honorific: "",
-            forename: "",
-            surname: "",
-            addressLine1: "",
-            addressLine2: "",
-            town: "",
-            postcode: "",
-            niNumber: "",
-            phone: "",
-            email: "",
-            addressInputType: "manual" 
-        })
-    }
-  }
 };
 </script>
 
 <style lang="scss" scoped>
+@import '~@/argon/vue_sfc.scss'; 
+
+.relative {
+    position: relative;
+}
+.remove-executor {
+    position: absolute;
+    top: 40px;
+
+    @include media-breakpoint-down(sm) {
+        top: 5px;
+    }
+}
 </style>

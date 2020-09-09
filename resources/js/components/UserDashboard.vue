@@ -57,8 +57,8 @@ export default {
             });
         },
         clientName(client) {
-            if(client.firstName) {
-                return `${client.firstName} ${client.lastName}`;
+            if(client.forename) {
+                return `${client.forename} ${client.surname}`;
             } else {
                 return 'Not Given';
             }

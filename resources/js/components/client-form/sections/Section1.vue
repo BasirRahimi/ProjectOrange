@@ -223,11 +223,9 @@ export default {
                 ...this.formData,
                 date_of_death: `${this.formData.date_of_death.getFullYear()}-${this.formData.date_of_death.getMonth() + 1}-${this.formData.date_of_death.getDate()}`,
             }
-            axios.patch(`/clients/${this.$store.state.client.id}`, data).then(response=>{
+            this.saveSectionData(data, this.$store.state.client.id).then(response=>{
                 console.log(response);
-            }).catch(response=>{
-                console.log(response);
-            })
+            });
         }
     }
 }
