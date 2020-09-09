@@ -3,24 +3,18 @@
 use Illuminate\Support\Str;
 
 if(isset($_SERVER['RDS_HOSTNAME'])) {
-    define('HOSTNAME', $_SERVER['RDS_HOSTNAME']);
-    define('USERNAME', $_SERVER['RDS_USERNAME']);
-    define('PASSWORD', $_SERVER['RDS_PASSWORD']);
+    define('DB_HOSTNAME', $_SERVER['RDS_HOSTNAME']);
+    define('DB_USERNAME', $_SERVER['RDS_USERNAME']);
+    define('DB_PASSWORD', $_SERVER['RDS_PASSWORD']);
     define('DB_NAME', $_SERVER['RDS_DB_NAME']);
-    define('PORT', $_SERVER['RDS_PORT']);
+    define('DB_PORT', $_SERVER['RDS_PORT']);
 } else {
-    define('HOSTNAME', env('DB_HOSTNAME'));
-    define('USERNAME', env('DB_USERNAME'));
-    define('PASSWORD', env('DB_PASSWORD'));
+    define('DB_HOSTNAME', env('DB_HOSTNAME'));
+    define('DB_USERNAME', env('DB_USERNAME'));
+    define('DB_PASSWORD', env('DB_PASSWORD'));
     define('DB_NAME', env('DB_NAME'));
-    define('PORT', env('DB_PORT'));
+    define('DB_PORT', env('DB_PORT'));
 }
-
-//RDS_HOSTNAME=aad6exfetsqe8o.civnzskeljsl.eu-west-2.rds.amazonaws.com
-//RDS_USERNAME=root
-//RDS_PASSWORD=wn8093enoa821l
-//RDS_DB_NAME=ebdb
-//RDS_PORT=3306
 
 return [
 
@@ -66,11 +60,11 @@ return [
         'mysql' => [
             'driver' => 'mysql',
             'url' => env('DATABASE_URL'),
-            'host' => HOSTNAME,
-            'port' => PORT,
+            'host' => DB_HOSTNAME,
+            'port' => DB_PORT,
             'database' => DB_NAME,
-            'username' => USERNAME,
-            'password' => PASSWORD,
+            'username' => DB_USERNAME,
+            'password' => DB_PASSWORD,
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
