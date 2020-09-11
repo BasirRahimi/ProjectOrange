@@ -5,8 +5,29 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 use App\Client;
+use App\Client\Assets;
+use App\Client\BanksSavings;
+use App\Client\BusinessInterests;
+use App\Client\Executors;
+use App\Client\Gifts;
+use App\Client\JointHeldAssets;
+use App\Client\Liabilities;
+use App\Client\LifeAssurance;
+use App\Client\LifetimeGifts;
+use App\Client\NilRateBand;
+use App\Client\OtherInformation;
+use App\Client\Pensions;
+use App\Client\PersonalBelongings;
+use App\Client\PowersOfAttorney;
+use App\Client\ReceivedInheritance;
+use App\Client\StocksShares;
+use App\Client\TaxHavens;
+use App\Client\Trusts;
+use App\Client\UKBritishIsles;
+use App\Client\Will;
 
 class ClientController extends Controller
 {
@@ -68,6 +89,29 @@ class ClientController extends Controller
         if(!$client) abort(404);
         
         if($client->user_id == Auth::user()->id) {
+            
+            // get client data models
+            $client->Executors;
+            $client->PowersOfAttorney;
+            $client->Will;
+            $client->LifetimeGifts;
+            $client->Gifts;
+            $client->UKBritishIsles;
+            $client->TaxHavens;
+            $client->NilRateBand;
+            $client->BusinessInterests;
+            $client->ReceivedInheritance;
+            $client->Trusts;
+            $client->Pensions;
+            $client->LifeAssurance;
+            $client->JointHeldAssets;
+            $client->StocksShares;
+            $client->BanksSavings;
+            $client->PersonalBelongings;
+            $client->Assets;
+            $client->Liabilities;
+            $client->OtherInformation;
+
             return view('client-form', ['client' => $client]);      
         }
 
@@ -94,7 +138,6 @@ class ClientController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
         $client = Client::find($id);
 
         if(!$client) {
@@ -102,7 +145,76 @@ class ClientController extends Controller
         }
 
         foreach ($request->all() as $key => $value) {
-            $client->$key = $value;
+            $model = null;
+            switch ($key) {
+                case 'executors':
+                    $model = new Executors;
+                    break;
+                case 'powers_of_attorney':
+                    $model = new PowersOfAttorney;
+                    break;
+                case 'will':
+                    $model = new Will;
+                    break;
+                case 'lifetime_gifts':
+                    $model = new LifetimeGifts;
+                    break;
+                case 'gifts':
+                    $model = new Gifts;
+                    break;
+                case 'uk_british_isles':
+                    $model = new UKBritishIsles;
+                    break;
+                case 'tax_havens':
+                    $model = new TaxHavens;
+                    break;
+                case 'nil_rate_band':
+                    $model = new NilRateBand;
+                    break;
+                case 'business_interests':
+                    $model = new BusinessInterests;
+                    break;
+                case 'received_inheritance':
+                    $model = new ReceivedInheritance;
+                    break;
+                case 'trusts':
+                    $model = new Trusts;
+                    break;
+                case 'pensions':
+                    $model = new Pensions;
+                    break;
+                case 'life_assurance':
+                    $model = new LifeAssurance;
+                    break;
+                case 'joint_held_assets':
+                    $model = new JointHeldAssets;
+                    break;
+                case 'stocks_shares':
+                    $model = new StocksShares;
+                    break;
+                case 'banks_savings':
+                    $model = new BanksSavings;
+                    break;
+                case 'personal_belongings':
+                    $model = new PersonalBelongings;
+                    break;
+                case 'assets':
+                    $model = new Assets;
+                    break;
+                case 'liabilities':
+                    $model = new Liabilities;
+                    break;
+                case 'other_information':
+                    $model = new OtherInformation;
+                    break;
+                default:
+                    $client->$key = $value;
+                    break;
+            }
+
+            if($model) {
+                $this->insertOrUpdateClientData($client->id, $model, $value);
+            }
         }
 
         if($client->save()) {
@@ -121,5 +233,21 @@ class ClientController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+    private function insertOrUpdateClientData($client_id, $model, $data) {
+        if(!$client_id || !$model || !$data) return;
+        
+        $record = $model::firstWhere('client_id', $client_id);
+        
+        if(!$record) {
+            $record = new $model;
+        }
+
+        $record->client_id = $client_id;
+        $record->the_data = $data;
+
+        $record->save();
     }
 }

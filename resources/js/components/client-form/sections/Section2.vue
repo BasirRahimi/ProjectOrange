@@ -139,7 +139,7 @@ export default {
     beforeMount() {
         if(this.$store.state.client) {
             if(this.$store.state.client.executors) {
-                this.executors = JSON.parse(this.$store.state.client.executors);
+                this.executors = JSON.parse(this.$store.state.client.executors.the_data);
             }
         }
     },

@@ -255,7 +255,7 @@ export default {
     beforeMount() {
         if(this.$store.state.client) {
             if(this.$store.state.client.powers_of_attorney) {
-                this.formData = JSON.parse(this.$store.state.client.powers_of_attorney);
+                this.formData = JSON.parse(this.$store.state.client.powers_of_attorney.the_data);
             }
         }
     },
