@@ -16,21 +16,13 @@
         </content-box>
 
         <content-box title="6.1 - England & Wales and the rest of the UK and British Isles">
-            <yes-no class="form-group" label="Did the deceased have any assets in Jersey?" collapse>
-                <textarea class="form-control mt-3" rows="4" placeholder="Please include a full overview of relevant details to this question"></textarea>
-            </yes-no>
-
-            <yes-no class="form-group" label="Did the deceased have any assets in Guernsey?" collapse>
-                <textarea class="form-control mt-3" rows="4" placeholder="Please include a full overview of relevant details to this question"></textarea>
-            </yes-no>
-
-            <yes-no class="form-group" label="Did the deceased have any assets in Isle of Man?" collapse>
-                <textarea class="form-control mt-3" rows="4" placeholder="Please include a full overview of relevant details to this question"></textarea>
+            <yes-no v-for="(row,i) in formData" :key="i" class="form-group" :label="row.query" v-model="row.answer" collapse>
+                <textarea v-model="row.onTrue" class="form-control mt-3" rows="4" placeholder="Please include a full overview of relevant details to this question"></textarea>
             </yes-no>
         </content-box>
 
         <content-box class="p-0 text-right" :shadow="false" :whiteBg="false">
-            <button class="btn btn-primary shadow" @click="$router.push({name:'section8'})">Next section</button>
+            <button class="btn btn-primary shadow" @click="saveData('uk_british_isles'); routerPush('section8');">Next section</button>
         </content-box>
     </div>
 </template>
@@ -43,7 +35,30 @@ export default {
     },
     data() {
         return {
-
+            formData: [
+                {
+                    query: 'Did the deceased have any assets in Jersey?',
+                    answer: null,
+                    onTrue: ''
+                },
+                {
+                    query: 'Did the deceased have any assets in Guernsey?',
+                    answer: null,
+                    onTrue: ''
+                },
+                {
+                    query: 'Did the deceased have any assets in Isle of Man?',
+                    answer: null,
+                    onTrue: ''
+                }
+            ]
+        }
+    },
+    beforeMount() {
+        if(this.$store.state.client) {
+            if(this.$store.state.client.uk_british_isles) {
+                this.formData = JSON.parse(this.$store.state.client.uk_british_isles.the_data);
+            }
         }
     }
 }

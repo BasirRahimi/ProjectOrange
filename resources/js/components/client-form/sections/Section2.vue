@@ -10,8 +10,8 @@
       <p class="text-gray-500">Below is provision for the details of one executor to be inserted but there may be as many as four named in the Will and who may wish to take the Grant of Probate. In this case, click ‘add executor’ to add more.</p>
     </content-box>
 
-    <content-box class="relative" v-for="(executor, key) in executors" :key="key" :title="`Executor ${key+1}`">
-        <a class="remove-executor" href="#" v-if="executors.length > 1" @click.prevent="removeExecutor(key)">Remove Executor</a>
+    <content-box class="relative" v-for="(executor, key) in formData" :key="key" :title="`Executor ${key+1}`">
+        <a class="remove-executor" href="#" v-if="formData.length > 1" @click.prevent="removeExecutor(key)">Remove Executor</a>
         <honorific v-model="executor.honorific"/>
 
         <base-input 
@@ -101,11 +101,11 @@
 
     <content-box class="p-0 text-right" :shadow="false" :whiteBg="false">
         <div class="d-flex mb-3 align-items-center" :class="[
-        {'justify-content-between': executors.length < 4},
-        {'justify-content-end': executors.length == 4}
+        {'justify-content-between': formData.length < 4},
+        {'justify-content-end': formData.length == 4}
         ]">
-            <a href="#" @click.prevent="addExecutor" v-show="executors.length < 4">Add executor +</a>
-            <button class="btn btn-primary shadow" @click="nextSection">Next section</button>
+            <a href="#" @click.prevent="addExecutor" v-show="formData.length < 4">Add executor +</a>
+            <button class="btn btn-primary shadow" @click="saveData('executors');routerPush('section3');">Next section</button>
         </div>
     </content-box>
   </div>
@@ -119,7 +119,7 @@ export default {
     },
     data() {
         return {
-            executors: [
+            formData: [
                 {
                     honorific: "",
                     forename: "",
@@ -139,20 +139,20 @@ export default {
     beforeMount() {
         if(this.$store.state.client) {
             if(this.$store.state.client.executors) {
-                this.executors = JSON.parse(this.$store.state.client.executors.the_data);
+                this.formData = JSON.parse(this.$store.state.client.executors.the_data);
             }
         }
     },
     methods: {
         updateHonorific(key, event) {
             if(typeof event == 'string') {
-                this.executors[key].honorific = event;
+                this.formData[key].honorific = event;
             } else {
-                this.executors[key].honorific = event.target.value;
+                this.formData[key].honorific = event.target.value;
             }
         },
         addExecutor() {
-            this.executors.push({
+            this.formData.push({
                 honorific: "",
                 forename: "",
                 surname: "",
@@ -167,19 +167,7 @@ export default {
             })
         },
         removeExecutor(i) {
-            this.executors.splice(i,1);
-        },
-        nextSection() {
-            this.saveData();
-            this.$router.push({name:'section3'});
-        },
-        saveData() {
-            let data = {
-                'executors': JSON.stringify(this.executors)
-            };
-            this.saveSectionData(data, this.$store.state.client.id).then(response=>{
-                console.log(response)
-            });
+            this.formData.splice(i,1);
         }
     },
 };

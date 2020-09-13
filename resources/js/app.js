@@ -61,6 +61,16 @@ Vue.mixin({
                 label.css('background-color', 'transparent');
             }, 100);
         },
+        routerPush(section) {
+            this.$router.push({name:section});
+        },
+        saveData(sectionName) {
+            let data = {};
+            data[sectionName] = JSON.stringify(this.formData);
+            this.saveSectionData(data, this.$store.state.client.id).then(response=>{
+                console.log(response)
+            });
+        }
     }
 });
 /**

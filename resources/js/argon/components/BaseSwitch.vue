@@ -3,26 +3,27 @@
         <input type="checkbox"
                :value="value"
                v-bind="$attrs"
-               v-on="inputListeners">
+               v-on="inputListeners"
+               ref="checkbox">
         <span class="custom-toggle-slider rounded-circle"></span>
     </label>
 </template>
 <script>
 export default {
-  name: "base-switch",
-  inheritAttrs: false,
-  props: {
-    value: {
-      type: Boolean,
-      default: false,
-      description: "Switch value"
+    name: "base-switch",
+    inheritAttrs: false,
+    props: {
+        value: {
+            type: Boolean,
+            default: false,
+            description: "Switch value"
+        },
+        coloured: {
+            type: Boolean,
+            default: false,
+            description: "coloured when in off state"
+        }
     },
-    coloured: {
-        type: Boolean,
-        default: false,
-        description: "coloured when in off state"
-    }
-  },
     computed: {
         inputListeners() {
             var _self = this;
@@ -51,6 +52,13 @@ export default {
         //     this.$emit("input", value);
         // }
         // }
+    },
+    mounted() {
+        this.$nextTick(()=>{
+            if(this.value) {
+                this.$refs.checkbox.checked = true;
+            }
+        });
     }
 };
 </script>

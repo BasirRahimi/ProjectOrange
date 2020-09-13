@@ -96,7 +96,6 @@ class ClientController extends Controller
             $client->Will;
             $client->LifetimeGifts;
             $client->Gifts;
-            $client->UKBritishIsles;
             $client->TaxHavens;
             $client->NilRateBand;
             $client->BusinessInterests;
@@ -111,6 +110,10 @@ class ClientController extends Controller
             $client->Assets;
             $client->Liabilities;
             $client->OtherInformation;
+
+            // by default the property name will be u_k_british_isles but I want uk_british_isles
+            $client->uk_british_isles = $client->UKBritishIsles;
+            unset($client->UKBritishIsles);
 
             return view('client-form', ['client' => $client]);      
         }

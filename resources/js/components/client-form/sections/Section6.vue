@@ -6,13 +6,13 @@
         </content-box>
 
         <content-box title="5.2 Anti-avoidance legislation">
-            <yes-no label="Did the deceased transfer any assets to any individual, trust, company or other organisation during their lifetime where the recipient did not take full possession of them?" collapse>
-                <textarea class="form-control mt-3" rows="4" placeholder="We shall review this information and ask for further details as appropriate to ensure you make full disclosure to HMRC."></textarea>
+            <yes-no :label="formData[0].query" v-model="formData[0].answer" collapse>
+                <textarea v-model="formData[0].onTrue" class="form-control mt-3" rows="4" placeholder="We shall review this information and ask for further details as appropriate to ensure you make full disclosure to HMRC."></textarea>
             </yes-no>
         </content-box>
 
         <content-box class="p-0 text-right" :shadow="false" :whiteBg="false">
-            <button class="btn btn-primary shadow" @click="$router.push({name:'section7'})">Next section</button>
+            <button class="btn btn-primary shadow" @click="saveData('gifts'); routerPush('section7');">Next section</button>
         </content-box>
   </div>
 </template>
@@ -25,7 +25,20 @@ export default {
     },
     data() {
         return {
-
+            formData: [
+                {
+                    query: 'Did the deceased transfer any assets to any individual, trust, company or other organisation during their lifetime where the recipient did not take full possession of them?',
+                    answer: null,
+                    onTrue: ''
+                }
+            ]
+        }
+    },
+    beforeMount() {
+        if(this.$store.state.client) {
+            if(this.$store.state.client.gifts) {
+                this.formData = JSON.parse(this.$store.state.client.gifts.the_data);
+            }
         }
     }
 }

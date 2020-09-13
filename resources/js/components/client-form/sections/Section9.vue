@@ -10,60 +10,59 @@
             </p>
         </content-box>
         
-        <content-box title="8.1 - Nil Rate Band Discretionary Trusts" v-for="(trust, key) in trusts" :key="key">
+        <content-box title="8.1 - Nil Rate Band Discretionary relative" class="relative" v-for="(trust, key) in formData" :key="key">
+            <a class="remove-trustee" href="#" v-if="formData.length > 1" @click.prevent="removeTrustee(key)">Remove Trustee</a>
             <p class="text-gray-500">If you know details of any Nil Rate Band Discretionary Trust, then please provide the following information:-</p>
             <honorific v-model="trust.honorific" />
             <base-input
                 label="Forename"
-                placeholder="John"></base-input>
+                placeholder="John"
+                v-model="trust.forename"></base-input>
             <base-input
                 label="Surname"
-                placeholder="Doe"></base-input>
+                placeholder="Doe"
+                v-model="trust.surname"></base-input>
 
-            <yes-no class="form-group" label="Did the deceased have any charge/debit arrangements with this trustee?" collapse>
-                <textarea class="form-control mt-3" rows="4" placeholder="Please include a full overview of relevant details to this question"></textarea>
+            <yes-no class="form-group" :label="trust.query1.query" v-model="trust.query1.answer" collapse>
+                <textarea v-model="trust.query1.onTrue" class="form-control mt-3" rows="4" placeholder="Please include a full overview of relevant details to this question"></textarea>
             </yes-no>
 
             <div class="form-group">
-                <label>Select dependent on which contact details you know:</label>
+                <label>{{trust.query2.query}}</label>
                 <switch-with-text 
-                    v-model="trust.hasDependant"
+                    v-model="trust.query2.answer"
                     left-text="The Trustee"
                     right-text="The trustee’s solicitors or accountants"/>
             </div>
-            <!-- <base-switch v-model="trust.hasDependant"/> -->
-            <!-- <div class="form-group d-flex">
-                <div :class="{'text-gray-500':trust.hasDependant}" @click="trust.hasDependant = true">The Trustee</div>
-                <div>
-                    <base-switch coloured @input="val=>{trust.hasDependant = val}" class="m-0"></base-switch>
-                </div>
-                <div :class="{'text-gray-500':!trust.hasDependant}" @click="trust.hasDependant = false">The trustee’s solicitors or accountants</div>
-            </div> -->
-            <b-collapse :visible="trust.hasDependant == true">
-                <honorific v-model="trust.dependant.honorific"/>
+            <b-collapse :visible="trust.query2.answer == true">
+                <honorific v-model="trust.query2.onTrue.honorific"/>
                 <base-input
                     label="Forename"
-                    placeholder="John"></base-input>
+                    placeholder="John"
+                    v-model="trust.query2.onTrue.forename"></base-input>
                 <base-input
                     label="Surname"
-                    placeholder="Doe"></base-input>
+                    placeholder="Doe"
+                    v-model="trust.query2.onTrue.surname"></base-input>
             </b-collapse>
 
             <div class="row">
                 <div class="col-12 col-lg-6">
                     <base-input
                         label="Phone number"
-                        placeholder="+44 012345 67890"></base-input>
+                        placeholder="+44 012345 67890"
+                        v-model="trust.phone"></base-input>
                 </div>
                 <div class="col-12 col-lg-6">
                     <base-input
                         label="Email Address"
-                        placeholder="John.doe@doe.co.uk"></base-input>
+                        placeholder="John.doe@doe.co.uk"
+                        v-model="trust.email"></base-input>
                 </div>
             </div>
         </content-box>
 
-        <content-box title="8.1 - Nil Rate Band Discretionary Trusts" v-if="trusts.length < 4">
+        <content-box title="8.1 - Nil Rate Band Discretionary Trusts" v-if="formData.length < 4">
             <div class="text-center">
                 <base-button
                     type="default"
@@ -73,7 +72,7 @@
         </content-box>
 
         <content-box class="p-0 text-right" :shadow="false" :whiteBg="false">
-            <button class="btn btn-primary shadow" @click="$router.push({name:'section10'})">Next section</button>
+            <button class="btn btn-primary shadow" @click="saveData('nil_rate_band'); routerPush('section10');">Next section</button>
         </content-box>
     </div>
 </template>
@@ -90,29 +89,59 @@ export default {
     },
     data() {
         return {
-            trusts: []
+            formData: []
+        }
+    },
+    beforeMount() {
+        if(this.$store.state.client) {
+            if(this.$store.state.client.nil_rate_band) {
+                this.formData = JSON.parse(this.$store.state.client.nil_rate_band.the_data);
+            }
         }
     },
     methods: {
         addTrustee() {
-            this.trusts.push({
+            this.formData.push({
                 honorific: '',
-                hasDependant: false,
                 forename: '',
                 surname: '',
+                query1: {
+                    query: 'Did the deceased have any charge/debit arrangements with this trustee?',
+                    answer: null,
+                    onTrue: ''
+                },
+                query2: {
+                    query: 'Select dependent on which contact details you know:',
+                    answer: false,
+                    onTrue: {
+                        honorific: '',
+                        forename: '',
+                        surname: ''
+                    }
+                },
                 phone: '',
                 email: '',
-                dependant: {
-                    honorific: '',
-                    forename: '',
-                    surname: ''
-                }
             });
+        },
+        removeTrustee(i) {
+            this.formData.splice(i,1);
         }
     }
 }
 </script>
 
 <style lang="scss" scoped>
+@import '~@/argon/vue_sfc.scss'; 
 
+.relative {
+    position: relative;
+}
+.remove-trustee {
+    position: absolute;
+    top: 40px;
+
+    @include media-breakpoint-down(sm) {
+        top: 5px;
+    }
+}
 </style>

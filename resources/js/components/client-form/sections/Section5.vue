@@ -12,24 +12,24 @@
         </content-box>
 
         <content-box title="4.2 Details of lifetime videos">
-            <yes-no v-show="slide === 1" class="form-group flash-label" label="Did the deceased make any gifts or transfer assets to or for the benefit of another individual, charity or other organisation?" collapse>
-                <textarea class="form-control mt-3" rows="4" placeholder="Please include a full overview of relevant details to this question"></textarea>
+            <yes-no v-show="slide === 1" class="form-group" label-class="flashit" :label="formData[0].query" v-model="formData[0].answer" collapse>
+                <textarea class="form-control mt-3" rows="4" placeholder="Please include a full overview of relevant details to this question" v-model="formData[0].onTrue"></textarea>
             </yes-no>
 
-            <yes-no v-show="slide === 2" class="form-group flash-label" label="Did the deceased create a trust or settlement?" collapse>
-                <textarea class="form-control mt-3" rows="4" placeholder="Please include a full overview of relevant details to this question"></textarea>
+            <yes-no v-show="slide === 2" class="form-group" label-class="flashit" :label="formData[1].query" v-model="formData[1].answer" collapse>
+                <textarea class="form-control mt-3" rows="4" placeholder="Please include a full overview of relevant details to this question" v-model="formData[1].onTrue"></textarea>
             </yes-no>
 
-            <yes-no v-show="slide === 3" class="form-group flash-label" label="Did the deceased transfer/gift additional assets to an existing trust or settlement?" collapse>
-                <textarea class="form-control mt-3" rows="4" placeholder="Please include a full overview of relevant details to this question"></textarea>
+            <yes-no v-show="slide === 3" class="form-group" label-class="flashit" :label="formData[2].query" v-model="formData[2].answer" collapse>
+                <textarea class="form-control mt-3" rows="4" placeholder="Please include a full overview of relevant details to this question" v-model="formData[2].onTrue"></textarea>
             </yes-no>
 
-            <yes-no v-show="slide === 4" class="form-group flash-label" label="Did the deceased pay a premium on any life insurance policy to for the benefit of someone else?" collapse>
-                <textarea class="form-control mt-3" rows="4" placeholder="Please include a full overview of relevant details to this question"></textarea>
+            <yes-no v-show="slide === 4" class="form-group" label-class="flashit" :label="formData[3].query" v-model="formData[3].answer" collapse>
+                <textarea class="form-control mt-3" rows="4" placeholder="Please include a full overview of relevant details to this question" v-model="formData[3].onTrue"></textarea>
             </yes-no>
 
-            <yes-no v-show="slide === 5" class="form-group flash-label" label="Was the deceased entitled to benefit from any assets held in trust or in a settlement which during their life had come to an end either in whole or in part?" collapse>
-                <textarea class="form-control mt-3" rows="4" placeholder="Please include a full overview of relevant details to this question"></textarea>
+            <yes-no v-show="slide === 5" class="form-group" label-class="flashit" :label="formData[4].query" v-model="formData[4].answer" collapse>
+                <textarea class="form-control mt-3" rows="4" placeholder="Please include a full overview of relevant details to this question" v-model="formData[4].onTrue"></textarea>
             </yes-no>
 
             <div class="d-sm-flex align-items-center">
@@ -45,7 +45,7 @@
         </content-box>
 
         <content-box class="p-0 text-right" :shadow="false" :whiteBg="false">
-            <button class="btn btn-primary shadow" @click="$router.push({name:'section6'})">Next section</button>
+            <button class="btn btn-primary shadow" @click="saveData('lifetime_gifts');routerPush('section6');">Next section</button>
         </content-box>
     </div>
 </template>
@@ -59,6 +59,40 @@ export default {
     data() {
         return {
             slide: 1,
+            formData: [
+                {
+                    query: 'Did the deceased make any gifts or transfer assets to or for the benefit of another individual, charity or other organisation?',
+                    answer: null,
+                    onTrue: ''
+                },
+                {
+                    query: 'Did the deceased create a trust or settlement?',
+                    answer: null,
+                    onTrue: ''
+                },
+                {
+                    query: 'Did the deceased transfer/gift additional assets to an existing trust or settlement?',
+                    answer: null,
+                    onTrue: ''
+                },
+                {
+                    query: 'Did the deceased pay a premium on any life insurance policy to for the benefit of someone else?',
+                    answer: null,
+                    onTrue: ''
+                },
+                {
+                    query: 'Was the deceased entitled to benefit from any assets held in trust or in a settlement which during their life had come to an end either in whole or in part?',
+                    answer: null,
+                    onTrue: ''
+                }
+            ]
+        }
+    },
+    beforeMount() {
+        if(this.$store.state.client) {
+            if(this.$store.state.client.lifetime_gifts) {
+                this.formData = JSON.parse(this.$store.state.client.lifetime_gifts.the_data);
+            }
         }
     },
     methods: {
@@ -74,14 +108,6 @@ export default {
                 this.flashLabel();
             }
         },
-        flashLabel() {
-            let label = $($('.flash-label > label')[this.slide - 1]);
-            label.css('background-color', 'yellow');
-            setTimeout(() => {
-                label.css('transition', 'all .9s');
-                label.css('background-color', 'transparent');
-            }, 100);
-        }
     }
 }
 </script>

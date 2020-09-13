@@ -21,10 +21,6 @@
                 :class="[{'active': option.active === true},
                     {'mr-3': key != optionsCopy.length - 1}]"
                 @click="update(key)">{{option.value}}</base-button>
-            <!-- <button v-for="(option, key) in optionsCopy" :key="key"
-                class="btn btn-outline-secondary active-primary"
-                :class="{'active': option.active === true}"
-                @click="update(key)">{{option.value}}</button> -->
         </div>
         <template v-else>
             <br />
@@ -33,10 +29,6 @@
                 outline
                 :class="{'active': option.active === true}"
                 @click="update(key)">{{option.value}}</base-button>
-            <!-- <button v-for="(option, key) in optionsCopy" :key="key"
-                class="btn btn-outline-secondary active-primary mr-3"
-                :class="{'active': option.active === true}"
-                @click="update(key)">{{option.value}}</button> -->
         </template>
     </div>
 </template>
@@ -68,7 +60,8 @@ export default {
         gridColsize: {
             type: Number,
             default: 150
-        }
+        },
+        value: {}
     },
     data() {
         return {
@@ -79,7 +72,7 @@ export default {
         this.optionsCopy = this.options.map(x=>{
             return {
                 value: x,
-                active: false
+                active: this.value === x ? true : false
             }
         });
     },

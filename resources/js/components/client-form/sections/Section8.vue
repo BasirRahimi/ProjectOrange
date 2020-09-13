@@ -8,17 +8,13 @@
         </content-box>
 
         <content-box title="7.1 Swiss and assets in other ‘tax havens’">
-            <yes-no class="form-group" label="Did the deceased have any assets in Switzerland?" collapse>
-                <textarea class="form-control mt-3" rows="4" placeholder="Please include a full overview of relevant details to this question"></textarea>
-            </yes-no>
-
-            <yes-no class="form-group" label="Did the deceased have any assets in a tax haven?" collapse>
-                <textarea class="form-control mt-3" rows="4" placeholder="Please include a full overview of relevant details to this question"></textarea>
+            <yes-no v-for="(row,i) in formData" :key="i" class="form-group" :label="row.query" v-model="row.answer" collapse>
+                <textarea v-model="row.onTrue" class="form-control mt-3" rows="4" placeholder="Please include a full overview of relevant details to this question"></textarea>
             </yes-no>
         </content-box>
 
         <content-box class="p-0 text-right" :shadow="false" :whiteBg="false">
-            <button class="btn btn-primary shadow" @click="$router.push({name:'section9'})">Next section</button>
+            <button class="btn btn-primary shadow" @click="saveData('tax_havens'); routerPush('section9');">Next section</button>
         </content-box>
     </div>
 </template>
@@ -31,7 +27,25 @@ export default {
     },
     data() {
         return {
-
+            formData: [
+                {
+                    query: 'Did the deceased have any assets in Switzerland?',
+                    answer: null,
+                    onTrue: ''
+                },
+                {
+                    query: 'Did the deceased have any assets in a tax haven?',
+                    answer: null,
+                    onTrue: ''
+                }
+            ]
+        }
+    },
+    beforeMount() {
+        if(this.$store.state.client) {
+            if(this.$store.state.client.tax_havens) {
+                this.formData = JSON.parse(this.$store.state.client.tax_havens.the_data);
+            }
         }
     }
 }

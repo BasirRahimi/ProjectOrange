@@ -15,7 +15,7 @@
         </content-box>
 
         <content-box title="2.2 Domicile, residence and non-UK assets">
-            <yes-no invert collapse :label="formData[2].query" v-model="formData[2].answer">
+            <yes-no collapse :collapseOn="false" :label="formData[2].query" v-model="formData[2].answer">
                 <base-input
                     class="mt-4"
                     :label="formData[2].onFalse[0].query"
@@ -83,12 +83,10 @@
                 </div>
             </div>    
             <div v-show="slide === 5">
-                <p class="flashit">{{formData[7].query}}</p>
-
-                <yes-no class="form-group" label="Was the deceased female?" v-model="formData[7].answer">
+                <yes-no class="form-group" label-class="flashit" :label="formData[7].query" v-model="formData[7].answer">
                 </yes-no>
                 
-                <yes-no class="form-group" label="Was the deceased born before 1/2/1974?" v-model="formData[8].answer">
+                <yes-no class="form-group" label-class="flashit" :label="formData[8].query" v-model="formData[8].answer">
                 </yes-no>
                 
                 <b-collapse :visible="formData[7].answer === true">
@@ -148,7 +146,7 @@
         </content-box>
 
         <content-box class="p-0 text-right" :shadow="false" :whiteBg="false">
-            <button class="btn btn-primary shadow" @click="nextSection">Next section</button>
+            <button class="btn btn-primary shadow" @click="saveData('powers_of_attorney');routerPush('section4');">Next section</button>
         </content-box>
     </div>
 </template>
@@ -271,18 +269,6 @@ export default {
                 this.slide--;
                 this.flashLabel();
             }
-        },
-        nextSection() {
-            this.saveData();
-            this.$router.push({name:'section4'});
-        },
-        saveData() {
-            let data = {
-                'powers_of_attorney': JSON.stringify(this.formData)
-            };
-            this.saveSectionData(data, this.$store.state.client.id).then(response=>{
-                console.log(response)
-            });
         }
     }
 };
