@@ -21,8 +21,11 @@
                             accordion="the-accordion"
                             role="tabpanel"
                             :visible="activeTab == i">
-                            <card shadow class="mb-2">
-                                <label>Description of asset</label>
+                            <card shadow class="mb-2 relative">
+                                <div class="d-flex">
+                                    <label class="d-lock">Description of asset</label>
+                                    <a class="ml-auto d-block" href="#" v-if="formData[0].onTrue.length > 1" @click.prevent="removeRow(i)">Remove asset</a>
+                                </div>
                                 <textarea
                                     placeholder="e.g. The deceased’s freehold home at 12 Acacia Avenue London, England, EW1 123"
                                     rows="2" 
@@ -143,5 +146,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~@/argon/vue_sfc.scss'; 
 
+.relative {
+    position: relative;
+}
+.remove-asset {
+    position: absolute;
+    top: 40px;
+
+    @include media-breakpoint-down(sm) {
+        top: 5px;
+    }
+}
 </style>
