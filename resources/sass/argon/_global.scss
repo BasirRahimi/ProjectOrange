@@ -26,61 +26,65 @@ $colsizes: 100, 150, 200;
 }
 
 .asset-table {
-    width: 100%;
-    border-collapse: separate; // so border-radius will work on th
-    border-spacing: 0;
-    thead {
-        th {
-            text-align: center;
-            padding: .5rem 0;
-            border: 1px solid $input-border-color;
-            border-left: 0;
-            &:first-child {
-                border-left: 1px solid $input-border-color;
-                border-radius: $border-radius 0 0 $border-radius;
-            }
-            &:last-child {
-                border-radius: 0 $border-radius $border-radius 0;
-            }
+    input,
+    textarea {
+        width: 100%;
+        background-color: $body-bg;
+        border: 0;
+        padding: .5rem 0;
+        text-align: center;
+    }
+    .cell-header {
+        text-align: center;
+        padding: .5rem 0;
+        border: 1px solid $input-border-color;
+        border-left: 0;
+        display: inline;
+        font-weight: 600;
+        &:first-child {
+            border-left: 1px solid $input-border-color;
+            border-radius: $border-radius 0 0 $border-radius;
+        }
+        &:last-child {
+            border-radius: 0 $border-radius $border-radius 0;
         }
     }
-    tbody {
-        input,
-        textarea {
-            // width: 100%;
-            background-color: $body-bg;
-            border: 0;
-            padding: .5rem 0;
-            text-align: center;
-        }
-        td {
-            padding: 2px 0px;
-            &:first-child {
-                input {
-                    border-radius: $border-radius 0 0 $border-radius;
-                }
-            }
-            &:last-child {
-                input {
-                    border-radius: 0 $border-radius $border-radius 0;
-                }
-            } 
-        }
+    .cell {
+        padding-left: 4px;
+        padding-right: 4px;
+        overflow: hidden;
     }
-    tr {
-        &.spacer {
-            height: 1rem;
-        }
-        &.spacer-sm {
-            height: .5rem;
+    .table-row {
+        position: relative;
+        margin-top: 8px;
+        .row-settings {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            opacity: 0;
+            transition: opacity .25s;
+            z-index: -1;
+            text-align: right;
+            &.active {
+                opacity: 1;
+                z-index: 1;
+            }
         }
     }
 }
 
-.asset-table-edit {
-    textarea {
-        transition: none;
+.accordion-asset-table {
+    .asset-toggle {
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
+}
+
+textarea {
+    transition: none !important;
 }
 
 .welcome-container,

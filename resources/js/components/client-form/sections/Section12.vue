@@ -1,27 +1,29 @@
 <template>
     <div class="container">
         <content-box title="Section 11 - Trusts in which the deceased had an interest">
-            <yes-no collapse label="Was the deceased entitled to benefit from a trust that was created by a Deed or under another’s person’s Will (or intestacy)?">
+            <yes-no collapse :label="formData[0].query" v-model="formData[0].answer">
                 <label class="mt-4">Who created the trust?</label>
                 
-                <honorific />
+                <honorific v-model="formData[0].onTrue.trust_honorific" />
                 
                 <base-input
                     label="Forename"
-                    placeholder="John"></base-input>
+                    placeholder="John"
+                    v-model="formData[0].onTrue.trust_forename"></base-input>
                 <base-input
                     label="Surname"
-                    placeholder="Doe"></base-input>
+                    placeholder="Doe"
+                    v-model="formData[0].onTrue.trust_surname"></base-input>
                 
                 <label>The date it was created / date of death of the person who died</label>
                 <div class="row">
                     <div class="col-md-4 form-group">
-                        <datepicker input-class="form-control bg-white" placeholder="Date" format="dd / MM / yy"></datepicker>
+                        <datepicker v-model="formData[0].onTrue.trust_date_created" input-class="form-control bg-white" placeholder="Date" format="dd / MM / yy"></datepicker>
                     </div>
                 </div>
 
                 <label>What was the nature of the inheritance received?</label>
-                <textarea class="form-control mb-4" rows="4" placeholder="Please include a full overview of relevant details to this question"></textarea>
+                <textarea v-model="formData[0].onTrue.nature_of_inheritance" class="form-control mb-4" rows="4" placeholder="Please include a full overview of relevant details to this question"></textarea>
 
                 <label>What was the value of the inheritance received?</label>
                 <div class="row">
@@ -29,61 +31,68 @@
                         <base-input
                             type="number"
                             placeholder="£240,000"
-                            min="0"></base-input>
+                            min="0"
+                            v-model="formData[0].onTrue.value"></base-input>
                     </div>
                 </div>
 
                 <label>The names of the trustees</label>
                 <p class="text-gray-500 mb-2">Please separate each name with a comma</p>
-                <textarea class="form-control mb-4" rows="4" placeholder="John Doe, Johnny Appleseed"></textarea>
+                <textarea v-model="formData[0].onTrue.trustees" class="form-control mb-4" rows="4" placeholder="John Doe, Johnny Appleseed"></textarea>
 
                 <label>Please add the contact details of one of the following</label>
                 <switch-with-text
                     left-text="Their Solicitors"
                     right-text="Their accountants"
-                    class="form-group"></switch-with-text>
+                    class="form-group"
+                    v-model="formData[0].onTrue.contact"
+                    return-text></switch-with-text>
 
-                <honorific />
+                <honorific v-model="formData[0].onTrue.contact_honorific"/>
                 <base-input
                     label="Forename"
-                    placeholder="John"></base-input>
+                    placeholder="John" v-model="formData[0].onTrue.contact_forename"></base-input>
                 <base-input
                     label="Surname"
-                    placeholder="Doe"></base-input>
+                    placeholder="Doe" v-model="formData[0].onTrue.contact_surname"></base-input>
 
                 <div class="row">
                     <div class="col-12 col-lg-6">
                         <base-input
                             label="Phone number"
-                            placeholder="+44 012345 67890"></base-input>
+                            placeholder="+44 012345 67890" v-model="formData[0].onTrue.contact_phone"></base-input>
                     </div>
                     <div class="col-12 col-lg-6">
                         <base-input
                             label="Email Address"
-                            placeholder="John.doe@doe.co.uk"></base-input>
+                            placeholder="John.doe@doe.co.uk" v-model="formData[0].onTrue.contact_email"></base-input>
                     </div>
                 </div>
 
                 <label>If you have a copy of the trust documents please include details below and upload the relevant documents too</label>
-                <div v-for="(doc,index) in docs" v-show="activeDoc === index" :key="index">
+                <div v-for="(doc,index) in formData[0].onTrue.docs" v-show="activeDoc === index" :key="index">
                     <div class="row no-gutters mt-4 form-group" :key="index">
                         <div class="col-md-4 mr-md-2 mb-2 mb-md-0">
                             <base-input
                                 placeholder="Document title e.g ‘The Will’"
-                                :form-group="false"></base-input>
+                                :form-group="false"
+                                v-model="doc.document_title"></base-input>
                         </div>
                         <div class="col">
-                            <base-file-upload class="m-0" />
+                            <base-file-upload v-model="doc.document" class="m-0" />
                         </div>
                     </div>
 
-                    <textarea :key="`details${index}`" class="form-control mb-4" rows="4" placeholder="Add details including any specific page references"></textarea>
+                    <textarea v-model="doc.extra_details" :key="`details${index}`" class="form-control mb-4" rows="4" placeholder="Add details including any specific page references"></textarea>
                 </div>
                 <div class="d-sm-flex align-items-center mb-4">
-                    <div class="flex-grow-1 mb-3" v-show="docs.length > 1"><b>Document: {{activeDoc + 1}}</b></div>
+                    <div class="flex-grow-1 mb-3" v-show="formData[0].onTrue.docs.length > 1">
+                        <b>Document: {{activeDoc + 1}} / {{formData[0].onTrue.docs.length}}</b><br>
+                        <a href="#" v-if="formData[0].onTrue.docs.length > 1" @click.prevent="removeDoc(activeDoc)">Remove document</a>
+                    </div>
                     <base-button v-if="activeDoc > 0" type="default" outline @click="activeDoc--">Back</base-button>
-                    <base-button type="default" outline @click="addDoc" v-if="activeDoc + 1 == docs.length">Add</base-button>
-                    <base-button type="default" outline @click="activeDoc++" v-if="activeDoc + 1 < docs.length">Next</base-button>
+                    <base-button type="default" outline @click="addDoc" v-if="activeDoc + 1 == formData[0].onTrue.docs.length">Add</base-button>
+                    <base-button type="default" outline @click="activeDoc++" v-if="activeDoc + 1 < formData[0].onTrue.docs.length">Next</base-button>
                 </div>
 
                 <a v-b-toggle.collapse1 class="pointer">Tip<i class="icon-xs fas fa-chevron-down ml-2"></i></a>
@@ -94,7 +103,7 @@
         </content-box>
 
         <content-box class="p-0 text-right" :shadow="false" :whiteBg="false">
-            <button class="btn btn-primary shadow" @click="$router.push({name:'section13'})">Next section</button>
+            <button class="btn btn-primary shadow" @click="saveData('trusts');routerPush('section13');">Next section</button>
         </content-box>
     </div>
 </template>
@@ -116,13 +125,53 @@ export default {
     data() {
         return {
             activeDoc: 0,
-            docs: [{title:'', file: null}]
+            formData: [
+                {
+                    query: 'Was the deceased entitled to benefit from a trust that was created by a Deed or under another’s person’s Will (or intestacy)?',
+                    answer: null,
+                    onTrue: {
+                        trust_honorific: '',
+                        trust_forename: '',
+                        trust_surname: '',
+                        trust_date_created: '',
+                        nature_of_inheritance: '',
+                        value: '',
+                        trustees: '',
+                        contact: '',
+                        contact_honorific: '',
+                        contact_forename: '',
+                        contact_surname: '',
+                        contact_phone: '',
+                        contact_email: '',
+                        docs: [
+                            {
+                                document_title: '',
+                                document: '',
+                                extra_details: ''
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    },
+    beforeMount() {
+        if(this.$store.state.client) {
+            if(this.$store.state.client.trusts) {
+                this.formData = JSON.parse(this.$store.state.client.trusts.the_data);
+            }
         }
     },
     methods: {
         addDoc() {
-            this.docs.push({title: '', file: null});
+            this.formData[0].onTrue.docs.push({document_title: '', document: '', extra_details: ''});
             this.activeDoc++;
+        },
+        removeDoc(i) {
+            if(i+1 == this.formData[0].onTrue.docs.length) {
+                this.activeDoc--;
+            }
+            this.formData[0].onTrue.docs.splice(i,1);
         }
     }
 }

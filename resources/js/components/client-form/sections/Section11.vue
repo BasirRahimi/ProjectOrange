@@ -5,19 +5,19 @@
         </content-box>
 
         <content-box title="10.1 Inheritance">
-            <yes-no label="In the 5 years before their death, did the deceased inherit money or assets from another person’s estate on which Inheritance Tax was paid?" collapse>
+            <yes-no :label="formData[0].query" v-model="formData[0].answer" collapse>
                 <label class="mt-4">Who gave them that legacy?</label>
-                <honorific />
+                <honorific v-model="formData[0].onTrue.honorific"/>
                 <base-input
                     label="Forename"
-                    placeholder="John"></base-input>
+                    placeholder="John" v-model="formData[0].onTrue.forename"></base-input>
                 <base-input
                     label="Surname"
-                    placeholder="Doe"></base-input>
+                    placeholder="Doe" v-model="formData[0].onTrue.surname"></base-input>
                 <div class="row no-gutters">
                     <div class="col-md-4 form-group">
                         <label>Date of death</label>
-                        <datepicker input-class="form-control bg-white" placeholder="Date" format="dd / MM / yy"></datepicker>
+                        <datepicker v-model="formData[0].onTrue.date_of_death" input-class="form-control bg-white" placeholder="Date" format="dd / MM / yy"></datepicker>
                     </div>
                 </div>
                 <div class="row no-gutters">
@@ -27,37 +27,42 @@
                     <div class="col-md-4">
                         <base-input
                             type="number"
-                            placeholder="£200,000"></base-input>
+                            placeholder="£200,000"
+                            v-model="formData[0].onTrue.value_of_inheritance"></base-input>
                     </div>
                 </div>
 
-                <yes-no collapse label="Do you have the copy of the Will, Grant of Probate or other documents relating to the legacy?">
-                    <div v-for="(doc,index) in docs" v-show="activeDoc === index" :key="index">
-                        <div class="row no-gutters mt-4 form-group" :key="index">
+                <yes-no collapse :label="formData[0].onTrue.query1.query" v-model="formData[0].onTrue.query1.answer">
+                    <div v-for="(doc,index) in formData[0].onTrue.query1.onTrue" v-show="activeDoc === index" :key="index">
+                        <div class="row no-gutters mt-4 form-group">
                             <div class="col-md-4 mr-md-2 mb-2 mb-md-0">
                                 <base-input
                                     placeholder="Document title e.g ‘The Will’"
-                                    :form-group="false"></base-input>
+                                    :form-group="false"
+                                    v-model="doc.document_title"></base-input>
                             </div>
                             <div class="col">
                                 <base-file-upload class="m-0" />
                             </div>
                         </div>
 
-                        <textarea :key="`details${index}`" class="form-control mb-4" rows="4" placeholder="Add details including any specific page references"></textarea>
+                        <textarea v-model="doc.extra_details" class="form-control mb-4" rows="4" placeholder="Add details including any specific page references"></textarea>
                     </div>
                     <div class="d-sm-flex align-items-center">
-                        <div class="flex-grow-1 mb-3" v-show="docs.length > 1"><b>Document: {{activeDoc + 1}}</b></div>
+                        <div class="flex-grow-1 mb-3" v-show="formData[0].onTrue.query1.onTrue.length > 1">
+                            <b>Document: {{activeDoc + 1}} / {{formData[0].onTrue.query1.onTrue.length}}</b><br>
+                            <a class="remove-doc" href="#" v-if="formData[0].onTrue.query1.onTrue.length > 1" @click.prevent="removeDoc(activeDoc)">Remove document</a>
+                        </div>
                         <base-button v-if="activeDoc > 0" type="default" outline @click="activeDoc--">Back</base-button>
-                        <base-button type="default" outline @click="addDoc" v-if="activeDoc + 1 == docs.length">Add</base-button>
-                        <base-button type="default" outline @click="activeDoc++" v-if="activeDoc + 1 < docs.length">Next</base-button>
+                        <base-button type="default" outline @click="addDoc" v-if="activeDoc + 1 == formData[0].onTrue.query1.onTrue.length">Add</base-button>
+                        <base-button type="default" outline @click="activeDoc++" v-if="activeDoc + 1 < formData[0].onTrue.query1.onTrue.length">Next</base-button>
                     </div>
                 </yes-no>
             </yes-no>
         </content-box>
 
         <content-box class="p-0 text-right" :shadow="false" :whiteBg="false">
-            <button class="btn btn-primary shadow" @click="$router.push({name:'section12'})">Next section</button>
+            <button class="btn btn-primary shadow" @click="saveData('received_inheritance');routerPush('section12');">Next section</button>
         </content-box>
     </div>
 </template>
@@ -77,13 +82,48 @@ export default {
     data() {
         return {
             activeDoc: 0,
-            docs: [{title:'', file: null}]
+            formData: [
+                {
+                    query: 'In the 5 years before their death, did the deceased inherit money or assets from another person’s estate on which Inheritance Tax was paid?',
+                    answer: null,
+                    onTrue: {
+                        honorific: '',
+                        forename: '',
+                        surname: '',
+                        date_of_death: '',
+                        value_of_inheritance: '',
+                        query1: {
+                            query: 'Do you have the copy of the Will, Grant of Probate or other documents relating to the legacy?',
+                            onTrue: [
+                                {
+                                    document_title: '',
+                                    document: '',
+                                    extra_details: ''
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        }
+    },
+    beforeMount() {
+        if(this.$store.state.client) {
+            if(this.$store.state.client.received_inheritance) {
+                this.formData = JSON.parse(this.$store.state.client.received_inheritance.the_data);
+            }
         }
     },
     methods: {
         addDoc() {
-            this.docs.push({title: '', file: null});
+            this.formData[0].onTrue.query1.onTrue.push({document_title: '', document: '', extra_details: ''});
             this.activeDoc++;
+        },
+        removeDoc(i) {
+            if(i+1 == this.formData[0].onTrue.query1.onTrue.length) {
+                this.activeDoc--;
+            }
+            this.formData[0].onTrue.query1.onTrue.splice(i,1);
         }
     }
 }

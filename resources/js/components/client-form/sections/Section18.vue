@@ -5,30 +5,29 @@
         </content-box>
 
         <content-box title="17.1 Chattels">
-            <yes-no collapse label="Did the deceased own any Chattels of particular value?" class="mb-4">
-                <table class="asset-table mt-4">
-                    <thead>
-                        <tr>
-                            <th>Description of Chattels</th>
-                            <th>Value £</th>
-                        </tr>
-                        <tr class="spacer"></tr>
-                    </thead>
-                    <tbody>
-                        <template v-for="(row, i) in rows">
-                            <tr :key="i">
-                                <td>
-                                    <input type="text" v-model="row.description">
-                                </td>
-                                <td>
-                                    <input type="number" step=".01" min="0" v-model="row.value">
-                                </td>
-                            </tr>
-                            <tr class="spacer-sm" :key="`spacer${i}`"></tr>
-                        </template>
-                    </tbody>
-                </table>
-                <base-button type="default" outline class="ml-auto d-block" @click="addRow">Add</base-button>
+            <yes-no collapse :label="formData[0].query" v-model="formData[0].answer" class="mb-4">
+                <div class="asset-table mt-4">
+                    <div class="row no-gutters">
+                        <div class="col-9 cell-header">Description of Chattels</div>
+                        <div class="col-3 cell-header">Value (£)</div>
+                    </div>
+                    <div class="row no-gutters table-row" v-for="(row, i) in formData[0].onTrue" :key="i">
+                        <div class="row-settings" :class="{active: rowSettings}">
+                            <base-button type="danger" icon="fas fa-window-close" icon-only @click="removeRow(i)"></base-button>
+                        </div>
+                        <div class="col-9 cell">
+                            <input type="text" v-model="row.description">
+                        </div>
+                        <div class="col-3 cell">
+                            <input type="number" min="0" v-model="row.value">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-right mt-2">
+                    <base-button type="default" outline :class="{active: rowSettings}" icon="fas fa-cog" icon-only @click="rowSettings = !rowSettings"></base-button>
+                    <base-button type="default" outline class="ml-auto" @click="addRow" v-if="formData[0].onTrue.length < 20">Add</base-button>
+                </div>
             </yes-no>
 
             <a v-b-toggle.collapse1 class="pointer">Tip<i class="icon-xs fas fa-chevron-down ml-2"></i></a>
@@ -38,7 +37,7 @@
         </content-box>
 
         <content-box class="p-0 text-right" :shadow="false" :whiteBg="false">
-            <button class="btn btn-primary shadow" @click="$router.push({name:'section19'})">Next section</button>
+            <button class="btn btn-primary shadow" @click="saveData('personal_belongings');routerPush('section19');">Next section</button>
         </content-box>
   </div>
 </template>
@@ -51,15 +50,32 @@ export default {
     },
     data() {
         return {
-            rows: []
+            rowSettings: false,
+            formData: [
+                {
+                    query: 'Did the deceased own any Chattels of particular value?',
+                    answer: null,
+                    onTrue: []
+                }
+            ]
+        }
+    },
+    beforeMount() {
+        if(this.$store.state.client) {
+            if(this.$store.state.client.personal_belongings) {
+                this.formData = JSON.parse(this.$store.state.client.personal_belongings.the_data);
+            }
         }
     },
     methods: {
         addRow() {
-            this.rows.push({
+            this.formData[0].onTrue.push({
                 description: '',
                 value: ''
             });
+        },
+        removeRow(i) {
+            this.formData[0].onTrue.splice(i,1);
         }
     }
 }

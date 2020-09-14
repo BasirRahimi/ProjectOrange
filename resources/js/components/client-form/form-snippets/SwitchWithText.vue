@@ -1,8 +1,8 @@
 <template>
     <div class="switch-with-text">
-        <div class="switch-text-left" :class="{'text-gray-500':checked}">{{leftText}}</div>
-        <div class="the-switch"><base-switch coloured v-model="checked" class="m-0 mx-3 d-block"></base-switch></div>
-        <div class="switch-text-right" :class="{'text-gray-500':!checked}">{{rightText}}</div>
+        <div class="switch-text-left pointer" :class="{'text-gray-500':checked}" @click="clickSwitch(false)">{{leftText}}</div>
+        <div class="the-switch"><base-switch coloured v-model="checked" class="m-0 mx-3 d-block" ref="switch"></base-switch></div>
+        <div class="switch-text-right pointer" :class="{'text-gray-500':!checked}" @click="clickSwitch(true)">{{rightText}}</div>
     </div>
 </template>
 
@@ -11,7 +11,7 @@ export default {
     name: 'switch-with-text',
     props: {
         value: {
-            type: Boolean,
+            type: Boolean | String,
             default: false
         },
         leftText: {
@@ -19,6 +19,10 @@ export default {
         },
         rightText: {
             type: String
+        },
+        returnText: {
+            type: Boolean,
+            default: false
         }
     },
     data() {
@@ -27,11 +31,33 @@ export default {
         }
     },
     beforeMount() {
-        this.checked = this.value;
+        if(this.returnText) {
+            if(this.rightText === this.value) {
+                this.checked = true;
+            }
+        } else {
+            this.checked = this.value;
+        }
     },
     watch: {
         checked(val) {
-            this.$emit('input', val);
+            let data = val;
+            if(this.returnText) {
+                if(val) {
+                    data = this.rightText;
+                } else {
+                    data = this.leftText;
+                }
+            } 
+            
+            this.$emit('input', data);
+        }
+    },
+    methods: {
+        clickSwitch(val) {
+            if(this.checked !== val) {
+                this.$refs.switch.$el.click();
+            }
         }
     }
 }
@@ -54,5 +80,9 @@ export default {
             text-align: center;
         }
     }
+}
+
+.pointer {
+    cursor: pointer;
 }
 </style>

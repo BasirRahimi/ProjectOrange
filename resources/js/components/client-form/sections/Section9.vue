@@ -32,9 +32,10 @@
                 <switch-with-text 
                     v-model="trust.query2.answer"
                     left-text="The Trustee"
-                    right-text="The trustee’s solicitors or accountants"/>
+                    right-text="The trustee’s solicitors or accountants"
+                    return-text/>
             </div>
-            <b-collapse :visible="trust.query2.answer == true">
+            <b-collapse :visible="trust.query2.answer == 'The trustee’s solicitors or accountants'">
                 <honorific v-model="trust.query2.onTrue.honorific"/>
                 <base-input
                     label="Forename"
@@ -112,7 +113,7 @@ export default {
                 },
                 query2: {
                     query: 'Select dependent on which contact details you know:',
-                    answer: false,
+                    answer: 'The Trustee',
                     onTrue: {
                         honorific: '',
                         forename: '',

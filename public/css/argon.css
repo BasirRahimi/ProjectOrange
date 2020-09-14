@@ -23453,58 +23453,69 @@ readers do not read off random characters that represent icons */
   color: #6D726D !important;
 }
 
-.asset-table {
+.asset-table input,
+.asset-table textarea {
   width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
-}
-
-.asset-table thead th {
-  text-align: center;
-  padding: 0.5rem 0;
-  border: 1px solid #cad1d7;
-  border-left: 0;
-}
-
-.asset-table thead th:first-child {
-  border-left: 1px solid #cad1d7;
-  border-radius: 0.25rem 0 0 0.25rem;
-}
-
-.asset-table thead th:last-child {
-  border-radius: 0 0.25rem 0.25rem 0;
-}
-
-.asset-table tbody input,
-.asset-table tbody textarea {
   background-color: #F0F0F0;
   border: 0;
   padding: 0.5rem 0;
   text-align: center;
 }
 
-.asset-table tbody td {
-  padding: 2px 0px;
+.asset-table .cell-header {
+  text-align: center;
+  padding: 0.5rem 0;
+  border: 1px solid #cad1d7;
+  border-left: 0;
+  display: inline;
+  font-weight: 600;
 }
 
-.asset-table tbody td:first-child input {
+.asset-table .cell-header:first-child {
+  border-left: 1px solid #cad1d7;
   border-radius: 0.25rem 0 0 0.25rem;
 }
 
-.asset-table tbody td:last-child input {
+.asset-table .cell-header:last-child {
   border-radius: 0 0.25rem 0.25rem 0;
 }
 
-.asset-table tr.spacer {
-  height: 1rem;
+.asset-table .cell {
+  padding-left: 4px;
+  padding-right: 4px;
+  overflow: hidden;
 }
 
-.asset-table tr.spacer-sm {
-  height: 0.5rem;
+.asset-table .table-row {
+  position: relative;
+  margin-top: 8px;
 }
 
-.asset-table-edit textarea {
-  transition: none;
+.asset-table .table-row .row-settings {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  opacity: 0;
+  transition: opacity 0.25s;
+  z-index: -1;
+  text-align: right;
+}
+
+.asset-table .table-row .row-settings.active {
+  opacity: 1;
+  z-index: 1;
+}
+
+.accordion-asset-table .asset-toggle {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+textarea {
+  transition: none !important;
 }
 
 .welcome-container,

@@ -5,38 +5,37 @@
         </content-box>
 
         <content-box title="14.1 Assets in joint names">
-            <yes-no collapse label="Did the deceased own any assets in the joint names with another person?" class="mb-4">
-                <table class="asset-table mt-4">
-                    <thead>
-                        <tr>
-                            <th>Description of asset</th>
-                            <th>Name of other owner</th>
-                            <th>Total Value (£)</th>
-                            <th>Deceased’s share (%)</th>
-                        </tr>
-                        <tr class="spacer"></tr>
-                    </thead>
-                    <tbody>
-                        <template v-for="(row, i) in rows">
-                            <tr :key="i">
-                                <td>
-                                    <input type="text" v-model="row.desc">
-                                </td>
-                                <td>
-                                    <input type="text" v-model="row.otherOwner">
-                                </td>
-                                <td>
-                                    <input type="number" step=".01" min="0" v-model="row.value">
-                                </td>
-                                <td>
-                                    <input type="number" step=".01" min="0" max="100" v-model="row.share">
-                                </td>
-                            </tr>
-                            <tr class="spacer-sm" :key="`spacer${i}`"></tr>
-                        </template>
-                    </tbody>
-                </table>
-                <base-button type="default" outline class="ml-auto d-block" @click="addRow" v-if="rows.length < 20">Add</base-button>
+            <yes-no collapse :label="formData[0].query" v-model="formData[0].answer" class="mb-4">
+                <div class="asset-table mt-4">
+                    <div class="row no-gutters">
+                        <div class="col-3 cell-header">Description of asset</div>
+                        <div class="col-3 cell-header">Name of other owner</div>
+                        <div class="col-3 cell-header">Total Value (£)</div>
+                        <div class="col-3 cell-header">Deceased’s share (%)</div>
+                    </div>
+                    <div class="row no-gutters table-row" v-for="(row, i) in formData[0].onTrue" :key="i">
+                        <div class="row-settings" :class="{active: rowSettings}">
+                            <base-button type="danger" icon="fas fa-window-close" icon-only @click="removeRow(i)"></base-button>
+                        </div>
+                        <div class="col-3 cell">
+                            <input type="text" v-model="row.desc">
+                        </div>
+                        <div class="col-3 cell">
+                            <input type="text" v-model="row.otherOwner">
+                        </div>
+                        <div class="col-3 cell">
+                            <input type="number" step=".01" min="0" v-model="row.value">
+                        </div>
+                        <div class="col-3 cell">
+                            <input type="number" step=".01" min="0" max="100" v-model="row.share">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-right mt-2">
+                    <base-button type="default" outline :class="{active: rowSettings}" icon="fas fa-cog" icon-only @click="rowSettings = !rowSettings"></base-button>
+                    <base-button type="default" outline class="ml-auto" @click="addRow" v-if="formData[0].onTrue.length < 20">Add</base-button>
+                </div>
             </yes-no>
             
             <a v-b-toggle.collapse1 class="pointer">Tip<i class="icon-xs fas fa-chevron-down ml-2"></i></a>
@@ -46,7 +45,7 @@
         </content-box>
 
         <content-box class="p-0 text-right" :shadow="false" :whiteBg="false">
-            <button class="btn btn-primary shadow" @click="$router.push({name:'section16'})">Next section</button>
+            <button class="btn btn-primary shadow" @click="saveData('joint_held_assets');routerPush('section16');">Next section</button>
         </content-box>
     </div>
 </template>
@@ -59,18 +58,35 @@ export default {
     },
     data() {
         return {
-            rows: []
+            rowSettings: false,
+            formData: [
+                {
+                    query: 'Did the deceased own any assets in the joint names with another person?',
+                    answer: null,
+                    onTrue: []
+                }
+            ]
+        }
+    },
+    beforeMount() {
+        if(this.$store.state.client) {
+            if(this.$store.state.client.joint_held_assets) {
+                this.formData = JSON.parse(this.$store.state.client.joint_held_assets.the_data);
+            }
         }
     },
     methods: {
         addRow() {
-            if(this.rows.length >= 20) return;
-            this.rows.push({
+            if(this.formData[0].onTrue.length >= 20) return;
+            this.formData[0].onTrue.push({
                 desc: '',
                 otherOwner: '',
                 value: '',
                 share: ''
             });
+        },
+        removeRow(i) {
+            this.formData[0].onTrue.splice(i,1);
         }
     }
 }
