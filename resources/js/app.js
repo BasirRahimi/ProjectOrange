@@ -68,7 +68,10 @@ Vue.mixin({
             let data = {};
             data[sectionName] = JSON.stringify(this.formData);
             this.saveSectionData(data, this.$store.state.client.id).then(response=>{
-                console.log(response)
+                if(response[0]) {
+                    console.log(response)
+                    this.$store.commit('updateClient', response[1].data);
+                }
             });
         }
     }

@@ -3,7 +3,7 @@
         <div class="widget-title">TOOLS</div>
         <p class="note">Below are some useful tools for you to use to help you complete each section.</p>
         <div class="doc-list mb-3">
-            <a class="doc" href="#">
+            <a class="doc" href="#" @click.prevent="scrollToTop">
                 <span class="status"><i class="fas fa-chevron-up"></i></span>
                 <span class="doc-name">Jump to top</span>
             </a>
@@ -28,6 +28,13 @@ export default {
     data() {
         return {
             showReminderForm: false
+        }
+    },
+    methods: {
+        scrollToTop() {
+            $('html, body').animate({
+                scrollTop: 0
+            }, 1000);
         }
     }
 }

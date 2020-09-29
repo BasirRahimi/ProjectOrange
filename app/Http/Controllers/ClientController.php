@@ -70,7 +70,7 @@ class ClientController extends Controller
         $client->user_id = Auth::user()->id;
 
         if($client->save()) {
-            return response(json_encode($client), 200);
+            return response($client->toJson(), 200);
         } else {
             return response('client didn\'t save', 500);
         }
@@ -90,30 +90,7 @@ class ClientController extends Controller
         
         if($client->user_id == Auth::user()->id) {
             
-            // get client data models
-            $client->Executors;
-            $client->PowersOfAttorney;
-            $client->Will;
-            $client->LifetimeGifts;
-            $client->Gifts;
-            $client->TaxHavens;
-            $client->NilRateBand;
-            $client->BusinessInterests;
-            $client->ReceivedInheritance;
-            $client->Trusts;
-            $client->Pensions;
-            $client->LifeAssurance;
-            $client->JointHeldAssets;
-            $client->StocksShares;
-            $client->BanksSavings;
-            $client->PersonalBelongings;
-            $client->Assets;
-            $client->Liabilities;
-            $client->OtherInformation;
-
-            // by default the property name will be u_k_british_isles but I want uk_british_isles
-            $client->uk_british_isles = $client->UKBritishIsles;
-            unset($client->UKBritishIsles);
+            $client = $this->getClientData($client);
 
             return view('client-form', ['client' => $client]);      
         }
@@ -221,7 +198,7 @@ class ClientController extends Controller
         }
 
         if($client->save()) {
-            return response('success');
+            return response($this->getClientData($client));
         } else {
             return response('client didn\'t save', 500);
         }
@@ -252,5 +229,40 @@ class ClientController extends Controller
         $record->the_data = $data;
 
         $record->save();
+    }
+
+    private function getClientData($client) {
+        if(gettype($client) == 'integer') {
+            $client = Client::find($client);
+        }
+
+        if(!$client) return false;
+
+        // get client data models
+        $client->Executors;
+        $client->PowersOfAttorney;
+        $client->Will;
+        $client->LifetimeGifts;
+        $client->Gifts;
+        $client->TaxHavens;
+        $client->NilRateBand;
+        $client->BusinessInterests;
+        $client->ReceivedInheritance;
+        $client->Trusts;
+        $client->Pensions;
+        $client->LifeAssurance;
+        $client->JointHeldAssets;
+        $client->StocksShares;
+        $client->BanksSavings;
+        $client->PersonalBelongings;
+        $client->Assets;
+        $client->Liabilities;
+        $client->OtherInformation;
+
+        // by default the property name will be u_k_british_isles but I want uk_british_isles
+        $client->uk_british_isles = $client->UKBritishIsles;
+        unset($client->UKBritishIsles);
+
+        return $client;
     }
 }
