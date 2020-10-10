@@ -2,10 +2,12 @@
     <div class="container">
         <content-box title="Section 2 - Powers of Attorney and non-UK elements">
             <yes-no class="form-group" :label="formData[0].query" collapse v-model="formData[0].answer">
-                <base-file-upload class="mt-3" v-model="formData[0].document"></base-file-upload>
+                <client-file-upload class="mt-3" v-model="formData[0].document" @input="saveData"></client-file-upload>
+                <a v-if="formData[0].document" :href="formData[0].document.path">{{formData[0].document.filename}}</a>
             </yes-no>
             <yes-no class="form-group" :label="formData[1].query" collapse v-model="formData[1].answer">
-                <base-file-upload class="mt-3" v-model="formData[1].document"></base-file-upload>
+                <client-file-upload class="mt-3" v-model="formData[1].document" @input="saveData"></client-file-upload>
+                <a v-if="formData[1].document" :href="formData[1].document.path">{{formData[1].document.filename}}</a>
             </yes-no>
             
             <a v-b-toggle.collapse1 class="pointer">Tip<i class="icon-xs fas fa-chevron-down ml-2"></i></a>
@@ -146,34 +148,35 @@
         </content-box>
 
         <content-box class="p-0 text-right" :shadow="false" :whiteBg="false">
-            <button class="btn btn-primary shadow" @click="saveData('powers_of_attorney');routerPush('section4');">Next section</button>
+            <button class="btn btn-primary shadow" @click="saveData();routerPush('section4');">Next section</button>
         </content-box>
     </div>
 </template>
 
 <script>
-import BaseFileUpload from '../../base-components/BaseFileUpload.vue';
+import ClientFileUpload from '../../base-components/ClientFileUpload.vue';
 import YesNo from '../form-snippets/YesNo.vue';
 import ButtonGroup from '../form-snippets/ButtonGroup.vue';
 export default {
     components: {
-        BaseFileUpload,
+        ClientFileUpload,
         YesNo,
         ButtonGroup
     },
     data() {
         return {
+            section: 'powers_of_attorney',
             slide: 1,
             formData: [
                 {
                     query: 'Did the deceased make an ENDURING power of attorney?',
                     answer: null,
-                    document: ''
+                    document: null
                 },
                 {
                     query: 'Did the deceased make a LASTING power of attorney?',
                     answer: null,
-                    document: ''
+                    document: null
                 },
                 {
                     query: 'Was the deceased born in the UK and did they spend all of their life as a UK resident?',
@@ -269,7 +272,7 @@ export default {
                 this.slide--;
                 this.flashLabel();
             }
-        }
+        },
     }
 };
 </script>

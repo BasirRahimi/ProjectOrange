@@ -43,7 +43,8 @@
                 </div>
 
                 <label>If the company accountants have valued the shares in the business in line with HMRC guidelines then please provide a copy</label><br />
-                <base-file-upload v-model="formData[0].onTrue.valuation" />
+                <client-file-upload v-model="formData[0].onTrue.valuation" @input="saveData"/>
+                <a v-if="formData[0].onTrue.valuation" :href="formData[0].onTrue.valuation.path">{{formData[0].onTrue.valuation.filename}}</a>
             </yes-no>
 
             <a v-b-toggle.collapse1 class="pointer">Tip<i class="icon-xs fas fa-chevron-down ml-2"></i></a>
@@ -95,28 +96,30 @@
                 </div>
 
                 <label>If the company accountants have valued the shares in the business in line with HMRC guidelines then please provide a copy</label><br />
-                <base-file-upload v-model="formData[1].onTrue.valuation"/>
+                <client-file-upload v-model="formData[1].onTrue.valuation" @input="saveData"/>
+                <a v-if="formData[1].onTrue.valuation" :href="formData[1].onTrue.valuation.path">{{formData[1].onTrue.valuation.filename}}</a>
             </yes-no>
         </content-box>
 
         <content-box class="p-0 text-right" :shadow="false" :whiteBg="false">
-            <button class="btn btn-primary shadow" @click="saveData('business_interests'); routerPush('section11');">Next section</button>
+            <button class="btn btn-primary shadow" @click="saveData(); routerPush('section11');">Next section</button>
         </content-box>
     </div>
 </template>
 
 <script>
-import BaseFileUpload from '../../base-components/BaseFileUpload.vue';
+import ClientFileUpload from '../../base-components/ClientFileUpload.vue';
 import YesNo from '../form-snippets/YesNo.vue';
 import Honorific from '../form-snippets/Honorific.vue';
 export default {
     components: {
         YesNo,
         Honorific,
-        BaseFileUpload
+        ClientFileUpload
     },
     data() {
         return {
+            section: 'business_interests',
             formData: [
                 {
                     query: 'Did the deceased own shares in a private company?',
@@ -132,7 +135,7 @@ export default {
                             phone: '',
                             email: ''
                         },
-                        valuation: ''
+                        valuation: null
                     }
                 },
                 {
@@ -149,7 +152,7 @@ export default {
                             phone: '',
                             email: ''
                         },
-                        valuation: ''
+                        valuation: null
                     }
                 }
             ]

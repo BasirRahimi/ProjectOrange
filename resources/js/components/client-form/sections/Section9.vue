@@ -73,7 +73,7 @@
         </content-box>
 
         <content-box class="p-0 text-right" :shadow="false" :whiteBg="false">
-            <button class="btn btn-primary shadow" @click="saveData('nil_rate_band'); routerPush('section10');">Next section</button>
+            <button class="btn btn-primary shadow" @click="saveData(); routerPush('section10');">Next section</button>
         </content-box>
     </div>
 </template>
@@ -90,6 +90,7 @@ export default {
     },
     data() {
         return {
+            section: 'nil_rate_band',
             formData: []
         }
     },

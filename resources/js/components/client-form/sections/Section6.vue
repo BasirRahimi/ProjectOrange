@@ -12,7 +12,7 @@
         </content-box>
 
         <content-box class="p-0 text-right" :shadow="false" :whiteBg="false">
-            <button class="btn btn-primary shadow" @click="saveData('gifts'); routerPush('section7');">Next section</button>
+            <button class="btn btn-primary shadow" @click="saveData(); routerPush('section7');">Next section</button>
         </content-box>
   </div>
 </template>
@@ -25,6 +25,7 @@ export default {
     },
     data() {
         return {
+            section: 'gifts',
             formData: [
                 {
                     query: 'Did the deceased transfer any assets to any individual, trust, company or other organisation during their lifetime where the recipient did not take full possession of them?',

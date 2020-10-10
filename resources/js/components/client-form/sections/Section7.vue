@@ -22,7 +22,7 @@
         </content-box>
 
         <content-box class="p-0 text-right" :shadow="false" :whiteBg="false">
-            <button class="btn btn-primary shadow" @click="saveData('uk_british_isles'); routerPush('section8');">Next section</button>
+            <button class="btn btn-primary shadow" @click="saveData(); routerPush('section8');">Next section</button>
         </content-box>
     </div>
 </template>
@@ -35,6 +35,7 @@ export default {
     },
     data() {
         return {
+            section: 'uk_british_isles',
             formData: [
                 {
                     query: 'Did the deceased have any assets in Jersey?',

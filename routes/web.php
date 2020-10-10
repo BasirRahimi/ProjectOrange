@@ -37,6 +37,10 @@ Route::resource('clients', 'ClientController')->middleware('has.access');
 
 Route::get('/clients/{id}/{vue_capture?}', 'ClientController@show')->where('vue_capture', '[\/\w\.-]*')->middleware('has.access');
 
+Route::post('/clients/{id}/upload', 'ClientController@fileUpload')->middleware('has.access');
+
+Route::get('/storage/userUploads/{user_id}/clientFiles/{client_id}/{filename}', 'ClientController@requestFile')->middleware('has.access');
+
 Route::get('/phpinfo', function() {
     if(Auth::check()){
         return phpinfo();

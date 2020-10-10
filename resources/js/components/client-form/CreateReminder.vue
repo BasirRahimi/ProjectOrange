@@ -43,8 +43,7 @@ export default {
     },
     methods: {
         submitForm() {
-            this.subject = '';
-            this.notes = '';
+            console.log(this.subject,this.notes);
         }
     }
 }

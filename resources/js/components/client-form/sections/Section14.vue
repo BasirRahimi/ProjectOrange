@@ -22,7 +22,21 @@
                     v-model="formData[0].onTrue.value"></base-input>
                 
                 <label>If you have any relevant documents or correspondence to this, please upload copies</label><br/>
-                <base-file-upload class="mb-0"></base-file-upload>
+                <div class="row mb-2" v-for="(doc, i) in formData[0].onTrue.docs" :key="i">
+                    <div class="col-12 file-row">
+                        <client-file-upload class="mb-0" v-model="formData[0].onTrue.docs[i]" @input="saveData"></client-file-upload>
+                        <a :href="doc.path">{{doc.filename}}</a>
+                        <div class="file-rem-hidden d-inline-block ml-3">
+                            <base-button type="danger" icon="fas fa-window-close" icon-only @click="removeDoc(0,i)"></base-button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <client-file-upload class="mb-0" v-model="formData[0].onTrue.docs[formData[0].onTrue.docs.length]" @input="saveData" wipeAfterInput></client-file-upload>
+                    </div>
+                </div>
+
             </yes-no>
         </content-box>
 
@@ -45,7 +59,20 @@
                     v-model="formData[1].onTrue.value"></base-input>
                 
                 <label>If you have any relevant documents or correspondence to this, please upload copies</label><br/>
-                <base-file-upload class="mb-0"></base-file-upload>
+                <div class="row mb-2" v-for="(doc, i) in formData[1].onTrue.docs" :key="i">
+                    <div class="col-12 file-row">
+                        <client-file-upload class="mb-0" v-model="formData[1].onTrue.docs[i]" @input="saveData"></client-file-upload>
+                        <a :href="doc.path">{{doc.filename}}</a>
+                        <div class="file-rem-hidden d-inline-block ml-3">
+                            <base-button type="danger" icon="fas fa-window-close" icon-only @click="removeDoc(1,i)"></base-button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <client-file-upload class="mb-0" v-model="formData[1].onTrue.docs[formData[1].onTrue.docs.length]" @input="saveData" wipeAfterInput></client-file-upload>
+                    </div>
+                </div>
             </yes-no>
         </content-box>
         
@@ -68,7 +95,20 @@
                     v-model="formData[2].onTrue.value"></base-input>
                 
                 <label>If you have any relevant documents or correspondence to this, please upload copies</label><br/>
-                <base-file-upload class="mb-0"></base-file-upload>
+                <div class="row mb-2" v-for="(doc, i) in formData[2].onTrue.docs" :key="i">
+                    <div class="col-12 file-row">
+                        <client-file-upload class="mb-0" v-model="formData[2].onTrue.docs[i]" @input="saveData"></client-file-upload>
+                        <a :href="doc.path">{{doc.filename}}</a>
+                        <div class="file-rem-hidden d-inline-block ml-3">
+                            <base-button type="danger" icon="fas fa-window-close" icon-only @click="removeDoc(2,i)"></base-button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <client-file-upload class="mb-0" v-model="formData[2].onTrue.docs[formData[2].onTrue.docs.length]" @input="saveData" wipeAfterInput></client-file-upload>
+                    </div>
+                </div>
             </yes-no>
         </content-box>
         
@@ -91,7 +131,20 @@
                     v-model="formData[3].onTrue.value"></base-input>
                 
                 <label>If you have any relevant documents or correspondence to this, please upload copies</label><br/>
-                <base-file-upload class="mb-0"></base-file-upload>
+                <div class="row mb-2" v-for="(doc, i) in formData[3].onTrue.docs" :key="i">
+                    <div class="col-12 file-row">
+                        <client-file-upload class="mb-0" v-model="formData[3].onTrue.docs[i]" @input="saveData"></client-file-upload>
+                        <a :href="doc.path">{{doc.filename}}</a>
+                        <div class="file-rem-hidden d-inline-block ml-3">
+                            <base-button type="danger" icon="fas fa-window-close" icon-only @click="removeDoc(3,i)"></base-button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <client-file-upload class="mb-0" v-model="formData[3].onTrue.docs[formData[3].onTrue.docs.length]" @input="saveData" wipeAfterInput></client-file-upload>
+                    </div>
+                </div>
             </yes-no>
         </content-box>
         
@@ -114,26 +167,40 @@
                     v-model="formData[4].onTrue.value"></base-input>
                 
                 <label>If you have any relevant documents or correspondence to this, please upload copies</label><br/>
-                <base-file-upload class="mb-0"></base-file-upload>
+                <div class="row mb-2" v-for="(doc, i) in formData[4].onTrue.docs" :key="i">
+                    <div class="col-12 file-row">
+                        <client-file-upload class="mb-0" v-model="formData[4].onTrue.docs[i]" @input="saveData"></client-file-upload>
+                        <a :href="doc.path">{{doc.filename}}</a>
+                        <div class="file-rem-hidden d-inline-block ml-3">
+                            <base-button type="danger" icon="fas fa-window-close" icon-only @click="removeDoc(4,i)"></base-button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <client-file-upload class="mb-0" v-model="formData[4].onTrue.docs[formData[4].onTrue.docs.length]" @input="saveData" wipeAfterInput></client-file-upload>
+                    </div>
+                </div>
             </yes-no>
         </content-box>
 
         <content-box class="p-0 text-right" :shadow="false" :whiteBg="false">
-            <button class="btn btn-primary shadow" @click="saveData('life_assurance');routerPush('section15');">Next section</button>
+            <button class="btn btn-primary shadow" @click="saveData();routerPush('section15');">Next section</button>
         </content-box>
     </div>
 </template>
 
 <script>
-import BaseFileUpload from '../../base-components/BaseFileUpload';
+import ClientFileUpload from '../../base-components/ClientFileUpload';
 import YesNo from '../form-snippets/YesNo';
 export default {
     components: {
-        BaseFileUpload,
+        ClientFileUpload,
         YesNo
     },
     data() {
         return {
+            section: 'life_assurance',
             formData: [
                 {
                     query: 'Were any sums payable from insurance companies to the estate as a result of the death of the deceased?',
@@ -142,7 +209,7 @@ export default {
                         company_name: '',
                         policies: '',
                         value: '',
-                        documents: ''
+                        docs: []
                     }
                 },
                 {
@@ -152,7 +219,7 @@ export default {
                         company_name: '',
                         policies: '',
                         value: '',
-                        documents: ''
+                        docs: []
                     }
                 },
                 {
@@ -162,7 +229,7 @@ export default {
                         company_name: '',
                         policies: '',
                         value: '',
-                        documents: ''
+                        docs: []
                     }
                 },
                 {
@@ -172,7 +239,7 @@ export default {
                         company_name: '',
                         policies: '',
                         value: '',
-                        documents: ''
+                        docs: []
                     }
                 },
                 {
@@ -182,7 +249,7 @@ export default {
                         company_name: '',
                         policies: '',
                         value: '',
-                        documents: ''
+                        docs: []
                     }
                 },
             ]
@@ -195,6 +262,11 @@ export default {
             }
         }
     },
+    methods: {
+        removeDoc(i, j) {
+            this.formData[i].onTrue.docs.splice(j,1);
+        }
+    }
 }
 </script>
 

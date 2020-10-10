@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 use App\Client;
 use App\Client\Assets;
@@ -215,6 +216,35 @@ class ClientController extends Controller
         //
     }
 
+    /**
+     * Handle file upload
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function fileUpload(Request $request, $id) {
+        $client = Client::find($id);
+
+        if(!$client) {
+            return response('client not found', 400);
+        }
+
+        $path = '/userUploads/'.Auth::id().'/clientFiles/' . $id;
+        $file = $request->file('file');
+        $filename = $file->getClientOriginalName();
+        $file_path = $file->storeAs($path, $filename);
+        
+        return response()->json([
+            'path' => asset(Storage::url($file_path)),
+            'filename' => $filename
+        ]);
+    }
+
+    public function requestFile(Request $request, $user_id, $client_id, $file) {
+        if(Auth::id() != $user_id) abort(404);
+
+        return Storage::download('/userUploads/'.$user_id.'/clientFiles/'.$client_id.'/'.$file);
+    }
 
     private function insertOrUpdateClientData($client_id, $model, $data) {
         if(!$client_id || !$model || !$data) return;

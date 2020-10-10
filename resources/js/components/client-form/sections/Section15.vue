@@ -45,7 +45,7 @@
         </content-box>
 
         <content-box class="p-0 text-right" :shadow="false" :whiteBg="false">
-            <button class="btn btn-primary shadow" @click="saveData('joint_held_assets');routerPush('section16');">Next section</button>
+            <button class="btn btn-primary shadow" @click="saveData();routerPush('section16');">Next section</button>
         </content-box>
     </div>
 </template>
@@ -58,6 +58,7 @@ export default {
     },
     data() {
         return {
+            section: 'joint_held_assets',
             rowSettings: false,
             formData: [
                 {

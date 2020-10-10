@@ -76,7 +76,7 @@
 		</content-box>
 
         <content-box class="p-0 text-right" :shadow="false" :whiteBg="false">
-            <button class="btn btn-primary shadow" @click="saveData('pensions');routerPush('section14');">Next section</button>
+            <button class="btn btn-primary shadow" @click="saveData();routerPush('section14');">Next section</button>
         </content-box>
 	</div>
 </template>
@@ -91,6 +91,7 @@ export default {
     },
     data() {
         return {
+            section: 'pensions',
             formData:[
                 {
                     query: 'Other than small arrears of pension due to the date of death, did any payments under a pension scheme or personal pension policy continue after the death of the deceased?',

@@ -79,7 +79,8 @@
                                 v-model="doc.document_title"></base-input>
                         </div>
                         <div class="col">
-                            <base-file-upload v-model="doc.document" class="m-0" />
+                            <client-file-upload v-model="doc.document" @input="saveData" class="m-0" />
+                            <a v-if="doc.document" :href="doc.document.path">{{doc.document.filename}}</a>
                         </div>
                     </div>
 
@@ -103,7 +104,7 @@
         </content-box>
 
         <content-box class="p-0 text-right" :shadow="false" :whiteBg="false">
-            <button class="btn btn-primary shadow" @click="saveData('trusts');routerPush('section13');">Next section</button>
+            <button class="btn btn-primary shadow" @click="saveData();routerPush('section13');">Next section</button>
         </content-box>
     </div>
 </template>
@@ -112,18 +113,19 @@
 import Datepicker from 'vuejs-datepicker';
 import YesNo from '../form-snippets/YesNo';
 import Honorific from '../form-snippets/Honorific';
-import BaseFileUpload from '../../base-components/BaseFileUpload';
+import ClientFileUpload from '../../base-components/ClientFileUpload';
 import SwitchWithText from '../form-snippets/SwitchWithText';
 export default {
     components: {
         YesNo,
         Honorific,
         Datepicker,
-        BaseFileUpload,
+        ClientFileUpload,
         SwitchWithText
     },
     data() {
         return {
+            section: 'trusts',
             activeDoc: 0,
             formData: [
                 {
@@ -146,7 +148,7 @@ export default {
                         docs: [
                             {
                                 document_title: '',
-                                document: '',
+                                document: null,
                                 extra_details: ''
                             }
                         ]

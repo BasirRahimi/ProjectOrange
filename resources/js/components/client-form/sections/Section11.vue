@@ -42,7 +42,8 @@
                                     v-model="doc.document_title"></base-input>
                             </div>
                             <div class="col">
-                                <base-file-upload class="m-0" />
+                                <client-file-upload class="m-0" v-model="doc.document" @input="saveData"/>
+                                <a v-if="doc.document" :href="doc.document.path">{{doc.document.filename}}</a>
                             </div>
                         </div>
 
@@ -62,7 +63,7 @@
         </content-box>
 
         <content-box class="p-0 text-right" :shadow="false" :whiteBg="false">
-            <button class="btn btn-primary shadow" @click="saveData('received_inheritance');routerPush('section12');">Next section</button>
+            <button class="btn btn-primary shadow" @click="saveData();routerPush('section12');">Next section</button>
         </content-box>
     </div>
 </template>
@@ -71,16 +72,17 @@
 import Datepicker from 'vuejs-datepicker';
 import YesNo from '../form-snippets/YesNo';
 import Honorific from '../form-snippets/Honorific';
-import BaseFileUpload from '../../base-components/BaseFileUpload';
+import ClientFileUpload from '../../base-components/ClientFileUpload';
 export default {
     components: {
         YesNo,
         Honorific,
         Datepicker,
-        BaseFileUpload
+        ClientFileUpload
     },
     data() {
         return {
+            section: 'received_inheritance',
             activeDoc: 0,
             formData: [
                 {
@@ -97,7 +99,7 @@ export default {
                             onTrue: [
                                 {
                                     document_title: '',
-                                    document: '',
+                                    document: null,
                                     extra_details: ''
                                 }
                             ]

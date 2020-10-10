@@ -14,7 +14,7 @@
         </content-box>
 
         <content-box class="p-0 text-right" :shadow="false" :whiteBg="false">
-            <button class="btn btn-primary shadow" @click="saveData('tax_havens'); routerPush('section9');">Next section</button>
+            <button class="btn btn-primary shadow" @click="saveData(); routerPush('section9');">Next section</button>
         </content-box>
     </div>
 </template>
@@ -27,6 +27,7 @@ export default {
     },
     data() {
         return {
+            section: 'tax_havens',
             formData: [
                 {
                     query: 'Did the deceased have any assets in Switzerland?',

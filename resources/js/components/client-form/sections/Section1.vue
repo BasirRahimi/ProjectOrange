@@ -225,6 +225,7 @@ export default {
             }
             this.saveSectionData(data, this.$store.state.client.id).then(response=>{
                 console.log(response);
+                this.$store.commit('updateClient', response[1].data);
             });
         }
     }

@@ -64,9 +64,9 @@ Vue.mixin({
         routerPush(section) {
             this.$router.push({name:section});
         },
-        saveData(sectionName) {
+        saveData() {
             let data = {};
-            data[sectionName] = JSON.stringify(this.formData);
+            data[this.section] = JSON.stringify(this.formData);
             this.saveSectionData(data, this.$store.state.client.id).then(response=>{
                 if(response[0]) {
                     console.log(response)

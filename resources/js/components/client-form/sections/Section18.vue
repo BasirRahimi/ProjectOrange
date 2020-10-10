@@ -37,7 +37,7 @@
         </content-box>
 
         <content-box class="p-0 text-right" :shadow="false" :whiteBg="false">
-            <button class="btn btn-primary shadow" @click="saveData('personal_belongings');routerPush('section19');">Next section</button>
+            <button class="btn btn-primary shadow" @click="saveData();routerPush('section19');">Next section</button>
         </content-box>
   </div>
 </template>
@@ -50,6 +50,7 @@ export default {
     },
     data() {
         return {
+            section: 'personal_belongings',
             rowSettings: false,
             formData: [
                 {

@@ -15,7 +15,20 @@
             <textarea v-model="row.description" class="form-control form-group" placeholder="I do not have the policy information and have asked my IFA to send it to you seperately"></textarea>
 
             <label>Upload relevant documents:</label><br/>
-            <base-file-upload></base-file-upload>
+            <div class="row mb-2" v-for="(doc, j) in row.docs" :key="j">
+                    <div class="col-12 file-row">
+                        <client-file-upload class="mb-0" v-model="formData[i].docs[j]" @input="saveData"></client-file-upload>
+                        <a :href="doc.path">{{doc.filename}}</a>
+                        <div class="file-rem-hidden d-inline-block ml-3">
+                            <base-button type="danger" icon="fas fa-window-close" icon-only @click="removeDoc(i,j)"></base-button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <client-file-upload class="mb-0" v-model="formData[i].docs[formData[i].docs.length]" @input="saveData" wipeAfterInput></client-file-upload>
+                    </div>
+                </div>
         </content-box>
             
         <content-box class="p-0 text-center" :shadow="false" :whiteBg="false">
@@ -23,18 +36,19 @@
         </content-box>
 
         <content-box class="p-0 text-right" :shadow="false" :whiteBg="false">
-            <button class="btn btn-primary shadow" @click="saveData('other_information');routerPush('overview');">Review</button>
+            <button class="btn btn-primary shadow" @click="saveData();routerPush('overview');">Review</button>
         </content-box>
     </div>
 </template>
 
 <script>
-import BaseFileUpload from '../../base-components/BaseFileUpload.vue';
+import ClientFileUpload from '../../base-components/ClientFileUpload.vue';
 
 export default {
-    components: { BaseFileUpload },
+    components: { ClientFileUpload },
     data() {
         return {
+            section: 'other_information',
             formData: []
         }
     },
@@ -55,11 +69,14 @@ export default {
             this.formData.push({
                 subject:'',
                 description: '',
-                documents: []
+                docs: []
             });
         },
         removeInfo(i) {
             this.formData.splice(i,1);
+        },
+        removeDoc(i,j) {
+            this.formData[i].docs.splice(j,1);
         }
     }
 }

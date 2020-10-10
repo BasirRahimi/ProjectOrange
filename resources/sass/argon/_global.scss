@@ -201,3 +201,18 @@ textarea {
         justify-content: center;
     }
 }
+
+.file-row {
+    .file-rem-hidden {
+        @include media-breakpoint-up(sm) {
+            opacity: 0;
+        }
+        transition: .25s;
+    }
+
+    &:hover {
+        .file-rem-hidden {
+            opacity: 1;
+        }
+    }
+}
