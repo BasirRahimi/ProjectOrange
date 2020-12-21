@@ -41,8 +41,7 @@ class ClientController extends Controller
     {
         $user = Auth::user();
         if($user) {
-            $clients = Client::where('user_id', $user->id)->get();
-            return response($clients->toJson(), 200);
+            return response($user->clients->toJson(), 200);
         } else {
             return response('Unauthenticated request', 401);
         }
@@ -289,6 +288,7 @@ class ClientController extends Controller
         $client->Liabilities;
         $client->OtherInformation;
 
+        $client->Reminders;
         // by default the property name will be u_k_british_isles but I want uk_british_isles
         $client->uk_british_isles = $client->UKBritishIsles;
         unset($client->UKBritishIsles);

@@ -10,6 +10,7 @@ const store = new Vuex.Store({
     mutations: {
         updateClient(state, client) {
             state.client = client;
+
         }
     }
 });

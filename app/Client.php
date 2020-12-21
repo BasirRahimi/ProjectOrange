@@ -165,4 +165,11 @@ class Client extends Model
     {
         return $this->hasOne('App\Client\OtherInformation');
     }
+
+    /**
+     * Get reminders for this client
+     */
+    public function reminders() {
+        return $this->hasMany('App\Reminder');
+    }
 }

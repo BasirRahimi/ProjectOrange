@@ -47,4 +47,18 @@ class User extends Authenticatable
     {
         return '447467423199';
     }
+
+    /**
+     * Get the Clients belonging to the user
+     */
+    public function clients() {
+        return $this->hasMany('App\Client');
+    }
+
+    /**
+     * Get reminders for this user
+     */
+    public function reminders() {
+        return $this->hasMany('App\Reminder');
+    }
 }

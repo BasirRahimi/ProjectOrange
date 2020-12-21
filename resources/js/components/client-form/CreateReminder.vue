@@ -43,7 +43,13 @@ export default {
     },
     methods: {
         submitForm() {
-            console.log(this.subject,this.notes);
+            let _self = this;
+            axios.post(`/reminders/${_self.$store.state.client.id}`, {
+                subject: _self.subject,
+                notes: _self.notes
+            }).then(response=>{
+                console.log(response);
+            })
         }
     }
 }

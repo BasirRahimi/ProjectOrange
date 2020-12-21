@@ -41,6 +41,11 @@ Route::post('/clients/{id}/upload', 'ClientController@fileUpload')->middleware('
 
 Route::get('/storage/userUploads/{user_id}/clientFiles/{client_id}/{filename}', 'ClientController@requestFile')->middleware('has.access');
 
+
+//Reminders
+Route::post('/reminders/{client_id}', 'ReminderController@store')->middleware('has.access');
+
+// Temp Dev Routes
 Route::get('/phpinfo', function() {
     if(Auth::check()){
         return phpinfo();

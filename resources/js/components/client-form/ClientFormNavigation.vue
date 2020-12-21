@@ -275,6 +275,7 @@ export default {
   color: #BEC0BE;
   text-align: left;
   width: 100%;
+  outline: none;
 }
 
 .fa-chevron-right {
