@@ -93,15 +93,7 @@ class RegisterController extends Controller
 
         $user = User::where('email', '=', $data['email'])->first();
         if($user === null) {
-            $tempPassword = RandomPasswordGenerator::makeAlphaNumeric(16);
-            $user = User::create([
-                'email' => $data['email'],
-                'password' => Hash::make($tempPassword)
-            ]);
-            Mail::to($user->email)->send(new AccountCreatedWithTempPwdMail($tempPassword));
-            return response()->json([
-                'user' => $user
-            ]);
+            return response(200);
         } else {
             // this email already exists
             return response()->json([
@@ -138,10 +130,15 @@ class RegisterController extends Controller
 
     protected function saveUserDetails(Request $request) {
         $data = $request->all();
-        $user = User::find($data['user']['id']);
+        
+        $user = new User;
+
+        $user->email = $data['email'];
+        $user->password = Hash::make($data['password']);
+        $user->phone = $data['phone'];
+        $user->honorific = $data['title'];
         $user->name = $data['firstname'];
         $user->surname = $data['lastname'];
-        $user->honorific = $data['title'];
         $user->company = $data['company'];
 
         if($user->save()) {

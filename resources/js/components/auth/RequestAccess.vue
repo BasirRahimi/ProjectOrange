@@ -27,9 +27,30 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-12 col-md-8">
+                    <h3 class="display-2 my-4">Enter a password</h3>
+                    <form @submit.prevent="nextSlide">
+                        <base-input type="password" v-model="password" name="password" placeholder="password"></base-input>
+                        <base-input type="password" v-model="passwordMatch" :formGroup="false" name="passwordMatch" placeholder="confirm password"></base-input>
+                        <base-button 
+                            class="hover-outline shadow w-75 d-block mx-auto mt-3"
+                            :class="{'opacity-0': !passwordValid}"
+                            type="primary"
+                            :disabled="working || !passwordValid"
+                            nativeType="submit" 
+                            >Continue</base-button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-8">
                     <h3 class="display-2 m-0">Enter your phone number</h3>
                     <p class="text-gray-600 my-4">We will only use this number for account setup and for security purposes, such as two-factor authentication. We do not share personal information with third parties.</p>
-                    <form @submit.prevent="processMobile(false)" class="pt-2">
+                    <form @submit.prevent="nextSlide" class="pt-2">
                         <vue-tel-input
                             v-model="mobile"
                             placeholder="Your mobile number"
@@ -53,12 +74,12 @@
         </div>
     </div>
 
-    <div class="slide">
+    <!-- <div class="slide">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-12 col-md-8">
                     <h3 class="display-2 mb-3">Confirm your phone number</h3>
-                    <p class="display-2 m-0 text-gray-600">{{user.phone}}</p>
+                    <p class="display-2 m-0 text-gray-600" v-if="user">{{user.phone}}</p>
                     <p class="text-gray-600 my-4">We sent you an SMS code.<br>Didn't recieve your code? <a href="#" @click.prevent="prevSlide">Edit phone number</a></p>
                     <form @submit.prevent="validateCode" class="pt-2">
                         <base-input 
@@ -78,7 +99,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <div class="slide">
         <div class="container">
@@ -168,6 +189,8 @@ export default {
         return {
             working: false,
             email: '',
+            password: '',
+            passwordMatch: '',
             mobile: '',
             errors: [],
             user: {},
@@ -230,6 +253,9 @@ export default {
     computed: {
         emailValidity() {
             return this.validateEmail(this.email);
+        },
+        passwordValid() {
+            return this.password.length > 0 && this.password === this.passwordMatch;
         }
     },
     methods: {
@@ -273,7 +299,7 @@ export default {
                 })
             } else {
                 _self.working = true;
-                axios.post('/request-access/sms-verification', {phone: _self.mobile, user: _self.user}).then(response=>{
+                axios.post('/request-access/sms-verification', {phone: _self.mobile}).then(response=>{
                     _self.user = response.data.user;
                     _self.$refs.carousel.next();
                     _self.working = false;
@@ -304,10 +330,12 @@ export default {
             _self.working = true; 
 
             axios.post('/request-access/save-user-details', {
-                user: _self.user,
+                email: _self.email,
+                password: _self.password,
+                phone: _self.mobile.trim(),
+                title: _self.title,
                 firstname: _self.firstname,
                 lastname: _self.lastname,
-                title: _self.title,
                 company: _self.company
             }).then(response=>{
                 _self.$refs.carousel.next();
@@ -322,6 +350,9 @@ export default {
         },
         prevSlide() {
             this.$refs.carousel.prev();
+        },
+        nextSlide() {
+            this.$refs.carousel.next();
         },
         setSlide() {
             this.$refs.carousel.slickGoTo();
