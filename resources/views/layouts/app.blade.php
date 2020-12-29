@@ -64,6 +64,10 @@
                             </base-button>
                             
                             <a href="{{ route('dashboard') }}" class="dropdown-item">{{ __('Dashboard') }}</a>
+
+                            @if($user->role < 2)
+                                <a href="{{ route('grant-access') }}" class="dropdown-item">{{ __('Access control') }}</a>
+                            @endif
                             
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();

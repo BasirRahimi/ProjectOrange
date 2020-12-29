@@ -35,6 +35,7 @@ Vue.use(CollapsePlugin)
 
 Vue.component('client-form', require('./components/ClientForm.vue').default);
 Vue.component('user-dashboard', require('./components/UserDashboard.vue').default);
+Vue.component('grant-access', require('./components/GrantAccess.vue').default);
 Vue.component('app-header', require('./components/AppHeader.vue').default);
 Vue.component('content-box', require('./components/client-form/ContentBox.vue').default);
 Vue.component('request-access', require('./components/auth/RequestAccess.vue').default);

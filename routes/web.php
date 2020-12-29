@@ -31,19 +31,30 @@ Route::post('/request-access/save-user-details', 'Auth\RegisterController@saveUs
 
 Auth::routes(['verify' => true]);
 
-Route::get('/dashboard', 'HomeController@index')->name('dashboard')->middleware('has.access');
 
-Route::resource('clients', 'ClientController')->middleware('has.access');
+Route::middleware(['has.access'])->group(function() {
 
-Route::get('/clients/{id}/{vue_capture?}', 'ClientController@show')->where('vue_capture', '[\/\w\.-]*')->middleware('has.access');
+    Route::get('/dashboard', 'HomeController@index')->name('dashboard');
+    
+    Route::resource('clients', 'ClientController');
+    
+    Route::get('/clients/{id}/{vue_capture?}', 'ClientController@show')->where('vue_capture', '[\/\w\.-]*');
+    
+    Route::post('/clients/{id}/upload', 'ClientController@fileUpload');
+    
+    Route::get('/storage/userUploads/{user_id}/clientFiles/{client_id}/{filename}', 'ClientController@requestFile');
+    
+    
+    //Reminders
+    Route::post('/reminders/{client_id}', 'ReminderController@store');
+});
 
-Route::post('/clients/{id}/upload', 'ClientController@fileUpload')->middleware('has.access');
+Route::middleware(['is.admin'])->group(function() {
+    Route::get('/grant-access', 'AccessController@index')->name('grant-access');
+    Route::post('/grant-access/{user_id}', 'AccessController@grantAccess');
+    Route::post('/deny-access/{user_id}', 'AccessController@denyAccess');
+});
 
-Route::get('/storage/userUploads/{user_id}/clientFiles/{client_id}/{filename}', 'ClientController@requestFile')->middleware('has.access');
-
-
-//Reminders
-Route::post('/reminders/{client_id}', 'ReminderController@store')->middleware('has.access');
 
 // Temp Dev Routes
 Route::get('/phpinfo', function() {
