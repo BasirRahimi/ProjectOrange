@@ -9,16 +9,12 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
-use App\Helpers\RandomPasswordGenerator;
-use App\Mail\AccountCreatedWithTempPwdMail;
+use App\Mail\UserRequestedAccess;
 use App\Notifications\SMSMobileVerification;
 use Carbon\Carbon;
-use Dotenv\Result\Success;
-use Illuminate\Http\Response;
 
 class RegisterController extends Controller
 {
@@ -142,6 +138,10 @@ class RegisterController extends Controller
         $user->company = $data['company'];
 
         if($user->save()) {
+            $admins = User::where('role', 1)->get();
+            foreach ($admins as $admin) {
+                Mail::to($admin->email)->send(new UserRequestedAccess($user));
+            }
             return response(200);
         } else {
             return response()->json([

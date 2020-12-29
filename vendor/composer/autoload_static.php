@@ -682,6 +682,7 @@ class ComposerStaticInitc1aafa050ef53e2b73ce2c9efc7de713
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\Mail\\AccountCreatedWithTempPwdMail' => __DIR__ . '/../..' . '/app/Mail/AccountCreatedWithTempPwdMail.php',
+        'App\\Mail\\UserRequestedAccess' => __DIR__ . '/../..' . '/app/Mail/UserRequestedAccess.php',
         'App\\Notifications\\SMSMobileVerification' => __DIR__ . '/../..' . '/app/Notifications/SMSMobileVerification.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',

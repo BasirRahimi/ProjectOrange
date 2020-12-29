@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddHasAccessToUsersTable extends Migration
+class AddRoleColumnToUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class AddHasAccessToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->boolean('has_access')->default(0)->after('phone_verified_at');
+            $table->tinyInteger('role')->default(2)->after('phone_verified_at');
         });
     }
 
@@ -26,7 +26,7 @@ class AddHasAccessToUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('has_access');
+            $table->dropColumn('role');
         });
     }
 }

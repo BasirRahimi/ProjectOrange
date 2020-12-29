@@ -11,6 +11,13 @@ class User extends Authenticatable
     use Notifiable;
 
     /**
+     * Roles: 
+     * 0 - superadmin
+     * 1 - admin
+     * 2 - normal user
+     */
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
