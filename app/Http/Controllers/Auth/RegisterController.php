@@ -4,13 +4,14 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
-use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use App\Models\User;
 
 use App\Mail\UserRequestedAccess;
 use App\Notifications\SMSMobileVerification;
@@ -79,6 +80,7 @@ class RegisterController extends Controller
     }
 
     protected function showRequestAccess() {
+      Log::info('TESTING');
         return response()->view('auth/request-access', ['user' => Auth::user()]);
     }
 

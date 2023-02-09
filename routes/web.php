@@ -1,66 +1,64 @@
 <?php
+
+use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ReminderController;
+use App\Http\Controllers\AccessController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
 |
 | Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
 |
 */
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
-
 Route::get('/', function () {
-    if(Auth::check()){
-        return redirect('dashboard');
-    } else {
-        return response()->view('welcome');
-    }
+  if(Auth::check()){
+      return redirect('dashboard');
+  } else {
+      return response()->view('welcome');
+  }
 });
 
-Route::get('/request-access', 'Auth\RegisterController@showRequestAccess')->middleware('no.access');
+Route::get('/request-access', [RegisterController::class, 'showRequestAccess'])->middleware('no.access');
 
-Route::post('/request-access', 'Auth\RegisterController@requestAccess');
-Route::post('/request-access/sms-verification', 'Auth\RegisterController@smsVerification');
-Route::post('/request-access/phone-verified', 'Auth\RegisterController@phoneVerified');
-Route::post('/request-access/save-user-details', 'Auth\RegisterController@saveUserDetails');
+Route::post('/request-access', [RegisterController::class, 'requestAccess']);
+Route::post('/request-access/sms-verification', [RegisterController::class, 'smsVerification']);
+Route::post('/request-access/phone-verified', [RegisterController::class, 'phoneVerified']);
+Route::post('/request-access/save-user-details', [RegisterController::class, 'saveUserDetails']);
 
 Auth::routes(['verify' => true]);
 
 
 Route::middleware(['has.access'])->group(function() {
 
-    Route::get('/dashboard', 'HomeController@index')->name('dashboard');
-    
-    Route::resource('clients', 'ClientController');
-    
-    Route::get('/clients/{id}/{vue_capture?}', 'ClientController@show')->where('vue_capture', '[\/\w\.-]*');
-    
-    Route::post('/clients/{id}/upload', 'ClientController@fileUpload');
-    
-    Route::get('/storage/userUploads/{user_id}/clientFiles/{client_id}/{filename}', 'ClientController@requestFile');
-    
-    
-    //Reminders
-    Route::post('/reminders/{client_id}', 'ReminderController@store');
+  Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
+  
+  Route::resource('clients', ClientController::class);
+  
+  Route::get('/clients/{id}/{vue_capture?}', [ClientController::class, 'show'])->where('vue_capture', '[\/\w\.-]*');
+  
+  Route::post('/clients/{id}/upload', [ClientController::class, 'fileUpload']);
+  
+  Route::get('/storage/userUploads/{user_id}/clientFiles/{client_id}/{filename}', [ClientController::class, 'requestFile']);
+  
+  
+  //Reminders
+  Route::post('/reminders/{client_id}', [ReminderController::class, 'store']);
 });
 
 Route::middleware(['is.admin'])->group(function() {
-    Route::get('/grant-access', 'AccessController@index')->name('grant-access');
-    Route::post('/grant-access/{user_id}', 'AccessController@grantAccess');
-    Route::post('/deny-access/{user_id}', 'AccessController@denyAccess');
-});
-
-
-// Temp Dev Routes
-Route::get('/phpinfo', function() {
-    if(Auth::check()){
-        return phpinfo();
-    } else {
-        return redirect()->action('Auth\LoginController@showLoginForm');
-    }
+  Route::get('/grant-access', [AccessController::class, 'index'])->name('grant-access');
+  Route::post('/grant-access/{user_id}', [AccessController::class, 'grantAccess']);
+  Route::post('/deny-access/{user_id}', [AccessController::class, 'denyAccess']);
 });

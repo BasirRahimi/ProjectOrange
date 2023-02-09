@@ -1,5 +1,5 @@
 const mix = require('laravel-mix');
-
+const path = require('path');
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -10,28 +10,28 @@ const mix = require('laravel-mix');
  | file for the application as well as bundling up all the JS files.
  |
  */
-mix.js('resources/js/app.js', 'public/js')
-   .webpackConfig({
-      module: {
-            rules: [
-               {
-                  test: /\.jsx?$/,
-                  exclude: /node_modules(?!\/foundation-sites)|bower_components/,
-                  use: [
-                        {
-                           loader: 'babel-loader',
-                           options: Config.babel()
-                        }
-                  ]
-               }
-            ]
-      },
-      resolve: {
-         alias: {
-            '@': path.resolve('resources/sass'),
-            '@@': path.resolve('resources/js')
-         }
+mix.js('resources/js/app.js', 'public/js').vue()
+  .webpackConfig({
+    module: {
+      rules: [
+        {
+          test: /\.jsx?$/,
+          exclude: /node_modules(?!\/foundation-sites)|bower_components/,
+          use: [
+            {
+              loader: 'babel-loader',
+              options: Config.babel()
+            }
+          ]
+        }
+      ]
+    },
+    resolve: {
+      alias: {
+        '@': path.resolve('resources/sass'),
+        '@@': path.resolve('resources/js')
       }
-   })
-   .sass('resources/sass/argon/argon.scss', 'public/css')
-   .copy('node_modules/@fortawesome/fontawesome-free/webfonts', 'public/webfonts');
+    }
+  })
+  .sass('resources/sass/argon/argon.scss', 'public/css')
+  .copy('node_modules/@fortawesome/fontawesome-free/webfonts', 'public/webfonts');

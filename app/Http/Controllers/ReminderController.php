@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Reminder;
+use App\Models\Reminder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;

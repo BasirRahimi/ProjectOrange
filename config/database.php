@@ -2,20 +2,6 @@
 
 use Illuminate\Support\Str;
 
-if(isset($_SERVER['RDS_HOSTNAME'])) {
-    define('DB_HOSTNAME', $_SERVER['RDS_HOSTNAME']);
-    define('DB_USERNAME', $_SERVER['RDS_USERNAME']);
-    define('DB_PASSWORD', $_SERVER['RDS_PASSWORD']);
-    define('DB_NAME', $_SERVER['RDS_DB_NAME']);
-    define('DB_PORT', $_SERVER['RDS_PORT']);
-} else {
-    define('DB_HOSTNAME', env('DB_HOSTNAME'));
-    define('DB_USERNAME', env('DB_USERNAME'));
-    define('DB_PASSWORD', env('DB_PASSWORD'));
-    define('DB_NAME', env('DB_NAME'));
-    define('DB_PORT', env('DB_PORT'));
-}
-
 return [
 
     /*
@@ -60,11 +46,11 @@ return [
         'mysql' => [
             'driver' => 'mysql',
             'url' => env('DATABASE_URL'),
-            'host' => DB_HOSTNAME,
-            'port' => DB_PORT,
-            'database' => DB_NAME,
-            'username' => DB_USERNAME,
-            'password' => DB_PASSWORD,
+            'host' => env('DB_HOST', '127.0.0.1'),
+            'port' => env('DB_PORT', '3306'),
+            'database' => env('DB_DATABASE', 'forge'),
+            'username' => env('DB_USERNAME', 'forge'),
+            'password' => env('DB_PASSWORD', ''),
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
@@ -88,7 +74,7 @@ return [
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
-            'schema' => 'public',
+            'search_path' => 'public',
             'sslmode' => 'prefer',
         ],
 
@@ -103,6 +89,8 @@ return [
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
+            // 'encrypt' => env('DB_ENCRYPT', 'yes'),
+            // 'trust_server_certificate' => env('DB_TRUST_SERVER_CERTIFICATE', 'false'),
         ],
 
     ],
@@ -143,7 +131,8 @@ return [
         'default' => [
             'url' => env('REDIS_URL'),
             'host' => env('REDIS_HOST', '127.0.0.1'),
-            'password' => env('REDIS_PASSWORD', null),
+            'username' => env('REDIS_USERNAME'),
+            'password' => env('REDIS_PASSWORD'),
             'port' => env('REDIS_PORT', '6379'),
             'database' => env('REDIS_DB', '0'),
         ],
@@ -151,7 +140,8 @@ return [
         'cache' => [
             'url' => env('REDIS_URL'),
             'host' => env('REDIS_HOST', '127.0.0.1'),
-            'password' => env('REDIS_PASSWORD', null),
+            'username' => env('REDIS_USERNAME'),
+            'password' => env('REDIS_PASSWORD'),
             'port' => env('REDIS_PORT', '6379'),
             'database' => env('REDIS_CACHE_DB', '1'),
         ],

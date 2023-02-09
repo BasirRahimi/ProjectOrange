@@ -1,13 +1,6 @@
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
+import './bootstrap';
 
-
-require('./bootstrap');
-
-window.Vue = require('vue');
+import Vue from 'vue';
 
 import globalComponents from "./argon/plugins/globalComponents";
 import globalDirectives from "./argon/plugins/globalDirectives";
@@ -41,41 +34,41 @@ Vue.component('content-box', require('./components/client-form/ContentBox.vue').
 Vue.component('request-access', require('./components/auth/RequestAccess.vue').default);
 
 Vue.mixin({
-    methods: {
-        validateEmail(email) {
-            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email); 
-        },
-        async saveSectionData(data, clientId) {
-            let result;
-            await axios.patch(`/clients/${clientId}`, data).then(response=>{
-                result = [true, response];
-            }).catch(response=>{
-                result = [false, response];
-            })
-            return result;
-        },
-        flashLabel() {
-            let label = $('.flashit');
-            label.css('background-color', '#FB952C');
-            setTimeout(() => {
-                label.css('transition', 'all .9s');
-                label.css('background-color', 'transparent');
-            }, 100);
-        },
-        routerPush(section) {
-            this.$router.push({name:section});
-        },
-        saveData() {
-            let data = {};
-            data[this.section] = JSON.stringify(this.formData);
-            this.saveSectionData(data, this.$store.state.client.id).then(response=>{
-                if(response[0]) {
-                    console.log(response)
-                    this.$store.commit('updateClient', response[1].data);
-                }
-            });
+  methods: {
+    validateEmail(email) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    },
+    async saveSectionData(data, clientId) {
+      let result;
+      await axios.patch(`/clients/${clientId}`, data).then(response => {
+        result = [true, response];
+      }).catch(response => {
+        result = [false, response];
+      })
+      return result;
+    },
+    flashLabel() {
+      let label = $('.flashit');
+      label.css('background-color', '#FB952C');
+      setTimeout(() => {
+        label.css('transition', 'all .9s');
+        label.css('background-color', 'transparent');
+      }, 100);
+    },
+    routerPush(section) {
+      this.$router.push({ name: section });
+    },
+    saveData() {
+      let data = {};
+      data[this.section] = JSON.stringify(this.formData);
+      this.saveSectionData(data, this.$store.state.client.id).then(response => {
+        if (response[0]) {
+          console.log(response)
+          this.$store.commit('updateClient', response[1].data);
         }
+      });
     }
+  }
 });
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -87,7 +80,7 @@ import router from './router';
 import store from './vuex';
 
 const app = new Vue({
-    el: '#app',
-    router,
-    store
+  el: '#app',
+  router,
+  store
 });

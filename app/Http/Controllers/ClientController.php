@@ -8,27 +8,27 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
-use App\Client;
-use App\Client\Assets;
-use App\Client\BanksSavings;
-use App\Client\BusinessInterests;
-use App\Client\Executors;
-use App\Client\Gifts;
-use App\Client\JointHeldAssets;
-use App\Client\Liabilities;
-use App\Client\LifeAssurance;
-use App\Client\LifetimeGifts;
-use App\Client\NilRateBand;
-use App\Client\OtherInformation;
-use App\Client\Pensions;
-use App\Client\PersonalBelongings;
-use App\Client\PowersOfAttorney;
-use App\Client\ReceivedInheritance;
-use App\Client\StocksShares;
-use App\Client\TaxHavens;
-use App\Client\Trusts;
-use App\Client\UKBritishIsles;
-use App\Client\Will;
+use App\Models\Client;
+use App\Models\Client\Assets;
+use App\Models\Client\BanksSavings;
+use App\Models\Client\BusinessInterests;
+use App\Models\Client\Executors;
+use App\Models\Client\Gifts;
+use App\Models\Client\JointHeldAssets;
+use App\Models\Client\Liabilities;
+use App\Models\Client\LifeAssurance;
+use App\Models\Client\LifetimeGifts;
+use App\Models\Client\NilRateBand;
+use App\Models\Client\OtherInformation;
+use App\Models\Client\Pensions;
+use App\Models\Client\PersonalBelongings;
+use App\Models\Client\PowersOfAttorney;
+use App\Models\Client\ReceivedInheritance;
+use App\Models\Client\StocksShares;
+use App\Models\Client\TaxHavens;
+use App\Models\Client\Trusts;
+use App\Models\Client\UKBritishIsles;
+use App\Models\Client\Will;
 
 class ClientController extends Controller
 {

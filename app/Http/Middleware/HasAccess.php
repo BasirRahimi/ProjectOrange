@@ -17,14 +17,6 @@ class HasAccess
     public function handle($request, Closure $next)
     {
         $user = Auth::user();
-        if($user) {
-            if(!$user->has_access) {
-                return redirect('/request-access');
-            }
-        } else {
-            return redirect('/request-access');
-        }
-
-        return $next($request);
+        return $user && $user->has_access ? $next($request) : redirect('/request-access');
     }
 }

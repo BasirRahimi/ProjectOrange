@@ -1,4 +1,0 @@
-Make source bundle for deployment to AWS Elastic Beanstalk environment
-linux: zip ../laravel-v2-rds.zip -r * .[^.]* -x "vendor/*" -x "node_modules/*"
-
-windows (powershell): Get-ChildItem D:\Sites\ProjectOrange -Directory  | where { $_.Name -notin @("node_modules", "vendor")} | Compress-Archive -DestinationPath D:\Sites\ProjectOrange\deploy.zip -Update
