@@ -11,7 +11,7 @@
         <base-button tag="a" type="white" class="shadow request-access-button" href="/request-access">Request access</base-button>
     </div>
     <div class="right-section">
-        <img class="illustration" src="{{ asset('images/dashboard_illustration.svg') }}" alt="illustration">
+        <img class="illustration" src="{{ Vite::asset('resources/images/dashboard_illustration.svg') }}" alt="illustration">
     </div>
 </div>
 

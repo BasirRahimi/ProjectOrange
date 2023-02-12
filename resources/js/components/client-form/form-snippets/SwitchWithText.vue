@@ -1,8 +1,11 @@
 <template>
     <div class="switch-with-text">
-        <div class="switch-text-left pointer" :class="{'text-gray-500':checked}" @click="clickSwitch(false)">{{leftText}}</div>
-        <div class="the-switch"><base-switch coloured v-model="checked" class="m-0 mx-3 d-block" ref="switch"></base-switch></div>
-        <div class="switch-text-right pointer" :class="{'text-gray-500':!checked}" @click="clickSwitch(true)">{{rightText}}</div>
+        <div class="switch-text-left pointer" :class="{ 'text-gray-500': checked }" @click="clickSwitch(false)">
+            {{ leftText }}</div>
+        <div class="the-switch"><base-switch coloured v-model="checked" class="m-0 mx-3 d-block"
+                ref="switch"></base-switch></div>
+        <div class="switch-text-right pointer" :class="{ 'text-gray-500': !checked }" @click="clickSwitch(true)">
+            {{ rightText }}</div>
     </div>
 </template>
 
@@ -31,8 +34,8 @@ export default {
         }
     },
     beforeMount() {
-        if(this.returnText) {
-            if(this.rightText === this.value) {
+        if (this.returnText) {
+            if (this.rightText === this.value) {
                 this.checked = true;
             }
         } else {
@@ -42,20 +45,20 @@ export default {
     watch: {
         checked(val) {
             let data = val;
-            if(this.returnText) {
-                if(val) {
+            if (this.returnText) {
+                if (val) {
                     data = this.rightText;
                 } else {
                     data = this.leftText;
                 }
-            } 
-            
+            }
+
             this.$emit('input', data);
         }
     },
     methods: {
         clickSwitch(val) {
-            if(this.checked !== val) {
+            if (this.checked !== val) {
                 this.$refs.switch.$el.click();
             }
         }
@@ -64,17 +67,20 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '~@/argon/vue_sfc.scss';
+@import '@/argon/vue_sfc.scss';
 
 .switch-with-text {
     display: flex;
     align-items: center;
+
     @include media-breakpoint-down(xs) {
         flex-direction: column;
+
         .the-switch {
             transform: rotate(90deg);
             padding: 20px 0px;
         }
+
         .switch-text-left,
         .switch-text-right {
             text-align: center;

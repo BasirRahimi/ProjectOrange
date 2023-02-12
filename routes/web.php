@@ -23,11 +23,11 @@ use App\Http\Controllers\AccessController;
 */
 
 Route::get('/', function () {
-  if(Auth::check()){
-      return redirect('dashboard');
-  } else {
-      return response()->view('welcome');
-  }
+    if (Auth::check()) {
+        return redirect('dashboard');
+    } else {
+        return response()->view('welcome');
+    }
 });
 
 Route::get('/request-access', [RegisterController::class, 'showRequestAccess'])->middleware('no.access');
@@ -40,25 +40,25 @@ Route::post('/request-access/save-user-details', [RegisterController::class, 'sa
 Auth::routes(['verify' => true]);
 
 
-Route::middleware(['has.access'])->group(function() {
+Route::middleware(['has.access'])->group(function () {
 
-  Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
-  
-  Route::resource('clients', ClientController::class);
-  
-  Route::get('/clients/{id}/{vue_capture?}', [ClientController::class, 'show'])->where('vue_capture', '[\/\w\.-]*');
-  
-  Route::post('/clients/{id}/upload', [ClientController::class, 'fileUpload']);
-  
-  Route::get('/storage/userUploads/{user_id}/clientFiles/{client_id}/{filename}', [ClientController::class, 'requestFile']);
-  
-  
-  //Reminders
-  Route::post('/reminders/{client_id}', [ReminderController::class, 'store']);
+    Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
+
+    Route::resource('clients', ClientController::class);
+
+    Route::get('/clients/{id}/{vue_capture?}', [ClientController::class, 'show'])->where('vue_capture', '[\/\w\.-]*');
+
+    Route::post('/clients/{id}/upload', [ClientController::class, 'fileUpload']);
+
+    Route::get('/storage/userUploads/{user_id}/clientFiles/{client_id}/{filename}', [ClientController::class, 'requestFile']);
+
+
+    //Reminders
+    Route::post('/reminders/{client_id}', [ReminderController::class, 'store']);
 });
 
-Route::middleware(['is.admin'])->group(function() {
-  Route::get('/grant-access', [AccessController::class, 'index'])->name('grant-access');
-  Route::post('/grant-access/{user_id}', [AccessController::class, 'grantAccess']);
-  Route::post('/deny-access/{user_id}', [AccessController::class, 'denyAccess']);
+Route::middleware(['is.admin'])->group(function () {
+    Route::get('/grant-access', [AccessController::class, 'index'])->name('grant-access');
+    Route::post('/grant-access/{user_id}', [AccessController::class, 'grantAccess']);
+    Route::post('/deny-access/{user_id}', [AccessController::class, 'denyAccess']);
 });

@@ -12,8 +12,9 @@
                         <div class="col-3 cell-header">Value (£)</div>
                     </div>
                     <div class="row no-gutters table-row" v-for="(row, i) in formData[0].onTrue" :key="i">
-                        <div class="row-settings" :class="{active: rowSettings}">
-                            <base-button type="danger" icon="fas fa-window-close" icon-only @click="removeRow(i)"></base-button>
+                        <div class="row-settings" :class="{ active: rowSettings }">
+                            <base-button type="danger" icon="fas fa-window-close" icon-only
+                                @click="removeRow(i)"></base-button>
                         </div>
                         <div class="col-9 cell">
                             <input type="text" v-model="row.description">
@@ -25,25 +26,28 @@
                 </div>
 
                 <div class="text-right mt-2">
-                    <base-button type="default" outline :class="{active: rowSettings}" icon="fas fa-cog" icon-only @click="rowSettings = !rowSettings"></base-button>
-                    <base-button type="default" outline class="ml-auto" @click="addRow" v-if="formData[0].onTrue.length < 20">Add</base-button>
+                    <base-button type="default" outline :class="{ active: rowSettings }" icon="fas fa-cog" icon-only
+                        @click="rowSettings = !rowSettings"></base-button>
+                    <base-button type="default" outline class="ml-auto" @click="addRow"
+                        v-if="formData[0].onTrue.length < 20">Add</base-button>
                 </div>
             </yes-no>
 
             <a v-b-toggle.collapse1 class="pointer">Tip<i class="icon-xs fas fa-chevron-down ml-2"></i></a>
             <b-collapse visible id="collapse1">
-                <p class="text-gray-500 mt-2 mb-0">When you do not know the value of a liability at the time of completing this section, note ‘approximately’ by the figure</p>
+                <p class="text-gray-500 mt-2 mb-0">When you do not know the value of a liability at the time of
+                    completing this section, note ‘approximately’ by the figure</p>
             </b-collapse>
         </content-box>
 
         <content-box class="p-0 text-right" :shadow="false" :whiteBg="false">
-            <button class="btn btn-primary shadow" @click="saveData();routerPush('section21');">Next section</button>
+            <button class="btn btn-primary shadow" @click="saveData(); routerPush('section21');">Next section</button>
         </content-box>
-  </div>
+    </div>
 </template>
 
 <script>
-import YesNo from '../form-snippets/YesNo';
+import YesNo from '../form-snippets/YesNo.vue';
 export default {
     components: {
         YesNo
@@ -62,8 +66,8 @@ export default {
         }
     },
     beforeMount() {
-        if(this.$store.state.client) {
-            if(this.$store.state.client.liabilities) {
+        if (this.$store.state.client) {
+            if (this.$store.state.client.liabilities) {
                 this.formData = JSON.parse(this.$store.state.client.liabilities.the_data);
             }
         }
@@ -76,7 +80,7 @@ export default {
             });
         },
         removeRow(i) {
-            this.formData[0].onTrue.splice(i,1);
+            this.formData[0].onTrue.splice(i, 1);
         }
     }
 }

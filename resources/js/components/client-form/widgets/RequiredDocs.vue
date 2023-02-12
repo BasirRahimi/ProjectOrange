@@ -1,5 +1,5 @@
 <template>
-    <div class="required-docs shadow rounded" :class="{'inSideNav':inSideNav}">
+    <div class="required-docs shadow rounded" :class="{ 'inSideNav': inSideNav }">
         <div class="widget-title">SECTION ONE - REQUIRED DOCUMENTS</div>
         <p class="note">Below is a list of all required documents in this section, click on them to find them faster</p>
         <div class="doc-list">
@@ -27,16 +27,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~@/argon/vue_sfc.scss'; 
+@import '@/argon/vue_sfc.scss';
 
 .required-docs {
     padding: 24px;
     background-color: $white;
 }
+
 .widget-title {
     font-weight: 600;
     margin-bottom: 16px;
 }
+
 .note {
     color: $gray-500;
 }
@@ -47,6 +49,7 @@ export default {
         display: flex;
         align-items: center;
         text-decoration: none;
+
         .status {
             position: relative;
             display: flex;
@@ -61,11 +64,13 @@ export default {
             background-color: $white;
             transition: .25s;
             color: $body-color;
+
             .fas {
                 font-size: 10px;
             }
 
         }
+
         &:not(:last-child) {
             .status::after {
                 content: ' ';
@@ -79,33 +84,40 @@ export default {
                 transform: translateX(-50%);
             }
         }
+
         &.done {
             .doc-name {
                 color: #A7AAA7;
             }
         }
+
         &.active {
             color: $primary;
+
             .status {
                 background-color: $primary;
                 border-color: $primary;
                 color: $white;
             }
+
             .doc-name {
                 color: $primary;
             }
         }
+
         &:hover {
             .doc-name {
                 color: $primary;
                 text-decoration: none;
             }
+
             .status {
                 background-color: $primary;
                 border-color: $primary;
                 color: $white;
             }
         }
+
         .doc-name {
             transition: .25s;
             flex: 1 1 0%;
@@ -116,19 +128,25 @@ export default {
         }
     }
 }
+
 .inSideNav {
     padding: 0;
+
     .widget-title {
         display: none;
     }
+
     .note {
         display: none;
     }
+
     .doc-list {
         margin-left: 2.5em;
+
         .doc {
             display: block;
             position: relative;
+
             .status {
                 position: absolute;
                 width: 16px;
@@ -138,10 +156,12 @@ export default {
                 left: -2.1em;
                 line-height: 12px;
             }
+
             .doc-name {
                 display: inline-block;
                 vertical-align: middle;
             }
+
             &:not(:last-child) {
                 .status::after {
                     height: 30px;

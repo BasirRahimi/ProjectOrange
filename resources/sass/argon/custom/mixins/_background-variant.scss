@@ -1,8 +1,11 @@
+@use 'sass:color';
+
 // Contextual backgrounds
 @mixin bg-variant($parent, $color) {
     #{$parent} {
         background-color: $color !important;
     }
+
     a#{$parent},
     button#{$parent} {
         @include hover-focus {
@@ -13,6 +16,6 @@
 
 @mixin bg-gradient-variant($parent, $color) {
     #{$parent} {
-        background: linear-gradient(87deg, $color 0, adjust-hue($color, 25%) 100%) !important;
+        background: linear-gradient(87deg, $color 0, color.adjust($color, $hue: 90deg) 100%) !important;
     }
 }

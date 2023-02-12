@@ -1,20 +1,20 @@
 <template>
-  <div class="widgets-container" :class="{show: !hidden}">
-    <required-docs class="mb-4"></required-docs>
-    <tools></tools>
-  </div>
+    <div class="widgets-container" :class="{ show: !hidden }">
+        <required-docs class="mb-4"></required-docs>
+        <tools></tools>
+    </div>
 </template>
 
 <script>
 import clientEB from '@@/clientEB.js';
 
-import RequiredDocs from './widgets/RequiredDocs';
-import Tools from './widgets/Tools'
+import RequiredDocs from './widgets/RequiredDocs.vue';
+import Tools from './widgets/Tools.vue';
 export default {
     name: 'ClientFormWidgets',
     components: {
-      RequiredDocs,
-      Tools
+        RequiredDocs,
+        Tools
     },
     data() {
         return {
@@ -24,11 +24,11 @@ export default {
     mounted() {
         let _self = this;
 
-        if(window.innerWidth < 992) {
+        if (window.innerWidth < 992) {
             _self.hidden = true;
         }
 
-        clientEB.$on('toggle-widgets', ()=>{
+        clientEB.$on('toggle-widgets', () => {
             _self.hidden = !_self.hidden;
         });
     }
@@ -36,7 +36,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~@/argon/vue_sfc.scss'; 
+@import '@/argon/vue_sfc.scss';
 
 .widgets-container {
     position: fixed;
@@ -52,6 +52,7 @@ export default {
     overflow-y: scroll;
     z-index: 1;
     transition: .25s;
+
     &::-webkit-scrollbar {
         width: 0;
     }

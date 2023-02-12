@@ -15,11 +15,8 @@
     </script>
     @endif
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
-    <!-- Styles -->
-    <link href="{{ asset('css/argon.css') }}" rel="stylesheet">
+    <!-- Scripts / Styles -->
+    @vite(['resources/sass/argon/argon.scss', 'resources/js/app.js'])
 
     <!-- Fonts -->
     <link rel="stylesheet" href="https://use.typekit.net/lxw2fcr.css">

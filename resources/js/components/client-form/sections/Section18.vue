@@ -12,8 +12,9 @@
                         <div class="col-3 cell-header">Value (£)</div>
                     </div>
                     <div class="row no-gutters table-row" v-for="(row, i) in formData[0].onTrue" :key="i">
-                        <div class="row-settings" :class="{active: rowSettings}">
-                            <base-button type="danger" icon="fas fa-window-close" icon-only @click="removeRow(i)"></base-button>
+                        <div class="row-settings" :class="{ active: rowSettings }">
+                            <base-button type="danger" icon="fas fa-window-close" icon-only
+                                @click="removeRow(i)"></base-button>
                         </div>
                         <div class="col-9 cell">
                             <input type="text" v-model="row.description">
@@ -25,25 +26,31 @@
                 </div>
 
                 <div class="text-right mt-2">
-                    <base-button type="default" outline :class="{active: rowSettings}" icon="fas fa-cog" icon-only @click="rowSettings = !rowSettings"></base-button>
-                    <base-button type="default" outline class="ml-auto" @click="addRow" v-if="formData[0].onTrue.length < 20">Add</base-button>
+                    <base-button type="default" outline :class="{ active: rowSettings }" icon="fas fa-cog" icon-only
+                        @click="rowSettings = !rowSettings"></base-button>
+                    <base-button type="default" outline class="ml-auto" @click="addRow"
+                        v-if="formData[0].onTrue.length < 20">Add</base-button>
                 </div>
             </yes-no>
 
             <a v-b-toggle.collapse1 class="pointer">Tip<i class="icon-xs fas fa-chevron-down ml-2"></i></a>
             <b-collapse visible id="collapse1">
-                <p class="text-gray-500 mt-2 mb-0">If the deceased was, for example, married and acquired furniture and household effects with their spouse, it could be the case that such items were owned jointly and so you should include jointly owned possessions in section 14. Unless the total value of the Chattels owned by the deceased is likely to exceed £1,000 there is usually no need to obtain a formal valuation. Include below Items such as cars, jewellery, etc.</p>
+                <p class="text-gray-500 mt-2 mb-0">If the deceased was, for example, married and acquired furniture and
+                    household effects with their spouse, it could be the case that such items were owned jointly and so
+                    you should include jointly owned possessions in section 14. Unless the total value of the Chattels
+                    owned by the deceased is likely to exceed £1,000 there is usually no need to obtain a formal
+                    valuation. Include below Items such as cars, jewellery, etc.</p>
             </b-collapse>
         </content-box>
 
         <content-box class="p-0 text-right" :shadow="false" :whiteBg="false">
-            <button class="btn btn-primary shadow" @click="saveData();routerPush('section19');">Next section</button>
+            <button class="btn btn-primary shadow" @click="saveData(); routerPush('section19');">Next section</button>
         </content-box>
-  </div>
+    </div>
 </template>
 
 <script>
-import YesNo from '../form-snippets/YesNo';
+import YesNo from '../form-snippets/YesNo.vue';
 export default {
     components: {
         YesNo
@@ -62,8 +69,8 @@ export default {
         }
     },
     beforeMount() {
-        if(this.$store.state.client) {
-            if(this.$store.state.client.personal_belongings) {
+        if (this.$store.state.client) {
+            if (this.$store.state.client.personal_belongings) {
                 this.formData = JSON.parse(this.$store.state.client.personal_belongings.the_data);
             }
         }
@@ -76,7 +83,7 @@ export default {
             });
         },
         removeRow(i) {
-            this.formData[0].onTrue.splice(i,1);
+            this.formData[0].onTrue.splice(i, 1);
         }
     }
 }

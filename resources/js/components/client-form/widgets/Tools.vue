@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import CreateReminder from '../CreateReminder';
+import CreateReminder from '../CreateReminder.vue';
 export default {
     name: 'Tools',
     components: {
@@ -41,19 +41,22 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~@/argon/vue_sfc.scss'; 
+@import '@/argon/vue_sfc.scss';
 
 .navigation {
     padding: 24px;
     background-color: $white;
 }
+
 .widget-title {
     font-weight: 600;
     margin-bottom: 16px;
 }
+
 .note {
     color: $gray-500;
 }
+
 .doc-list {
     .doc {
         padding: 8px 0;
@@ -76,24 +79,28 @@ export default {
             width: 24px;
             height: 24px;
             transition: .25s;
+
             .fas {
                 font-size: 10px;
                 color: $body-color;
             }
         }
-        
+
         &:hover {
             color: $primary;
             text-decoration: none;
+
             .status {
                 background-color: $primary;
                 border-color: $primary;
                 color: $white;
+
                 .fas {
                     color: $white;
                 }
             }
         }
+
         .doc-name {
             flex-grow: 1;
         }

@@ -1,7 +1,7 @@
 <template>
-  <div class="container">
-      <content-box title="Section 16 - Bank and saving accounts (in the sole name of the deceased)">
-			<p class="text-gray-500 m-0">HMRC requires information about all assets held by the deceased.</p>
+    <div class="container">
+        <content-box title="Section 16 - Bank and saving accounts (in the sole name of the deceased)">
+            <p class="text-gray-500 m-0">HMRC requires information about all assets held by the deceased.</p>
         </content-box>
 
         <content-box title="16.1 Banking">
@@ -14,8 +14,9 @@
                         <div class="col-3 cell-header">Value at D.O.D (£)</div>
                     </div>
                     <div class="row no-gutters table-row" v-for="(row, i) in formData[0].onTrue" :key="i">
-                        <div class="row-settings" :class="{active: rowSettings}">
-                            <base-button type="danger" icon="fas fa-window-close" icon-only @click="removeRow(i)"></base-button>
+                        <div class="row-settings" :class="{ active: rowSettings }">
+                            <base-button type="danger" icon="fas fa-window-close" icon-only
+                                @click="removeRow(i)"></base-button>
                         </div>
                         <div class="col-3 cell">
                             <input type="text" v-model="row.institution">
@@ -33,20 +34,22 @@
                 </div>
 
                 <div class="text-right mt-2">
-                    <base-button type="default" outline :class="{active: rowSettings}" icon="fas fa-cog" icon-only @click="rowSettings = !rowSettings"></base-button>
-                    <base-button type="default" outline class="ml-auto" @click="addRow" v-if="formData[0].onTrue.length < 20">Add</base-button>
+                    <base-button type="default" outline :class="{ active: rowSettings }" icon="fas fa-cog" icon-only
+                        @click="rowSettings = !rowSettings"></base-button>
+                    <base-button type="default" outline class="ml-auto" @click="addRow"
+                        v-if="formData[0].onTrue.length < 20">Add</base-button>
                 </div>
             </yes-no>
         </content-box>
 
         <content-box class="p-0 text-right" :shadow="false" :whiteBg="false">
-            <button class="btn btn-primary shadow" @click="saveData();routerPush('section18');">Next section</button>
+            <button class="btn btn-primary shadow" @click="saveData(); routerPush('section18');">Next section</button>
         </content-box>
-  </div>
+    </div>
 </template>
 
 <script>
-import YesNo from '../form-snippets/YesNo';
+import YesNo from '../form-snippets/YesNo.vue';
 export default {
     components: {
         YesNo
@@ -65,8 +68,8 @@ export default {
         }
     },
     beforeMount() {
-        if(this.$store.state.client) {
-            if(this.$store.state.client.banks_savings) {
+        if (this.$store.state.client) {
+            if (this.$store.state.client.banks_savings) {
                 this.formData = JSON.parse(this.$store.state.client.banks_savings.the_data);
             }
         }
@@ -81,7 +84,7 @@ export default {
             });
         },
         removeRow(i) {
-            this.formData[0].onTrue.splice(i,1);
+            this.formData[0].onTrue.splice(i, 1);
         }
     }
 }

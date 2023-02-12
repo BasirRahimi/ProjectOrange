@@ -79,18 +79,19 @@ class RegisterController extends Controller
         ]);
     }
 
-    protected function showRequestAccess() {
-      Log::info('TESTING');
+    protected function showRequestAccess()
+    {
         return response()->view('auth/request-access', ['user' => Auth::user()]);
     }
 
-    protected function requestAccess(Request $request) {
+    protected function requestAccess(Request $request)
+    {
         $data = $request->validate([
             'email' => 'required|email:rfc,dns'
         ]);
 
         $user = User::where('email', '=', $data['email'])->first();
-        if($user === null) {
+        if ($user === null) {
             return response(200);
         } else {
             // this email already exists
@@ -100,10 +101,11 @@ class RegisterController extends Controller
         }
     }
 
-    protected function smsVerification(Request $request) {
+    protected function smsVerification(Request $request)
+    {
         $data = $request->all();
         $user = User::find($data['user']['id']);
-        if(array_key_exists('phone', $data)) {
+        if (array_key_exists('phone', $data)) {
             $user->phone = $data['phone'];
             $user->save();
         }
@@ -115,7 +117,8 @@ class RegisterController extends Controller
         ]);
     }
 
-    protected function phoneVerified(Request $request) {
+    protected function phoneVerified(Request $request)
+    {
         $data = $request->all();
         $user = User::find($data['user']['id']);
         $user->phone_verified_at = Carbon::now()->toDateTimeString();
@@ -126,9 +129,10 @@ class RegisterController extends Controller
         ]);
     }
 
-    protected function saveUserDetails(Request $request) {
+    protected function saveUserDetails(Request $request)
+    {
         $data = $request->all();
-        
+
         $user = new User;
 
         $user->email = $data['email'];
@@ -139,7 +143,7 @@ class RegisterController extends Controller
         $user->surname = $data['lastname'];
         $user->company = $data['company'];
 
-        if($user->save()) {
+        if ($user->save()) {
             $admins = User::where('role', 1)->get();
             foreach ($admins as $admin) {
                 Mail::to($admin->email)->send(new UserRequestedAccess($user));
@@ -148,7 +152,7 @@ class RegisterController extends Controller
         } else {
             return response()->json([
                 'error' => 'User did not save'
-            ],500);
+            ], 500);
         }
     }
 }

@@ -24,7 +24,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~@/argon/vue_sfc.scss'; 
+@import '@/argon/vue_sfc.scss';
 
 .client-form-utility-bar {
     background-color: $body-bg;
