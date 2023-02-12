@@ -1,69 +1,67 @@
 <template>
-    <VueSlickCarousel v-bind="slickSettings" ref="carousel">
-
-        <div class="slide">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-12 col-md-8">
-                        <h3 class="display-2 m-0">Welcome. Request access here.</h3>
-                        <p class="text-gray-600 my-4">We need your work email address to save your data and to continue
-                            registering your account with us.</p>
-                        <form @submit.prevent="processEmail">
-                            <base-input placeholder="Your work email address" type="email" v-model="email"
-                                :formGroup="false" name="email"></base-input>
-                            <p class="text-danger text-center m-0" v-for="(error, i) in errors" :key="i"><small
-                                    v-html="error" /></p>
-                            <base-button class="hover-outline shadow w-75 d-block mx-auto mt-3"
-                                :class="{ 'opacity-0': !emailValidity }" type="primary"
-                                :disabled="working || !emailValidity" nativeType="submit">Continue</base-button>
-                        </form>
-                    </div>
+    <div class="slide">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-8">
+                    <h3 class="display-2 m-0">Welcome. Request access here.</h3>
+                    <p class="text-gray-600 my-4">We need your work email address to save your data and to continue
+                        registering your account with us.</p>
+                    <form @submit.prevent="processEmail">
+                        <base-input placeholder="Your work email address" type="email" v-model="email"
+                            :formGroup="false" name="email"></base-input>
+                        <p class="text-danger text-center m-0" v-for="(error, i) in errors" :key="i"><small
+                                v-html="error" /></p>
+                        <base-button class="hover-outline shadow w-75 d-block mx-auto mt-3"
+                            :class="{ 'opacity-0': !emailValidity }" type="primary"
+                            :disabled="working || !emailValidity" nativeType="submit">Continue</base-button>
+                    </form>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="slide">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-12 col-md-8">
-                        <h3 class="display-2 my-4">Enter a password</h3>
-                        <form @submit.prevent="nextSlide">
-                            <base-input type="password" v-model="password" name="password"
-                                placeholder="password"></base-input>
-                            <base-input type="password" v-model="passwordMatch" :formGroup="false" name="passwordMatch"
-                                placeholder="confirm password"></base-input>
-                            <base-button class="hover-outline shadow w-75 d-block mx-auto mt-3"
-                                :class="{ 'opacity-0': !passwordValid }" type="primary"
-                                :disabled="working || !passwordValid" nativeType="submit">Continue</base-button>
-                        </form>
-                    </div>
+    <div class="slide">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-8">
+                    <h3 class="display-2 my-4">Enter a password</h3>
+                    <form @submit.prevent="nextSlide">
+                        <base-input type="password" v-model="password" name="password"
+                            placeholder="password"></base-input>
+                        <base-input type="password" v-model="passwordMatch" :formGroup="false" name="passwordMatch"
+                            placeholder="confirm password"></base-input>
+                        <base-button class="hover-outline shadow w-75 d-block mx-auto mt-3"
+                            :class="{ 'opacity-0': !passwordValid }" type="primary"
+                            :disabled="working || !passwordValid" nativeType="submit">Continue</base-button>
+                    </form>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="slide">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-12 col-md-8">
-                        <h3 class="display-2 m-0">Enter your phone number</h3>
-                        <p class="text-gray-600 my-4">We will only use this number for account setup and for security
-                            purposes, such as two-factor authentication. We do not share personal information with third
-                            parties.</p>
-                        <form @submit.prevent="nextSlide" class="pt-2">
-                            <vue-tel-input v-model="mobile" placeholder="Your mobile number" required
-                                :preferredCountries="['GB']" wrapperClasses="d-flex" inputClasses="form-control"
-                                @validate="mobileValidated"></vue-tel-input>
+    <div class="slide">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-8">
+                    <h3 class="display-2 m-0">Enter your phone number</h3>
+                    <p class="text-gray-600 my-4">We will only use this number for account setup and for security
+                        purposes, such as two-factor authentication. We do not share personal information with third
+                        parties.</p>
+                    <form @submit.prevent="nextSlide" class="pt-2">
+                        <vue-tel-input v-model="mobile" placeholder="Your mobile number" required
+                            :preferredCountries="['GB']" wrapperClasses="d-flex" inputClasses="form-control"
+                            @validate="mobileValidated"></vue-tel-input>
 
-                            <base-button class="hover-outline shadow w-75 d-block mx-auto mt-3"
-                                :class="{ 'opacity-0': !mobileIsValid }" :disabled="working || !mobileIsValid"
-                                type="primary" nativeType="submit">Continue</base-button>
-                        </form>
-                    </div>
+                        <base-button class="hover-outline shadow w-75 d-block mx-auto mt-3"
+                            :class="{ 'opacity-0': !mobileIsValid }" :disabled="working || !mobileIsValid"
+                            type="primary" nativeType="submit">Continue</base-button>
+                    </form>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- <div class="slide">
+    <!-- <div class="slide">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-12 col-md-8">
@@ -90,82 +88,76 @@
         </div>
     </div> -->
 
-        <div class="slide">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-12 col-md-8">
-                        <h3 class="display-2 mb-3">Personal details</h3>
-                        <p class="text-gray-600 my-4">Tell us a little bit more about you so we know who we're talking
-                            to.</p>
-                        <form @submit.prevent="saveUserDetails" class="pt-2">
-                            <div class="d-flex align-items-center">
-                                <div class="form-group mr-3">
-                                    <select v-model="title" class="form-control">
-                                        <option value="Mr." selected>Mr.</option>
-                                        <option value="Mrs.">Mrs.</option>
-                                        <option value="Miss">Miss</option>
-                                        <option value="Ms">Ms</option>
-                                    </select>
-                                </div>
-                                <base-input class="flex-grow-1" v-model="firstname"
-                                    placeholder="First name"></base-input>
+    <div class="slide">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-8">
+                    <h3 class="display-2 mb-3">Personal details</h3>
+                    <p class="text-gray-600 my-4">Tell us a little bit more about you so we know who we're talking
+                        to.</p>
+                    <form @submit.prevent="saveUserDetails" class="pt-2">
+                        <div class="d-flex align-items-center">
+                            <div class="form-group mr-3">
+                                <select v-model="title" class="form-control">
+                                    <option value="Mr." selected>Mr.</option>
+                                    <option value="Mrs.">Mrs.</option>
+                                    <option value="Miss">Miss</option>
+                                    <option value="Ms">Ms</option>
+                                </select>
                             </div>
+                            <base-input class="flex-grow-1" v-model="firstname" placeholder="First name"></base-input>
+                        </div>
 
-                            <div class="row">
-                                <div class="col-12">
-                                    <base-input v-model="lastname" placeholder="Last name"></base-input>
-                                </div>
-                                <div class="col-12">
-                                    <base-input v-model="company" placeholder="Company (optional)"></base-input>
-                                </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <base-input v-model="lastname" placeholder="Last name"></base-input>
                             </div>
+                            <div class="col-12">
+                                <base-input v-model="company" placeholder="Company (optional)"></base-input>
+                            </div>
+                        </div>
 
-                            <base-button class="hover-outline shadow w-75 d-block mx-auto mt-3"
-                                :class="{ 'opacity-0': firstname.length == 0 || lastname.length == 0 }"
-                                :disabled="working || firstname.length == 0 || lastname.length == 0" type="primary"
-                                nativeType="submit">Submit</base-button>
-                        </form>
-                    </div>
+                        <base-button class="hover-outline shadow w-75 d-block mx-auto mt-3"
+                            :class="{ 'opacity-0': firstname.length == 0 || lastname.length == 0 }"
+                            :disabled="working || firstname.length == 0 || lastname.length == 0" type="primary"
+                            nativeType="submit">Submit</base-button>
+                    </form>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="slide">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-12 col-md-6 d-flex flex-column justify-content-center">
-                        <h3 class="display-2 mb-3">Thank you.</h3>
-                        <p class="text-gray-600">
-                            Information received
-                        </p>
-                        <p class="text-gray-600">
-                            We've received your request for access to Project Orange. We're reviewing your details and
-                            will notify you shortly whether we approve your access or not.
-                        </p>
-                        <p class="text-gray-600">
-                            Keep an eye on your email's. We'll follow up shortly.
-                        </p>
-                        <p class="text-gray-600">Need some help? <a href="#">Contact us</a></p>
-                    </div>
-                    <div class="col-12 col-md-6">
-                        <img :src="emailIllustration" alt="email illustration">
-                    </div>
+    <div class="slide">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-6 d-flex flex-column justify-content-center">
+                    <h3 class="display-2 mb-3">Thank you.</h3>
+                    <p class="text-gray-600">
+                        Information received
+                    </p>
+                    <p class="text-gray-600">
+                        We've received your request for access to Project Orange. We're reviewing your details and
+                        will notify you shortly whether we approve your access or not.
+                    </p>
+                    <p class="text-gray-600">
+                        Keep an eye on your email's. We'll follow up shortly.
+                    </p>
+                    <p class="text-gray-600">Need some help? <a href="#">Contact us</a></p>
+                </div>
+                <div class="col-12 col-md-6">
+                    <img :src="emailIllustration" alt="email illustration">
                 </div>
             </div>
         </div>
-
-    </VueSlickCarousel>
+    </div>
 </template>
 
 <script>
 import { VueTelInput } from 'vue-tel-input';
-import VueSlickCarousel from 'vue-slick-carousel';
-import 'vue-slick-carousel/dist/vue-slick-carousel.css';
 import emailIllustration from '../../../images/email_illustration.svg'
 export default {
-    name: 'request-access',
+    name: 'RequestAccess',
     components: {
-        VueSlickCarousel,
         VueTelInput
     },
     props: {

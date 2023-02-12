@@ -90,7 +90,8 @@
                 { 'justify-content-end': formData.length == 4 }
             ]">
                 <a href="#" @click.prevent="addExecutor" v-show="formData.length < 4">Add executor +</a>
-                <button class="btn btn-primary shadow" @click="saveData(); routerPush('section3');">Next section</button>
+                <button class="btn btn-primary shadow" @click="saveData(); routerPush('section3');">Next
+                    section</button>
             </div>
         </content-box>
     </div>
@@ -160,7 +161,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '@/argon/vue_sfc.scss';
+@import '@/vue_sfc.scss';
 
 .relative {
     position: relative;

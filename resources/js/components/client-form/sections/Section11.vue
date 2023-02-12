@@ -14,8 +14,8 @@
                 <div class="row no-gutters">
                     <div class="col-md-4 form-group">
                         <label>Date of death</label>
-                        <datepicker v-model="formData[0].onTrue.date_of_death" input-class="form-control bg-white"
-                            placeholder="Date" format="dd / MM / yy"></datepicker>
+                        <!-- <datepicker v-model="formData[0].onTrue.date_of_death" input-class="form-control bg-white"
+                            placeholder="Date" format="dd / MM / yy"></datepicker> -->
                     </div>
                 </div>
                 <div class="row no-gutters">
@@ -68,7 +68,7 @@
 </template>
 
 <script>
-import Datepicker from 'vuejs-datepicker';
+// import Datepicker from 'vuejs-datepicker';
 import YesNo from '../form-snippets/YesNo.vue';
 import Honorific from '../form-snippets/Honorific.vue';
 import ClientFileUpload from '../../base-components/ClientFileUpload.vue';
@@ -76,7 +76,7 @@ export default {
     components: {
         YesNo,
         Honorific,
-        Datepicker,
+        // Datepicker,
         ClientFileUpload
     },
     data() {

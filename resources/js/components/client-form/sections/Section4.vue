@@ -45,13 +45,13 @@
                 <div class="row">
                     <div class="col-lg-4 form-group">
                         <label>Date of death</label>
-                        <datepicker input-class="form-control bg-white" v-model="formData[3].onTrue.date_of_death"
-                            placeholder="Date" format="dd / MM / yy"></datepicker>
+                        <!-- <datepicker input-class="form-control bg-white" v-model="formData[3].onTrue.date_of_death"
+                            placeholder="Date" format="dd / MM / yy"></datepicker> -->
                     </div>
                     <div class="col-lg-4 form-group">
                         <label>Date of marriage</label>
-                        <datepicker input-class="form-control bg-white" v-model="formData[3].onTrue.date_of_marriage"
-                            placeholder="Date" format="dd / MM / yy"></datepicker>
+                        <!-- <datepicker input-class="form-control bg-white" v-model="formData[3].onTrue.date_of_marriage"
+                            placeholder="Date" format="dd / MM / yy"></datepicker> -->
                     </div>
                 </div>
                 <base-input label="Forename" placeholder="John" v-model="formData[3].onTrue.forename"></base-input>
@@ -66,32 +66,36 @@
                     <div class="col-12 col-lg-3 d-flex align-items-center mb-1">A marriage certificate</div>
                     <div class="col d-flex align-items-center">
                         <client-file-upload class="mb-0" v-model="formData[3].onTrue.marriage_cert" @input="saveData" />
-                        <a v-if="formData[3].onTrue.marriage_cert"
-                            :href="formData[3].onTrue.marriage_cert.path">{{ formData[3].onTrue.marriage_cert.filename }}</a>
+                        <a v-if="formData[3].onTrue.marriage_cert" :href="formData[3].onTrue.marriage_cert.path">{{
+                            formData[3].onTrue.marriage_cert.filename
+                        }}</a>
                     </div>
                 </div>
                 <div class="row mb-2">
                     <div class="col-12 col-lg-3 d-flex align-items-center mb-1">Death certificate</div>
                     <div class="col d-flex align-items-center">
                         <client-file-upload class="mb-0" v-model="formData[3].onTrue.death_cert" @input="saveData" />
-                        <a v-if="formData[3].onTrue.death_cert"
-                            :href="formData[3].onTrue.death_cert.path">{{ formData[3].onTrue.death_cert.filename }}</a>
+                        <a v-if="formData[3].onTrue.death_cert" :href="formData[3].onTrue.death_cert.path">{{
+                            formData[3].onTrue.death_cert.filename
+                        }}</a>
                     </div>
                 </div>
                 <div class="row mb-2">
                     <div class="col-12 col-lg-3 d-flex align-items-center mb-1">Copy of Will</div>
                     <div class="col d-flex align-items-center">
                         <client-file-upload class="mb-0" v-model="formData[3].onTrue.will" @input="saveData" />
-                        <a v-if="formData[3].onTrue.will"
-                            :href="formData[3].onTrue.will.path">{{ formData[3].onTrue.will.filename }}</a>
+                        <a v-if="formData[3].onTrue.will" :href="formData[3].onTrue.will.path">{{
+                            formData[3].onTrue.will.filename
+                        }}</a>
                     </div>
                 </div>
                 <div class="row mb-2">
                     <div class="col-12 col-lg-3 d-flex align-items-center mb-1">Copy of Codicil(s)</div>
                     <div class="col d-flex align-items-center">
                         <client-file-upload class="mb-0" v-model="formData[3].onTrue.condicils" @input="saveData" />
-                        <a v-if="formData[3].onTrue.condicils"
-                            :href="formData[3].onTrue.condicils.path">{{ formData[3].onTrue.condicils.filename }}</a>
+                        <a v-if="formData[3].onTrue.condicils" :href="formData[3].onTrue.condicils.path">{{
+                            formData[3].onTrue.condicils.filename
+                        }}</a>
                     </div>
                 </div>
                 <div class="row mb-2">
@@ -100,7 +104,9 @@
                         <client-file-upload class="mb-0" v-model="formData[3].onTrue.grant_of_probate"
                             @input="saveData" />
                         <a v-if="formData[3].onTrue.grant_of_probate"
-                            :href="formData[3].onTrue.grant_of_probate.path">{{ formData[3].onTrue.grant_of_probate.filename }}</a>
+                            :href="formData[3].onTrue.grant_of_probate.path">{{
+                                formData[3].onTrue.grant_of_probate.filename
+                            }}</a>
                     </div>
                 </div>
                 <div class="row">
@@ -108,8 +114,9 @@
                     <div class="col d-flex align-items-center">
                         <client-file-upload class="mb-0" v-model="formData[3].onTrue.estate_accounts"
                             @input="saveData" />
-                        <a v-if="formData[3].onTrue.estate_accounts"
-                            :href="formData[3].onTrue.estate_accounts.path">{{ formData[3].onTrue.estate_accounts.filename }}</a>
+                        <a v-if="formData[3].onTrue.estate_accounts" :href="formData[3].onTrue.estate_accounts.path">{{
+                            formData[3].onTrue.estate_accounts.filename
+                        }}</a>
                     </div>
                 </div>
             </yes-no>
@@ -123,13 +130,13 @@
 <script>
 import ClientFileUpload from '../../base-components/ClientFileUpload.vue';
 import Honorific from '../form-snippets/Honorific.vue';
-import Datepicker from 'vuejs-datepicker';
+// import Datepicker from 'vuejs-datepicker';
 import YesNo from '../form-snippets/YesNo.vue';
 export default {
     components: {
         ClientFileUpload,
         Honorific,
-        Datepicker,
+        // Datepicker,
         YesNo
     },
     data() {

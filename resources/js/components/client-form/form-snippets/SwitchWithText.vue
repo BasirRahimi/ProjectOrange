@@ -67,7 +67,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '@/argon/vue_sfc.scss';
+@import '@/vue_sfc.scss';
 
 .switch-with-text {
     display: flex;

@@ -89,7 +89,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '@/argon/vue_sfc.scss';
+@import '@/vue_sfc.scss';
 
 .relative {
     position: relative;

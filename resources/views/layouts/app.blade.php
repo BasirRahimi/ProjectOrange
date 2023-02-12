@@ -16,7 +16,7 @@
     @endif
 
     <!-- Scripts / Styles -->
-    @vite(['resources/sass/argon/argon.scss', 'resources/js/app.js'])
+    @vite(['resources/js/app.js'])
 
     <!-- Fonts -->
     <link rel="stylesheet" href="https://use.typekit.net/lxw2fcr.css">

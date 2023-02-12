@@ -13,8 +13,8 @@
                 <label>The date it was created / date of death of the person who died</label>
                 <div class="row">
                     <div class="col-md-4 form-group">
-                        <datepicker v-model="formData[0].onTrue.trust_date_created" input-class="form-control bg-white"
-                            placeholder="Date" format="dd / MM / yy"></datepicker>
+                        <!-- <datepicker v-model="formData[0].onTrue.trust_date_created" input-class="form-control bg-white"
+                            placeholder="Date" format="dd / MM / yy"></datepicker> -->
                     </div>
                 </div>
 
@@ -104,7 +104,7 @@
 </template>
 
 <script>
-import Datepicker from 'vuejs-datepicker';
+// import Datepicker from 'vuejs-datepicker';
 import YesNo from '../form-snippets/YesNo.vue';
 import Honorific from '../form-snippets/Honorific.vue';
 import ClientFileUpload from '../../base-components/ClientFileUpload.vue';
@@ -113,7 +113,7 @@ export default {
     components: {
         YesNo,
         Honorific,
-        Datepicker,
+        // Datepicker,
         ClientFileUpload,
         SwitchWithText
     },

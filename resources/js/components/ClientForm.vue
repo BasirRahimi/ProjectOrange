@@ -1,12 +1,12 @@
 <template>
     <div class="client-form" :class="{ 'nav-collaped': navCollapsed }">
-        <client-form-navigation @navToggled="navToggled"></client-form-navigation>
+        <client-form-navigation @toggleNav="toggleNav"></client-form-navigation>
         <client-form-widgets></client-form-widgets>
         <div class="router-view">
             <router-view></router-view>
         </div>
 
-        <client-form-utility-bar></client-form-utility-bar>
+        <client-form-utility-bar @toggleNav="toggleNav" @toggleWidgets=""></client-form-utility-bar>
     </div>
 </template>
 
@@ -27,21 +27,26 @@ export default {
     },
     data() {
         return {
-            navCollapsed: false
+            navCollapsed: false,
+            widgetsHidden: false
         }
     },
     beforeMount() {
         this.$store.commit('updateClient', this.client)
+        if (window.innerWidth < 992) {
+            this.widgetsHidden = true;
+            this.navCollapsed = true;
+        }
     },
     methods: {
-        navToggled(val) {
-            this.navCollapsed = val;
+        toggleNav(val) {
+            this.navCollapsed = val ? val : !this.navCollapsed;
         }
     }
 }
 </script>
 <style lang="scss" scoped>
-@import '@/argon/vue_sfc.scss';
+@import '@/vue_sfc.scss';
 
 .client-form {
     position: relative;

@@ -8,23 +8,22 @@
 </template>
 
 <script>
-import clientEB from '@@/clientEB.js';
 
 export default {
     name: 'client-form-utility-bar',
     methods: {
         toggleNav() {
-            clientEB.$emit('toggle-nav');
+            this.$emit('toggleNav');
         },
         toggleWidgets() {
-            clientEB.$emit('toggle-widgets')
+            this.$emit('toggleWidgets')
         }
     }
 }
 </script>
 
 <style lang="scss" scoped>
-@import '@/argon/vue_sfc.scss';
+@import '@/vue_sfc.scss';
 
 .client-form-utility-bar {
     background-color: $body-bg;

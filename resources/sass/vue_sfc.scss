@@ -1,0 +1,36 @@
+@use 'sass:math';
+
+@import "~bootstrap/scss/functions";
+
+@import "./variables";
+@import "~bootstrap/scss/variables";
+
+@import "~bootstrap/scss/mixins";
+
+@function strip-unit($value) {
+    @return math.div($value, $value * 0 + 1);
+}
+
+@mixin fluid-property-vw($min-value, $max-value, $min-width, $max-width, $property) {
+    $min-vw: $min-width;
+    $max-vw: $max-width;
+
+    $u1: unit($min-vw);
+    $u2: unit($max-vw);
+    $u3: unit($min-value);
+    $u4: unit($max-value);
+
+    @if $u1 ==$u2 and $u1 ==$u3 and $u1 ==$u4 {
+        & {
+            #{$property}: $min-value;
+
+            @media screen and (min-width: $min-vw) {
+                #{$property}: calc(#{$min-value} + #{strip-unit($max-value - $min-value)} * (math.div(100vw - #{$min-vw}, #{strip-unit($max-vw - $min-vw)})));
+            }
+
+            @media screen and (min-width: $max-vw) {
+                #{$property}: $max-value;
+            }
+        }
+    }
+}

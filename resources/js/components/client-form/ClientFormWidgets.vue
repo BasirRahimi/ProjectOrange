@@ -6,8 +6,6 @@
 </template>
 
 <script>
-import clientEB from '@@/clientEB.js';
-
 import RequiredDocs from './widgets/RequiredDocs.vue';
 import Tools from './widgets/Tools.vue';
 export default {
@@ -16,27 +14,14 @@ export default {
         RequiredDocs,
         Tools
     },
-    data() {
-        return {
-            hidden: false
-        }
+    props: {
+        hidden: { type: Boolean, default: false }
     },
-    mounted() {
-        let _self = this;
-
-        if (window.innerWidth < 992) {
-            _self.hidden = true;
-        }
-
-        clientEB.$on('toggle-widgets', () => {
-            _self.hidden = !_self.hidden;
-        });
-    }
 }
 </script>
 
 <style lang="scss" scoped>
-@import '@/argon/vue_sfc.scss';
+@import '@/vue_sfc.scss';
 
 .widgets-container {
     position: fixed;

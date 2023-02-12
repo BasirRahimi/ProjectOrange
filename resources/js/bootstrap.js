@@ -6,15 +6,8 @@ window._ = _;
  * for JavaScript based Bootstrap features such as modals and tabs. This
  * code may be modified to fit the specific needs of your application.
  */
-import Popper from 'popper.js';
-import jQuery from 'jquery';
 
-try {
-    window.Popper = Popper;
-    window.$ = window.jQuery = jQuery;
-} catch (e) { }
-
-import 'bootstrap';
+import * as bootstrap from 'bootstrap';
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests

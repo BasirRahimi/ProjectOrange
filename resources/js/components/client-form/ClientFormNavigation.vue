@@ -94,8 +94,6 @@
     </nav>
 </template>
 <script>
-import clientEB from '@@/clientEB.js';
-
 import CreateReminder from './CreateReminder.vue';
 import RequiredDocs from './widgets/RequiredDocs.vue';
 
@@ -104,6 +102,9 @@ export default {
     components: {
         CreateReminder,
         RequiredDocs
+    },
+    props: {
+        navHidden: { type: Boolean, default: false }
     },
     data() {
         return {
@@ -211,7 +212,6 @@ export default {
             // toolsOpenHeight: '60',
             documentsOpen: true,
             navCollapsed: false,
-            navHidden: false,
             showReminderForm: false,
         }
     },
@@ -236,13 +236,7 @@ export default {
                     _self.navCollapsed = true;
                 }
             })
-        } else if (window.innerWidth < 992) {
-            _self.navHidden = true;
         }
-
-        clientEB.$on('toggle-nav', () => {
-            _self.navHidden = !_self.navHidden;
-        });
     },
     methods: {
         sectionClick(routeName) {
@@ -252,13 +246,13 @@ export default {
     },
     watch: {
         navCollapsed(newVal) {
-            this.$emit('navToggled', newVal);
+            this.$emit('toggleNav', newVal);
         },
     },
 }
 </script>
 <style lang="scss" scoped>
-@import '@/argon/vue_sfc.scss';
+@import '@/vue_sfc.scss';
 
 .client-form-navigation {
     position: fixed;

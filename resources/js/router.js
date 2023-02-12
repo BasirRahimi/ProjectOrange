@@ -1,7 +1,4 @@
-import Vue from 'vue';
-import VueRouter from 'vue-router';
-
-Vue.use(VueRouter);
+import { createRouter, createWebHashHistory } from 'vue-router';
 
 import Section1 from './components/client-form/sections/section1.vue';
 import Section2 from './components/client-form/sections/section2.vue';
@@ -147,8 +144,7 @@ let clientRoutes = [
 let regex = /^\/clients/;
 if (window.location.pathname.match(regex)) {
     routerOptions = {
-        base: `/clients/${clientId}/`,
-        mode: 'history',
+        history: createWebHashHistory(`/clients/${clientId}`),
         routes: clientRoutes,
         scrollBehavior(to, from, savedPosition) {
             return { x: 0, y: 0 }
@@ -156,4 +152,6 @@ if (window.location.pathname.match(regex)) {
     }
 }
 
-export default new VueRouter(routerOptions);
+let router = createRouter(routerOptions);
+
+export default router;

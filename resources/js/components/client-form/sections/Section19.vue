@@ -8,12 +8,12 @@
         <content-box title="18.1 All other assets">
             <yes-no collapse :label="formData[0].query" v-model="formData[0].answer" class="mb-4" @input="addRowIfNone">
                 <div class="mt-4 accordion-asset-table" v-show="viewData == false">
-                    <template v-for="(row, i) in formData[0].onTrue">
+                    <template v-for="(row, i) in formData[0].onTrue" :key="`toggle${i}`">
                         <base-button :class="{ active: activeTab == i }" type="default" outline
-                            class="d-block mb-2 asset-toggle" :key="`toggle${i}`" @click="activeTab = i">{{ i+ 1}} -
+                            class="d-block mb-2 asset-toggle" @click="activeTab = i">{{ i+ 1}} -
                             {{ row.description }}</base-button>
-                        <b-collapse :key="`collapse${i}`" :id="`accordion${i}`" accordion="the-accordion"
-                            role="tabpanel" :visible="activeTab == i">
+                        <b-collapse :id="`accordion${i}`" accordion="the-accordion" role="tabpanel"
+                            :visible="activeTab == i">
                             <card shadow class="mb-2 relative">
                                 <div class="d-flex">
                                     <label class="d-lock">Description of asset</label>
@@ -131,7 +131,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '@/argon/vue_sfc.scss';
+@import '@/vue_sfc.scss';
 
 .relative {
     position: relative;

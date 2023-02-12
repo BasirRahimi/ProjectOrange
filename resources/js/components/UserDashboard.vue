@@ -14,12 +14,10 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="client in clients"
-                                    :key="client.id" 
-                                    @click="openClientForm(client.id)"
+                                <tr v-for="client in clients" :key="client.id" @click="openClientForm(client.id)"
                                     class="client-link">
-                                    <td>#{{client.id}}</td>
-                                    <td>{{clientName(client)}}</td>
+                                    <td>#{{ client.id }}</td>
+                                    <td>{{ clientName(client) }}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -33,7 +31,7 @@
 
 <script>
 export default {
-    name: 'user-dashboard',
+    name: 'UserDashboard',
     data() {
         return {
             clients: []
@@ -41,23 +39,23 @@ export default {
     },
     mounted() {
         let _self = this;
-        axios.get('/clients').then(response=>{
+        axios.get('/clients').then(response => {
             _self.clients = response.data;
-        }).catch(error=>{
+        }).catch(error => {
             console.log(error);
         })
     },
     methods: {
         createNewClient() {
             let _self = this;
-            axios.post('/clients').then(response=>{
+            axios.post('/clients').then(response => {
                 _self.clients.push(response.data);
-            }).catch(error=>{
+            }).catch(error => {
                 console.log(error);
             });
         },
         clientName(client) {
-            if(client.forename) {
+            if (client.forename) {
                 return `${client.forename} ${client.surname}`;
             } else {
                 return 'Not Given';
