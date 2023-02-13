@@ -8,6 +8,7 @@ require 'recipe/laravel.php';
 
 set('repository', 'git@github.com:BasirRahimi/ProjectOrange.git');
 set('ssh_multiplexing', false);
+set('keep_releases', 3);
 
 add('shared_files', []);
 add('shared_dirs', []);
