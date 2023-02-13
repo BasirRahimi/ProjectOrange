@@ -1,4 +1,5 @@
 <?php
+
 namespace Deployer;
 
 require 'recipe/laravel.php';
@@ -7,6 +8,7 @@ require 'recipe/laravel.php';
 
 set('repository', 'git@github.com:BasirRahimi/ProjectOrange.git');
 set('ssh_multiplexing', false);
+set('keep_releases', 3);
 
 add('shared_files', []);
 add('shared_dirs', []);
@@ -16,7 +18,7 @@ add('writable_dirs', []);
 
 host('157.245.39.48')
     ->set('remote_user', 'deployer')
-    // ->set('identity_file', '~/.ssh/projectorangedeployer')
+    ->set('identity_file', '~/.ssh/projectorangedeployer')
     ->set('deploy_path', '/var/www/projectorange');
 
 // Hooks
