@@ -10,7 +10,10 @@ jobs:
   deploy:
     name: Deployment
     runs-on: ubuntu-latest
-
+    
+    - name: Set Up Deployer
+      run: curl -LO https://deployer.org/deployer.phar && mv deployer.phar bin/dep && sudo chmod +x bin/dep
+    
     steps:
       - name: Deploy
         uses: deployphp/action@master
