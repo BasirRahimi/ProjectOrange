@@ -18,8 +18,10 @@ import clickOutside from "./directives/click-ouside.js";
 app.directive('click-outside', clickOutside);
 
 // Router
-import router from './router';
-app.use(createRouter(router));
+import clientRouter from './clientRouter';
+if (clientRouter.inUse) {
+    app.use(createRouter(clientRouter.router));
+}
 
 // Store
 import { createPinia } from 'pinia'

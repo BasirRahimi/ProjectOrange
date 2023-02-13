@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory } from 'vue-router';
+import { createRouter, createWebHistory } from 'vue-router';
 
 import Section1 from './components/client-form/sections/section1.vue';
 import Section2 from './components/client-form/sections/section2.vue';
@@ -23,9 +23,6 @@ import Section20 from './components/client-form/sections/section20.vue';
 import Section21 from './components/client-form/sections/section21.vue';
 import Overview from './components/client-form/overview.vue';
 
-let routerOptions = {
-    mode: 'history'
-}
 
 let clientRoutes = [
     { path: '/', redirect: '/about' },
@@ -141,17 +138,21 @@ let clientRoutes = [
     }
 ];
 
-let regex = /^\/clients/;
-if (window.location.pathname.match(regex)) {
-    routerOptions = {
-        history: createWebHashHistory(`/clients/${clientId}`),
-        routes: clientRoutes,
-        scrollBehavior(to, from, savedPosition) {
-            return { x: 0, y: 0 }
-        }
-    }
+let router = {
+    inUse: false
 }
 
-let router = createRouter(routerOptions);
+if (window.location.pathname.match(/^\/clients/)) {
+    router = {
+        router: createRouter({
+            history: createWebHistory(`/clients/:clientId`),
+            routes: clientRoutes,
+            scrollBehavior(to, from, savedPosition) {
+                return { x: 0, y: 0 }
+            }
+        }),
+        inUse: true
+    }
+}
 
 export default router;
