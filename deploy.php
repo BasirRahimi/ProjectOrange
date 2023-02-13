@@ -17,7 +17,7 @@ add('writable_dirs', []);
 
 host('157.245.39.48')
     ->set('remote_user', 'deployer')
-    ->set('identity_file', '~/.ssh/projectorangedeployer')
+    // ->set('identity_file', '~/.ssh/projectorangedeployer')
     ->set('deploy_path', '/var/www/projectorange');
 
 // Hooks
