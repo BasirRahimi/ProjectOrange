@@ -20,8 +20,9 @@ export default defineConfig({
     ],
     resolve: {
         alias: {
-            '@': '/resources/sass',
-            '@@': '/resources/js',
+            '@': '/resources/js',
+            '@sass': '/resources/sass',
+            '@images': '/resources/images',
             '~bootstrap': '/node_modules/bootstrap'
         }
     }

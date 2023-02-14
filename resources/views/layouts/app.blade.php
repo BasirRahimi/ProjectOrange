@@ -9,11 +9,11 @@
 
     <title>{{ config('app.name', 'Laravel') }} @hasSection('title')- @yield('title') @endif</title>
 
-    @if($client ?? '')
+    {{-- @if($client ?? '')
     <script>
         window.clientId = {{$client->id}};
     </script>
-    @endif
+    @endif --}}
 
     <!-- Scripts / Styles -->
     @vite(['resources/js/app.js'])

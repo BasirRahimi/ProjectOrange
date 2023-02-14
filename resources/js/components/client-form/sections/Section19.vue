@@ -131,7 +131,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '@/vue_sfc.scss';
+@import '@sass/vue_sfc.scss';
 
 .relative {
     position: relative;

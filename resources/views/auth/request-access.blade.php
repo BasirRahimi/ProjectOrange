@@ -15,9 +15,6 @@
     <div class="router-view">
         <request-access user-prop="{{ $user }}"></request-access>
     </div>
-    <div class="footer">
-        <p>By confirming your email, you agree to our <a href="#">Terms of Service</a> and that you have read and understood our <a href="#">Privacy Policy</a></p>
-    </div>
     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
         @csrf
     </form>
