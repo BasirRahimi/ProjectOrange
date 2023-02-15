@@ -1,17 +1,21 @@
 <template>
     <div>
-        <label :class="labelClass">{{label}}</label>
+        <label :class="labelClass">{{ label }}</label>
         <div class="button-grid colsize-100">
-            <base-button 
-                type="default" 
-                outline 
-                :class="{'active': answer === true}" 
-                @click="yes()">Yes</base-button>
-            <base-button 
-                type="default" 
-                outline 
-                :class="{'active': answer === false}" 
-                @click="no()">No</base-button>
+            <base-button
+                type="default"
+                outline
+                :class="{ active: answer === true }"
+                @click="yes()"
+                >Yes</base-button
+            >
+            <base-button
+                type="default"
+                outline
+                :class="{ active: answer === false }"
+                @click="no()"
+                >No</base-button
+            >
         </div>
         <b-collapse v-if="collapse" :visible="answer === collapseOn">
             <slot></slot>
@@ -38,7 +42,7 @@ export default {
             type: Boolean,
             default: true
         },
-        value: {
+        modelValue: {
             type: Boolean,
             default: null
         }
@@ -46,24 +50,22 @@ export default {
     data() {
         return {
             answer: null
-        }
+        };
     },
     methods: {
         yes() {
             this.answer = true;
-            this.$emit('input', this.answer);
+            this.$emit('update:modelValue', this.answer);
         },
         no() {
             this.answer = false;
-            this.$emit('input', this.answer);
+            this.$emit('update:modelValue', this.answer);
         }
     },
     beforeMount() {
-        this.answer = this.value;
+        this.answer = this.modelValue;
     }
-}
+};
 </script>
 
-<style>
-
-</style>
+<style></style>

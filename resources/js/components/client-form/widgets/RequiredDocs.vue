@@ -1,11 +1,16 @@
 <template>
-    <div class="required-docs shadow rounded" :class="{ 'inSideNav': inSideNav }">
+    <div class="required-docs shadow rounded" :class="{ inSideNav: inSideNav }">
         <div class="widget-title">SECTION ONE - REQUIRED DOCUMENTS</div>
-        <p class="note">Below is a list of all required documents in this section, click on them to find them faster</p>
+        <p class="note">
+            Below is a list of all required documents in this section, click on
+            them to find them faster
+        </p>
         <div class="doc-list">
             <a href="#" @click.prevent class="doc">
                 <span class="status">1</span>
-                <div href="#" class="doc-name">Document that has nothing uploaded</div>
+                <div href="#" class="doc-namee">
+                    Document that has nothing uploaded
+                </div>
             </a>
             <a href="#" @click.prevent class="doc done">
                 <span class="status"><i class="fas fa-check"></i></span>
@@ -13,7 +18,9 @@
             </a>
             <a href="#" @click.prevent class="doc active">
                 <span class="status">3</span>
-                <div href="#" class="doc-name">Document has been clicked on and shown left</div>
+                <div href="#" class="doc-name">
+                    Document has been clicked on and shown left
+                </div>
             </a>
         </div>
     </div>
@@ -23,7 +30,7 @@
 export default {
     name: 'RequiredDocs',
     props: ['inSideNav']
-}
+};
 </script>
 
 <style lang="scss" scoped>
@@ -62,13 +69,12 @@ export default {
             width: 24px;
             height: 24px;
             background-color: $white;
-            transition: .25s;
+            transition: 0.25s;
             color: $body-color;
 
             .fas {
                 font-size: 10px;
             }
-
         }
 
         &:not(:last-child) {
@@ -87,7 +93,7 @@ export default {
 
         &.done {
             .doc-name {
-                color: #A7AAA7;
+                color: #a7aaa7;
             }
         }
 
@@ -119,7 +125,7 @@ export default {
         }
 
         .doc-name {
-            transition: .25s;
+            transition: 0.25s;
             flex: 1 1 0%;
             color: $body-color;
             width: 100%;

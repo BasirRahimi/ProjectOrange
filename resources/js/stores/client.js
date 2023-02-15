@@ -1,5 +1,5 @@
 import { ref } from 'vue';
-import { defineStore } from 'pinia'
+import { defineStore } from 'pinia';
 
 export const useClientStore = defineStore('client', () => {
     const client = ref(null);
@@ -7,5 +7,5 @@ export const useClientStore = defineStore('client', () => {
         client.value = data;
     }
 
-    return { client, updateClient }
+    return { client, updateClient };
 });

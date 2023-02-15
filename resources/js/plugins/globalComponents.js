@@ -1,22 +1,23 @@
-import Badge from '../components/Badge.vue';
-import BaseAlert from '../components/BaseAlert.vue';
-import BaseButton from '../components/BaseButton.vue';
-import BaseCheckbox from '../components/BaseCheckbox.vue';
-import BaseDropdown from '../components/BaseDropdown.vue';
-import BaseInput from '../components/BaseInput.vue';
-import BasePagination from '../components/BasePagination.vue';
-import BaseProgress from '../components/BaseProgress.vue';
-import BaseRadio from '../components/BaseRadio.vue';
-import BaseSlider from '../components/BaseSlider.vue';
-import BaseSwitch from '../components/BaseSwitch.vue';
-import Card from '../components/Card.vue';
-import Icon from '../components/Icon.vue';
-import ClientForm from '../components/ClientForm.vue';
-import UserDashboard from '../components/UserDashboard.vue';
-import GrantAccess from '../components/GrantAccess.vue';
-import AppHeader from '../components/AppHeader.vue';
-import ContentBox from '../components/client-form/ContentBox.vue';
-import RequestAccess from '../components/auth/RequestAccess.vue';
+import Badge from '@/components/Badge.vue';
+import BaseAlert from '@/components/BaseAlert.vue';
+import BaseButton from '@/components/BaseButton.vue';
+import BaseCheckbox from '@/components/BaseCheckbox.vue';
+import BaseDropdown from '@/components/BaseDropdown.vue';
+import BaseInput from '@/components/BaseInput.vue';
+import BasePagination from '@/components/BasePagination.vue';
+import BaseProgress from '@/components/BaseProgress.vue';
+import BaseRadio from '@/components/BaseRadio.vue';
+import BaseSlider from '@/components/BaseSlider.vue';
+import BaseSwitch from '@/components/BaseSwitch.vue';
+import BCollapse from '@/components/BCollapse.vue';
+import Card from '@/components/Card.vue';
+import Icon from '@/components/Icon.vue';
+import ClientForm from '@/components/ClientForm.vue';
+import UserDashboard from '@/components/UserDashboard.vue';
+import GrantAccess from '@/components/GrantAccess.vue';
+import AppHeader from '@/components/AppHeader.vue';
+import ContentBox from '@/components/client-form/ContentBox.vue';
+import RequestAccess from '@/components/auth/RequestAccess.vue';
 
 export default {
     install: (app) => {
@@ -31,6 +32,7 @@ export default {
         app.component('BaseRadio', BaseRadio);
         app.component('BaseSlider', BaseSlider);
         app.component('BaseSwitch', BaseSwitch);
+        app.component('BCollapse', BCollapse);
         app.component('Card', Card);
         app.component('Icon', Icon);
         app.component('ClientForm', ClientForm);

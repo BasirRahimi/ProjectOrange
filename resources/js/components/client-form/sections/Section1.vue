@@ -20,7 +20,7 @@
             </p>
         </content-box>
         <content-box title="About the Deceased">
-            <honorific v-model="formData.honorific" />
+            <Honorific v-model="formData.honorific" />
 
             <base-input
                 placeholder="John"
@@ -37,19 +37,19 @@
 
             <div class="form-group">
                 <label>Last usual address</label><br />
-                <base-radio
+                <BaseRadio
                     inline
                     name="postcode"
                     v-model="addressInputType"
-                    value="manual"
-                    >Find with postcode</base-radio
+                    value="postcode"
+                    >Find with postcode</BaseRadio
                 >
-                <base-radio
+                <BaseRadio
                     inline
                     name="manual"
                     v-model="addressInputType"
                     value="manual"
-                    >Add manually</base-radio
+                    >Add manually</BaseRadio
                 >
             </div>
 
@@ -119,7 +119,12 @@
             <div class="row">
                 <div class="col-lg-5">
                     <label for="aliases">Date of Death</label>
-                    <!-- <datepicker input-class="form-control bg-white" v-model="formData.date_of_death" placeholder="21 / 9 / 2020" format="dd / MM / yy"></datepicker> -->
+                    <Datepicker
+                        class="form-control bg-white"
+                        v-model="formData.date_of_death"
+                        placeholder="21 / 9 / 2020"
+                        input-format="dd / MM / yy"
+                        :upper-limit="date"></Datepicker>
                 </div>
             </div>
         </content-box>
@@ -186,7 +191,7 @@
                 <base-button
                     type="default"
                     outline
-                    @click="formData.spouse = !formData.spouse"
+                    @click="updateSurvivingRelatives('spouse')"
                     :class="{ active: formData.spouse }"
                     class="col mr-3"
                     >Spouse</base-button
@@ -224,7 +229,7 @@
                     >Grand Children</base-button
                 >
             </div>
-            <b-collapse :visible="formData.parents > 0">
+            <BCollapse :visible="formData.parents > 0">
                 <div class="row mt-4">
                     <div class="col-lg-6">
                         <label for="noOfParents"
@@ -239,8 +244,8 @@
                             v-model.number="formData.parents" />
                     </div>
                 </div>
-            </b-collapse>
-            <b-collapse :visible="formData.siblings > 0">
+            </BCollapse>
+            <BCollapse :visible="formData.siblings > 0">
                 <div class="row mt-4">
                     <div class="col-lg-6">
                         <label for="noOfSiblings"
@@ -254,8 +259,8 @@
                             v-model.number="formData.siblings" />
                     </div>
                 </div>
-            </b-collapse>
-            <b-collapse :visible="formData.children > 0">
+            </BCollapse>
+            <BCollapse :visible="formData.children > 0">
                 <div class="row mt-4">
                     <div class="col-lg-6">
                         <label for="noOfChildren"
@@ -269,8 +274,8 @@
                             v-model.number="formData.children" />
                     </div>
                 </div>
-            </b-collapse>
-            <b-collapse :visible="formData.grand_children > 0">
+            </BCollapse>
+            <BCollapse :visible="formData.grand_children > 0">
                 <div class="row mt-4">
                     <div class="col-lg-6">
                         <label for="noOfGrandChildren"
@@ -284,7 +289,7 @@
                             v-model.number="formData.grand_children" />
                     </div>
                 </div>
-            </b-collapse>
+            </BCollapse>
         </content-box>
         <content-box title="1.5 Income tax details">
             <div class="row">
@@ -338,92 +343,80 @@
         </content-box>
     </div>
 </template>
-
-<script>
-// import Datepicker from 'vuejs-datepicker';
+<script setup>
 import Honorific from '../form-snippets/Honorific.vue';
-import ButtonGroup from '../form-snippets/ButtonGroup.vue';
 import { useClientStore } from '@/stores/client.js';
-export default {
-    components: {
-        // Datepicker,
-        Honorific,
-        ButtonGroup
-    },
-    setup() {
-        const store = useClientStore();
-        return { store };
-    },
-    data() {
-        return {
-            formData: {
-                honorific: null,
-                forename: null,
-                surname: null,
-                aliases: null,
-                addressline1: null,
-                addressline2: null,
-                city: null,
-                postcode: null,
-                date_of_death: null,
-                place_of_birth: null,
-                place_of_death: null,
-                marital_status: null,
-                spouse: null,
-                parents: null,
-                siblings: null,
-                children: null,
-                grand_children: null,
-                national_insurance_number: null,
-                income_tax_reference: null,
-                accountant_phone: null,
-                accountant_email: null
-            },
-            addressInputType: 'manual'
-        };
-    },
-    beforeMount() {
-        if (this.store.client) {
-            Object.keys(this.formData).forEach((key, index) => {
-                if (key === 'date_of_death') {
-                    this.formData[key] = new Date(this.store.client[key]);
-                } else {
-                    this.formData[key] = this.store.client[key];
-                }
-            });
-        }
-    },
-    methods: {
-        updateSurvivingRelatives(relative) {
-            if (
-                this.formData[relative] === 0 ||
-                this.formData[relative] === null
-            ) {
-                this.formData[relative] = 1;
-            } else {
-                this.formData[relative] = 0;
-            }
-        },
-        nextSection() {
-            this.saveData();
-            this.$router.push({ name: 'section2' });
-        },
-        saveData() {
-            let data = {
-                ...this.formData,
-                date_of_death: `${this.formData.date_of_death.getFullYear()}-${
-                    this.formData.date_of_death.getMonth() + 1
-                }-${this.formData.date_of_death.getDate()}`
-            };
-            this.saveSectionData(data, this.store.client.id).then(
-                (response) => {
-                    console.log(response);
-                    this.store.updateClient(response[1].data);
-                }
-            );
-        }
+import Datepicker from 'vue3-datepicker';
+import { onBeforeMount, ref, reactive } from 'vue';
+import { useRouter } from 'vue-router';
+import { useSaveSectionData as saveSectionData } from '@/composables/helper.js';
+
+const router = useRouter();
+const store = useClientStore();
+const formData = reactive({
+    honorific: '',
+    forename: '',
+    surname: '',
+    aliases: '',
+    addressline1: '',
+    addressline2: '',
+    city: '',
+    postcode: '',
+    date_of_death: null,
+    place_of_birth: null,
+    place_of_death: null,
+    marital_status: null,
+    spouse: false,
+    parents: 0,
+    siblings: 0,
+    children: 0,
+    grand_children: 0,
+    national_insurance_number: '',
+    income_tax_reference: '',
+    accountant_phone: '',
+    accountant_email: ''
+});
+const addressInputType = ref('manual');
+const date = new Date();
+
+const updateSurvivingRelatives = (relative) => {
+    console.log('updateSurvivingRelatives');
+
+    if (relative === 'spouse') {
+        formData.spouse = !!formData.spouse ? false : true;
+    } else if (formData[relative] === 0 || formData[relative] === null) {
+        formData[relative] = 1;
+    } else {
+        formData[relative] = 0;
     }
 };
+const nextSection = () => {
+    saveData();
+    router.push({ name: 'section2' });
+};
+const saveData = () => {
+    let data = {
+        ...formData,
+        date_of_death: `${formData.date_of_death.getFullYear()}-${
+            formData.date_of_death.getMonth() + 1
+        }-${formData.date_of_death.getDate()}`
+    };
+    saveSectionData(data, store.client.id).then((response) => {
+        console.log(response);
+        store.updateClient(response[1].data);
+    });
+};
+onBeforeMount(() => {
+    if (store.client) {
+        Object.keys(formData).forEach((key, index) => {
+            if (key === 'date_of_death' && store.client[key]) {
+                formData[key] = new Date(store.client[key]);
+            } else {
+                formData[key] = store.client[key];
+            }
+        });
+    }
+});
 </script>
 
 <style lang="scss" scoped></style>

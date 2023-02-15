@@ -1,14 +1,21 @@
+import { useRouter } from 'vue-router';
+
+import { useClientStore } from '@/stores/client.js';
+
 export function useValidateEmail(email) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
 export async function useSaveSectionData(data, clientId) {
     let result;
-    await axios.patch(`/clients/${clientId}`, data).then(response => {
-        result = [true, response];
-    }).catch(response => {
-        result = [false, response];
-    })
+    await axios
+        .patch(`/clients/${clientId}`, data)
+        .then((response) => {
+            result = [true, response];
+        })
+        .catch((response) => {
+            result = [false, response];
+        });
     return result;
 }
 export function useFlashLabel() {
@@ -19,16 +26,15 @@ export function useFlashLabel() {
         label.css('background-color', 'transparent');
     }, 100);
 }
-export function useRouterPush(section) {
-    this.$router.push({ name: section });
-}
-export function useSaveData() {
+
+export function useSaveData(section, formData) {
+    const store = useClientStore();
     let data = {};
-    data[this.section] = JSON.stringify(this.formData);
-    this.saveSectionData(data, this.$store.state.client.id).then(response => {
+    data[section] = JSON.stringify(formData);
+    useSaveSectionData(data, store.client.id).then((response) => {
         if (response[0]) {
-            console.log(response)
-            this.$store.commit('updateClient', response[1].data);
+            console.log(response);
+            store.updateClient(response[1].data);
         }
     });
 }

@@ -1,52 +1,53 @@
 <template>
     <div class="d-inline-block">
         <label class="file btn btn-outline-default active-primary mb-0">
-            <input type="file" @change="onFileChange" ref="fileInput">
-            <span v-if="value">Change Copy</span>
+            <input type="file" @change="onFileChange" ref="fileInput" />
+            <span v-if="modelValue">Change Copy</span>
             <span v-else>Upload Copy +</span>
         </label>
-        <span v-if="value">{{value.name}}</span>
+        <span v-if="modelValue">{{ modelValue.name }}</span>
     </div>
 </template>
 
-<script>
-export default {
-    name: 'ClientFileUpload',
-    props: {
-        value: {
-            default: null
-        },
-        wipeAfterInput: {
-            default: false,
-            type: Boolean
-        }
+<script setup>
+import { ref } from 'vue';
+import { useClientStore } from '@/stores/client.js';
+const store = useClientStore();
+const fileInput = ref(null);
+const emit = defineEmits(['update:modelValue']);
+const props = defineProps({
+    modelValue: {
+        default: null
     },
-    methods: {
-        onFileChange(e) {
-            let files = e.target.files || e.dataTransfer.files;
-            if(!files.length) return;
-            this.uploadFile(files[0]);
-        },
-        uploadFile(file) {
-            let formData = new FormData();
-            formData.append('file', file);
-            axios.post(`/clients/${this.$store.state.client.id}/upload`, formData)
-            .then(response => {
-                this.$emit('input', response.data);
-                if(this.wipeAfterInput) {
-                    this.$refs.fileInput.value = '';
-                }
-            });
-        }
+    wipeAfterInput: {
+        default: false,
+        type: Boolean
     }
-}
+});
+const onFileChange = (e) => {
+    let files = e.target.files || e.dataTransfer.files;
+    if (!files.length) return;
+    uploadFile(files[0]);
+};
+const uploadFile = (file) => {
+    let formData = new FormData();
+    formData.append('file', file);
+    axios
+        .post(`/clients/${store.client.id}/upload`, formData)
+        .then((response) => {
+            console.log(response.data);
+            emit('update:modelValue', response.data);
+            if (props.wipeAfterInput) {
+                fileInput.value.value = '';
+            }
+        });
+};
 </script>
 
 <style lang="scss" scoped>
-
 .file {
     position: relative;
-    
+
     input {
         position: absolute;
         left: -99999px;
