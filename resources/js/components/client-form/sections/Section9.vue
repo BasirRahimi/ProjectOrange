@@ -62,11 +62,10 @@
 
             <div class="form-group">
                 <label>{{ trust.query2.query }}</label>
-                <switch-with-text
+                <BaseSwitch
                     v-model="trust.query2.answer"
                     left-text="The Trustee"
-                    right-text="The trustee’s solicitors or accountants"
-                    return-text />
+                    label="The trustee’s solicitors or accountants" />
             </div>
             <b-collapse
                 :visible="
@@ -125,7 +124,6 @@
 <script setup>
 import YesNo from '../form-snippets/YesNo.vue';
 import Honorific from '../form-snippets/Honorific.vue';
-import SwitchWithText from '../form-snippets/SwitchWithText.vue';
 import { reactive, onBeforeMount } from 'vue';
 import { useSaveData as saveData } from '../../../composables/helper';
 import { useRouter } from 'vue-router';
@@ -163,7 +161,9 @@ const removeTrustee = (i) => {
 onBeforeMount(() => {
     if (store.client) {
         if (store.client.nil_rate_band) {
-            formData = JSON.parse(store.client.nil_rate_band.the_data);
+            formData = reactive(
+                JSON.parse(store.client.nil_rate_band.the_data)
+            );
         }
     }
 });

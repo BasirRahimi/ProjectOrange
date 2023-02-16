@@ -213,7 +213,7 @@ const removeExecutor = (i) => {
 onBeforeMount(() => {
     if (store.client) {
         if (store.client.executors) {
-            formData = JSON.parse(store.client.executors.the_data);
+            formData = reactive(JSON.parse(store.client.executors.the_data));
         }
     }
 });

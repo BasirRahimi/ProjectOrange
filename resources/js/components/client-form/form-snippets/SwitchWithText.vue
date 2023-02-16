@@ -1,11 +1,24 @@
 <template>
     <div class="switch-with-text">
-        <div class="switch-text-left pointer" :class="{ 'text-gray-500': checked }" @click="clickSwitch(false)">
-            {{ leftText }}</div>
-        <div class="the-switch"><base-switch coloured v-model="checked" class="m-0 mx-3 d-block"
-                ref="switch"></base-switch></div>
-        <div class="switch-text-right pointer" :class="{ 'text-gray-500': !checked }" @click="clickSwitch(true)">
-            {{ rightText }}</div>
+        <div
+            class="switch-text-left pointer"
+            :class="{ 'text-gray-500': checked }"
+            @click="clickSwitch(false)">
+            {{ leftText }}
+        </div>
+        <div class="the-switch">
+            <base-switch
+                coloured
+                v-model="checked"
+                class="m-0 mx-3 d-block"
+                ref="switch"></base-switch>
+        </div>
+        <div
+            class="switch-text-right pointer"
+            :class="{ 'text-gray-500': !checked }"
+            @click="clickSwitch(true)">
+            {{ rightText }}
+        </div>
     </div>
 </template>
 
@@ -13,8 +26,8 @@
 export default {
     name: 'switch-with-text',
     props: {
-        value: {
-            type: Boolean | String,
+        modelValue: {
+            type: [Boolean, String],
             default: false
         },
         leftText: {
@@ -31,15 +44,15 @@ export default {
     data() {
         return {
             checked: false
-        }
+        };
     },
     beforeMount() {
         if (this.returnText) {
-            if (this.rightText === this.value) {
+            if (this.rightText === this.modelValue) {
                 this.checked = true;
             }
         } else {
-            this.checked = this.value;
+            this.checked = this.modelValue;
         }
     },
     watch: {
@@ -53,17 +66,17 @@ export default {
                 }
             }
 
-            this.$emit('input', data);
+            this.$emit('update:modelValue', data);
         }
     },
     methods: {
         clickSwitch(val) {
             if (this.checked !== val) {
-                this.$refs.switch.$el.click();
+                this.$refs.switch.click();
             }
         }
     }
-}
+};
 </script>
 
 <style scoped lang="scss">

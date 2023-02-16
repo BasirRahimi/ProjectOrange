@@ -129,10 +129,12 @@
                 >
             </div>
 
-            <a v-b-toggle.collapse2 class="pointer"
-                >Tip<i class="icon-xs fas fa-chevron-down ml-2"></i
-            ></a>
-            <b-collapse visible id="collapse2">
+            <BaseButton
+                @click="collapse.collapse1 = !collapse.collapse1"
+                class="pointer">
+                Tip<i class="icon-xs fas fa-chevron-down ml-2"></i>
+            </BaseButton>
+            <b-collapse :visible="collapse.collapse1" id="collapse2">
                 <p class="text-gray-500 mt-2">
                     Domicile and residence is relevant because it affects the
                     law that governs succession. Since 17.8.2016 a new European
@@ -152,7 +154,7 @@
                 class="btn btn-primary shadow"
                 @click="
                     saveData('lifetime_gifts', formData);
-                    routerPush('section6');
+                    router.push({ name: 'section6' });
                 ">
                 Next section
             </button>
@@ -161,12 +163,16 @@
 </template>
 <script setup>
 import YesNo from '../form-snippets/YesNo.vue';
-import { reactive, onBeforeMount } from 'vue';
-import { useSaveData as saveData } from '../../../composables/helper';
+import { reactive, onBeforeMount, ref } from 'vue';
+import {
+    useSaveData as saveData,
+    useFlashLabel as flashLabel
+} from '../../../composables/helper';
 import { useRouter } from 'vue-router';
 import { useClientStore } from '@/stores/client.js';
 const router = useRouter();
 const store = useClientStore();
+const collapse = ref({ collapse1: false });
 let formData = reactive([
     {
         query: 'Did the deceased make any gifts or transfer assets to or for the benefit of another individual, charity or other organisation?',
@@ -199,7 +205,9 @@ const slide = ref(1);
 onBeforeMount(() => {
     if (store.client) {
         if (store.client.lifetime_gifts) {
-            formData = JSON.parse(store.client.lifetime_gifts.the_data);
+            formData = reactive(
+                JSON.parse(store.client.lifetime_gifts.the_data)
+            );
         }
     }
 });

@@ -82,7 +82,7 @@
 </template>
 <script setup>
 import YesNo from '../form-snippets/YesNo.vue';
-import { reactive, onBeforeMount } from 'vue';
+import { reactive, onBeforeMount, ref } from 'vue';
 import { useSaveData as saveData } from '../../../composables/helper';
 import { useRouter } from 'vue-router';
 import { useClientStore } from '@/stores/client.js';
@@ -100,7 +100,9 @@ let formData = reactive([
 onBeforeMount(() => {
     if (store.client) {
         if (store.client.banks_savings) {
-            formData = JSON.parse(store.client.banks_savings.the_data);
+            formData = reactive(
+                JSON.parse(store.client.banks_savings.the_data)
+            );
         }
     }
 });

@@ -408,7 +408,9 @@ const removeDoc = (i, j) => {
 onBeforeMount(() => {
     if (store.client) {
         if (store.client.life_assurance) {
-            formData = JSON.parse(store.client.life_assurance.the_data);
+            formData = reactive(
+                JSON.parse(store.client.life_assurance.the_data)
+            );
         }
     }
 });

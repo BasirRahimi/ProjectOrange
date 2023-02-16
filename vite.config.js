@@ -14,10 +14,10 @@ export default defineConfig({
                     includeAbsolute: false
                 }
             }
-        }),
-        ViteRestart({
-            restart: ['/resources/js/components/client-form/sections/*.vue']
         })
+        // ViteRestart({
+        //     restart: ['/resources/js/components/client-form/sections/*.vue']
+        // })
     ],
     resolve: {
         alias: {

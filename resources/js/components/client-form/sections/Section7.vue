@@ -3,10 +3,12 @@
         <content-box
             title="Section 6 - England & Wales and he rest of the UK and British Isles">
             <div class="mb-3">
-                <a v-b-toggle.collapse1 class="pointer"
+                <BaseButton
+                    @click="collapse.collapse1 = !collapse.collapse1"
+                    class="pointer"
                     >Tip<i class="icon-xs fas fa-chevron-down ml-2"></i
-                ></a>
-                <b-collapse visible id="collapse1">
+                ></BaseButton>
+                <b-collapse :visible="collapse.collapse1">
                     <p class="text-gray-500 mt-2 mb-0">
                         Certain investments can be placed with investment
                         institutions in these jurisdictions. They each have
@@ -16,10 +18,12 @@
                 </b-collapse>
             </div>
             <div>
-                <a v-b-toggle.collapse2 class="pointer"
+                <BaseButton
+                    @click="collapse.collapse2 = !collapse.collapse2"
+                    class="pointer"
                     >Tip<i class="icon-xs fas fa-chevron-down ml-2"></i
-                ></a>
-                <b-collapse visible id="collapse2">
+                ></BaseButton>
+                <b-collapse :visible="collapse.collapse2">
                     <p class="text-gray-500 mt-2 mb-0">
                         You should take care that the deceased had regularised
                         their affairs with HMRC. For example, the Jersey
@@ -65,12 +69,14 @@
 </template>
 <script setup>
 import YesNo from '../form-snippets/YesNo.vue';
-import { reactive, onBeforeMount } from 'vue';
+import { reactive, onBeforeMount, ref } from 'vue';
 import { useSaveData as saveData } from '../../../composables/helper';
 import { useRouter } from 'vue-router';
 import { useClientStore } from '@/stores/client.js';
 const router = useRouter();
 const store = useClientStore();
+
+const collapse = ref({ collapse1: false, collapse2: false });
 let formData = reactive([
     {
         query: 'Did the deceased have any assets in Jersey?',
@@ -91,7 +97,9 @@ let formData = reactive([
 onBeforeMount(() => {
     if (store.client) {
         if (store.client.uk_british_isles) {
-            formData = JSON.parse(store.client.uk_british_isles.the_data);
+            formData = reactive(
+                JSON.parse(store.client.uk_british_isles.the_data)
+            );
         }
     }
 });

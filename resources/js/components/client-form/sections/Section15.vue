@@ -81,10 +81,12 @@
                 </div>
             </yes-no>
 
-            <a v-b-toggle.collapse1 class="pointer"
+            <BaseButton
+                @click="collapse.collapse1 = !collapse.collapse1"
+                class="pointer"
                 >Tip<i class="icon-xs fas fa-chevron-down ml-2"></i
-            ></a>
-            <b-collapse visible id="collapse1">
+            ></BaseButton>
+            <b-collapse :visible="collapse.collapse1">
                 <p class="text-gray-500 mt-2 mb-0">
                     If the deceased owned a property jointly with another
                     person, include it here. If there is a mortgage on the
@@ -107,12 +109,14 @@
 </template>
 <script setup>
 import YesNo from '../form-snippets/YesNo.vue';
-import { reactive, onBeforeMount } from 'vue';
+import { reactive, onBeforeMount, ref } from 'vue';
 import { useSaveData as saveData } from '../../../composables/helper';
 import { useRouter } from 'vue-router';
 import { useClientStore } from '@/stores/client.js';
 const router = useRouter();
 const store = useClientStore();
+const collapse = ref({ collapse1: false });
+const rowSettings = ref(false);
 let formData = reactive([
     {
         query: 'Did the deceased own any assets in the joint names with another person?',
@@ -136,7 +140,9 @@ const removeRow = (i) => {
 onBeforeMount(() => {
     if (store.client) {
         if (store.client.joint_held_assets) {
-            formData = JSON.parse(store.client.joint_held_assets.the_data);
+            formData = reactive(
+                JSON.parse(store.client.joint_held_assets.the_data)
+            );
         }
     }
 });

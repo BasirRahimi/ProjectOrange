@@ -153,7 +153,7 @@ import YesNo from '../form-snippets/YesNo.vue';
 import Honorific from '../form-snippets/Honorific.vue';
 import ClientFileUpload from '../../base-components/ClientFileUpload.vue';
 import Datepicker from 'vue3-datepicker';
-import { reactive, onBeforeMount } from 'vue';
+import { reactive, onBeforeMount, ref } from 'vue';
 import { useSaveData as saveData } from '../../../composables/helper';
 import { useRouter } from 'vue-router';
 import { useClientStore } from '@/stores/client.js';
@@ -202,7 +202,13 @@ const removeDoc = (i) => {
 onBeforeMount(() => {
     if (store.client) {
         if (store.client.received_inheritance) {
-            formData = JSON.parse(store.client.received_inheritance.the_data);
+            formData = reactive(
+                JSON.parse(store.client.received_inheritance.the_data)
+            );
+            let date_of_death = formData[0].onTrue.date_of_death;
+            formData[0].onTrue.date_of_death = date_of_death
+                ? new Date(date_of_death)
+                : null;
         }
     }
 });

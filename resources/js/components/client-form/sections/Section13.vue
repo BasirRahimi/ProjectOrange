@@ -163,7 +163,7 @@ let formData = reactive([
 onBeforeMount(() => {
     if (store.client) {
         if (store.client.pensions) {
-            formData = JSON.parse(store.client.pensions.the_data);
+            formData = reactive(JSON.parse(store.client.pensions.the_data));
         }
     }
 });

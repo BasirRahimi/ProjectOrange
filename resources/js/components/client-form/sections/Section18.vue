@@ -62,10 +62,12 @@
                 </div>
             </yes-no>
 
-            <a v-b-toggle.collapse1 class="pointer"
+            <BaseButton
+                @click="collapse.collapse1 = !collapse.collapse1"
+                class="pointer"
                 >Tip<i class="icon-xs fas fa-chevron-down ml-2"></i
-            ></a>
-            <b-collapse visible id="collapse1">
+            ></BaseButton>
+            <b-collapse :visible="collapse.collapse1">
                 <p class="text-gray-500 mt-2 mb-0">
                     If the deceased was, for example, married and acquired
                     furniture and household effects with their spouse, it could
@@ -93,13 +95,14 @@
 </template>
 <script setup>
 import YesNo from '../form-snippets/YesNo.vue';
-import { reactive, onBeforeMount } from 'vue';
+import { reactive, onBeforeMount, ref } from 'vue';
 import { useSaveData as saveData } from '../../../composables/helper';
 import { useRouter } from 'vue-router';
 import { useClientStore } from '@/stores/client.js';
 const router = useRouter();
 const store = useClientStore();
 const rowSettings = ref(false);
+const collapse = ref({ collapse1: false });
 let formData = reactive([
     {
         query: 'Did the deceased own any Chattels of particular value?',
@@ -121,7 +124,9 @@ const removeRow = (i) => {
 onBeforeMount(() => {
     if (store.client) {
         if (store.client.personal_belongings) {
-            formData = JSON.parse(store.client.personal_belongings.the_data);
+            formData = reactive(
+                JSON.parse(store.client.personal_belongings.the_data)
+            );
         }
     }
 });

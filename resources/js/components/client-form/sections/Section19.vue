@@ -30,7 +30,6 @@
                         >
                         <b-collapse
                             :id="`accordion${i}`"
-                            accordion="the-accordion"
                             role="tabpanel"
                             :visible="activeTab == i">
                             <card shadow class="mb-2 relative">
@@ -92,20 +91,20 @@
                             {{ row.description }}
                         </div>
                         <div class="col-3 cell text-center">
-                            <money-format
-                                v-if="row.mortgage"
-                                :value="parseFloat(row.mortgage)"
-                                currency-code="GBP"
-                                :subunits-value="true">
-                            </money-format>
+                            <span v-if="row.mortgage">{{
+                                new Intl.NumberFormat('en', {
+                                    style: 'currency',
+                                    currency: 'GBP'
+                                }).format(parseFloat(row.mortgage))
+                            }}</span>
                         </div>
                         <div class="col-3 cell text-center">
-                            <money-format
-                                v-if="row.value"
-                                :value="parseFloat(row.value)"
-                                currency-code="GBP"
-                                :subunits-value="true">
-                            </money-format>
+                            <span v-if="row.mortgage">{{
+                                new Intl.NumberFormat('en', {
+                                    style: 'currency',
+                                    currency: 'GBP'
+                                }).format(parseFloat(row.value))
+                            }}</span>
                         </div>
                     </div>
                 </div>
@@ -143,8 +142,7 @@
 </template>
 <script setup>
 import YesNo from '../form-snippets/YesNo.vue';
-import MoneyFormat from 'vue-money-format';
-import { reactive, onBeforeMount } from 'vue';
+import { reactive, onBeforeMount, ref } from 'vue';
 import { useSaveData as saveData } from '../../../composables/helper';
 import { useRouter } from 'vue-router';
 import { useClientStore } from '@/stores/client.js';
@@ -180,7 +178,7 @@ const addRowIfNone = (data) => {
 onBeforeMount(() => {
     if (store.client) {
         if (store.client.assets) {
-            formData = JSON.parse(store.client.assets.the_data);
+            formData = reactive(JSON.parse(store.client.assets.the_data));
         }
     }
 });

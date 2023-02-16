@@ -103,10 +103,10 @@ const removeDoc = (i, j) => {
 };
 
 onBeforeMount(() => {
-    if (this.$store.state.client) {
-        if (this.$store.state.client.other_information) {
-            this.formData = JSON.parse(
-                this.$store.state.client.other_information.the_data
+    if (store.client) {
+        if (store.client.other_information) {
+            formData = reactive(
+                JSON.parse(store.client.other_information.the_data)
             );
         }
     }

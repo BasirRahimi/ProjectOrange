@@ -248,7 +248,7 @@ const router = useRouter();
 const store = useClientStore();
 
 const slide = ref(1);
-const collapse = reactive({
+const collapse = ref({
     collapse1: false,
     collapse2: false
 });
@@ -351,7 +351,9 @@ const prevSlide = () => {
 onBeforeMount(() => {
     if (store.client) {
         if (store.client.powers_of_attorney) {
-            formData = JSON.parse(store.client.powers_of_attorney.the_data);
+            formData = reactive(
+                JSON.parse(store.client.powers_of_attorney.the_data)
+            );
         }
     }
 });

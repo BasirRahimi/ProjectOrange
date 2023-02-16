@@ -65,12 +65,11 @@
                     >Please add the contact details of one of the
                     following</label
                 >
-                <switch-with-text
+                <BaseSwitch
                     left-text="Their Solicitors"
-                    right-text="Their accountants"
+                    label="Their accountants"
                     class="form-group"
-                    v-model="formData[0].onTrue.contact"
-                    return-text></switch-with-text>
+                    v-model="formData[0].onTrue.contact" />
 
                 <honorific v-model="formData[0].onTrue.contact_honorific" />
                 <base-input
@@ -172,10 +171,12 @@
                     >
                 </div>
 
-                <a v-b-toggle.collapse1 class="pointer"
+                <BaseButton
+                    @click="collapse.collapse1 = !collapse.collapse1"
+                    class="pointer"
                     >Tip<i class="icon-xs fas fa-chevron-down ml-2"></i
-                ></a>
-                <b-collapse visible id="collapse1">
+                ></BaseButton>
+                <b-collapse :visible="collapse.collapse1">
                     <p class="text-gray-500 mt-2 mb-0">
                         Domicile and residence is relevant because it affects
                         the law that governs succession. Since 17.8.2016 a new
@@ -209,14 +210,14 @@ import Datepicker from 'vue3-datepicker';
 import YesNo from '../form-snippets/YesNo.vue';
 import Honorific from '../form-snippets/Honorific.vue';
 import ClientFileUpload from '../../base-components/ClientFileUpload.vue';
-import SwitchWithText from '../form-snippets/SwitchWithText.vue';
-import { reactive, onBeforeMount } from 'vue';
+import { reactive, onBeforeMount, ref } from 'vue';
 import { useSaveData as saveData } from '../../../composables/helper';
 import { useRouter } from 'vue-router';
 import { useClientStore } from '@/stores/client.js';
 const router = useRouter();
 const store = useClientStore();
 const activeDoc = ref(0);
+const collapse = ref({ collapse1: false });
 let formData = reactive([
     {
         query: 'Was the deceased entitled to benefit from a trust that was created by a Deed or under another’s person’s Will (or intestacy)?',
@@ -263,7 +264,11 @@ const removeDoc = (i) => {
 onBeforeMount(() => {
     if (store.client) {
         if (store.client.trusts) {
-            formData = JSON.parse(store.client.trusts.the_data);
+            formData = reactive(JSON.parse(store.client.trusts.the_data));
+            let trust_date_created = formData[0].onTrue.trust_date_created;
+            formData[0].onTrue.trust_date_created = trust_date_created
+                ? new Date(trust_date_created)
+                : null;
         }
     }
 });

@@ -1,66 +1,84 @@
 <template>
-    <label class="custom-toggle" :class="{'coloured-dot':coloured}">
-        <input type="checkbox"
-               :value="value"
-               v-bind="$attrs"
-               v-on="inputListeners"
-               ref="checkbox">
-        <span class="custom-toggle-slider rounded-circle"></span>
-    </label>
+    <div
+        class="form-check form-switch"
+        :class="{ 'coloured-dot': leftText.length }">
+        <label
+            class="form-check-label switch-text-left"
+            @click="value = false"
+            v-if="leftText"
+            >{{ leftText }}</label
+        >
+        <input
+            v-model="value"
+            class="form-check-input"
+            type="checkbox"
+            role="switch"
+            id="flexSwitchCheckDefault" />
+        <label
+            class="form-check-label switch-text-right"
+            @click="value = true"
+            v-if="label"
+            >{{ label }}</label
+        >
+    </div>
 </template>
-<script>
-export default {
-    name: "base-switch",
-    inheritAttrs: false,
-    props: {
-        value: {
-            type: Boolean,
-            default: false,
-            description: "Switch value"
-        },
-        coloured: {
-            type: Boolean,
-            default: false,
-            description: "coloured when in off state"
-        }
-    },
-    computed: {
-        inputListeners() {
-            var _self = this;
-            // `Object.assign` merges objects together to form a new object
-            return Object.assign({},
-                // We add all the listeners from the parent
-                this.$listeners,
-                // Then we can add custom listeners or override the
-                // behavior of some listeners.
-                {
-                    // This ensures that the component works with v-model
-                    input(event) {
-                        _self.$emit('input', event.target.value == 'false')
-                    }
-                }
-            )
-        },
-        // model: {
-        // get() {
-        //     if(typeof this.value == 'boolean'){
+<script setup>
+import { computed } from 'vue';
 
-        //         return this.value;
-        //     }
-        // },
-        // set(value) {
-        //     this.$emit("input", value);
-        // }
-        // }
+const props = defineProps({
+    modelValue: {
+        type: [Boolean, String]
     },
-    mounted() {
-        this.$nextTick(()=>{
-            if(this.value) {
-                this.$refs.checkbox.checked = true;
-            }
-        });
+    label: '',
+    leftText: ''
+});
+
+const emit = defineEmits(['update:modelValue']);
+
+const value = computed({
+    get() {
+        if (typeof props.modelValue === 'string') {
+            return props.label === props.modelValue;
+        }
+        return props.modelValue;
+    },
+    set(value) {
+        if (typeof props.modelValue === 'string') {
+            emit('update:modelValue', value ? props.label : props.leftText);
+        } else {
+            emit('update:modelValue', value);
+        }
     }
-};
+});
 </script>
-<style>
+<style scoped lang="scss">
+@import '@sass/vue_sfc.scss';
+
+.form-check.form-switch {
+    display: flex;
+    align-items: center;
+    padding-left: 0;
+    .form-check-input {
+        margin-left: 1rem;
+        margin-right: 1rem;
+    }
+
+    @include media-breakpoint-down(md) {
+        flex-direction: column;
+
+        .form-check-input {
+            transform: rotate(90deg);
+            padding: 20px 0px;
+        }
+
+        .switch-text-left,
+        .switch-text-right {
+            text-align: center;
+        }
+    }
+}
+
+.pointer {
+    cursor: pointer;
+}
 </style>

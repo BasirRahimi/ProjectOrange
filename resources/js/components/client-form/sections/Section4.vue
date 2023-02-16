@@ -262,13 +262,13 @@ import ClientFileUpload from '../../base-components/ClientFileUpload.vue';
 import Honorific from '../form-snippets/Honorific.vue';
 import Datepicker from 'vue3-datepicker';
 import YesNo from '../form-snippets/YesNo.vue';
-import { reactive, onBeforeMount } from 'vue';
+import { reactive, onBeforeMount, ref } from 'vue';
 import { useSaveData as saveData } from '../../../composables/helper';
 import { useRouter } from 'vue-router';
 import { useClientStore } from '@/stores/client.js';
 const router = useRouter();
 const store = useClientStore();
-const collapse = reactive({
+const collapse = ref({
     collapse1: false
 });
 let formData = reactive([
@@ -318,7 +318,15 @@ let formData = reactive([
 onBeforeMount(() => {
     if (store.client) {
         if (store.client.will) {
-            formData = JSON.parse(store.client.will.the_data);
+            formData = reactive(JSON.parse(store.client.will.the_data));
+            let date_of_death = formData[3].onTrue.date_of_death;
+            let date_of_marriage = formData[3].onTrue.date_of_marriage;
+            formData[3].onTrue.date_of_death = date_of_death
+                ? new Date(date_of_death)
+                : null;
+            formData[3].onTrue.date_of_marriage = date_of_marriage
+                ? new Date(date_of_marriage)
+                : null;
         }
     }
 });

@@ -60,7 +60,7 @@ let formData = reactive([
 onBeforeMount(() => {
     if (store.client) {
         if (store.client.gifts) {
-            formData = JSON.parse(store.client.gifts.the_data);
+            formData = reactive(JSON.parse(store.client.gifts.the_data));
         }
     }
 });

@@ -95,7 +95,7 @@
 </template>
 <script setup>
 import YesNo from '../form-snippets/YesNo.vue';
-import { reactive, onBeforeMount } from 'vue';
+import { reactive, onBeforeMount, ref } from 'vue';
 import { useSaveData as saveData } from '../../../composables/helper';
 import { useRouter } from 'vue-router';
 import { useClientStore } from '@/stores/client.js';
@@ -124,7 +124,9 @@ const removeRow = (i) => {
 onBeforeMount(() => {
     if (store.client) {
         if (store.client.stocks_shares) {
-            formData = JSON.parse(store.client.stocks_shares.the_data);
+            formData = reactive(
+                JSON.parse(store.client.stocks_shares.the_data)
+            );
         }
     }
 });

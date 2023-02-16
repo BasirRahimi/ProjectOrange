@@ -22,7 +22,6 @@
         "pinia": "^2.0.0",
         "slick-carousel": "^1.8.1",
         "vue": "^3.0.0",
-        "vue-money-format": "^1.0.0",
         "vue-router": "^4.0.0",
         "vue3-datepicker": "^0.3.4"
     }
