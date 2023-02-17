@@ -4,11 +4,10 @@
             <p class="text-gray-500">
                 The nil rate band is also called the Inheritance tax threshold.
                 It represents the first part of the estate which is taxed at 0%.
-                On 5.4.2016 this threshold was £325,000.
             </p>
             <p class="text-gray-500">
                 If the deceased was a widow or widower, you have been asked in
-                section to give details of the estate of the first spouse to
+                section 3.3 to give details of the estate of the first spouse to
                 die. This is necessary to claim both the deceased’s nil-rate
                 band plus the nil rate band of the first spouse to die.<br />
                 Therefore, up to £650,000 of the estate can pass free of tax,

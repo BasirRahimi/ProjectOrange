@@ -40,7 +40,7 @@
             </ul>
         </content-box>
 
-        <content-box title="4.2 Details of lifetime videos">
+        <content-box title="4.2 Details of lifetime gifts">
             <yes-no
                 v-show="slide === 1"
                 class="mb-4"
@@ -129,7 +129,7 @@
                 >
             </div>
 
-            <BaseButton
+            <!-- <BaseButton
                 @click="collapse.collapse1 = !collapse.collapse1"
                 class="pointer"
                 size="sm">
@@ -147,7 +147,7 @@
                     consider your own Will now. Do not wait until the estate has
                     been administered.
                 </p>
-            </b-collapse>
+            </b-collapse> -->
         </content-box>
 
         <content-box class="p-0 text-end" :shadow="false" :whiteBg="false">

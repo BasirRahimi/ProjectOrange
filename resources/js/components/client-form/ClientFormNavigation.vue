@@ -95,7 +95,7 @@
                         <span class="fa-li">
                             <i class="me-2 po-icon-person"></i>
                         </span>
-                        About
+                        About the deceased
                     </a>
                 </li>
                 <li

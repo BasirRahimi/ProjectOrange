@@ -3,8 +3,8 @@
         <content-box
             title="Section 14 - Assets held jointly with another person">
             <p class="text-gray-500 m-0">
-                HMRC requires information from you about simple life policies
-                and other investments as follows
+                Remember that it is possible to own assets either jointly and
+                severally or as tenants in common.
             </p>
         </content-box>
 

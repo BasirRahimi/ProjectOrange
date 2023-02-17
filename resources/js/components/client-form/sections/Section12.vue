@@ -171,7 +171,7 @@
                     >
                 </div>
 
-                <BaseButton
+                <!-- <BaseButton
                     @click="collapse1.toggle()"
                     size="sm"
                     class="pointer"
@@ -190,7 +190,7 @@
                         Will now. Do not wait until the estate has been
                         administered.
                     </p>
-                </b-collapse>
+                </b-collapse> -->
             </yes-no>
         </content-box>
 

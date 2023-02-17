@@ -20,7 +20,7 @@
                         <div class="col-3 cell-header">
                             Number of shares held
                         </div>
-                        <div class="col-3 cell-header">Share Number</div>
+                        <div class="col-3 cell-header">Shareholder no.</div>
                         <div class="col-3 cell-header">
                             Share price at D.O.D (£)
                         </div>

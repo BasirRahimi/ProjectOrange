@@ -200,7 +200,7 @@
                 >
             </div>
 
-            <BaseButton @click="collapse3.toggle()" class="pointer" size="sm"
+            <!-- <BaseButton @click="collapse3.toggle()" class="pointer" size="sm"
                 >Tip<i class="icon-xs fas fa-chevron-down ms-2"></i
             ></BaseButton>
             <b-collapse ref="collapse3">
@@ -215,7 +215,7 @@
                     consider your own Will now. Do not wait until the estate has
                     been administered.
                 </p>
-            </b-collapse>
+            </b-collapse> -->
         </content-box>
 
         <content-box class="p-0 text-end" :shadow="false" :whiteBg="false">
@@ -328,7 +328,7 @@ let formData = reactive([
         answer: ''
     },
     {
-        query: 'Do you know if the deceased intended to live in the UK for the rest of their lives?',
+        query: 'Do you know if the deceased intended to live in the UK for the rest of their life?',
         answer: null
     }
 ]);

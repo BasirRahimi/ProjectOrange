@@ -1,13 +1,13 @@
 <template>
     <div class="container">
-        <content-box title="Section 18 - Houses, flats and all other assets">
+        <content-box title="Section 18 - Houses, flats and all other realty">
             <p class="text-gray-500 m-0">
                 Use this section to include assets which are known to you but
                 not otherwise included in this form.
             </p>
         </content-box>
 
-        <content-box title="18.1 All other assets">
+        <content-box title="18.1 Realty">
             <yes-no
                 collapse
                 :label="formData[0].query"
@@ -166,7 +166,7 @@ const changeActiveTab = (i) => {
 
 let formData = reactive([
     {
-        query: 'Did the deceased own, lease or rent assets like those identified above?',
+        query: 'Did the deceased own IN THEIR SOLE NAME, houses, flats or other realty?',
         answer: null,
         onTrue: []
     }

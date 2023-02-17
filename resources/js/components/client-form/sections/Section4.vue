@@ -137,10 +137,8 @@
                     spouse:</label
                 >
                 <p class="text-gray-500 mb-3">
-                    All of these documents are necessary to claim Transferable
-                    Nil Rate Band. Sometimes the Grant of Probate and Estate
-                    accounts are not available, if you cannot locate them,
-                    please search.
+                    It may be the case that a Grant of Probate/Letters of
+                    Administration was not applied for.
                 </p>
 
                 <div class="row mb-2">
@@ -209,7 +207,7 @@
                 </div>
                 <div class="row mb-2">
                     <div class="col-12 col-lg-3 d-flex align-items-center mb-1">
-                        Grant of Probate
+                        Grant of Representation
                     </div>
                     <div class="col d-flex align-items-center">
                         <client-file-upload

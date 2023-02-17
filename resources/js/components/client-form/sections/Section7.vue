@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <content-box
-            title="Section 6 - England & Wales and he rest of the UK and British Isles">
+            title="Section 6 - England & Wales and the rest of the UK and British Isles">
             <div class="mb-3">
                 <BaseButton @click="tip1.toggle()" size="sm" class="pointer"
                     >Tip<i class="icon-xs fas fa-chevron-down ms-2"></i

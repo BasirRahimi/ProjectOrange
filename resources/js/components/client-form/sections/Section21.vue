@@ -27,8 +27,7 @@
             <label>Description</label>
             <textarea
                 v-model="row.description"
-                class="form-control mb-4"
-                placeholder="I do not have the policy information and have asked my IFA to send it to you seperately"></textarea>
+                class="form-control mb-4"></textarea>
 
             <label>Upload relevant documents:</label><br />
             <div class="row mb-2" v-for="(doc, j) in row.docs" :key="j">

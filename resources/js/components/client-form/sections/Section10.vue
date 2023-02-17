@@ -69,7 +69,7 @@
                 >
             </yes-no>
 
-            <BaseButton @click="collapse1.toggle()" size="sm" class="pointer"
+            <!-- <BaseButton @click="collapse1.toggle()" size="sm" class="pointer"
                 >Tip<i class="icon-xs fas fa-chevron-down ms-2"></i
             ></BaseButton>
             <b-collapse ref="collapse1">
@@ -83,7 +83,7 @@
                     chance to regularise their UK tax affairs in a controlled
                     manner on beneficial terms.
                 </p>
-            </b-collapse>
+            </b-collapse> -->
         </content-box>
 
         <content-box title="9.2 Partnerships">
@@ -92,20 +92,22 @@
                 v-model="formData[1].answer"
                 collapse>
                 <base-input
-                    label="Company name"
+                    label="Partnership name"
                     class="mt-4"
                     placeholder="John Appleseed Ltd"
-                    v-model="formData[1].onTrue.company_name"></base-input>
+                    v-model="formData[1].onTrue.partnership_name"></base-input>
                 <base-input
-                    label="Company number"
+                    label="Partnership number"
                     placeholder="1235 1235 08311"
-                    v-model="formData[1].onTrue.company_number"></base-input>
+                    v-model="
+                        formData[1].onTrue.partnership_number
+                    "></base-input>
                 <base-input
                     label="Business activity"
                     placeholder="Import & export"
                     v-model="formData[1].onTrue.business_activity"></base-input>
 
-                <label>Company accountant details</label>
+                <label>Partnership accountant details</label>
                 <honorific v-model="formData[1].onTrue.accountant.honorific" />
                 <base-input
                     label="Forenames"
@@ -140,9 +142,9 @@
                 </div>
 
                 <label
-                    >If the company accountants have valued the shares in the
-                    business in line with HMRC guidelines then please provide a
-                    copy</label
+                    >If the Partnership accountants have valued the shares in
+                    the business in line with HMRC guidelines then please
+                    provide a copy</label
                 ><br />
                 <client-file-upload
                     v-model="formData[1].onTrue.valuation"
@@ -200,8 +202,8 @@ let formData = reactive([
         query: 'Was the deceased a member of a partnership?',
         answer: null,
         onTrue: {
-            company_name: '',
-            company_number: '',
+            partnership_name: '',
+            partnership_number: '',
             business_activity: '',
             accountant: {
                 honorific: '',

@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <content-box title="Section 7 - Swiss and assets in other ‘tax havens’">
-            <BaseButton
+            <!-- <BaseButton
                 @click="collapse.collapse1 = !collapse.collapse1"
                 size="sm"
                 class="pointer"
@@ -19,7 +19,7 @@
                     consider your own Will now. Do not wait until the estate has
                     been administered.
                 </p>
-            </b-collapse>
+            </b-collapse> -->
         </content-box>
 
         <content-box title="7.1 Swiss and assets in other ‘tax havens’">
