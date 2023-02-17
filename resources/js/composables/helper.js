@@ -1,5 +1,3 @@
-import { useRouter } from 'vue-router';
-
 import { useClientStore } from '@/stores/client.js';
 
 export function useValidateEmail(email) {

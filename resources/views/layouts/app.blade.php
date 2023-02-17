@@ -37,15 +37,9 @@
 
                 {{-- <div class="collapse navbar-collapse" id="navbarSupportedContent"> --}}
                 <div>
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
+                    <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
-                        @guest
+                            @guest
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
@@ -56,9 +50,11 @@
                             @endif
                         @else
                         <base-dropdown tag="li" class="nav-item" menu-classes="shadow" position="right">
-                            <base-button slot="title" type="link" class="dropdown-toggle m-0 nav-link">
-                            {{ $user->name }} <span class="caret"></span>
-                            </base-button>
+                            <template v-slot:title>
+                                <base-button type="link" class="dropdown-toggle m-0 nav-link">
+                                {{ $user->name }} <span class="caret"></span>
+                                 </base-button>
+                            </template>
                             
                             <a href="{{ route('dashboard') }}" class="dropdown-item">{{ __('Dashboard') }}</a>
 

@@ -63,10 +63,65 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+@import '@sass/vue_sfc.scss';
+.custom-radio {
+    position: relative;
+    display: block;
+    min-height: 1.5rem;
+    padding-left: 1.75rem;
+    .custom-control-label::before {
+        border-radius: 50%;
+        border: 1px solid $input-border-color;
+        transition: $input-transition;
+        position: absolute;
+        top: 0.125rem;
+        left: -1.75rem;
+        display: block;
+        width: 1.25rem;
+        height: 1.25rem;
+        pointer-events: none;
+        content: '';
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+        background-color: $white;
+    }
+    .custom-control-input {
+        position: absolute;
+        z-index: -1;
+        opacity: 0;
+    }
+    .custom-control-input ~ .custom-control-label {
+        font-weight: normal;
+        font-size: 0.875rem;
+        cursor: pointer;
+        margin-bottom: 0;
+        position: relative;
+        display: inline-block;
+    }
+    .custom-control-input:checked ~ .custom-control-label::before {
+        border-color: $primary;
+        background-color: $primary;
+        color: $white;
+    }
+    .custom-control-input:checked ~ .custom-control-label::after {
+        background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3E%3Ccircle r='3' fill='%23fff'/%3E%3C/svg%3E");
+    }
+    .custom-control-label::after {
+        position: absolute;
+        top: 0.125rem;
+        left: -1.75rem;
+        display: block;
+        width: 1.25rem;
+        height: 1.25rem;
+        content: '';
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: 50% 50%;
+    }
+}
+
 .form-check-inline {
     display: inline-flex;
-}
-.custom-radio .custom-control-input ~ .custom-control-label {
-    font-weight: normal;
 }
 </style>

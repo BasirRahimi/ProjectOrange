@@ -4,6 +4,7 @@
         :class="{ 'coloured-dot': leftText.length }">
         <label
             class="form-check-label switch-text-left"
+            :class="{ 'text-gray-500': !value }"
             @click="value = false"
             v-if="leftText"
             >{{ leftText }}</label
@@ -11,11 +12,13 @@
         <input
             v-model="value"
             class="form-check-input"
+            :class="{ 'string-val': leftText }"
             type="checkbox"
             role="switch"
             id="flexSwitchCheckDefault" />
         <label
             class="form-check-label switch-text-right"
+            :class="{ 'text-gray-500': value }"
             @click="value = true"
             v-if="label"
             >{{ label }}</label
@@ -53,7 +56,10 @@ const value = computed({
 </script>
 <style scoped lang="scss">
 @import '@sass/vue_sfc.scss';
-
+label {
+    font-weight: $font-weight-base;
+    margin-bottom: 0;
+}
 .form-check.form-switch {
     display: flex;
     align-items: center;
@@ -61,6 +67,38 @@ const value = computed({
     .form-check-input {
         margin-left: 1rem;
         margin-right: 1rem;
+        background: none;
+        border-color: $input-border-color;
+        width: 3em;
+        height: 1.5em;
+        position: relative;
+        &::before {
+            content: '';
+            position: absolute;
+            width: 1.2em;
+            height: 1.2em;
+            border-radius: 50%;
+            background-color: $primary;
+            left: 1px;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: $input-transition;
+        }
+
+        &:active {
+            filter: none;
+        }
+        &:checked {
+            background: none;
+            background-color: transparent;
+            border-color: $input-border-color;
+            &::before {
+                left: calc(100% - calc(1.2em + 1px));
+            }
+        }
+
+        &.string-val {
+        }
     }
 
     @include media-breakpoint-down(md) {

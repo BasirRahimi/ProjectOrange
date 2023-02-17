@@ -2,7 +2,7 @@
     <div class="container">
         <content-box title="Section 3 - Other Information">
             <yes-no
-                class="form-group"
+                class="mb-4"
                 collapse
                 :label="formData[0].query"
                 v-model="formData[0].answer">
@@ -17,7 +17,7 @@
                 >
             </yes-no>
             <yes-no
-                class="form-group"
+                class="mb-4"
                 collapse
                 :label="formData[1].query"
                 v-model="formData[1].answer">
@@ -35,7 +35,8 @@
             <BaseButton
                 @click="collapse.collapse1 = !collapse.collapse1"
                 class="pointer"
-                >Tip<i class="icon-xs fas fa-chevron-down ml-2"></i
+                size="sm"
+                >Tip<i class="icon-xs fas fa-chevron-down ms-2"></i
             ></BaseButton>
             <b-collapse :visible="collapse.collapse1" id="collapse1">
                 <p class="text-gray-500 mt-2">
@@ -83,7 +84,7 @@
                             <base-input
                                 label="Email Address"
                                 placeholder="John.doe@doe.co.uk"
-                                :form-group="false"
+                                :mb-4="false"
                                 v-model="
                                     formData[2].onTrue.onTrue.email
                                 "></base-input>
@@ -103,7 +104,7 @@
                     first:</label
                 >
                 <div class="row">
-                    <div class="col-lg-4 form-group">
+                    <div class="col-lg-4 mb-4">
                         <label>Date of death</label>
                         <datepicker
                             class="form-control bg-white"
@@ -112,7 +113,7 @@
                             format="dd / MM / yy"
                             :upper-limit="new Date()"></datepicker>
                     </div>
-                    <div class="col-lg-4 form-group">
+                    <div class="col-lg-4 mb-4">
                         <label>Date of marriage</label>
                         <datepicker
                             class="form-control bg-white"
@@ -244,7 +245,7 @@
                 </div>
             </yes-no>
         </content-box>
-        <content-box class="p-0 text-right" :shadow="false" :whiteBg="false">
+        <content-box class="p-0 text-end" :shadow="false" :whiteBg="false">
             <button
                 class="btn btn-primary shadow"
                 @click="

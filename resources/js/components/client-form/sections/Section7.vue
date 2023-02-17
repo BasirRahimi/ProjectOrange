@@ -3,12 +3,10 @@
         <content-box
             title="Section 6 - England & Wales and he rest of the UK and British Isles">
             <div class="mb-3">
-                <BaseButton
-                    @click="collapse.collapse1 = !collapse.collapse1"
-                    class="pointer"
-                    >Tip<i class="icon-xs fas fa-chevron-down ml-2"></i
+                <BaseButton @click="tip1.toggle()" size="sm" class="pointer"
+                    >Tip<i class="icon-xs fas fa-chevron-down ms-2"></i
                 ></BaseButton>
-                <b-collapse :visible="collapse.collapse1">
+                <b-collapse ref="tip1">
                     <p class="text-gray-500 mt-2 mb-0">
                         Certain investments can be placed with investment
                         institutions in these jurisdictions. They each have
@@ -18,12 +16,10 @@
                 </b-collapse>
             </div>
             <div>
-                <BaseButton
-                    @click="collapse.collapse2 = !collapse.collapse2"
-                    class="pointer"
-                    >Tip<i class="icon-xs fas fa-chevron-down ml-2"></i
+                <BaseButton @click="tip2.toggle()" size="sm" class="pointer"
+                    >Tip<i class="icon-xs fas fa-chevron-down ms-2"></i
                 ></BaseButton>
-                <b-collapse :visible="collapse.collapse2">
+                <b-collapse ref="tip2">
                     <p class="text-gray-500 mt-2 mb-0">
                         You should take care that the deceased had regularised
                         their affairs with HMRC. For example, the Jersey
@@ -43,7 +39,7 @@
             <yes-no
                 v-for="(row, i) in formData"
                 :key="i"
-                class="form-group"
+                class="mb-4"
                 :label="row.query"
                 v-model="row.answer"
                 collapse>
@@ -55,7 +51,7 @@
             </yes-no>
         </content-box>
 
-        <content-box class="p-0 text-right" :shadow="false" :whiteBg="false">
+        <content-box class="p-0 text-end" :shadow="false" :whiteBg="false">
             <button
                 class="btn btn-primary shadow"
                 @click="
@@ -76,7 +72,8 @@ import { useClientStore } from '@/stores/client.js';
 const router = useRouter();
 const store = useClientStore();
 
-const collapse = ref({ collapse1: false, collapse2: false });
+const tip1 = ref(null);
+const tip2 = ref(null);
 let formData = reactive([
     {
         query: 'Did the deceased have any assets in Jersey?',

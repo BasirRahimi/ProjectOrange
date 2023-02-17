@@ -56,6 +56,7 @@
 // 8. Add additional custom code here
 @import './nouislider';
 
+$fa-font-path: '../../public/webfonts/';
 @import '@fortawesome/fontawesome-free/scss/fontawesome';
 @import '@fortawesome/fontawesome-free/scss/regular';
 @import '@fortawesome/fontawesome-free/scss/solid';
@@ -63,6 +64,11 @@
 
 // Custom fonticon
 @import './fonticons';
+
+// Custom sass modules
+@import './navbar';
+@import './buttons';
+@import './dropdown';
 
 // Custom global styles
 @import './global';

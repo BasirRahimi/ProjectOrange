@@ -46,7 +46,7 @@
                             v-model="formData[0].onTrue.docs[i]"
                             @input="saveData"></client-file-upload>
                         <a :href="doc.path">{{ doc.filename }}</a>
-                        <div class="file-rem-hidden d-inline-block ml-3">
+                        <div class="file-rem-hidden d-inline-block ms-3">
                             <base-button
                                 type="danger"
                                 icon="fas fa-window-close"
@@ -110,7 +110,7 @@
                             v-model="formData[1].onTrue.docs[i]"
                             @input="saveData"></client-file-upload>
                         <a :href="doc.path">{{ doc.filename }}</a>
-                        <div class="file-rem-hidden d-inline-block ml-3">
+                        <div class="file-rem-hidden d-inline-block ms-3">
                             <base-button
                                 type="danger"
                                 icon="fas fa-window-close"
@@ -174,7 +174,7 @@
                             v-model="formData[2].onTrue.docs[i]"
                             @input="saveData"></client-file-upload>
                         <a :href="doc.path">{{ doc.filename }}</a>
-                        <div class="file-rem-hidden d-inline-block ml-3">
+                        <div class="file-rem-hidden d-inline-block ms-3">
                             <base-button
                                 type="danger"
                                 icon="fas fa-window-close"
@@ -238,7 +238,7 @@
                             v-model="formData[3].onTrue.docs[i]"
                             @input="saveData"></client-file-upload>
                         <a :href="doc.path">{{ doc.filename }}</a>
-                        <div class="file-rem-hidden d-inline-block ml-3">
+                        <div class="file-rem-hidden d-inline-block ms-3">
                             <base-button
                                 type="danger"
                                 icon="fas fa-window-close"
@@ -302,7 +302,7 @@
                             v-model="formData[4].onTrue.docs[i]"
                             @input="saveData"></client-file-upload>
                         <a :href="doc.path">{{ doc.filename }}</a>
-                        <div class="file-rem-hidden d-inline-block ml-3">
+                        <div class="file-rem-hidden d-inline-block ms-3">
                             <base-button
                                 type="danger"
                                 icon="fas fa-window-close"
@@ -327,7 +327,7 @@
             </yes-no>
         </content-box>
 
-        <content-box class="p-0 text-right" :shadow="false" :whiteBg="false">
+        <content-box class="p-0 text-end" :shadow="false" :whiteBg="false">
             <button
                 class="btn btn-primary shadow"
                 @click="

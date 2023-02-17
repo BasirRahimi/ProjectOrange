@@ -3,13 +3,13 @@
         <div class="brand">Project Orange</div>
         <div class="title">JOHN DOE DECEASED</div>
         <div class="toolbar">
-            <a href="" class="mr-2">
+            <a href="" class="me-2">
                 <i class="fas fa-comment-dots"></i>
             </a>
-            <a href="" class="mr-2">
+            <a href="" class="me-2">
                 <i class="fas fa-bell"></i>
             </a>
-            <a href="" class="mr-2">
+            <a href="" class="me-2">
                 <i class="fas fa-cog"></i>
             </a>
         </div>
@@ -19,7 +19,7 @@
 <script>
 export default {
     name: 'AppHeader'
-}
+};
 </script>
 <style lang="scss" scoped>
 .header {
@@ -39,7 +39,7 @@ export default {
         padding: 20px 0;
         text-align: center;
         box-sizing: border-box;
-        border-right: 1px solid #F0F0F0;
+        border-right: 1px solid #f0f0f0;
     }
 
     .title {
@@ -57,10 +57,10 @@ export default {
 
         a {
             color: #4c4c4c;
-            transition: .25s;
+            transition: 0.25s;
 
             &:hover {
-                color: #FB952C;
+                color: #fb952c;
             }
         }
     }

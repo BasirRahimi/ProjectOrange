@@ -5,7 +5,7 @@
             <span v-if="modelValue">Change Copy</span>
             <span v-else>Upload Copy +</span>
         </label>
-        <span v-if="modelValue">{{ modelValue.name }}</span>
+        <span v-if="modelValue" class="ms-3">{{ modelValue.name }}</span>
     </div>
 </template>
 

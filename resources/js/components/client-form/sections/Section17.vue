@@ -48,7 +48,7 @@
                     </div>
                 </div>
 
-                <div class="text-right mt-2">
+                <div class="text-end mt-2">
                     <base-button
                         type="default"
                         outline
@@ -59,7 +59,7 @@
                     <base-button
                         type="default"
                         outline
-                        class="ml-auto"
+                        class="ms-auto"
                         @click="addRow"
                         v-if="formData[0].onTrue.length < 20"
                         >Add</base-button
@@ -68,7 +68,7 @@
             </yes-no>
         </content-box>
 
-        <content-box class="p-0 text-right" :shadow="false" :whiteBg="false">
+        <content-box class="p-0 text-end" :shadow="false" :whiteBg="false">
             <button
                 class="btn btn-primary shadow"
                 @click="

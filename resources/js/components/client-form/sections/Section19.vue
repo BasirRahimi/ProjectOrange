@@ -38,7 +38,7 @@
                                         >Description of asset</label
                                     >
                                     <a
-                                        class="ml-auto d-block"
+                                        class="ms-auto d-block"
                                         href="#"
                                         v-if="formData[0].onTrue.length > 1"
                                         @click.prevent="removeRow(i)"
@@ -48,7 +48,7 @@
                                 <textarea
                                     placeholder="e.g. The deceased’s freehold home at 12 Acacia Avenue London, England, EW1 123"
                                     rows="2"
-                                    class="form-control form-group"
+                                    class="form-control mb-4"
                                     v-model="row.description"></textarea>
 
                                 <div class="row">
@@ -119,7 +119,7 @@
                     <base-button
                         type="default"
                         outline
-                        class="ml-auto d-block"
+                        class="ms-auto d-block"
                         @click="addRow"
                         v-if="!viewData"
                         >Add</base-button
@@ -128,7 +128,7 @@
             </yes-no>
         </content-box>
 
-        <content-box class="p-0 text-right" :shadow="false" :whiteBg="false">
+        <content-box class="p-0 text-end" :shadow="false" :whiteBg="false">
             <button
                 class="btn btn-primary shadow"
                 @click="

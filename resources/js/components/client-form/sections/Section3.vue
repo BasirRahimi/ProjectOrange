@@ -2,7 +2,7 @@
     <div class="container">
         <content-box title="Section 2 - Powers of Attorney and non-UK elements">
             <yes-no
-                class="form-group"
+                class="mb-4"
                 :label="formData[0].query"
                 collapse
                 v-model="formData[0].answer">
@@ -16,7 +16,7 @@
                 >
             </yes-no>
             <yes-no
-                class="form-group"
+                class="mb-4"
                 :label="formData[1].query"
                 collapse
                 v-model="formData[1].answer">
@@ -30,12 +30,10 @@
                 >
             </yes-no>
 
-            <BaseButton
-                @click="collapse.collapse1 = !collapse.collapse1"
-                class="pointer"
-                >Tip<i class="icon-xs fas fa-chevron-down ml-2"></i
-            ></BaseButton>
-            <b-collapse :visible="collapse.collapse1" id="collapse1">
+            <BaseButton @click="collapse1.toggle()" size="sm"
+                >Tip<i class="icon-xs fa-solid fa-chevron-down ms-2"></i>
+            </BaseButton>
+            <b-collapse ref="collapse1">
                 <p class="text-gray-500 mt-2">
                     When a person dies, the Power of Attorney ceases to have
                     effect. The Attorney must hand over their responsibilities
@@ -49,15 +47,14 @@
         <content-box title="2.2 Domicile, residence and non-UK assets">
             <yes-no
                 collapse
-                :collapseOn="false"
+                :openOn="false"
                 :label="formData[2].query"
                 v-model="formData[2].answer">
                 <base-input
-                    class="mt-4"
+                    label-classes="mt-4"
                     :label="formData[2].onFalse[0].query"
                     placeholder="Paris, France"
                     v-model="formData[2].onFalse[0].answer"></base-input>
-
                 <base-input
                     :label="formData[2].onFalse[1].query"
                     placeholder="French"
@@ -66,7 +63,7 @@
                 <button-group
                     cssGrid
                     :gridColsize="100"
-                    class="form-group"
+                    class="mb-4"
                     :label="formData[2].onFalse[2].query"
                     :options="['Yes', 'No', 'Unsure']"
                     v-model="formData[2].onFalse[2].answer"></button-group>
@@ -74,7 +71,7 @@
                 <button-group
                     cssGrid
                     :gridColsize="100"
-                    class="form-group"
+                    class="mb-4"
                     :label="formData[2].onFalse[3].query"
                     :options="['Yes', 'No', 'Unsure']"
                     v-model="formData[2].onFalse[3].answer"></button-group>
@@ -83,7 +80,7 @@
 
         <content-box title="2.3 A brief narrative of the life of the deceased">
             <div v-show="slide === 1">
-                <div class="form-group">
+                <div class="mb-4">
                     <label class="flashit">{{ formData[3].query }}</label>
                     <textarea
                         class="form-control"
@@ -93,7 +90,7 @@
                 </div>
             </div>
             <div v-show="slide === 2">
-                <div class="form-group">
+                <div class="mb-4">
                     <label class="flashit">{{ formData[4].query }}</label>
                     <textarea
                         class="form-control"
@@ -103,7 +100,7 @@
                 </div>
             </div>
             <div v-show="slide === 3">
-                <div class="form-group">
+                <div class="mb-4">
                     <label class="flashit">{{ formData[5].query }}</label>
                     <textarea
                         class="form-control"
@@ -113,7 +110,7 @@
                 </div>
             </div>
             <div v-show="slide === 4">
-                <div class="form-group">
+                <div class="mb-4">
                     <label class="flashit">{{ formData[6].query }}</label>
                     <textarea
                         class="form-control"
@@ -124,20 +121,22 @@
             </div>
             <div v-show="slide === 5">
                 <yes-no
-                    class="form-group"
+                    class="mb-4"
                     label-class="flashit"
                     :label="formData[7].query"
                     v-model="formData[7].answer">
                 </yes-no>
 
                 <yes-no
-                    class="form-group"
+                    class="mb-4"
                     label-class="flashit"
                     :label="formData[8].query"
                     v-model="formData[8].answer">
                 </yes-no>
 
-                <b-collapse :visible="formData[7].answer === true">
+                <b-collapse
+                    ref="collapse2"
+                    :visible="formData[7].answer === true">
                     <base-input
                         :label="formData[7].onTrue[0].query"
                         placeholder="France"
@@ -153,7 +152,7 @@
                 </b-collapse>
             </div>
             <div v-show="slide === 6">
-                <div class="form-group">
+                <div class="mb-4">
                     <label class="flashit">{{ formData[9].query }}</label>
                     <textarea
                         class="form-control"
@@ -163,7 +162,7 @@
                 </div>
             </div>
             <div v-show="slide === 7">
-                <div class="form-group">
+                <div class="mb-4">
                     <label class="flashit">{{ formData[10].query }}</label>
                     <textarea
                         class="form-control"
@@ -172,11 +171,11 @@
                         v-model="formData[10].answer"></textarea>
                 </div>
 
-                <div class="form-group">
+                <div class="mb-4">
                     <button-group
                         cssGrid
                         :gridColsize="100"
-                        class="form-group"
+                        class="mb-4"
                         :label="formData[11].query"
                         :options="['Yes', 'No', 'Unsure']"
                         v-model="formData[11].answer"></button-group>
@@ -201,12 +200,10 @@
                 >
             </div>
 
-            <BaseButton
-                @click="collapse.collapse2 = !collapse.collapse2"
-                class="pointer"
-                >Tip<i class="icon-xs fas fa-chevron-down ml-2"></i
+            <BaseButton @click="collapse3.toggle()" class="pointer" size="sm"
+                >Tip<i class="icon-xs fas fa-chevron-down ms-2"></i
             ></BaseButton>
-            <b-collapse :visible="collapse.collapse2" id="collapse2">
+            <b-collapse ref="collapse3">
                 <p class="text-gray-500 mt-2">
                     Domicile and residence is relevant because it affects the
                     law that governs succession. Since 17.8.2016 a new European
@@ -221,7 +218,7 @@
             </b-collapse>
         </content-box>
 
-        <content-box class="p-0 text-right" :shadow="false" :whiteBg="false">
+        <content-box class="p-0 text-end" :shadow="false" :whiteBg="false">
             <button
                 class="btn btn-primary shadow"
                 @click="
@@ -248,10 +245,9 @@ const router = useRouter();
 const store = useClientStore();
 
 const slide = ref(1);
-const collapse = ref({
-    collapse1: false,
-    collapse2: false
-});
+const collapse1 = ref(null);
+const collapse2 = ref(null);
+const collapse3 = ref(null);
 let formData = reactive([
     {
         query: 'Did the deceased make an ENDURING power of attorney?',

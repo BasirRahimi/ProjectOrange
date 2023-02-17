@@ -1,0 +1,12 @@
+.btn-primary {
+    --#{$prefix}btn-color: #{$white};
+    --#{$prefix}btn-hover-color: #{$white};
+    --#{$prefix}btn-active-color: #{$white};
+}
+.btn-outline-default {
+    --#{$prefix}btn-hover-bg: #{$primary};
+    --#{$prefix}btn-hover-border-color: #{$primary};
+    --#{$prefix}btn-border-color: #{$input-border-color};
+    --#{$prefix}btn-active-bg: #{$primary};
+    --#{$prefix}btn-active-border-color: #{$primary};
+}

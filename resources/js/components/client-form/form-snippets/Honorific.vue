@@ -1,8 +1,8 @@
 <template>
-    <div class="row no-gutters form-group">
-        <div class="col-12 col-lg-6 mb-md-2 mb-lg-0">
-            <div class="row no-gutters mr-lg-2 h-100">
-                <div class="col-6 col-md-3 mb-2 mb-md-0 pr-1">
+    <div class="row g-2 mb-4">
+        <div class="col-12 col-lg-6">
+            <div class="row g-2 h-100">
+                <div class="col-6 col-md-3 mb-2 mb-md-0">
                     <base-button
                         @click="updateHonorific('Mr.')"
                         :class="{ active: honorific == 'Mr.' }"
@@ -12,7 +12,7 @@
                         >Mr.</base-button
                     >
                 </div>
-                <div class="col-6 col-md-3 mb-2 mb-md-0 pl-1 px-md-1">
+                <div class="col-6 col-md-3 mb-2 mb-md-0">
                     <base-button
                         @click="updateHonorific('Mrs.')"
                         :class="{ active: honorific == 'Mrs.' }"
@@ -22,7 +22,7 @@
                         >Mrs.</base-button
                     >
                 </div>
-                <div class="col-6 col-md-3 mb-2 mb-md-0 pr-1 px-md-1">
+                <div class="col-6 col-md-3 mb-2 mb-md-0">
                     <base-button
                         @click="updateHonorific('Miss')"
                         :class="{ active: honorific == 'Miss' }"
@@ -32,7 +32,7 @@
                         >Miss</base-button
                     >
                 </div>
-                <div class="col-6 col-md-3 mb-2 mb-md-0 pl-1">
+                <div class="col-6 col-md-3 mb-2 mb-md-0">
                     <base-button
                         @click="updateHonorific('Ms')"
                         :class="{ active: honorific == 'Ms' }"
@@ -48,7 +48,7 @@
             <base-input
                 placeholder="Other"
                 v-model="customHonorific"
-                :form-group="false"></base-input>
+                :formGroup="false"></base-input>
         </div>
     </div>
 </template>
@@ -92,5 +92,3 @@ export default {
     }
 };
 </script>
-
-<style></style>

@@ -44,7 +44,7 @@
                 placeholder="Doe"
                 v-model="executor.surname"></base-input>
 
-            <div class="form-group">
+            <div class="mb-4">
                 <label>Last usual address</label><br />
                 <base-radio
                     inline
@@ -141,7 +141,7 @@
             </div>
         </content-box>
 
-        <content-box class="p-0 text-right" :shadow="false" :whiteBg="false">
+        <content-box class="p-0 text-end" :shadow="false" :whiteBg="false">
             <div
                 class="d-flex mb-3 align-items-center"
                 :class="[

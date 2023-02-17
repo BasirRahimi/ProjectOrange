@@ -1,25 +1,25 @@
 $colsizes: 100, 150, 200;
 .button-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  /* This is better for small screens, once min() is better supported */
-  /* grid-template-columns: repeat(auto-fill, minmax(min(200px, 100%), 1fr)); */
-  grid-gap: 1rem;
-  /* This is the standardized property now, but has slightly less support */
-  /* gap: 1rem */
-  button:not(:last-child) {
-    margin: 0;
-  }
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    /* This is better for small screens, once min() is better supported */
+    /* grid-template-columns: repeat(auto-fill, minmax(min(200px, 100%), 1fr)); */
+    grid-gap: 1rem;
+    /* This is the standardized property now, but has slightly less support */
+    /* gap: 1rem */
+    button:not(:last-child) {
+        margin: 0;
+    }
 
-  @each $size in $colsizes {
-    &.colsize-#{$size} {
-      grid-template-columns: repeat(auto-fill, minmax(#{$size}px, 1fr));
-    } 
-  }
+    @each $size in $colsizes {
+        &.colsize-#{$size} {
+            grid-template-columns: repeat(auto-fill, minmax(#{$size}px, 1fr));
+        }
+    }
 }
 
 .text-gray-500 {
-  color: $gray-500 !important;
+    color: $gray-500 !important;
 }
 .text-gray-600 {
     color: $gray-600 !important;
@@ -31,12 +31,12 @@ $colsizes: 100, 150, 200;
         width: 100%;
         background-color: $body-bg;
         border: 0;
-        padding: .5rem 0;
+        padding: 0.5rem 0;
         text-align: center;
     }
     .cell-header {
         text-align: center;
-        padding: .5rem 0;
+        padding: 0.5rem 0;
         border: 1px solid $input-border-color;
         border-left: 0;
         display: inline;
@@ -64,7 +64,7 @@ $colsizes: 100, 150, 200;
             bottom: 0;
             right: 0;
             opacity: 0;
-            transition: opacity .25s;
+            transition: opacity 0.25s;
             z-index: -1;
             text-align: right;
             &.active {
@@ -207,7 +207,7 @@ textarea {
         @include media-breakpoint-up(sm) {
             opacity: 0;
         }
-        transition: .25s;
+        transition: 0.25s;
     }
 
     &:hover {
@@ -217,6 +217,12 @@ textarea {
     }
 }
 
-*:focus {
-    outline: none;
+label {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.v3dp__datepicker {
+    --vdp-hover-bg-color: #{$primary};
+    --vdp-selected-bg-color: #{$primary};
 }

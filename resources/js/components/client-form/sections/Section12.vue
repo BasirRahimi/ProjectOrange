@@ -24,7 +24,7 @@
                     died</label
                 >
                 <div class="row">
-                    <div class="col-md-4 form-group">
+                    <div class="col-md-4 mb-4">
                         <datepicker
                             v-model="formData[0].onTrue.trust_date_created"
                             class="form-control bg-white"
@@ -42,7 +42,7 @@
 
                 <label>What was the value of the inheritance received?</label>
                 <div class="row">
-                    <div class="col-md-4 form-group">
+                    <div class="col-md-4 mb-4">
                         <base-input
                             type="number"
                             placeholder="£240,000"
@@ -68,7 +68,7 @@
                 <BaseSwitch
                     left-text="Their Solicitors"
                     label="Their accountants"
-                    class="form-group"
+                    class="mb-4"
                     v-model="formData[0].onTrue.contact" />
 
                 <honorific v-model="formData[0].onTrue.contact_honorific" />
@@ -108,11 +108,11 @@
                     v-for="(doc, index) in formData[0].onTrue.docs"
                     v-show="activeDoc === index"
                     :key="index">
-                    <div class="row no-gutters mt-4 form-group" :key="index">
-                        <div class="col-md-4 mr-md-2 mb-2 mb-md-0">
+                    <div class="row no-gutters mt-4 mb-4" :key="index">
+                        <div class="col-md-4 me-md-2 mb-2 mb-md-0">
                             <base-input
                                 placeholder="Document title e.g ‘The Will’"
-                                :form-group="false"
+                                :mb-4="false"
                                 v-model="doc.document_title"></base-input>
                         </div>
                         <div class="col">
@@ -173,8 +173,9 @@
 
                 <BaseButton
                     @click="collapse.collapse1 = !collapse.collapse1"
+                    size="sm"
                     class="pointer"
-                    >Tip<i class="icon-xs fas fa-chevron-down ml-2"></i
+                    >Tip<i class="icon-xs fas fa-chevron-down ms-2"></i
                 ></BaseButton>
                 <b-collapse :visible="collapse.collapse1">
                     <p class="text-gray-500 mt-2 mb-0">
@@ -193,7 +194,7 @@
             </yes-no>
         </content-box>
 
-        <content-box class="p-0 text-right" :shadow="false" :whiteBg="false">
+        <content-box class="p-0 text-end" :shadow="false" :whiteBg="false">
             <button
                 class="btn btn-primary shadow"
                 @click="

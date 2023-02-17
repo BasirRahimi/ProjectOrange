@@ -26,7 +26,7 @@
                 class="col"
                 :class="[
                     { active: option.active === true },
-                    { 'mr-3': key != optionsCopy.length - 1 }
+                    { 'me-3': key != optionsCopy.length - 1 }
                 ]"
                 @click="update(key)"
                 >{{ option.value }}</base-button
@@ -86,7 +86,7 @@ export default {
         this.optionsCopy = this.options.map((x) => {
             return {
                 value: x,
-                active: this.value === x ? true : false
+                active: this.modelValue === x ? true : false
             };
         });
     },

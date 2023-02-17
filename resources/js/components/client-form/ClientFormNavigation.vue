@@ -1,62 +1,109 @@
 <template>
-    <nav aria-label="form navigation" class="client-form-navigation shadow"
-        :class="[{ 'collapsed': navCollapsed }, { 'nav-hidden': navHidden }]">
-
-        <button class="nav-toggle" @click="navCollapsed = !navCollapsed" v-if="false">
+    <nav
+        aria-label="form navigation"
+        class="client-form-navigation shadow"
+        :class="[{ collapsed: navCollapsed }, { 'nav-hidden': navHidden }]">
+        <button
+            class="nav-toggle"
+            @click="navCollapsed = !navCollapsed"
+            v-if="false">
             <div class="text" v-if="!navCollapsed">NAVIGATION</div>
             <div class="icons" :class="{ 'm-auto': navCollapsed }">
-                <i v-if="!navCollapsed" class="fas fa-chevron-left mr-1"></i>
+                <i v-if="!navCollapsed" class="fas fa-chevron-left me-1"></i>
                 <i class="fas fa-bars"></i>
-                <i v-if="navCollapsed" class="fas fa-chevron-right ml-1"></i>
+                <i v-if="navCollapsed" class="fas fa-chevron-right ms-1"></i>
             </div>
         </button>
 
         <div class="d-xl-none" v-if="false">
-            <button class="section-toggle" :class="{ 'text-center': navCollapsed }" @click="toolsOpen = !toolsOpen">
-                <span v-if="!navCollapsed">TOOLS</span><i class="fas fa-chevron-right"
-                    :class="[{ 'active': toolsOpen }, { 'ml-2': !navCollapsed }]"></i>
+            <button
+                class="section-toggle"
+                :class="{ 'text-center': navCollapsed }"
+                @click="toolsOpen = !toolsOpen">
+                <span v-if="!navCollapsed">TOOLS</span
+                ><i
+                    class="fas fa-chevron-right"
+                    :class="[
+                        { active: toolsOpen },
+                        { 'ms-2': !navCollapsed }
+                    ]"></i>
             </button>
-            <div class="section-collapse" :class="{ 'collapsed': !toolsOpen || navCollapsed }" ref="sectionCollapse">
+            <div
+                class="section-collapse"
+                :class="{ collapsed: !toolsOpen || navCollapsed }"
+                ref="sectionCollapse">
                 <!-- :style="{height: `${toolsOpenHeight}px`}" -->
-                <a class="show-reminder-form py-2" href="#" @click.prevent="showReminderForm = !showReminderForm"><i
-                        class="fas mr-2"
-                        :class="[{ 'fa-plus': !showReminderForm }, { 'fa-minus': showReminderForm }]"></i>Set
-                    new reminder</a>
-                <create-reminder v-show="showReminderForm" class="py-2" :small="true"></create-reminder>
+                <a
+                    class="show-reminder-form py-2"
+                    href="#"
+                    @click.prevent="showReminderForm = !showReminderForm"
+                    ><i
+                        class="fas me-2"
+                        :class="[
+                            { 'fa-plus': !showReminderForm },
+                            { 'fa-minus': showReminderForm }
+                        ]"></i
+                    >Set new reminder</a
+                >
+                <create-reminder
+                    v-show="showReminderForm"
+                    class="py-2"
+                    :small="true"></create-reminder>
             </div>
         </div>
         <div class="d-xl-none" v-if="false">
-            <button class="section-toggle" :class="{ 'text-center': navCollapsed }"
+            <button
+                class="section-toggle"
+                :class="{ 'text-center': navCollapsed }"
                 @click="documentsOpen = !documentsOpen">
-                <span v-if="!navCollapsed">SECTION DOCUMENTS</span><i class="fas fa-chevron-right"
-                    :class="[{ 'active': documentsOpen }, { 'ml-2': !navCollapsed }]"></i>
+                <span v-if="!navCollapsed">SECTION DOCUMENTS</span
+                ><i
+                    class="fas fa-chevron-right"
+                    :class="[
+                        { active: documentsOpen },
+                        { 'ms-2': !navCollapsed }
+                    ]"></i>
             </button>
-            <div class="section-collapse" :class="{ 'collapsed': !documentsOpen }" ref="sectionCollapse">
+            <div
+                class="section-collapse"
+                :class="{ collapsed: !documentsOpen }"
+                ref="sectionCollapse">
                 <!-- :style="{height: `${documentsOpenHeight}px`}" -->
                 <required-docs :inSideNav="true"></required-docs>
             </div>
         </div>
 
-        <button class="section-toggle" :class="{ 'text-center': navCollapsed }"
+        <button
+            class="section-toggle"
+            :class="{ 'text-center': navCollapsed }"
             @click="caseDetailsOpen = !caseDetailsOpen">
-            <span v-if="!navCollapsed">CASE DETAILS</span><i class="fas fa-chevron-right"
-                :class="[{ 'active': caseDetailsOpen }, { 'ml-2': !navCollapsed }]"></i>
+            <span v-if="!navCollapsed">CASE DETAILS</span
+            ><i
+                class="fas fa-chevron-right"
+                :class="[
+                    { active: caseDetailsOpen },
+                    { 'ms-2': !navCollapsed }
+                ]"></i>
         </button>
-        <div class="section-collapse" :class="{ 'collapsed': !caseDetailsOpen }">
+        <div class="section-collapse" :class="{ collapsed: !caseDetailsOpen }">
             <!-- :style="{height: `${caseDetailsOpenHeight}px`}" -->
             <ul class="fa-ul mb-0">
-                <li class="py-2 section-link" :class="{ 'active': 'section1' == currentRouteName }">
+                <li
+                    class="py-2 section-link"
+                    :class="{ active: 'section1' == currentRouteName }">
                     <a href="#" @click.prevent="sectionClick('section1')">
                         <span class="fa-li">
-                            <i class="mr-2 po-icon-person"></i>
+                            <i class="me-2 po-icon-person"></i>
                         </span>
                         About
                     </a>
                 </li>
-                <li class="py-2 section-link" :class="{ 'active': 'section2' == currentRouteName }">
+                <li
+                    class="py-2 section-link"
+                    :class="{ active: 'section2' == currentRouteName }">
                     <a href="#" @click.prevent="sectionClick('section2')">
                         <span class="fa-li">
-                            <i class="fas fa-user-tie mr-2"></i>
+                            <i class="fas fa-user-tie me-2"></i>
                         </span>
                         Executors
                     </a>
@@ -64,18 +111,35 @@
             </ul>
         </div>
 
-        <button class="section-toggle" :class="{ 'text-center': navCollapsed }" @click="sectionsOpen = !sectionsOpen">
-            <span v-if="!navCollapsed">SECTIONS</span><i class="fas fa-chevron-right"
-                :class="[{ 'active': sectionsOpen }, { 'ml-2': !navCollapsed }]"></i>
+        <button
+            class="section-toggle"
+            :class="{ 'text-center': navCollapsed }"
+            @click="sectionsOpen = !sectionsOpen">
+            <span v-if="!navCollapsed">SECTIONS</span
+            ><i
+                class="fas fa-chevron-right"
+                :class="[
+                    { active: sectionsOpen },
+                    { 'ms-2': !navCollapsed }
+                ]"></i>
         </button>
-        <div class="section-collapse" :class="{ 'collapsed': !sectionsOpen }" ref="sectionCollapse">
+        <div
+            class="section-collapse"
+            :class="{ collapsed: !sectionsOpen }"
+            ref="sectionCollapse">
             <!-- :style="{height: `${sectionsOpenHeight}px`}" -->
             <ul class="fa-ul mb-0">
-                <li class="py-2 section-link" :class="{ 'active': section.routeName == currentRouteName }"
-                    v-for="(section, index) in sections" :key="index">
-                    <a :tabindex="sectionsOpen ? 0 : -1" href="#" @click.prevent="sectionClick(section.routeName)">
+                <li
+                    class="py-2 section-link"
+                    :class="{ active: section.routeName == currentRouteName }"
+                    v-for="(section, index) in sections"
+                    :key="index">
+                    <a
+                        :tabindex="sectionsOpen ? 0 : -1"
+                        href="#"
+                        @click.prevent="sectionClick(section.routeName)">
                         <span class="fa-li">
-                            <i :class="section.icon" class="mr-2"></i>
+                            <i :class="section.icon" class="me-2"></i>
                         </span>
                         {{ section.label }}
                     </a>
@@ -83,13 +147,17 @@
             </ul>
         </div>
         <button class="section-toggle" :class="{ 'text-center': navCollapsed }">
-            <span v-if="!navCollapsed">REMINDERS</span><i class="fas fa-chevron-right"
-                :class="{ 'ml-2': !navCollapsed }"></i>
+            <span v-if="!navCollapsed">REMINDERS</span
+            ><i
+                class="fas fa-chevron-right"
+                :class="{ 'ms-2': !navCollapsed }"></i>
         </button>
-        <br>
+        <br />
         <button class="section-toggle" :class="{ 'text-center': navCollapsed }">
-            <span v-if="!navCollapsed">NEED HELP?</span><i class="fas fa-chevron-right"
-                :class="{ 'ml-2': !navCollapsed }"></i>
+            <span v-if="!navCollapsed">NEED HELP?</span
+            ><i
+                class="fas fa-chevron-right"
+                :class="{ 'ms-2': !navCollapsed }"></i>
         </button>
     </nav>
 </template>
@@ -203,7 +271,7 @@ export default {
                     label: 'Other information',
                     icon: 'po-icon-information',
                     routeName: 'section21'
-                },
+                }
             ],
             caseDetailsOpen: true,
             sectionsOpen: true,
@@ -212,8 +280,8 @@ export default {
             // toolsOpenHeight: '60',
             documentsOpen: true,
             navCollapsed: false,
-            showReminderForm: false,
-        }
+            showReminderForm: false
+        };
     },
     computed: {
         currentRouteName() {
@@ -225,17 +293,20 @@ export default {
         let nav = $('.client-form-navigation');
         if (window.innerWidth < 1500 && window.innerWidth > 991) {
             _self.navCollapsed = true;
-            $(nav).hover(e => {
-                // hover in
-                if (_self.navCollapsed) {
-                    _self.navCollapsed = false;
+            $(nav).hover(
+                (e) => {
+                    // hover in
+                    if (_self.navCollapsed) {
+                        _self.navCollapsed = false;
+                    }
+                },
+                (e) => {
+                    // hover out
+                    if (!_self.navCollapsed) {
+                        _self.navCollapsed = true;
+                    }
                 }
-            }, e => {
-                // hover out
-                if (!_self.navCollapsed) {
-                    _self.navCollapsed = true;
-                }
-            })
+            );
         }
     },
     methods: {
@@ -247,9 +318,9 @@ export default {
     watch: {
         navCollapsed(newVal) {
             this.$emit('toggleNav', newVal);
-        },
-    },
-}
+        }
+    }
+};
 </script>
 <style lang="scss" scoped>
 @import '@sass/vue_sfc.scss';
@@ -262,7 +333,7 @@ export default {
     padding: 20px;
     max-width: 300px;
     height: calc(100% - 68px);
-    transition: .25s;
+    transition: 0.25s;
     overflow-y: scroll;
     white-space: nowrap;
     z-index: 1;
@@ -285,14 +356,14 @@ export default {
     background-color: $white;
     padding: 0;
     margin: 8px 0;
-    color: #BEC0BE;
+    color: #bec0be;
     text-align: left;
     width: 100%;
     outline: none;
 }
 
 .fa-chevron-right {
-    transition: .25s;
+    transition: 0.25s;
 
     &.active {
         transform: rotateZ(90deg);
@@ -304,7 +375,7 @@ export default {
         display: block;
         text-decoration: none;
         color: $body-color;
-        transition: .25s;
+        transition: 0.25s;
 
         &:hover {
             color: $primary;
@@ -320,7 +391,7 @@ export default {
         //po icons
         .icon {
             &::before {
-                transition: .25s;
+                transition: 0.25s;
                 color: $body-color;
             }
         }
@@ -341,7 +412,7 @@ export default {
 }
 
 .section-collapse {
-    transition: .25s;
+    transition: 0.25s;
     overflow: hidden;
 
     &.collapsed {
@@ -357,7 +428,7 @@ export default {
     font-weight: 600;
     border: none;
     background-color: $white;
-    color: #979A97;
+    color: #979a97;
     width: 100%;
     text-align: left;
 
@@ -371,7 +442,7 @@ export default {
 }
 
 .show-reminder-form {
-    transition: .25s;
+    transition: 0.25s;
     color: $body-color;
     text-decoration: none;
     display: flex;

@@ -49,7 +49,7 @@
                 v-model="trust.surname"></base-input>
 
             <yes-no
-                class="form-group"
+                class="mb-4"
                 :label="trust.query1.query"
                 v-model="trust.query1.answer"
                 collapse>
@@ -60,7 +60,7 @@
                     placeholder="Please include a full overview of relevant details to this question"></textarea>
             </yes-no>
 
-            <div class="form-group">
+            <div class="mb-4">
                 <label>{{ trust.query2.query }}</label>
                 <BaseSwitch
                     v-model="trust.query2.answer"
@@ -104,12 +104,12 @@
             v-if="formData.length < 4">
             <div class="text-center">
                 <base-button type="default" outline @click="addTrustee"
-                    >Add trustee<i class="fas fa-plus ml-3"></i
+                    >Add trustee<i class="fas fa-plus ms-3"></i
                 ></base-button>
             </div>
         </content-box>
 
-        <content-box class="p-0 text-right" :shadow="false" :whiteBg="false">
+        <content-box class="p-0 text-end" :shadow="false" :whiteBg="false">
             <button
                 class="btn btn-primary shadow"
                 @click="

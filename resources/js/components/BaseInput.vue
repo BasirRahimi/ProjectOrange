@@ -1,7 +1,7 @@
 <template>
     <div
         :class="[
-            { 'form-group': formGroup },
+            { 'mb-4': formGroup },
             { 'input-group': hasIcon },
             { 'has-danger': error },
             { focused: focused },
@@ -163,4 +163,3 @@ export default {
     }
 };
 </script>
-<style></style>

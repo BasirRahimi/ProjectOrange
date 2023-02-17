@@ -5,19 +5,22 @@
             <base-button
                 type="default"
                 outline
-                :class="{ active: answer === true }"
+                :class="{ active: modelValue === true }"
                 @click="yes()"
                 >Yes</base-button
             >
             <base-button
                 type="default"
                 outline
-                :class="{ active: answer === false }"
+                :class="{ active: modelValue === false }"
                 @click="no()"
                 >No</base-button
             >
         </div>
-        <b-collapse v-if="collapse" :visible="answer === collapseOn">
+        <b-collapse
+            v-if="collapse"
+            ref="collapse1"
+            :visible="openOn === modelValue">
             <slot></slot>
         </b-collapse>
     </div>
@@ -38,32 +41,28 @@ export default {
             type: Boolean,
             default: false
         },
-        collapseOn: {
-            type: Boolean,
-            default: true
-        },
         modelValue: {
             type: Boolean,
             default: null
+        },
+        openOn: {
+            type: Boolean,
+            default: true
         }
-    },
-    data() {
-        return {
-            answer: null
-        };
     },
     methods: {
         yes() {
-            this.answer = true;
-            this.$emit('update:modelValue', this.answer);
+            this.openOn
+                ? this.$refs.collapse1.show()
+                : this.$refs.collapse1.hide();
+            this.$emit('update:modelValue', true);
         },
         no() {
-            this.answer = false;
-            this.$emit('update:modelValue', this.answer);
+            this.openOn
+                ? this.$refs.collapse1.hide()
+                : this.$refs.collapse1.show();
+            this.$emit('update:modelValue', false);
         }
-    },
-    beforeMount() {
-        this.answer = this.modelValue;
     }
 };
 </script>

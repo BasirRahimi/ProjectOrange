@@ -43,7 +43,7 @@
         <content-box title="4.2 Details of lifetime videos">
             <yes-no
                 v-show="slide === 1"
-                class="form-group"
+                class="mb-4"
                 label-class="flashit"
                 :label="formData[0].query"
                 v-model="formData[0].answer"
@@ -57,7 +57,7 @@
 
             <yes-no
                 v-show="slide === 2"
-                class="form-group"
+                class="mb-4"
                 label-class="flashit"
                 :label="formData[1].query"
                 v-model="formData[1].answer"
@@ -71,7 +71,7 @@
 
             <yes-no
                 v-show="slide === 3"
-                class="form-group"
+                class="mb-4"
                 label-class="flashit"
                 :label="formData[2].query"
                 v-model="formData[2].answer"
@@ -85,7 +85,7 @@
 
             <yes-no
                 v-show="slide === 4"
-                class="form-group"
+                class="mb-4"
                 label-class="flashit"
                 :label="formData[3].query"
                 v-model="formData[3].answer"
@@ -99,7 +99,7 @@
 
             <yes-no
                 v-show="slide === 5"
-                class="form-group"
+                class="mb-4"
                 label-class="flashit"
                 :label="formData[4].query"
                 v-model="formData[4].answer"
@@ -131,8 +131,9 @@
 
             <BaseButton
                 @click="collapse.collapse1 = !collapse.collapse1"
-                class="pointer">
-                Tip<i class="icon-xs fas fa-chevron-down ml-2"></i>
+                class="pointer"
+                size="sm">
+                Tip<i class="icon-xs fas fa-chevron-down ms-2"></i>
             </BaseButton>
             <b-collapse :visible="collapse.collapse1" id="collapse2">
                 <p class="text-gray-500 mt-2">
@@ -149,7 +150,7 @@
             </b-collapse>
         </content-box>
 
-        <content-box class="p-0 text-right" :shadow="false" :whiteBg="false">
+        <content-box class="p-0 text-end" :shadow="false" :whiteBg="false">
             <button
                 class="btn btn-primary shadow"
                 @click="

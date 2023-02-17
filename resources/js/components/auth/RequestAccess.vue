@@ -145,7 +145,7 @@
                         </p>
                         <form @submit.prevent="saveUserDetails" class="pt-2">
                             <div class="d-flex align-items-center">
-                                <div class="form-group mr-3">
+                                <div class="mb-4 me-3">
                                     <select
                                         v-model="title"
                                         class="form-control">

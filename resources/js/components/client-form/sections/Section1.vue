@@ -35,7 +35,7 @@
                 v-model="formData.aliases"
                 label="Any aliases in which they held assets?"></base-input>
 
-            <div class="form-group">
+            <div class="mb-4">
                 <label>Last usual address</label><br />
                 <BaseRadio
                     inline
@@ -55,7 +55,7 @@
 
             <div class="row">
                 <div
-                    class="col-lg-5 form-group"
+                    class="col-lg-5 mb-4"
                     v-show="addressInputType == 'postcode'">
                     <div class="input-group">
                         <input
@@ -71,7 +71,7 @@
                 </div>
                 <div class="col-12" v-show="addressInputType == 'manual'">
                     <div class="row">
-                        <div class="col-lg-5 form-group">
+                        <div class="col-lg-5 mb-4">
                             <label for="addressLine1">Address Line 1</label>
                             <input
                                 type="text"
@@ -82,7 +82,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-5 form-group">
+                        <div class="col-lg-5 mb-4">
                             <label for="addressLine2">Address Line 2</label>
                             <input
                                 type="text"
@@ -93,7 +93,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-5 form-group">
+                        <div class="col-lg-5 mb-4">
                             <label for="town">Town / City</label>
                             <input
                                 type="text"
@@ -104,7 +104,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-5 form-group">
+                        <div class="col-lg-5 mb-4">
                             <label for="postcode">Postcode</label>
                             <input
                                 type="text"
@@ -136,14 +136,14 @@
                         label="Place of Birth"
                         placeholder="Maidstone, Kent"
                         v-model="formData.place_of_birth"
-                        :form-group="false"></base-input>
+                        :mb-4="false"></base-input>
                 </div>
                 <div class="col-12 col-lg-6">
                     <base-input
                         label="Place of Death"
                         placeholder="Wandsworth, London"
                         v-model="formData.place_of_death"
-                        :form-group="false"></base-input>
+                        :mb-4="false"></base-input>
                 </div>
             </div>
         </content-box>
@@ -193,7 +193,7 @@
                     outline
                     @click="updateSurvivingRelatives('spouse')"
                     :class="{ active: formData.spouse }"
-                    class="col mr-3"
+                    class="col me-3"
                     >Spouse</base-button
                 >
                 <base-button
@@ -201,7 +201,7 @@
                     outline
                     @click="updateSurvivingRelatives('parents')"
                     :class="{ active: formData.parents > 0 }"
-                    class="col mr-3"
+                    class="col me-3"
                     >Parents</base-button
                 >
                 <base-button
@@ -209,7 +209,7 @@
                     outline
                     @click="updateSurvivingRelatives('siblings')"
                     :class="{ active: formData.siblings > 0 }"
-                    class="col mr-3"
+                    class="col me-3"
                     >Siblings</base-button
                 >
                 <base-button
@@ -217,7 +217,7 @@
                     outline
                     @click="updateSurvivingRelatives('children')"
                     :class="{ active: formData.children > 0 }"
-                    class="col mr-3"
+                    class="col me-3"
                     >Children</base-button
                 >
                 <base-button
@@ -229,7 +229,7 @@
                     >Grand Children</base-button
                 >
             </div>
-            <BCollapse :visible="formData.parents > 0">
+            <b-collapse ref="collapse1" :visible="formData.parents > 0">
                 <div class="row mt-4">
                     <div class="col-lg-6">
                         <label for="noOfParents"
@@ -244,8 +244,8 @@
                             v-model.number="formData.parents" />
                     </div>
                 </div>
-            </BCollapse>
-            <BCollapse :visible="formData.siblings > 0">
+            </b-collapse>
+            <b-collapse ref="collapse2" :visible="formData.siblings > 0">
                 <div class="row mt-4">
                     <div class="col-lg-6">
                         <label for="noOfSiblings"
@@ -259,8 +259,8 @@
                             v-model.number="formData.siblings" />
                     </div>
                 </div>
-            </BCollapse>
-            <BCollapse :visible="formData.children > 0">
+            </b-collapse>
+            <b-collapse ref="collapse3" :visible="formData.children > 0">
                 <div class="row mt-4">
                     <div class="col-lg-6">
                         <label for="noOfChildren"
@@ -274,8 +274,8 @@
                             v-model.number="formData.children" />
                     </div>
                 </div>
-            </BCollapse>
-            <BCollapse :visible="formData.grand_children > 0">
+            </b-collapse>
+            <b-collapse ref="collapse4" :visible="formData.grand_children > 0">
                 <div class="row mt-4">
                     <div class="col-lg-6">
                         <label for="noOfGrandChildren"
@@ -289,11 +289,11 @@
                             v-model.number="formData.grand_children" />
                     </div>
                 </div>
-            </BCollapse>
+            </b-collapse>
         </content-box>
         <content-box title="1.5 Income tax details">
             <div class="row">
-                <div class="col-12 col-lg-6 form-group">
+                <div class="col-12 col-lg-6 mb-4">
                     <label for="NInumber">National insurance number</label>
                     <input
                         type="text"
@@ -302,7 +302,7 @@
                         placeholder="576HDIW7 IE"
                         v-model="formData.national_insurance_number" />
                 </div>
-                <div class="col-12 col-lg-6 form-group">
+                <div class="col-12 col-lg-6 mb-4">
                     <label for="tax-ref">Income tax reference</label>
                     <input
                         type="text"
@@ -316,7 +316,7 @@
                         >The contact details of the deceased’s accountant</label
                     >
                 </div>
-                <div class="col-12 col-lg-6 form-group">
+                <div class="col-12 col-lg-6 mb-4">
                     <label for="phone">Phone number</label>
                     <input
                         type="text"
@@ -325,7 +325,7 @@
                         placeholder="+44 012345 67890"
                         v-model="formData.accountant_phone" />
                 </div>
-                <div class="col-12 col-lg-6 form-group">
+                <div class="col-12 col-lg-6 mb-4">
                     <label for="email">Email Address</label>
                     <input
                         type="text"
@@ -336,7 +336,7 @@
                 </div>
             </div>
         </content-box>
-        <content-box class="p-0 text-right" :shadow="false" :whiteBg="false">
+        <content-box class="p-0 text-end" :shadow="false" :whiteBg="false">
             <button class="btn btn-primary shadow" @click="nextSection">
                 Next section
             </button>
@@ -353,6 +353,10 @@ import { useSaveSectionData as saveSectionData } from '@/composables/helper.js';
 
 const router = useRouter();
 const store = useClientStore();
+const collapse1 = ref(null);
+const collapse2 = ref(null);
+const collapse3 = ref(null);
+const collapse4 = ref(null);
 const formData = reactive({
     honorific: '',
     forename: '',
@@ -380,14 +384,50 @@ const addressInputType = ref('manual');
 const date = new Date();
 
 const updateSurvivingRelatives = (relative) => {
-    console.log('updateSurvivingRelatives');
+    switch (relative) {
+        case 'spouse':
+            formData[relative] =
+                formData[relative] === 0 || formData[relative] === null ? 1 : 0;
+            break;
+        case 'parents':
+            if (formData[relative] === 0 || formData[relative] === null) {
+                formData[relative] = 1;
+                collapse1.value.show();
+            } else {
+                formData[relative] = 0;
+                collapse1.value.hide();
+            }
+            break;
+        case 'siblings':
+            if (formData[relative] === 0 || formData[relative] === null) {
+                formData[relative] = 1;
+                collapse2.value.show();
+            } else {
+                formData[relative] = 0;
+                collapse2.value.hide();
+            }
+            break;
+        case 'children':
+            if (formData[relative] === 0 || formData[relative] === null) {
+                formData[relative] = 1;
+                collapse3.value.show();
+            } else {
+                formData[relative] = 0;
+                collapse3.value.hide();
+            }
+            break;
+        case 'grand_children':
+            if (formData[relative] === 0 || formData[relative] === null) {
+                formData[relative] = 1;
+                collapse4.value.show();
+            } else {
+                formData[relative] = 0;
+                collapse4.value.hide();
+            }
+            break;
 
-    if (relative === 'spouse') {
-        formData.spouse = !!formData.spouse ? false : true;
-    } else if (formData[relative] === 0 || formData[relative] === null) {
-        formData[relative] = 1;
-    } else {
-        formData[relative] = 0;
+        default:
+            break;
     }
 };
 const nextSection = () => {

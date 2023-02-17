@@ -24,7 +24,7 @@
                     placeholder="Doe"
                     v-model="formData[0].onTrue.surname"></base-input>
                 <div class="row no-gutters">
-                    <div class="col-md-4 form-group">
+                    <div class="col-md-4 mb-4">
                         <label>Date of death</label>
                         <datepicker
                             v-model="formData[0].onTrue.date_of_death"
@@ -58,11 +58,11 @@
                         v-for="(doc, index) in formData[0].onTrue.query1.onTrue"
                         v-show="activeDoc === index"
                         :key="index">
-                        <div class="row no-gutters mt-4 form-group">
-                            <div class="col-md-4 mr-md-2 mb-2 mb-md-0">
+                        <div class="row no-gutters mt-4 mb-4">
+                            <div class="col-md-4 me-md-2 mb-2 mb-md-0">
                                 <base-input
                                     placeholder="Document title e.g ‘The Will’"
-                                    :form-group="false"
+                                    :mb-4="false"
                                     v-model="doc.document_title"></base-input>
                             </div>
                             <div class="col">
@@ -136,7 +136,7 @@
             </yes-no>
         </content-box>
 
-        <content-box class="p-0 text-right" :shadow="false" :whiteBg="false">
+        <content-box class="p-0 text-end" :shadow="false" :whiteBg="false">
             <button
                 class="btn btn-primary shadow"
                 @click="

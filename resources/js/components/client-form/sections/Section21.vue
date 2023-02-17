@@ -27,7 +27,7 @@
             <label>Description</label>
             <textarea
                 v-model="row.description"
-                class="form-control form-group"
+                class="form-control mb-4"
                 placeholder="I do not have the policy information and have asked my IFA to send it to you seperately"></textarea>
 
             <label>Upload relevant documents:</label><br />
@@ -38,7 +38,7 @@
                         v-model="formData[i].docs[j]"
                         @input="saveData"></client-file-upload>
                     <a :href="doc.path">{{ doc.filename }}</a>
-                    <div class="file-rem-hidden d-inline-block ml-3">
+                    <div class="file-rem-hidden d-inline-block ms-3">
                         <base-button
                             type="danger"
                             icon="fas fa-window-close"
@@ -62,11 +62,11 @@
             <button class="btn btn-primary shadow" @click="addRow">
                 Add information<i
                     data-v-c216df9e=""
-                    class="fas fa-plus ml-3"></i>
+                    class="fas fa-plus ms-3"></i>
             </button>
         </content-box>
 
-        <content-box class="p-0 text-right" :shadow="false" :whiteBg="false">
+        <content-box class="p-0 text-end" :shadow="false" :whiteBg="false">
             <button
                 class="btn btn-primary shadow"
                 @click="

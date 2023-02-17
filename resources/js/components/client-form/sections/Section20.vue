@@ -42,7 +42,7 @@
                     </div>
                 </div>
 
-                <div class="text-right mt-2">
+                <div class="text-end mt-2">
                     <base-button
                         type="default"
                         outline
@@ -53,7 +53,7 @@
                     <base-button
                         type="default"
                         outline
-                        class="ml-auto"
+                        class="ms-auto"
                         @click="addRow"
                         v-if="formData[0].onTrue.length < 20"
                         >Add</base-button
@@ -63,8 +63,9 @@
 
             <BaseButton
                 @click="collapse.collapse1 = !collapse.collapse1"
+                size="sm"
                 class="pointer"
-                >Tip<i class="icon-xs fas fa-chevron-down ml-2"></i
+                >Tip<i class="icon-xs fas fa-chevron-down ms-2"></i
             ></BaseButton>
             <b-collapse :visible="collapse.collapse1">
                 <p class="text-gray-500 mt-2 mb-0">
@@ -74,7 +75,7 @@
             </b-collapse>
         </content-box>
 
-        <content-box class="p-0 text-right" :shadow="false" :whiteBg="false">
+        <content-box class="p-0 text-end" :shadow="false" :whiteBg="false">
             <button
                 class="btn btn-primary shadow"
                 @click="

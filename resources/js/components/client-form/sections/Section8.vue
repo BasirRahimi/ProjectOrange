@@ -3,8 +3,9 @@
         <content-box title="Section 7 - Swiss and assets in other ‘tax havens’">
             <BaseButton
                 @click="collapse.collapse1 = !collapse.collapse1"
+                size="sm"
                 class="pointer"
-                >Tip<i class="icon-xs fas fa-chevron-down ml-2"></i
+                >Tip<i class="icon-xs fas fa-chevron-down ms-2"></i
             ></BaseButton>
             <b-collapse :visible="collapse.collapse1">
                 <p class="text-gray-500 mt-2 mb-0">
@@ -25,7 +26,7 @@
             <yes-no
                 v-for="(row, i) in formData"
                 :key="i"
-                class="form-group"
+                class="mb-4"
                 :label="row.query"
                 v-model="row.answer"
                 collapse>
@@ -37,7 +38,7 @@
             </yes-no>
         </content-box>
 
-        <content-box class="p-0 text-right" :shadow="false" :whiteBg="false">
+        <content-box class="p-0 text-end" :shadow="false" :whiteBg="false">
             <button
                 class="btn btn-primary shadow"
                 @click="
