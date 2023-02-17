@@ -5,7 +5,7 @@ import ViteRestart from 'vite-plugin-restart';
 
 export default defineConfig({
     plugins: [
-        laravel(['resources/sass/argon/argon.scss', 'resources/js/app.js']),
+        laravel(['resources/sass/main.scss', 'resources/js/app.js']),
         vue({
             runtimeCompiler: true,
             template: {
