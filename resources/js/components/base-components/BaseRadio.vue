@@ -15,7 +15,7 @@
     </div>
 </template>
 <script>
-import { randomString } from './stringUtils';
+import { randomString } from '@/composables/helper.js';
 export default {
     name: 'base-radio',
     props: {

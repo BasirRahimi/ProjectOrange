@@ -8,7 +8,7 @@ const app = createApp({
 });
 
 // Components
-import globalComponents from './plugins/globalComponents';
+import globalComponents from './globalComponents';
 app.use(globalComponents);
 
 // Directives

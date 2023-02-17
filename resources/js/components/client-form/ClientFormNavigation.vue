@@ -161,167 +161,156 @@
         </button>
     </nav>
 </template>
-<script>
+<script setup>
+import { computed, ref, onMounted, watch } from 'vue';
 import CreateReminder from './CreateReminder.vue';
 import RequiredDocs from './widgets/RequiredDocs.vue';
+import { useRouter, useRoute } from 'vue-router';
+const router = useRouter();
+const route = useRoute();
 
-export default {
-    name: 'ClientFormNavigation',
-    components: {
-        CreateReminder,
-        RequiredDocs
+const props = defineProps({ navHidden: { type: Boolean, default: false } });
+const sections = [
+    {
+        label: 'Powers of Attorney',
+        icon: 'fas fa-pen-nib',
+        routeName: 'section3'
     },
-    props: {
-        navHidden: { type: Boolean, default: false }
+    {
+        label: 'Will & Marital Status',
+        icon: 'po-icon-ring',
+        routeName: 'section4'
     },
-    data() {
-        return {
-            sections: [
-                {
-                    label: 'Powers of Attorney',
-                    icon: 'fas fa-pen-nib',
-                    routeName: 'section3'
-                },
-                {
-                    label: 'Will & Marital Status',
-                    icon: 'po-icon-ring',
-                    routeName: 'section4'
-                },
-                {
-                    label: 'Lifetime gifts',
-                    icon: 'po-icon-present',
-                    routeName: 'section5'
-                },
-                {
-                    label: 'Gifts',
-                    icon: 'fas fa-gifts',
-                    routeName: 'section6'
-                },
-                {
-                    label: 'UK & British Isles',
-                    icon: 'po-icon-flag',
-                    routeName: 'section7'
-                },
-                {
-                    label: 'Tax Havens',
-                    icon: 'po-icon-world',
-                    routeName: 'section8'
-                },
-                {
-                    label: 'Nil-Rate band',
-                    icon: 'po-icon-pound',
-                    routeName: 'section9'
-                },
-                {
-                    label: 'Business interests',
-                    icon: 'po-icon-briefcase',
-                    routeName: 'section10'
-                },
-                {
-                    label: 'Received inheritance',
-                    icon: 'po-icon-debit-card',
-                    routeName: 'section11'
-                },
-                {
-                    label: 'Trusts',
-                    icon: 'po-icon-handshake',
-                    routeName: 'section12'
-                },
-                {
-                    label: 'Pensions',
-                    icon: 'po-icon-piggybank',
-                    routeName: 'section13'
-                },
-                {
-                    label: 'Life Assurance',
-                    icon: 'po-icon-lifebuoy',
-                    routeName: 'section14'
-                },
-                {
-                    label: 'Joint held assets',
-                    icon: 'po-icon-people',
-                    routeName: 'section15'
-                },
-                {
-                    label: 'Stocks & Shares',
-                    icon: 'po-icon-graph',
-                    routeName: 'section16'
-                },
-                {
-                    label: 'Bank and savings',
-                    icon: 'po-icon-dollar',
-                    routeName: 'section17'
-                },
-                {
-                    label: 'Personal belongings',
-                    icon: 'po-icon-tv',
-                    routeName: 'section18'
-                },
-                {
-                    label: 'Assets',
-                    icon: 'po-icon-house',
-                    routeName: 'section19'
-                },
-                {
-                    label: 'Liabilities',
-                    icon: 'po-icon-car',
-                    routeName: 'section20'
-                },
-                {
-                    label: 'Other information',
-                    icon: 'po-icon-information',
-                    routeName: 'section21'
-                }
-            ],
-            caseDetailsOpen: true,
-            sectionsOpen: true,
-            // sectionsOpenHeight: '620',
-            toolsOpen: true,
-            // toolsOpenHeight: '60',
-            documentsOpen: true,
-            navCollapsed: false,
-            showReminderForm: false
-        };
+    {
+        label: 'Lifetime gifts',
+        icon: 'po-icon-present',
+        routeName: 'section5'
     },
-    computed: {
-        currentRouteName() {
-            return this.$route.name;
-        }
+    {
+        label: 'Gifts',
+        icon: 'fas fa-gifts',
+        routeName: 'section6'
     },
-    mounted() {
-        let _self = this;
-        let nav = $('.client-form-navigation');
-        if (window.innerWidth < 1500 && window.innerWidth > 991) {
-            _self.navCollapsed = true;
-            $(nav).hover(
-                (e) => {
-                    // hover in
-                    if (_self.navCollapsed) {
-                        _self.navCollapsed = false;
-                    }
-                },
-                (e) => {
-                    // hover out
-                    if (!_self.navCollapsed) {
-                        _self.navCollapsed = true;
-                    }
-                }
-            );
-        }
+    {
+        label: 'UK & British Isles',
+        icon: 'po-icon-flag',
+        routeName: 'section7'
     },
-    methods: {
-        sectionClick(routeName) {
-            this.$router.push({ name: routeName });
-            this.navHidden = true;
-        }
+    {
+        label: 'Tax Havens',
+        icon: 'po-icon-world',
+        routeName: 'section8'
     },
-    watch: {
-        navCollapsed(newVal) {
-            this.$emit('toggleNav', newVal);
-        }
+    {
+        label: 'Nil-Rate band',
+        icon: 'po-icon-pound',
+        routeName: 'section9'
+    },
+    {
+        label: 'Business interests',
+        icon: 'po-icon-briefcase',
+        routeName: 'section10'
+    },
+    {
+        label: 'Received inheritance',
+        icon: 'po-icon-debit-card',
+        routeName: 'section11'
+    },
+    {
+        label: 'Trusts',
+        icon: 'po-icon-handshake',
+        routeName: 'section12'
+    },
+    {
+        label: 'Pensions',
+        icon: 'po-icon-piggybank',
+        routeName: 'section13'
+    },
+    {
+        label: 'Life Assurance',
+        icon: 'po-icon-lifebuoy',
+        routeName: 'section14'
+    },
+    {
+        label: 'Joint held assets',
+        icon: 'po-icon-people',
+        routeName: 'section15'
+    },
+    {
+        label: 'Stocks & Shares',
+        icon: 'po-icon-graph',
+        routeName: 'section16'
+    },
+    {
+        label: 'Bank and savings',
+        icon: 'po-icon-dollar',
+        routeName: 'section17'
+    },
+    {
+        label: 'Personal belongings',
+        icon: 'po-icon-tv',
+        routeName: 'section18'
+    },
+    {
+        label: 'Assets',
+        icon: 'po-icon-house',
+        routeName: 'section19'
+    },
+    {
+        label: 'Liabilities',
+        icon: 'po-icon-car',
+        routeName: 'section20'
+    },
+    {
+        label: 'Other information',
+        icon: 'po-icon-information',
+        routeName: 'section21'
     }
+];
+
+const caseDetailsOpen = ref(true);
+const sectionsOpen = ref(true);
+// const sectionsOpenHeight = '620';
+// const toolsOpenHeight = '60';
+const toolsOpen = ref(true);
+const documentsOpen = ref(true);
+const navCollapsed = ref(false);
+const showReminderForm = ref(false);
+const currentRouteName = computed(() => {
+    return route.name;
+});
+
+onMounted(() => {
+    let nav = $('.client-form-navigation');
+    if (window.innerWidth < 1500 && window.innerWidth > 991) {
+        navCollapsed.value = true;
+        $(nav).hover(
+            (e) => {
+                // hover in
+                if (navCollapsed.value) {
+                    navCollapsed.value = false;
+                }
+            },
+            (e) => {
+                // hover out
+                if (!navCollapsed.value) {
+                    navCollapsed.value = true;
+                }
+            }
+        );
+    }
+});
+
+const sectionClick = (routeName) => {
+    router.push({ name: routeName });
+    navHidden.value = true;
 };
+const emit = defineEmits(['toggleNav']);
+watch(navCollapsed, (newVal) => {
+    emit('toggleNav', newVal);
+});
 </script>
+
 <style lang="scss" scoped>
 @import '@sass/vue_sfc.scss';
 
@@ -376,6 +365,7 @@ export default {
         text-decoration: none;
         color: $body-color;
         transition: 0.25s;
+        font-weight: 400;
 
         &:hover {
             color: $primary;
@@ -457,10 +447,10 @@ export default {
     }
 }
 
-@include media-breakpoint-down(md) {
+@include media-breakpoint-down(lg) {
     .client-form-navigation {
-        top: 42px;
-        height: calc(100% - 96px);
+        top: 52px;
+        height: calc(100% - 52px);
 
         &.nav-hidden {
             top: 100%;
