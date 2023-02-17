@@ -4,7 +4,7 @@
         :class="{ 'coloured-dot': leftText.length }">
         <label
             class="form-check-label switch-text-left"
-            :class="{ 'text-gray-500': !value }"
+            :class="{ 'text-gray-500': value }"
             @click="value = false"
             v-if="leftText"
             >{{ leftText }}</label
@@ -18,7 +18,7 @@
             id="flexSwitchCheckDefault" />
         <label
             class="form-check-label switch-text-right"
-            :class="{ 'text-gray-500': value }"
+            :class="{ 'text-gray-500': !value }"
             @click="value = true"
             v-if="label"
             >{{ label }}</label
@@ -65,6 +65,7 @@ label {
     align-items: center;
     padding-left: 0;
     .form-check-input {
+        cursor: pointer;
         margin-left: 1rem;
         margin-right: 1rem;
         background: none;
@@ -96,9 +97,9 @@ label {
                 left: calc(100% - calc(1.2em + 1px));
             }
         }
-
-        &.string-val {
-        }
+    }
+    .form-check-label {
+        cursor: pointer;
     }
 
     @include media-breakpoint-down(md) {
@@ -114,9 +115,5 @@ label {
             text-align: center;
         }
     }
-}
-
-.pointer {
-    cursor: pointer;
 }
 </style>

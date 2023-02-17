@@ -25,13 +25,14 @@
                             type="default"
                             outline
                             class="d-block mb-2 asset-toggle"
-                            @click="activeTab = i"
+                            @click="changeActiveTab(i)"
                             >{{ i + 1 }} - {{ row.description }}</base-button
                         >
                         <b-collapse
                             :id="`accordion${i}`"
                             role="tabpanel"
-                            :visible="activeTab == i">
+                            :visible="activeTab == i"
+                            ref="tabPanels">
                             <card shadow class="mb-2 relative">
                                 <div class="d-flex">
                                     <label class="d-lock"
@@ -149,7 +150,20 @@ import { useClientStore } from '@/stores/client.js';
 const router = useRouter();
 const store = useClientStore();
 const viewData = ref(false);
-const activeTab = ref();
+
+const activeTab = ref(null);
+const tabPanels = ref(null);
+const changeActiveTab = (i) => {
+    if (activeTab.value == i) {
+        tabPanels.value[i].hide();
+        activeTab.value = null;
+    } else {
+        activeTab.value = i;
+        tabPanels.value.forEach((x) => x.hide());
+        tabPanels.value[i].show();
+    }
+};
+
 let formData = reactive([
     {
         query: 'Did the deceased own, lease or rent assets like those identified above?',

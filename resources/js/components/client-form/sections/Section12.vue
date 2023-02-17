@@ -172,12 +172,12 @@
                 </div>
 
                 <BaseButton
-                    @click="collapse.collapse1 = !collapse.collapse1"
+                    @click="collapse1.toggle()"
                     size="sm"
                     class="pointer"
                     >Tip<i class="icon-xs fas fa-chevron-down ms-2"></i
                 ></BaseButton>
-                <b-collapse :visible="collapse.collapse1">
+                <b-collapse ref="collapse1">
                     <p class="text-gray-500 mt-2 mb-0">
                         Domicile and residence is relevant because it affects
                         the law that governs succession. Since 17.8.2016 a new
@@ -218,7 +218,7 @@ import { useClientStore } from '@/stores/client.js';
 const router = useRouter();
 const store = useClientStore();
 const activeDoc = ref(0);
-const collapse = ref({ collapse1: false });
+const collapse1 = ref(null);
 let formData = reactive([
     {
         query: 'Was the deceased entitled to benefit from a trust that was created by a Deed or under another’s person’s Will (or intestacy)?',

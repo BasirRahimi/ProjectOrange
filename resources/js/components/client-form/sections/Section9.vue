@@ -63,6 +63,13 @@
             <div class="mb-4">
                 <label>{{ trust.query2.query }}</label>
                 <BaseSwitch
+                    @update:modelValue="
+                        (val) => {
+                            val == 'The trustee’s solicitors or accountants'
+                                ? formDataRefs[key].show()
+                                : formDataRefs[key].hide();
+                        }
+                    "
                     v-model="trust.query2.answer"
                     left-text="The Trustee"
                     label="The trustee’s solicitors or accountants" />
@@ -71,7 +78,8 @@
                 :visible="
                     trust.query2.answer ==
                     'The trustee’s solicitors or accountants'
-                ">
+                "
+                ref="formDataRefs">
                 <honorific v-model="trust.query2.onTrue.honorific" />
                 <base-input
                     label="Forename"
@@ -124,12 +132,14 @@
 <script setup>
 import YesNo from '../form-snippets/YesNo.vue';
 import Honorific from '../form-snippets/Honorific.vue';
-import { reactive, onBeforeMount } from 'vue';
+import { reactive, onBeforeMount, ref } from 'vue';
 import { useSaveData as saveData } from '../../../composables/helper';
 import { useRouter } from 'vue-router';
 import { useClientStore } from '@/stores/client.js';
 const router = useRouter();
 const store = useClientStore();
+const formDataRefs = ref(null);
+
 let formData = reactive([]);
 
 const addTrustee = () => {
@@ -158,6 +168,7 @@ const addTrustee = () => {
 const removeTrustee = (i) => {
     formData.splice(i, 1);
 };
+
 onBeforeMount(() => {
     if (store.client) {
         if (store.client.nil_rate_band) {
