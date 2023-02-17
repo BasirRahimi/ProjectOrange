@@ -40,7 +40,7 @@
             </p>
             <honorific v-model="trust.honorific" />
             <base-input
-                label="Forename"
+                label="Forenames"
                 placeholder="John"
                 v-model="trust.forename"></base-input>
             <base-input
@@ -82,7 +82,7 @@
                 ref="formDataRefs">
                 <honorific v-model="trust.query2.onTrue.honorific" />
                 <base-input
-                    label="Forename"
+                    label="Forenames"
                     placeholder="John"
                     v-model="trust.query2.onTrue.forename"></base-input>
                 <base-input

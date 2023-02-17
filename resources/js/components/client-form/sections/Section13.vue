@@ -34,7 +34,7 @@
                     placeholder="Appleseed Holdings"
                     v-model="formData[0].onTrue.company_name"></base-input>
                 <base-input
-                    label="Forename"
+                    label="Forenames"
                     placeholder="John"
                     v-model="formData[0].onTrue.forename"></base-input>
                 <base-input

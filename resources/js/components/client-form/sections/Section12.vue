@@ -11,7 +11,7 @@
                 <honorific v-model="formData[0].onTrue.trust_honorific" />
 
                 <base-input
-                    label="Forename"
+                    label="Forenames"
                     placeholder="John"
                     v-model="formData[0].onTrue.trust_forename"></base-input>
                 <base-input
@@ -73,7 +73,7 @@
 
                 <honorific v-model="formData[0].onTrue.contact_honorific" />
                 <base-input
-                    label="Forename"
+                    label="Forenames"
                     placeholder="John"
                     v-model="formData[0].onTrue.contact_forename"></base-input>
                 <base-input

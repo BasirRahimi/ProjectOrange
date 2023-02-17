@@ -316,12 +316,12 @@ watch(navCollapsed, (newVal) => {
 
 .client-form-navigation {
     position: fixed;
-    top: 68px;
+    top: 60px;
     left: 0;
     background-color: $white;
     padding: 20px;
     max-width: 300px;
-    height: calc(100% - 68px);
+    height: calc(100% - 60px);
     transition: 0.25s;
     overflow-y: scroll;
     white-space: nowrap;
@@ -449,9 +449,6 @@ watch(navCollapsed, (newVal) => {
 
 @include media-breakpoint-down(lg) {
     .client-form-navigation {
-        top: 52px;
-        height: calc(100% - 52px);
-
         &.nav-hidden {
             top: 100%;
         }

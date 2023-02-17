@@ -23,7 +23,7 @@
                 <label>Company accountant details</label>
                 <honorific v-model="formData[0].onTrue.accountant.honorific" />
                 <base-input
-                    label="Forename"
+                    label="Forenames"
                     placeholder="John"
                     v-model="
                         formData[0].onTrue.accountant.forename
@@ -108,7 +108,7 @@
                 <label>Company accountant details</label>
                 <honorific v-model="formData[1].onTrue.accountant.honorific" />
                 <base-input
-                    label="Forename"
+                    label="Forenames"
                     placeholder="John"
                     v-model="
                         formData[1].onTrue.accountant.forename

@@ -12,6 +12,7 @@ import BaseSwitch from '@/components/base-components/BaseSwitch.vue';
 import BCollapse from '@/components/base-components/BCollapse.vue';
 import Card from '@/components/base-components/Card.vue';
 import Icon from '@/components/base-components/Icon.vue';
+import BModal from '@/components/base-components/BModal.vue';
 import ContentBox from '@/components/client-form/ContentBox.vue';
 import ClientForm from '@/components/ClientForm.vue';
 import UserDashboard from '@/components/UserDashboard.vue';
@@ -35,6 +36,7 @@ export default {
         app.component('BCollapse', BCollapse);
         app.component('Card', Card);
         app.component('Icon', Icon);
+        app.component('BModal', BModal);
         app.component('ClientForm', ClientForm);
         app.component('UserDashboard', UserDashboard);
         app.component('GrantAccess', GrantAccess);

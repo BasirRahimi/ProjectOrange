@@ -1,14 +1,9 @@
 <template>
     <form @submit.prevent="submitForm">
-        <b-modal
-            :id="`${rand}modal`"
-            centered
-            size="lg"
-            hide-footer
-            hide-header>
+        <BModal ref="modal" centered size="lg">
             <div class="d-flex mb-4">
                 <div class="flex-grow-1"><strong>SET REMINDER</strong></div>
-                <div class="pointer" @click="$bvModal.hide(`${rand}modal`)">
+                <div class="pointer" @click="modal.hide()">
                     <strong>x</strong>
                 </div>
             </div>
@@ -44,7 +39,7 @@
                 style="width: 150px">
                 Save
             </button>
-        </b-modal>
+        </BModal>
 
         <div class="mb-4">
             <label :for="`${rand}subject`">Subject</label>
@@ -65,7 +60,7 @@
                 v-model="notes"
                 placeholder="Check storage for John’s national insurance number"
                 rows="5"></textarea>
-            <span class="expand" @click="$bvModal.show(`${rand}modal`)"
+            <span class="expand" @click="modal.show()"
                 ><i class="fas fa-external-link-alt"></i
             ></span>
         </div>
@@ -78,30 +73,25 @@
     </form>
 </template>
 
-<script>
-export default {
-    name: 'CreateReminder',
-    props: ['small'],
-    data() {
-        return {
-            rand: Math.floor(Math.random() * 100),
-            subject: '',
-            notes: ''
-        };
-    },
-    methods: {
-        submitForm() {
-            let _self = this;
-            axios
-                .post(`/reminders/${_self.$store.state.client.id}`, {
-                    subject: _self.subject,
-                    notes: _self.notes
-                })
-                .then((response) => {
-                    console.log(response);
-                });
-        }
-    }
+<script setup>
+import { ref } from 'vue';
+import { useClientStore } from '@/stores/client.js';
+const store = useClientStore();
+
+defineProps(['small']);
+const rand = Math.floor(Math.random() * 100);
+const subject = ref('');
+const notes = ref('');
+const modal = ref(null);
+const submitForm = () => {
+    axios
+        .post(`/reminders/${store.client.id}`, {
+            subject: subject.value,
+            notes: notes.value
+        })
+        .then((response) => {
+            console.log(response);
+        });
 };
 </script>
 

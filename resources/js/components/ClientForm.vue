@@ -1,9 +1,9 @@
 <template>
     <div class="client-form" :class="{ 'nav-collaped': navCollapsed }">
-        <ClientFormNavigation @toggleNav="toggleNav"></ClientFormNavigation>
-        <!-- <client-form-widgets></client-form-widgets> -->
+        <ClientFormNavigation @toggleNav="toggleNav" />
+        <ClientFormWidgets />
         <div class="router-view">
-            <router-view></router-view>
+            <router-view />
         </div>
 
         <!-- <client-form-utility-bar

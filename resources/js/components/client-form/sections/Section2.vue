@@ -36,7 +36,7 @@
             <honorific v-model="executor.honorific" />
 
             <base-input
-                label="Forename"
+                label="Forenames"
                 placeholder="John"
                 v-model="executor.forename"></base-input>
             <base-input

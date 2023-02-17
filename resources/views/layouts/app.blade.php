@@ -26,7 +26,7 @@
         <?php $user = Auth::user(); ?>
         @if($user)
         @if ($user->has_access)
-        <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-white shadow-sm  p-0 px-lg-3 py-lg-2">
+        <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-white shadow-sm header-nav p-0 px-lg-3 py-lg-2">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}

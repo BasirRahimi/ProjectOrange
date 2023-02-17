@@ -60,7 +60,7 @@
                         v-model="formData[2].onTrue.onTrue.honorific"
                         class="mt-4" />
                     <base-input
-                        label="Forename"
+                        label="Forenames"
                         placeholder="John"
                         v-model="
                             formData[2].onTrue.onTrue.forename
@@ -124,7 +124,7 @@
                     </div>
                 </div>
                 <base-input
-                    label="Forename"
+                    label="Forenames"
                     placeholder="John"
                     v-model="formData[3].onTrue.forename"></base-input>
                 <base-input

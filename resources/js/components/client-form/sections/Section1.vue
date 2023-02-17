@@ -18,7 +18,7 @@
             <base-input
                 placeholder="John"
                 v-model="formData.forename"
-                label="Forename"></base-input>
+                label="Forenames"></base-input>
             <base-input
                 placeholder="Doe"
                 v-model="formData.surname"

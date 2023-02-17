@@ -16,7 +16,7 @@
                 <label class="mt-4">Who gave them that legacy?</label>
                 <honorific v-model="formData[0].onTrue.honorific" />
                 <base-input
-                    label="Forename"
+                    label="Forenames"
                     placeholder="John"
                     v-model="formData[0].onTrue.forename"></base-input>
                 <base-input
