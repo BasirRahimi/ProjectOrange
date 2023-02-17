@@ -255,7 +255,7 @@ let formData = reactive([
         document: null
     },
     {
-        query: 'Did the deceased make a LASTING power of attorney?',
+        query: 'Did the deceased make a Property & Financial Affairs LASTING power of attorney?',
         answer: null,
         document: null
     },

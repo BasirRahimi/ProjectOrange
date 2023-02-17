@@ -1,22 +1,15 @@
 <template>
     <div class="container">
-        <content-box title="Welcome to Project Orange">
-            <p class="text-muted m-0">
-                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                diam nonumy eirmod tempor invidunt ut labore et dolore magna
-                aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
-                takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum
-                dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-                eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-                sed diam voluptua. At vero eos et accusam et justo duo dolores
-                et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus
-                est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
-                consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-                invidunt ut labore et dolore magna aliquyam erat, sed diam
-                voluptua. At vero eos et accusam et justo duo dolores et ea
-                rebum. Stet clita kasd gubergren, no sea takimata sanctus est
-                Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet
+        <content-box title="The Advisor Fact-Find" class="text-muted">
+            <p>
+                Please work through this fact find and complete as much
+                information as possible. You may not have all of the information
+                in the first instance and so you may set yourself reminders to
+                revisit sections.
+            </p>
+            <p>
+                Once the Executors have approved the fact find, please click the
+                submit button.
             </p>
         </content-box>
         <content-box title="About the Deceased">
