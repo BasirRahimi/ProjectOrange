@@ -26,7 +26,8 @@ host('157.245.39.48')
 after('deploy:failed', 'deploy:unlock');
 
 task('deploy:assets', function() {
-    run('cd {{release_or_current_path}} && npm install && npm run build');
+    run('cd {{release_or_current_path}} && npm install');
+    run('cd {{release_or_current_path}} && npm run build');
 });
 
 task('deploy', [
