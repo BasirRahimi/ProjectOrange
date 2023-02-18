@@ -45,6 +45,7 @@
 </template>
 <script setup>
 import { ref, onMounted } from 'vue';
+import { Modal as BsModal } from 'bootstrap';
 
 const modalEl = ref(null);
 let modal = null;
@@ -97,7 +98,7 @@ const toggle = () => {
 };
 
 onMounted(() => {
-    modal = new bootstrap.Modal(modalEl.value);
+    modal = new BsModal(modalEl.value);
 });
 
 defineExpose({ show, hide, toggle });

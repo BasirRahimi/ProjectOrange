@@ -21,8 +21,8 @@ export default defineConfig({
     ],
     resolve: {
         alias: {
-            '@sass': './resources/sass',
-            '@images': './resources/images',
+            '@sass': '/resources/sass',
+            '@images': '/resources/images',
             '~bootstrap': '/node_modules/bootstrap'
         }
     }

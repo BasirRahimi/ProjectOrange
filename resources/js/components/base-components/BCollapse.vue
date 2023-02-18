@@ -6,6 +6,8 @@
 
 <script setup>
 import { onMounted, ref } from 'vue';
+import { Collapse as BsCollapse } from 'bootstrap';
+
 const props = defineProps({
     visible: Boolean
 });
@@ -25,7 +27,7 @@ const hide = () => {
 defineExpose({ toggle, show, hide });
 
 onMounted(() => {
-    collapse = new bootstrap.Collapse(collapseEl.value, {
+    collapse = new BsCollapse(collapseEl.value, {
         toggle: props.visible
     });
 });
