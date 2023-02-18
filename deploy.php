@@ -26,14 +26,16 @@ host('157.245.39.48')
 after('deploy:failed', 'deploy:unlock');
 
 task('deploy:assets', function() {
+    // run('sudo systemctl stop mysql');
     run('cd {{release_or_current_path}} && npm install');
     run('cd {{release_or_current_path}} && npm run build');
+    // run('sudo systemctl start mysql');
 });
 
 task('deploy', [
     'deploy:prepare',
     'deploy:vendors',
-    'deploy:assets',
+    // 'deploy:assets',
     'artisan:storage:link',
     'artisan:config:cache',
     'artisan:route:cache',

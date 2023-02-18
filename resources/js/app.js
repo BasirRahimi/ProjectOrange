@@ -1,6 +1,8 @@
 import '@sass/main.scss';
 import './bootstrap';
 
+import.meta.glob(['../images/**/*']);
+
 // VUE 3
 import { createApp } from 'vue/dist/vue.esm-bundler.js';
 const app = createApp({
