@@ -24,3 +24,20 @@ host('157.245.39.48')
 // Hooks
 
 after('deploy:failed', 'deploy:unlock');
+
+task('deploy:assets', function() {
+    run('cd {{release_or_current_path}} && npm install && npm run build');
+});
+
+task('deploy', [
+    'deploy:prepare',
+    'deploy:vendors',
+    'deploy:assets',
+    'artisan:storage:link',
+    'artisan:config:cache',
+    'artisan:route:cache',
+    'artisan:view:cache',
+    'artisan:event:cache',
+    'artisan:migrate',
+    'deploy:publish',
+]);
