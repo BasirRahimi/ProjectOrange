@@ -35,7 +35,7 @@ task('deploy:assets', function() {
 task('deploy', [
     'deploy:prepare',
     'deploy:vendors',
-    // 'deploy:assets',
+    'deploy:assets',
     'artisan:storage:link',
     'artisan:config:cache',
     'artisan:route:cache',
