@@ -205,16 +205,21 @@
                 <BaseRadio
                     :name="`${key}executorActing`"
                     v-model="executor.acting"
+                    @update:modelValue="updateActing()"
                     value="Accept"
                     >Accept their role and act as executor?</BaseRadio
                 >
                 <BaseRadio
                     :name="`${key}executorActing`"
                     v-model="executor.acting"
+                    @update:modelValue="updateActing(`${key}retire`)"
                     value="Retire"
                     >Retire as an executor?</BaseRadio
                 >
-                <div class="mb-3" v-if="executor.acting == 'Retire'">
+                <BCollapse
+                    ref="actingCollapse"
+                    :identifier="`${key}retire`"
+                    :visible="executor.acting == 'Retire'">
                     <p class="text-gray-500">
                         This executor will need to sign a Renunciation. Download
                         a copy below.
@@ -230,16 +235,21 @@
                     <ClientFileUpload
                         v-model="executor.renunciation"
                         uploadText="Upload Doc +"
+                        class="mb-3"
                         changeText="Change Doc" />
-                </div>
+                </BCollapse>
                 <BaseRadio
                     :name="`${key}executorActing`"
                     v-model="executor.acting"
+                    @update:modelValue="updateActing(`${key}reserve`)"
                     value="Reserve"
                     >Have the power of Executorship reserved to them? (Standing
                     back now but can be involved later)</BaseRadio
                 >
-                <div class="mb-3" v-if="executor.acting == 'Reserve'">
+                <BCollapse
+                    ref="actingCollapse"
+                    :identifier="`${key}reserve`"
+                    :visible="executor.acting == 'Reserve'">
                     <p class="text-gray-500">
                         This executor will receive a notice of the intention to
                         reserve power on them. This notice can be downloaded
@@ -256,22 +266,27 @@
                     <ClientFileUpload
                         v-model="executor.reserveIntent"
                         uploadText="Upload Doc +"
+                        class="mb-3"
                         changeText="Change Doc" />
-                </div>
+                </BCollapse>
                 <BaseRadio
                     :name="`${key}executorActing`"
                     v-model="executor.acting"
+                    @update:modelValue="updateActing(`${key}appoint`)"
                     value="Appoint"
                     >Appoint someone to take on the responsibility on their
                     behalf?</BaseRadio
                 >
-                <div class="mb-3" v-if="executor.acting == 'Appoint'">
+                <BCollapse
+                    ref="actingCollapse"
+                    :identifier="`${key}appoint`"
+                    :visible="executor.acting == 'Appoint'">
                     <p class="text-gray-500">
                         If this Executor wants to appoint an Attorney to act for
                         them, you will need to contact us. Use the button below.
                     </p>
                     <a href="#">Create alternative Attorney</a>
-                </div>
+                </BCollapse>
             </div>
         </content-box>
 
@@ -303,7 +318,6 @@
 </template>
 <script setup>
 import Honorific from '../form-snippets/Honorific.vue';
-import RadioGroup from '../../base-components/RadioGroup.vue';
 import { useClientStore } from '@/stores/client.js';
 import { onBeforeMount, ref, reactive } from 'vue';
 import { useRouter } from 'vue-router';
@@ -312,7 +326,9 @@ import ClientFileUpload from '../../base-components/ClientFileUpload.vue';
 
 const router = useRouter();
 const store = useClientStore();
+
 const relationshipCollapse = ref(null);
+const actingCollapse = ref(null);
 
 let formData = reactive([
     {
@@ -365,6 +381,16 @@ const clickRelationship = (relationship, i) => {
     } else {
         relationshipCollapse.value[i].hide();
     }
+};
+
+const updateActing = (collapseIdentifier) => {
+    actingCollapse.value.forEach((x) => {
+        if (x.identifier === collapseIdentifier) {
+            x.show();
+        } else {
+            x.hide();
+        }
+    });
 };
 
 onBeforeMount(() => {

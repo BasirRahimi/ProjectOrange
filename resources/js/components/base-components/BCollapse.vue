@@ -9,7 +9,8 @@ import { onMounted, ref } from 'vue';
 import { Collapse as BsCollapse } from 'bootstrap';
 
 const props = defineProps({
-    visible: Boolean
+    visible: Boolean,
+    identifier: String
 });
 const collapseEl = ref(null);
 let collapse = null;
@@ -23,8 +24,8 @@ const show = () => {
 const hide = () => {
     collapse.hide();
 };
-
-defineExpose({ toggle, show, hide });
+const identifier = props.identifier;
+defineExpose({ toggle, show, hide, identifier });
 
 onMounted(() => {
     collapse = new BsCollapse(collapseEl.value, {
