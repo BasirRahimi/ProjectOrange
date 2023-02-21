@@ -17,15 +17,14 @@
             </label>
         </slot>
 
-        <div
+        <span
             v-if="addonLeftIcon || $slots.addonLeft"
-            class="input-group-prepend">
-            <span class="input-group-text">
-                <slot name="addonLeft">
-                    <i :class="addonLeftIcon"></i>
-                </slot>
-            </span>
-        </div>
+            class="input-group-text"
+            :class="addonLeftClasses">
+            <slot name="addonLeft">
+                <i :class="addonLeftIcon"></i>
+            </slot>
+        </span>
         <slot v-bind="slotData">
             <input
                 :value="modelValue"
@@ -39,15 +38,15 @@
                 ]"
                 aria-describedby="addon-right addon-left" />
         </slot>
-        <div
+        <component
+            is="button"
             v-if="addonRightIcon || $slots.addonRight"
-            class="input-group-append">
-            <span class="input-group-text">
-                <slot name="addonRight">
-                    <i :class="addonRightIcon"></i>
-                </slot>
-            </span>
-        </div>
+            class="input-group-text"
+            :class="addonRightClasses">
+            <slot name="addonRight">
+                <i :class="addonRightIcon"></i>
+            </slot>
+        </component>
         <slot name="infoBlock"></slot>
         <slot name="helpBlock">
             <div
@@ -106,6 +105,10 @@ export default {
             type: String,
             description: 'Addont left icon'
         },
+        addonLeftClasses: {
+            type: String
+        },
+        addonRightClasses: { type: String },
         formGroup: {
             type: Boolean,
             default: true
@@ -163,3 +166,12 @@ export default {
     }
 };
 </script>
+<style lang="scss" scoped>
+.input-group-text {
+    &.btn {
+        background-color: var(--bs-btn-bg);
+        color: var(--bs-btn-color);
+        border-color: var(--bs-btn-border-color);
+    }
+}
+</style>

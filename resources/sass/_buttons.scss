@@ -3,6 +3,10 @@
     --#{$prefix}btn-hover-color: #{$white};
     --#{$prefix}btn-active-color: #{$white};
 }
+.btn-outline-primary {
+    --#{$prefix}btn-hover-color: #{$white};
+    --#{$prefix}btn-active-color: #{$white};
+}
 .btn-outline-default {
     --#{$prefix}btn-hover-bg: #{$primary};
     --#{$prefix}btn-hover-border-color: #{$primary};

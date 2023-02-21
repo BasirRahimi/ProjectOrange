@@ -36,7 +36,6 @@
                         class="mb-0"
                         v-model="formData[i].docs[j]"
                         @input="saveData"></client-file-upload>
-                    <a :href="doc.path">{{ doc.filename }}</a>
                     <div class="file-rem-hidden d-inline-block ms-3">
                         <base-button
                             type="danger"
@@ -52,7 +51,8 @@
                         class="mb-0"
                         v-model="formData[i].docs[formData[i].docs.length]"
                         @input="saveData"
-                        wipeAfterInput></client-file-upload>
+                        wipeAfterInput
+                        :show-file="false"></client-file-upload>
                 </div>
             </div>
         </content-box>

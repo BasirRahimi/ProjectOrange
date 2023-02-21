@@ -1,11 +1,17 @@
 <template>
     <div class="d-inline-block">
         <label class="file btn btn-outline-default active-primary mb-0">
-            <input type="file" @change="onFileChange" ref="fileInput" />
-            <span v-if="modelValue">Change Copy</span>
-            <span v-else>Upload Copy +</span>
+            <input
+                type="file"
+                @change="onFileChange"
+                ref="fileInput"
+                :id="inputId" />
+            <span v-if="modelValue">{{ changeText }}</span>
+            <span v-else>{{ uploadText }}</span>
         </label>
-        <span v-if="modelValue" class="ms-3">{{ modelValue.name }}</span>
+        <a class="ms-2" v-if="modelValue && showFile" :href="modelValue.path">{{
+            modelValue.filename
+        }}</a>
     </div>
 </template>
 
@@ -19,9 +25,25 @@ const props = defineProps({
     modelValue: {
         default: null
     },
+    inputId: {
+        type: String,
+        default: ''
+    },
     wipeAfterInput: {
         default: false,
         type: Boolean
+    },
+    showFile: {
+        default: true,
+        type: Boolean
+    },
+    uploadText: {
+        type: String,
+        default: 'Upload Copy +'
+    },
+    changeText: {
+        type: String,
+        default: 'Change Copy'
     }
 });
 const onFileChange = (e) => {

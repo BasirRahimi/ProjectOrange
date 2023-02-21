@@ -29,27 +29,17 @@
                 label="Any aliases in which they held assets?"></base-input>
 
             <div class="mb-4">
-                <label>Last usual address</label><br />
-                <BaseRadio
-                    inline
-                    name="postcode"
+                <label>Last usual address</label>
+                <BaseSwitch
                     v-model="addressInputType"
-                    value="postcode"
-                    >Find with postcode</BaseRadio
-                >
-                <BaseRadio
-                    inline
-                    name="manual"
-                    v-model="addressInputType"
-                    value="manual"
-                    >Add manually</BaseRadio
-                >
+                    label="Add manually"
+                    leftText="Use postcode" />
             </div>
 
             <div class="row">
                 <div
                     class="col-lg-5 mb-4"
-                    v-show="addressInputType == 'postcode'">
+                    v-show="addressInputType == 'Use postcode'">
                     <div class="input-group">
                         <input
                             type="text"
@@ -62,7 +52,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-12" v-show="addressInputType == 'manual'">
+                <div class="col-12" v-show="addressInputType == 'Add manually'">
                     <div class="row">
                         <div class="col-lg-5 mb-4">
                             <label for="addressLine1">Address Line 1</label>
@@ -373,7 +363,7 @@ const formData = reactive({
     accountant_phone: '',
     accountant_email: ''
 });
-const addressInputType = ref('manual');
+const addressInputType = ref('Add manually');
 const date = new Date();
 
 const updateSurvivingRelatives = (relative) => {

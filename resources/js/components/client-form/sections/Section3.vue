@@ -9,11 +9,6 @@
                 <client-file-upload
                     class="mt-3"
                     v-model="formData[0].document"></client-file-upload>
-                <a
-                    v-if="formData[0].document"
-                    :href="formData[0].document.path"
-                    >{{ formData[0].document.filename }}</a
-                >
             </yes-no>
             <yes-no
                 class="mb-4"
@@ -23,11 +18,6 @@
                 <client-file-upload
                     class="mt-3"
                     v-model="formData[1].document"></client-file-upload>
-                <a
-                    v-if="formData[1].document"
-                    :href="formData[1].document.path"
-                    >{{ formData[1].document.filename }}</a
-                >
             </yes-no>
 
             <BaseButton @click="collapse1.toggle()" size="sm"

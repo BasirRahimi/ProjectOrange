@@ -45,7 +45,6 @@
                             class="mb-0"
                             v-model="formData[0].onTrue.docs[i]"
                             @input="saveData"></client-file-upload>
-                        <a :href="doc.path">{{ doc.filename }}</a>
                         <div class="file-rem-hidden d-inline-block ms-3">
                             <base-button
                                 type="danger"
@@ -65,7 +64,8 @@
                                 ]
                             "
                             @input="saveData"
-                            wipeAfterInput></client-file-upload>
+                            wipeAfterInput
+                            :show-file="false"></client-file-upload>
                     </div>
                 </div>
             </yes-no>
@@ -109,7 +109,6 @@
                             class="mb-0"
                             v-model="formData[1].onTrue.docs[i]"
                             @input="saveData"></client-file-upload>
-                        <a :href="doc.path">{{ doc.filename }}</a>
                         <div class="file-rem-hidden d-inline-block ms-3">
                             <base-button
                                 type="danger"
@@ -129,7 +128,8 @@
                                 ]
                             "
                             @input="saveData"
-                            wipeAfterInput></client-file-upload>
+                            wipeAfterInput
+                            :show-file="false"></client-file-upload>
                     </div>
                 </div>
             </yes-no>
@@ -173,7 +173,6 @@
                             class="mb-0"
                             v-model="formData[2].onTrue.docs[i]"
                             @input="saveData"></client-file-upload>
-                        <a :href="doc.path">{{ doc.filename }}</a>
                         <div class="file-rem-hidden d-inline-block ms-3">
                             <base-button
                                 type="danger"
@@ -193,7 +192,8 @@
                                 ]
                             "
                             @input="saveData"
-                            wipeAfterInput></client-file-upload>
+                            wipeAfterInput
+                            :show-file="false"></client-file-upload>
                     </div>
                 </div>
             </yes-no>
@@ -237,7 +237,6 @@
                             class="mb-0"
                             v-model="formData[3].onTrue.docs[i]"
                             @input="saveData"></client-file-upload>
-                        <a :href="doc.path">{{ doc.filename }}</a>
                         <div class="file-rem-hidden d-inline-block ms-3">
                             <base-button
                                 type="danger"
@@ -257,7 +256,8 @@
                                 ]
                             "
                             @input="saveData"
-                            wipeAfterInput></client-file-upload>
+                            wipeAfterInput
+                            :show-file="false"></client-file-upload>
                     </div>
                 </div>
             </yes-no>
@@ -301,7 +301,6 @@
                             class="mb-0"
                             v-model="formData[4].onTrue.docs[i]"
                             @input="saveData"></client-file-upload>
-                        <a :href="doc.path">{{ doc.filename }}</a>
                         <div class="file-rem-hidden d-inline-block ms-3">
                             <base-button
                                 type="danger"
@@ -321,7 +320,8 @@
                                 ]
                             "
                             @input="saveData"
-                            wipeAfterInput></client-file-upload>
+                            wipeAfterInput
+                            :show-file="false"></client-file-upload>
                     </div>
                 </div>
             </yes-no>

@@ -1,15 +1,16 @@
 <template>
-    <div
-        class="custom-control custom-radio"
-        :class="[inlineClass, { disabled: disabled }]">
+    <div class="form-check" :class="[inlineClass, { disabled: disabled }]">
+        <!-- custom-control-input -->
         <input
             :id="cbId"
-            class="custom-control-input"
+            class="form-check-input"
             type="radio"
             :disabled="disabled"
-            :value="name"
-            v-model="model" />
-        <label :for="cbId" class="custom-control-label">
+            :name="name"
+            v-model="model"
+            v-bind="$attrs" />
+        <!-- custom-control-label -->
+        <label :for="cbId" class="form-check-label">
             <slot></slot>
         </label>
     </div>
@@ -18,6 +19,7 @@
 import { randomString } from '@/composables/helper.js';
 export default {
     name: 'base-radio',
+    inheritAttrs: false,
     props: {
         name: {
             type: [String, Number],
@@ -46,7 +48,7 @@ export default {
             get() {
                 return this.modelValue;
             },
-            set(value) {
+            set(value, b, c) {
                 this.$emit('update:modelValue', value);
             }
         },
@@ -64,64 +66,41 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import '@sass/vue_sfc.scss';
-.custom-radio {
-    position: relative;
-    display: block;
-    min-height: 1.5rem;
-    padding-left: 1.75rem;
-    .custom-control-label::before {
-        border-radius: 50%;
-        border: 1px solid $input-border-color;
-        transition: $input-transition;
-        position: absolute;
-        top: 0.125rem;
-        left: -1.75rem;
-        display: block;
-        width: 1.25rem;
-        height: 1.25rem;
-        pointer-events: none;
-        content: '';
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-        background-color: $white;
-    }
-    .custom-control-input {
-        position: absolute;
-        z-index: -1;
-        opacity: 0;
-    }
-    .custom-control-input ~ .custom-control-label {
-        font-weight: normal;
-        font-size: 0.875rem;
-        cursor: pointer;
-        margin-bottom: 0;
-        position: relative;
-        display: inline-block;
-    }
-    .custom-control-input:checked ~ .custom-control-label::before {
-        border-color: $primary;
-        background-color: $primary;
-        color: $white;
-    }
-    .custom-control-input:checked ~ .custom-control-label::after {
-        background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3E%3Ccircle r='3' fill='%23fff'/%3E%3C/svg%3E");
-    }
-    .custom-control-label::after {
-        position: absolute;
-        top: 0.125rem;
-        left: -1.75rem;
-        display: block;
-        width: 1.25rem;
-        height: 1.25rem;
-        content: '';
-        background-repeat: no-repeat;
-        background-position: center center;
-        background-size: 50% 50%;
-    }
-}
 
-.form-check-inline {
-    display: inline-flex;
+.form-check {
+    --height: 1.8rem;
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    .form-check-input {
+        width: var(--height);
+        height: var(--height);
+        border-radius: var(--bs-border-radius);
+        border-color: $input-border-color;
+        position: relative;
+        margin-top: 0;
+        cursor: pointer;
+        transition: $input-transition;
+        &::before {
+            font: var(--fa-font-solid);
+            content: '\f00c';
+            color: white;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        &:checked,
+        &:hover {
+            background-color: var(--bs-primary);
+            background-image: none;
+        }
+    }
+    .form-check-label {
+        height: var(--height);
+        margin-bottom: 0;
+        margin-left: 1rem;
+        cursor: pointer;
+    }
 }
 </style>
