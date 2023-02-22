@@ -426,7 +426,7 @@ const saveData = () => {
     }
     let data = {
         ...formData,
-        date_of_death
+        date_of_death: date_of_death
     };
     saveSectionData(data, store.client.id).then((response) => {
         console.log(response);

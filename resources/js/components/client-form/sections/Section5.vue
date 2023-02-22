@@ -40,7 +40,7 @@
             </ul>
         </content-box>
 
-        <content-box title="4.2 Details of lifetime gifts">
+        <content-box title="4.1 Details of lifetime gifts">
             <yes-no
                 v-show="slide === 1"
                 class="mb-4"
