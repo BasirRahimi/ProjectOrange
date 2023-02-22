@@ -37,7 +37,7 @@ Route::post('/request-access/sms-verification', [RegisterController::class, 'sms
 Route::post('/request-access/phone-verified', [RegisterController::class, 'phoneVerified']);
 Route::post('/request-access/save-user-details', [RegisterController::class, 'saveUserDetails']);
 
-Auth::routes(['verify' => true]);
+Auth::routes(['verify' => true, 'register' => false]);
 
 
 Route::middleware(['has.access'])->group(function () {

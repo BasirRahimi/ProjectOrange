@@ -16,7 +16,7 @@ export default defineConfig({
             }
         })
         // ViteRestart({
-        //     restart: ['/resources/js/components/client-form/sections/*.vue']
+        //     restart: ['/resources/js/components/forms/probate/*.vue', '/resources/js/components/forms/succession/*.vue']
         // })
     ],
     resolve: {

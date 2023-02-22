@@ -1,0 +1,11 @@
+{
+    "allowJs": true,
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "@/*": ["./resources/js/*"],
+            "@sass/*": ["./resources/sass/*"],
+            "@images/*": ["./resources/images/*"]
+        }
+    }
+}
