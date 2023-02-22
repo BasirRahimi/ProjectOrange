@@ -418,11 +418,15 @@ const nextSection = () => {
     router.push({ name: 'section2' });
 };
 const saveData = () => {
+    let date_of_death = null;
+    if (formData.date_of_death) {
+        date_of_death = `${formData.date_of_death.getFullYear()}-${
+            formData.date_of_death.getMonth() + 1
+        }-${formData.date_of_death.getDate()}`;
+    }
     let data = {
         ...formData,
-        date_of_death: `${formData.date_of_death.getFullYear()}-${
-            formData.date_of_death.getMonth() + 1
-        }-${formData.date_of_death.getDate()}`
+        date_of_death
     };
     saveSectionData(data, store.client.id).then((response) => {
         console.log(response);
