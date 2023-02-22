@@ -17,7 +17,7 @@
             </p>
         </content-box>
 
-        <content-box title="5.2 Anti-avoidance legislation">
+        <content-box title="5.1 Anti-avoidance legislation">
             <yes-no
                 :label="formData[0].query"
                 v-model="formData[0].answer"
