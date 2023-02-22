@@ -1,159 +1,138 @@
 <template>
     <div class="container">
-        <content-box title="Section 9 - Business interests or partnerships">
+        <content-box title="Section 10 - Inheritance from other people">
+            <p class="text-gray-500">
+                If the deceased received a legacy of money or of an asset from
+                another person in the last five years then please be alert to
+                the details below.
+            </p>
+        </content-box>
+
+        <content-box title="10.1 Inheritance">
             <yes-no
-                class="mb-4"
                 :label="formData[0].query"
                 v-model="formData[0].answer"
                 collapse>
-                <base-input
-                    label="Company name"
-                    class="mt-4"
-                    placeholder="John Appleseed Ltd"
-                    v-model="formData[0].onTrue.company_name"></base-input>
-                <base-input
-                    label="Company number"
-                    placeholder="1235 1235 08311"
-                    v-model="formData[0].onTrue.company_number"></base-input>
-                <base-input
-                    label="Business activity"
-                    placeholder="Import & export"
-                    v-model="formData[0].onTrue.business_activity"></base-input>
-
-                <label>Company accountant details</label>
-                <honorific v-model="formData[0].onTrue.accountant.honorific" />
+                <label class="mt-4">Who gave them that legacy?</label>
+                <honorific v-model="formData[0].onTrue.honorific" />
                 <base-input
                     label="Forenames"
                     placeholder="John"
-                    v-model="
-                        formData[0].onTrue.accountant.forename
-                    "></base-input>
+                    v-model="formData[0].onTrue.forename"></base-input>
                 <base-input
                     label="Surname"
                     placeholder="Doe"
-                    v-model="
-                        formData[0].onTrue.accountant.surname
-                    "></base-input>
-
-                <div class="row">
-                    <div class="col-12 col-lg-6">
-                        <base-input
-                            label="Phone number"
-                            placeholder="+44 012345 67890"
-                            v-model="
-                                formData[0].onTrue.accountant.phone
-                            "></base-input>
+                    v-model="formData[0].onTrue.surname"></base-input>
+                <div class="row no-gutters">
+                    <div class="col-md-4 mb-4">
+                        <label>Date of death</label>
+                        <datepicker
+                            v-model="formData[0].onTrue.date_of_death"
+                            class="form-control bg-white"
+                            placeholder="Date"
+                            format="dd / MM / yy"></datepicker>
                     </div>
-                    <div class="col-12 col-lg-6">
+                </div>
+                <div class="row no-gutters">
+                    <div class="col-12">
+                        <label
+                            >What was the value of the inheritance
+                            received?</label
+                        >
+                    </div>
+                    <div class="col-md-4">
                         <base-input
-                            label="Email Address"
-                            placeholder="John.doe@doe.co.uk"
+                            type="number"
+                            placeholder="£200,000"
                             v-model="
-                                formData[0].onTrue.accountant.email
+                                formData[0].onTrue.value_of_inheritance
                             "></base-input>
                     </div>
                 </div>
 
-                <label
-                    >If the company accountants have valued the shares in the
-                    business in line with HMRC guidelines then please provide a
-                    copy</label
-                ><br />
-                <client-file-upload
-                    v-model="formData[0].onTrue.valuation"
-                    @input="saveData" />
-                <a
-                    v-if="formData[0].onTrue.valuation"
-                    :href="formData[0].onTrue.valuation.path"
-                    >{{ formData[0].onTrue.valuation.filename }}</a
-                >
-            </yes-no>
+                <yes-no
+                    collapse
+                    :label="formData[0].onTrue.query1.query"
+                    v-model="formData[0].onTrue.query1.answer">
+                    <div
+                        v-for="(doc, index) in formData[0].onTrue.query1.onTrue"
+                        v-show="activeDoc === index"
+                        :key="index">
+                        <div class="row no-gutters mt-4 mb-4">
+                            <div class="col-md-4 me-md-2 mb-2 mb-md-0">
+                                <base-input
+                                    placeholder="Document title e.g ‘The Will’"
+                                    :mb-4="false"
+                                    v-model="doc.document_title"></base-input>
+                            </div>
+                            <div class="col">
+                                <client-file-upload
+                                    class="m-0"
+                                    v-model="doc.document"
+                                    @input="saveData" />
+                                <a
+                                    v-if="doc.document"
+                                    :href="doc.document.path"
+                                    >{{ doc.document.filename }}</a
+                                >
+                            </div>
+                        </div>
 
-            <!-- <BaseButton @click="collapse1.toggle()" size="sm" class="pointer"
-                >Tip<i class="icon-xs fas fa-chevron-down ms-2"></i
-            ></BaseButton>
-            <BCollapse ref="collapse1">
-                <p class="text-gray-500 mt-2 mb-0">
-                    You should take care that the deceased had regularised their
-                    affairs with HMRC. For example, the Jersey Disclosure
-                    Facility provides for a voluntary disclosure facility to UK
-                    residents from 6 April 2013 to 30 September 2016 for UK
-                    residents with a beneficial interest in Jersey “relevant
-                    property”, with undisclosed UK tax liabilities, with a
-                    chance to regularise their UK tax affairs in a controlled
-                    manner on beneficial terms.
-                </p>
-            </BCollapse> -->
-        </content-box>
-
-        <content-box title="9.2 Partnerships">
-            <yes-no
-                :label="formData[1].query"
-                v-model="formData[1].answer"
-                collapse>
-                <base-input
-                    label="Partnership name"
-                    class="mt-4"
-                    placeholder="John Appleseed Ltd"
-                    v-model="formData[1].onTrue.partnership_name"></base-input>
-                <base-input
-                    label="Partnership number"
-                    placeholder="1235 1235 08311"
-                    v-model="
-                        formData[1].onTrue.partnership_number
-                    "></base-input>
-                <base-input
-                    label="Business activity"
-                    placeholder="Import & export"
-                    v-model="formData[1].onTrue.business_activity"></base-input>
-
-                <label>Partnership accountant details</label>
-                <honorific v-model="formData[1].onTrue.accountant.honorific" />
-                <base-input
-                    label="Forenames"
-                    placeholder="John"
-                    v-model="
-                        formData[1].onTrue.accountant.forename
-                    "></base-input>
-                <base-input
-                    label="Surname"
-                    placeholder="Doe"
-                    v-model="
-                        formData[1].onTrue.accountant.surname
-                    "></base-input>
-
-                <div class="row">
-                    <div class="col-12 col-lg-6">
-                        <base-input
-                            label="Phone number"
-                            placeholder="+44 012345 67890"
-                            v-model="
-                                formData[1].onTrue.accountant.phone
-                            "></base-input>
+                        <textarea
+                            v-model="doc.extra_details"
+                            class="form-control mb-4"
+                            rows="4"
+                            placeholder="Add details including any specific page references"></textarea>
                     </div>
-                    <div class="col-12 col-lg-6">
-                        <base-input
-                            label="Email Address"
-                            placeholder="John.doe@doe.co.uk"
-                            v-model="
-                                formData[1].onTrue.accountant.email
-                            "></base-input>
+                    <div class="d-sm-flex align-items-center">
+                        <div
+                            class="flex-grow-1 mb-3"
+                            v-show="
+                                formData[0].onTrue.query1.onTrue.length > 1
+                            ">
+                            <b
+                                >Document: {{ activeDoc + 1 }} /
+                                {{ formData[0].onTrue.query1.onTrue.length }}</b
+                            ><br />
+                            <a
+                                class="remove-doc"
+                                href="#"
+                                v-if="
+                                    formData[0].onTrue.query1.onTrue.length > 1
+                                "
+                                @click.prevent="removeDoc(activeDoc)"
+                                >Remove document</a
+                            >
+                        </div>
+                        <base-button
+                            v-if="activeDoc > 0"
+                            type="default"
+                            outline
+                            @click="activeDoc--"
+                            >Back</base-button
+                        >
+                        <base-button
+                            type="default"
+                            outline
+                            @click="addDoc"
+                            v-if="
+                                activeDoc + 1 ==
+                                formData[0].onTrue.query1.onTrue.length
+                            "
+                            >Add</base-button
+                        >
+                        <base-button
+                            type="default"
+                            outline
+                            @click="activeDoc++"
+                            v-if="
+                                activeDoc + 1 <
+                                formData[0].onTrue.query1.onTrue.length
+                            "
+                            >Next</base-button
+                        >
                     </div>
-                </div>
-
-                <label
-                    >If the Partnership accountants have valued the shares in
-                    the business in line with HMRC guidelines then please
-                    provide a copy</label
-                ><br />
-                <client-file-upload
-                    v-model="formData[1].onTrue.valuation"
-                    @input="saveData" />
-                <a
-                    v-if="formData[1].onTrue.valuation"
-                    :href="formData[1].onTrue.valuation.path"
-                    >{{ formData[1].onTrue.valuation.filename }}</a
-                >
+                </yes-no>
             </yes-no>
         </content-box>
 
@@ -161,8 +140,8 @@
             <button
                 class="btn btn-primary shadow"
                 @click="
-                    saveData('business_interests', formData);
-                    router.push({ name: 'section11' });
+                    saveData('received_inheritance', formData);
+                    router.push({ name: 'Section11' });
                 ">
                 Next section
             </button>
@@ -170,61 +149,67 @@
     </div>
 </template>
 <script setup>
-// import BCollapse from '@/components/simple/BCollapse.vue';
-import ContentBox from '@/components/simple/ContentBox.vue';
-import ClientFileUpload from '@/components/forms/form-snippets/ClientFileUpload.vue';
 import YesNo from '@/components/forms/form-snippets/YesNo.vue';
+import ContentBox from '@/components/simple/ContentBox.vue';
 import Honorific from '@/components/forms/form-snippets/Honorific.vue';
+import ClientFileUpload from '@/components/forms/form-snippets/ClientFileUpload.vue';
+import Datepicker from 'vue3-datepicker';
 import { reactive, onBeforeMount, ref } from 'vue';
 import { useSaveData as saveData } from '@/composables/helper.js';
 import { useRouter } from 'vue-router';
 import { useClientStore } from '@/stores/client.js';
 const router = useRouter();
 const store = useClientStore();
-const collapse1 = ref(null);
+const activeDoc = ref(0);
 let formData = reactive([
     {
-        query: 'Did the deceased own shares in a private company?',
+        query: 'In the 5 years before their death, did the deceased inherit money or assets from another person’s estate on which Inheritance Tax was paid?',
         answer: null,
         onTrue: {
-            company_name: '',
-            company_number: '',
-            business_activity: '',
-            accountant: {
-                honorific: '',
-                forename: '',
-                surname: '',
-                phone: '',
-                email: ''
-            },
-            valuation: null
-        }
-    },
-    {
-        query: 'Was the deceased a member of a partnership?',
-        answer: null,
-        onTrue: {
-            partnership_name: '',
-            partnership_number: '',
-            business_activity: '',
-            accountant: {
-                honorific: '',
-                forename: '',
-                surname: '',
-                phone: '',
-                email: ''
-            },
-            valuation: null
+            honorific: '',
+            forename: '',
+            surname: '',
+            date_of_death: null,
+            value_of_inheritance: '',
+            query1: {
+                query: 'Do you have the copy of the Will, Grant of Probate or other documents relating to the legacy?',
+                onTrue: [
+                    {
+                        document_title: '',
+                        document: null,
+                        extra_details: ''
+                    }
+                ]
+            }
         }
     }
 ]);
 
+const addDoc = () => {
+    formData[0].onTrue.query1.onTrue.push({
+        document_title: '',
+        document: '',
+        extra_details: ''
+    });
+    activeDoc.value++;
+};
+const removeDoc = (i) => {
+    if (i + 1 == formData[0].onTrue.query1.onTrue.length) {
+        activeDoc.value--;
+    }
+    formData[0].onTrue.query1.onTrue.splice(i, 1);
+};
+
 onBeforeMount(() => {
     if (store.client) {
-        if (store.client.business_interests) {
+        if (store.client.received_inheritance) {
             formData = reactive(
-                JSON.parse(store.client.business_interests.the_data)
+                JSON.parse(store.client.received_inheritance.the_data)
             );
+            let date_of_death = formData[0].onTrue.date_of_death;
+            formData[0].onTrue.date_of_death = date_of_death
+                ? new Date(date_of_death)
+                : null;
         }
     }
 });

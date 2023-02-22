@@ -1,41 +1,28 @@
 <template>
     <div class="container">
-        <content-box
-            title="Section 6 - England & Wales and the rest of the UK and British Isles">
-            <div class="mb-3">
-                <BaseButton @click="tip1.toggle()" size="sm" class="pointer"
-                    >Tip<i class="icon-xs fas fa-chevron-down ms-2"></i
-                ></BaseButton>
-                <BCollapse ref="tip1">
-                    <p class="text-gray-500 mt-2 mb-0">
-                        Certain investments can be placed with investment
-                        institutions in these jurisdictions. They each have
-                        separate legal systems and you may be required to apply
-                        for a similar Grant of Probate there.
-                    </p>
-                </BCollapse>
-            </div>
-            <div>
-                <BaseButton @click="tip2.toggle()" size="sm" class="pointer"
-                    >Tip<i class="icon-xs fas fa-chevron-down ms-2"></i
-                ></BaseButton>
-                <BCollapse ref="tip2">
-                    <p class="text-gray-500 mt-2 mb-0">
-                        You should take care that the deceased had regularised
-                        their affairs with HMRC. For example, the Jersey
-                        Disclosure Facility provides for a voluntary disclosure
-                        facility to UK residents from 6 April 2013 to 30
-                        September 2016 for UK residents with a beneficial
-                        interest in Jersey “relevant property”, with undisclosed
-                        UK tax liabilities, with a chance to regularise their UK
-                        tax affairs in a controlled manner on beneficial terms.
-                    </p>
-                </BCollapse>
-            </div>
+        <content-box title="Section 7 - Swiss and assets in other ‘tax havens’">
+            <!-- <BaseButton
+                @click="collapse.collapse1 = !collapse.collapse1"
+                size="sm"
+                class="pointer"
+                >Tip<i class="icon-xs fas fa-chevron-down ms-2"></i
+            ></BaseButton>
+            <BCollapse :visible="collapse.collapse1">
+                <p class="text-gray-500 mt-2 mb-0">
+                    Domicile and residence is relevant because it affects the
+                    law that governs succession. Since 17.8.2016 a new European
+                    Regulation affects succession within EU member states. The
+                    UK and Eire have not opted in to the Regulation (Denmark has
+                    opted out) but it will nonetheless affect individuals
+                    connected with the EU. If you are a beneficiary of this
+                    estate and there are non-UK assets involved, you should
+                    consider your own Will now. Do not wait until the estate has
+                    been administered.
+                </p>
+            </BCollapse> -->
         </content-box>
 
-        <content-box
-            title="6.1 - England & Wales and the rest of the UK and British Isles">
+        <content-box title="7.1 Swiss and assets in other ‘tax havens’">
             <yes-no
                 v-for="(row, i) in formData"
                 :key="i"
@@ -55,16 +42,17 @@
             <button
                 class="btn btn-primary shadow"
                 @click="
-                    saveData('uk_british_isles', formData);
-                    router.push({ name: 'section8' });
+                    saveData('tax_havens', formData);
+                    router.push({ name: 'Section8' });
                 ">
                 Next section
             </button>
         </content-box>
     </div>
 </template>
+
 <script setup>
-import BCollapse from '@/components/simple/BCollapse.vue';
+// import BCollapse from '@/components/simple/BCollapse.vue';
 import ContentBox from '@/components/simple/ContentBox.vue';
 import YesNo from '@/components/forms/form-snippets/YesNo.vue';
 import { reactive, onBeforeMount, ref } from 'vue';
@@ -73,32 +61,24 @@ import { useRouter } from 'vue-router';
 import { useClientStore } from '@/stores/client.js';
 const router = useRouter();
 const store = useClientStore();
+const collapse = ref({ collapse1: false });
 
-const tip1 = ref(null);
-const tip2 = ref(null);
 let formData = reactive([
     {
-        query: 'Did the deceased have any assets in Jersey?',
+        query: 'Did the deceased have any assets in Switzerland?',
         answer: null,
         onTrue: ''
     },
     {
-        query: 'Did the deceased have any assets in Guernsey?',
-        answer: null,
-        onTrue: ''
-    },
-    {
-        query: 'Did the deceased have any assets in Isle of Man?',
+        query: 'Did the deceased have any assets in a tax haven?',
         answer: null,
         onTrue: ''
     }
 ]);
 onBeforeMount(() => {
     if (store.client) {
-        if (store.client.uk_british_isles) {
-            formData = reactive(
-                JSON.parse(store.client.uk_british_isles.the_data)
-            );
+        if (store.client.tax_havens) {
+            formData = reactive(JSON.parse(store.client.tax_havens.the_data));
         }
     }
 });

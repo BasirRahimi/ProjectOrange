@@ -1,108 +1,329 @@
 <template>
     <div class="container">
-        <content-box title="Section 12 - Pensions">
+        <content-box title="Section 13 - Life Assurance">
             <p class="text-gray-500 m-0">
-                If the deceased received, or had made provision for, a pension
-                or benefit from an employer or under a personal pension policy
-                (other than the State Pension) you are required to submit
-                details to HMRC.
+                HMRC requires information from you about simple life policies
+                and other investments as follows
             </p>
         </content-box>
 
-        <content-box title="12.1 Pension Details">
+        <content-box title="13.1 Sums payable from insurance companies">
             <yes-no
                 collapse
                 :label="formData[0].query"
                 v-model="formData[0].answer">
                 <div class="mt-4"></div>
                 <base-input
-                    label="Name of pension scheme or title of pension policy"
-                    placeholder="Personal pension programme"
-                    v-model="formData[0].onTrue.name_of_pension"></base-input>
+                    label="Company name"
+                    placeholder="Insurance Company"
+                    v-model="formData[0].onTrue.company_name"></base-input>
 
-                <label>Please describe the pension</label>
+                <label>Please describe the policies</label>
                 <textarea
-                    v-model="formData[0].onTrue.description"
+                    v-model="formData[0].onTrue.policies"
                     class="form-control mb-4"
                     rows="4"
                     placeholder="Please include a full overview of relevant details to this question"></textarea>
 
-                <label>Contact details of the scheme administrators </label>
-                <honorific v-model="formData[0].onTrue.honorific" />
                 <base-input
-                    label="Company name"
-                    placeholder="Appleseed Holdings"
-                    v-model="formData[0].onTrue.company_name"></base-input>
-                <base-input
-                    label="Forenames"
-                    placeholder="John"
-                    v-model="formData[0].onTrue.forename"></base-input>
-                <base-input
-                    label="Surname"
-                    placeholder="Doe"
-                    v-model="formData[0].onTrue.surname"></base-input>
+                    label="Value of lump sum"
+                    placeholder="£1,000,000"
+                    type="number"
+                    min="0"
+                    v-model="formData[0].onTrue.value"></base-input>
 
-                <div class="row">
-                    <div class="col-12 col-lg-6">
-                        <base-input
-                            label="Phone number"
-                            placeholder="+44 012345 67890"
-                            v-model="formData[0].onTrue.phone"></base-input>
+                <label
+                    >If you have any relevant documents or correspondence to
+                    this, please upload copies</label
+                ><br />
+                <div
+                    class="row mb-2"
+                    v-for="(doc, i) in formData[0].onTrue.docs"
+                    :key="i">
+                    <div class="col-12 file-row">
+                        <client-file-upload
+                            class="mb-0"
+                            v-model="formData[0].onTrue.docs[i]"
+                            @input="saveData"></client-file-upload>
+                        <div class="file-rem-hidden d-inline-block ms-3">
+                            <base-button
+                                type="danger"
+                                icon="fas fa-window-close"
+                                icon-only
+                                @click="removeDoc(0, i)"></base-button>
+                        </div>
                     </div>
-                    <div class="col-12 col-lg-6">
-                        <base-input
-                            label="Email Address"
-                            placeholder="John.doe@doe.co.uk"
-                            v-model="formData[0].onTrue.email"></base-input>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <client-file-upload
+                            class="mb-0"
+                            v-model="
+                                formData[0].onTrue.docs[
+                                    formData[0].onTrue.docs.length
+                                ]
+                            "
+                            @input="saveData"
+                            wipeAfterInput
+                            :show-file="false"></client-file-upload>
                     </div>
                 </div>
             </yes-no>
         </content-box>
 
-        <content-box title="12.2 Pension Payment">
+        <content-box title="13.2 Investment Bonds">
             <yes-no
                 collapse
                 :label="formData[1].query"
                 v-model="formData[1].answer">
                 <div class="mt-4"></div>
                 <base-input
-                    label="Name of pension scheme or title of pension policy"
-                    placeholder="Personal pension programme"
-                    v-model="formData[1].onTrue.name_of_pension"></base-input>
+                    label="Company name"
+                    placeholder="Insurance Company"
+                    v-model="formData[1].onTrue.company_name"></base-input>
 
-                <label>Please describe the pension</label>
+                <label>Please describe the policies</label>
                 <textarea
-                    v-model="formData[1].onTrue.description"
+                    v-model="formData[1].onTrue.policies"
                     class="form-control mb-4"
                     rows="4"
                     placeholder="Please include a full overview of relevant details to this question"></textarea>
 
                 <base-input
-                    label="What is the value of the lump sum?"
-                    placeholder="£300,000"
+                    label="Value of lump sum"
+                    placeholder="£1,000,000"
                     type="number"
                     min="0"
                     v-model="formData[1].onTrue.value"></base-input>
+
+                <label
+                    >If you have any relevant documents or correspondence to
+                    this, please upload copies</label
+                ><br />
+                <div
+                    class="row mb-2"
+                    v-for="(doc, i) in formData[1].onTrue.docs"
+                    :key="i">
+                    <div class="col-12 file-row">
+                        <client-file-upload
+                            class="mb-0"
+                            v-model="formData[1].onTrue.docs[i]"
+                            @input="saveData"></client-file-upload>
+                        <div class="file-rem-hidden d-inline-block ms-3">
+                            <base-button
+                                type="danger"
+                                icon="fas fa-window-close"
+                                icon-only
+                                @click="removeDoc(1, i)"></base-button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <client-file-upload
+                            class="mb-0"
+                            v-model="
+                                formData[1].onTrue.docs[
+                                    formData[1].onTrue.docs.length
+                                ]
+                            "
+                            @input="saveData"
+                            wipeAfterInput
+                            :show-file="false"></client-file-upload>
+                    </div>
+                </div>
             </yes-no>
         </content-box>
 
-        <content-box title="12.3 Pension Payment">
+        <content-box title="13.3 Investment or reinvestment">
             <yes-no
                 collapse
                 :label="formData[2].query"
                 v-model="formData[2].answer">
                 <div class="mt-4"></div>
                 <base-input
-                    label="Name of pension scheme or title of pension policy"
-                    placeholder="Personal pension programme"
-                    v-model="formData[2].onTrue.name_of_pension"></base-input>
+                    label="Company name"
+                    placeholder="Insurance Company"
+                    v-model="formData[2].onTrue.company_name"></base-input>
 
-                <label>Please describe the pension</label>
+                <label>Please describe the policies</label>
                 <textarea
-                    v-model="formData[2].onTrue.description"
+                    v-model="formData[2].onTrue.policies"
                     class="form-control mb-4"
                     rows="4"
                     placeholder="Please include a full overview of relevant details to this question"></textarea>
+
+                <base-input
+                    label="Value of lump sum"
+                    placeholder="£1,000,000"
+                    type="number"
+                    min="0"
+                    v-model="formData[2].onTrue.value"></base-input>
+
+                <label
+                    >If you have any relevant documents or correspondence to
+                    this, please upload copies</label
+                ><br />
+                <div
+                    class="row mb-2"
+                    v-for="(doc, i) in formData[2].onTrue.docs"
+                    :key="i">
+                    <div class="col-12 file-row">
+                        <client-file-upload
+                            class="mb-0"
+                            v-model="formData[2].onTrue.docs[i]"
+                            @input="saveData"></client-file-upload>
+                        <div class="file-rem-hidden d-inline-block ms-3">
+                            <base-button
+                                type="danger"
+                                icon="fas fa-window-close"
+                                icon-only
+                                @click="removeDoc(2, i)"></base-button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <client-file-upload
+                            class="mb-0"
+                            v-model="
+                                formData[2].onTrue.docs[
+                                    formData[2].onTrue.docs.length
+                                ]
+                            "
+                            @input="saveData"
+                            wipeAfterInput
+                            :show-file="false"></client-file-upload>
+                    </div>
+                </div>
+            </yes-no>
+        </content-box>
+
+        <content-box title="13.4 Unit-linked investment bonds">
+            <yes-no
+                collapse
+                :label="formData[3].query"
+                v-model="formData[3].answer">
+                <div class="mt-4"></div>
+                <base-input
+                    label="Company name"
+                    placeholder="Insurance Company"
+                    v-model="formData[3].onTrue.company_name"></base-input>
+
+                <label>Please describe the policies</label>
+                <textarea
+                    v-model="formData[3].onTrue.policies"
+                    class="form-control mb-4"
+                    rows="4"
+                    placeholder="Please include a full overview of relevant details to this question"></textarea>
+
+                <base-input
+                    label="Value of lump sum"
+                    placeholder="£1,000,000"
+                    type="number"
+                    min="0"
+                    v-model="formData[3].onTrue.value"></base-input>
+
+                <label
+                    >If you have any relevant documents or correspondence to
+                    this, please upload copies</label
+                ><br />
+                <div
+                    class="row mb-2"
+                    v-for="(doc, i) in formData[3].onTrue.docs"
+                    :key="i">
+                    <div class="col-12 file-row">
+                        <client-file-upload
+                            class="mb-0"
+                            v-model="formData[3].onTrue.docs[i]"
+                            @input="saveData"></client-file-upload>
+                        <div class="file-rem-hidden d-inline-block ms-3">
+                            <base-button
+                                type="danger"
+                                icon="fas fa-window-close"
+                                icon-only
+                                @click="removeDoc(3, i)"></base-button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <client-file-upload
+                            class="mb-0"
+                            v-model="
+                                formData[3].onTrue.docs[
+                                    formData[3].onTrue.docs.length
+                                ]
+                            "
+                            @input="saveData"
+                            wipeAfterInput
+                            :show-file="false"></client-file-upload>
+                    </div>
+                </div>
+            </yes-no>
+        </content-box>
+
+        <content-box title="13.5 Joint life assurances">
+            <yes-no
+                collapse
+                :label="formData[4].query"
+                v-model="formData[4].answer">
+                <div class="mt-4"></div>
+                <base-input
+                    label="Company name"
+                    placeholder="Insurance Company"
+                    v-model="formData[4].onTrue.company_name"></base-input>
+
+                <label>Please describe the policies</label>
+                <textarea
+                    v-model="formData[4].onTrue.policies"
+                    class="form-control mb-4"
+                    rows="4"
+                    placeholder="Please include a full overview of relevant details to this question"></textarea>
+
+                <base-input
+                    label="Value of lump sum"
+                    placeholder="£1,000,000"
+                    type="number"
+                    min="0"
+                    v-model="formData[4].onTrue.value"></base-input>
+
+                <label
+                    >If you have any relevant documents or correspondence to
+                    this, please upload copies</label
+                ><br />
+                <div
+                    class="row mb-2"
+                    v-for="(doc, i) in formData[4].onTrue.docs"
+                    :key="i">
+                    <div class="col-12 file-row">
+                        <client-file-upload
+                            class="mb-0"
+                            v-model="formData[4].onTrue.docs[i]"
+                            @input="saveData"></client-file-upload>
+                        <div class="file-rem-hidden d-inline-block ms-3">
+                            <base-button
+                                type="danger"
+                                icon="fas fa-window-close"
+                                icon-only
+                                @click="removeDoc(4, i)"></base-button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <client-file-upload
+                            class="mb-0"
+                            v-model="
+                                formData[4].onTrue.docs[
+                                    formData[4].onTrue.docs.length
+                                ]
+                            "
+                            @input="saveData"
+                            wipeAfterInput
+                            :show-file="false"></client-file-upload>
+                    </div>
+                </div>
             </yes-no>
         </content-box>
 
@@ -110,8 +331,8 @@
             <button
                 class="btn btn-primary shadow"
                 @click="
-                    saveData('pensions', formData);
-                    router.push({ name: 'section14' });
+                    saveData('life_assurance', formData);
+                    router.push({ name: 'Section14' });
                 ">
                 Next section
             </button>
@@ -119,7 +340,7 @@
     </div>
 </template>
 <script setup>
-import Honorific from '@/components/forms/form-snippets/Honorific.vue';
+import ClientFileUpload from '@/components/forms/form-snippets/ClientFileUpload.vue';
 import ContentBox from '@/components/simple/ContentBox.vue';
 import YesNo from '@/components/forms/form-snippets/YesNo.vue';
 import { reactive, onBeforeMount } from 'vue';
@@ -130,41 +351,67 @@ const router = useRouter();
 const store = useClientStore();
 let formData = reactive([
     {
-        query: 'Other than small arrears of pension due to the date of death, did any payments under a pension scheme or personal pension policy continue after the death of the deceased?',
+        query: 'Were any sums payable from insurance companies to the estate as a result of the death of the deceased?',
         answer: null,
         onTrue: {
-            name_of_pension: '',
-            description: '',
-            honorific: '',
             company_name: '',
-            forename: '',
-            surname: '',
-            phone: '',
-            email: ''
+            policies: '',
+            value: '',
+            docs: []
         }
     },
     {
-        query: 'Was a lump sum payable under the scheme as a result of the death of the deceased?',
+        query: 'Did the deceased have any unit-linked investment bonds with insurance companies or other financial service providers that pay 101% of the value of the unit trusts to the estate?',
         answer: null,
         onTrue: {
-            name_of_pension: '',
-            description: '',
-            value: ''
+            company_name: '',
+            policies: '',
+            value: '',
+            docs: []
         }
     },
     {
-        query: 'Did the deceased, within two-years of their death, transfer or dispose of any benefits payable under a pension scheme or person pension policy?',
+        query: 'Did the deceased have any investment or reinvestment plans, bonds or contracts with financial services providers that pay out to the estate on death?',
         answer: null,
         onTrue: {
-            name_of_pension: '',
-            description: ''
+            company_name: '',
+            policies: '',
+            value: '',
+            docs: []
+        }
+    },
+    {
+        query: 'Did the deceased have any insurance policies and unit-linked investment bonds that are payable to beneficiaries under trust and do not form part of the estate?',
+        answer: null,
+        onTrue: {
+            company_name: '',
+            policies: '',
+            value: '',
+            docs: []
+        }
+    },
+    {
+        query: 'Did the deceased have any joint life assurance policies under which the deceased was one of the lives assured but which remain in force after the death?',
+        answer: null,
+        onTrue: {
+            company_name: '',
+            policies: '',
+            value: '',
+            docs: []
         }
     }
 ]);
+
+const removeDoc = (i, j) => {
+    formData[i].onTrue.docs.splice(j, 1);
+};
+
 onBeforeMount(() => {
     if (store.client) {
-        if (store.client.pensions) {
-            formData = reactive(JSON.parse(store.client.pensions.the_data));
+        if (store.client.life_assurance) {
+            formData = reactive(
+                JSON.parse(store.client.life_assurance.the_data)
+            );
         }
     }
 });

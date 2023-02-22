@@ -1,424 +1,350 @@
 <template>
     <div class="container">
-        <content-box title="Adding Executors">
-            <p class="text-gray-500">
-                Not every Executor may want to take on their role as an Executor
-                for personal or other reasons. When this happens an Executor can
-                choose one of the following:-
-            </p>
-            <p class="text-gray-500">
-                1. Formally retire as an Executor (‘Renounce Executorship’) for
-                which a form is required to be signed.
-                <br />2. Have the power of Executorship reserved on them.
-                <br />3. Appoint someone to take on the responsibility on their
-                behalf (appoint an ‘Attorney’).
-            </p>
-            <p class="text-gray-500">
-                Below is provision for the details of one executor to be
-                inserted but there may be as many as four named in the Will and
-                who may wish to take the Grant of Probate. In this case, click
-                ‘add executor’ to add more.
-            </p>
+        <content-box title="Section 2 - Powers of Attorney and non-UK elements">
+            <yes-no
+                class="mb-4"
+                :label="formData[0].query"
+                collapse
+                v-model="formData[0].answer">
+                <client-file-upload
+                    class="mt-3"
+                    v-model="formData[0].document"></client-file-upload>
+            </yes-no>
+            <yes-no
+                class="mb-4"
+                :label="formData[1].query"
+                collapse
+                v-model="formData[1].answer">
+                <client-file-upload
+                    class="mt-3"
+                    v-model="formData[1].document"></client-file-upload>
+            </yes-no>
+
+            <BaseButton @click="collapse1.toggle()" size="sm"
+                >Tip<i class="icon-xs fa-solid fa-chevron-down ms-2"></i>
+            </BaseButton>
+            <BCollapse ref="collapse1">
+                <p class="text-gray-500 mt-2">
+                    When a person dies, the Power of Attorney ceases to have
+                    effect. The Attorney must hand over their responsibilities
+                    to the Executors. If a Power of Attorney has been registered
+                    with the Office of the Public Guardian then the death
+                    certificate must be registered with that office.
+                </p>
+            </BCollapse>
         </content-box>
 
-        <content-box
-            class="relative"
-            v-for="(executor, key) in formData"
-            :key="key"
-            :title="`Executor ${key + 1}`">
-            <a
-                class="remove-executor"
-                href="#"
-                v-if="formData.length > 1"
-                @click.prevent="removeExecutor(key)"
-                >Remove Executor</a
-            >
-            <honorific v-model="executor.honorific" />
+        <content-box title="2.2 Domicile, residence and non-UK assets">
+            <yes-no
+                collapse
+                :openOn="false"
+                :label="formData[2].query"
+                v-model="formData[2].answer">
+                <base-input
+                    label-classes="mt-4"
+                    :label="formData[2].onFalse[0].query"
+                    placeholder="Paris, France"
+                    v-model="formData[2].onFalse[0].answer"></base-input>
+                <base-input
+                    :label="formData[2].onFalse[1].query"
+                    placeholder="French"
+                    v-model="formData[2].onFalse[1].answer"></base-input>
 
-            <base-input
-                label="Forenames"
-                placeholder="John"
-                v-model="executor.forename"></base-input>
-            <base-input
-                label="Surname"
-                placeholder="Doe"
-                v-model="executor.surname"></base-input>
+                <button-group
+                    cssGrid
+                    :gridColsize="100"
+                    class="mb-4"
+                    :label="formData[2].onFalse[2].query"
+                    :options="['Yes', 'No', 'Unsure']"
+                    v-model="formData[2].onFalse[2].answer"></button-group>
 
-            <div class="mb-4">
-                <label>Last usual address</label>
-                <BaseSwitch
-                    v-model="executor.addressInputType"
-                    label="Add manually"
-                    leftText="Use postcode" />
-            </div>
+                <button-group
+                    cssGrid
+                    :gridColsize="100"
+                    class="mb-4"
+                    :label="formData[2].onFalse[3].query"
+                    :options="['Yes', 'No', 'Unsure']"
+                    v-model="formData[2].onFalse[3].answer"></button-group>
+            </yes-no>
+        </content-box>
 
-            <div class="row">
-                <div
-                    class="col-lg-5"
-                    v-show="executor.addressInputType == 'Use postcode'">
-                    <BaseInput
-                        v-model="executor.postcode"
-                        addonRightIcon="fas fa-search"
-                        addonRightClasses="btn btn-primary"
-                        placeholder="E.g. TN30 6RN" />
-                </div>
-                <div
-                    class="col-12"
-                    v-show="executor.addressInputType == 'Add manually'">
-                    <div class="row">
-                        <div class="col-lg-5">
-                            <base-input
-                                label="Address Line 1"
-                                placeholder="23 Acacia Avenue"
-                                v-model="executor.addressLine1"></base-input>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-5">
-                            <base-input
-                                label="Address Line 2"
-                                placeholder="Acacia Road"
-                                v-model="executor.addressLine2"></base-input>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-5">
-                            <base-input
-                                label="Town / City"
-                                placeholder="Acacia"
-                                v-model="executor.town"></base-input>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-5">
-                            <base-input
-                                label="Postcode"
-                                placeholder="TN28 PJ13"
-                                v-model="executor.postcode"></base-input>
-                        </div>
-                    </div>
+        <content-box title="2.3 A brief narrative of the life of the deceased">
+            <div v-show="slide === 1">
+                <div class="mb-4">
+                    <label class="flashit">{{ formData[3].query }}</label>
+                    <textarea
+                        class="form-control"
+                        rows="4"
+                        placeholder="Please include a full overview of relevant details to this question"
+                        v-model="formData[3].answer"></textarea>
                 </div>
             </div>
-
-            <div class="row">
-                <div class="col-12 col-lg-6">
-                    <base-input
-                        label="National insurance number"
-                        placeholder="576HDIW7 IE"
-                        v-model="executor.niNumber"></base-input>
+            <div v-show="slide === 2">
+                <div class="mb-4">
+                    <label class="flashit">{{ formData[4].query }}</label>
+                    <textarea
+                        class="form-control"
+                        rows="4"
+                        placeholder="Please include a full overview of relevant details to this question"
+                        v-model="formData[4].answer"></textarea>
                 </div>
             </div>
-
-            <div class="row">
-                <div class="col-12 col-lg-6">
-                    <base-input
-                        label="Phone number"
-                        placeholder="+44 012345 67890"
-                        v-model="executor.phone"></base-input>
-                </div>
-                <div class="col-12 col-lg-6">
-                    <base-input
-                        label="Email Address"
-                        placeholder="John.doe@doe.co.uk"
-                        v-model="executor.email"></base-input>
+            <div v-show="slide === 3">
+                <div class="mb-4">
+                    <label class="flashit">{{ formData[5].query }}</label>
+                    <textarea
+                        class="form-control"
+                        rows="4"
+                        placeholder="Please include a full overview of relevant details to this question"
+                        v-model="formData[5].answer"></textarea>
                 </div>
             </div>
-
-            <label>Relationship</label>
-            <div class="button-grid mb-4">
-                <BaseButton
-                    type="default"
-                    outline
-                    :class="{ active: executor.relationship == 'Spouse' }"
-                    @click="clickRelationship('Spouse', key)"
-                    >Spouse</BaseButton
-                >
-                <BaseButton
-                    type="default"
-                    outline
-                    :class="{ active: executor.relationship == 'Child' }"
-                    @click="clickRelationship('Child', key)"
-                    >Child</BaseButton
-                >
-                <BaseButton
-                    type="default"
-                    outline
-                    :class="{ active: executor.relationship == 'Grandchild' }"
-                    @click="clickRelationship('Grandchild', key)"
-                    >Grandchild</BaseButton
-                >
-                <BaseButton
-                    type="default"
-                    outline
-                    :class="{ active: executor.relationship == 'Sibling' }"
-                    @click="clickRelationship('Sibling', key)"
-                    >Sibling</BaseButton
-                >
-                <BaseButton
-                    type="default"
-                    outline
-                    :class="{ active: executor.relationship == 'Other' }"
-                    @click="clickRelationship('Other', key)"
-                    >Other</BaseButton
-                >
-            </div>
-            <BCollapse
-                ref="relationshipCollapse"
-                :visible="executor.relationship == 'Other'">
-                <textarea
-                    class="form-control mb-4"
-                    rows="3"
-                    placeholder="Please include a full overview of relevant details to this question"
-                    v-model="executor.relationshipOther"></textarea>
-            </BCollapse>
-
-            <label>KYC Document</label>
-            <p class="text-gray-500">
-                For each executor, a copy of the KYC document should be produced
-                with this application. The template of an IFA certification
-                letter for this letter is downloadable
-                <a href="#"><u>here</u></a
-                >. For each Executor, please provide a certified copy of a Type
-                1 document and a Type 2 document.
-            </p>
-            <div class="d-flex mb-4">
-                <div class="me-3">
-                    <label :for="`${key}kyc1`">Type 1</label><br />
-                    <ClientFileUpload
-                        :inputId="`${key}kyc1`"
-                        v-model="executor.kycType1" />
-                </div>
-                <div>
-                    <label :for="`${key}kyc2`">Type 2</label><br />
-                    <ClientFileUpload
-                        :inputId="`${key}kyc2`"
-                        v-model="executor.kycType2" />
+            <div v-show="slide === 4">
+                <div class="mb-4">
+                    <label class="flashit">{{ formData[6].query }}</label>
+                    <textarea
+                        class="form-control"
+                        rows="4"
+                        placeholder="Please include a full overview of relevant details to this question"
+                        v-model="formData[6].answer"></textarea>
                 </div>
             </div>
+            <div v-show="slide === 5">
+                <yes-no
+                    class="mb-4"
+                    label-class="flashit"
+                    :label="formData[7].query"
+                    v-model="formData[7].answer">
+                </yes-no>
 
-            <label>Acting as an Executor</label>
-            <p class="text-gray-500">
-                Sometimes a person may decide that they do not want to be an
-                Executor. Would this Executor like to:-
-            </p>
-            <div>
-                <BaseRadio
-                    :name="`${key}executorActing`"
-                    v-model="executor.acting"
-                    @update:modelValue="updateActing()"
-                    value="Accept"
-                    >Accept their role and act as executor?</BaseRadio
-                >
-                <BaseRadio
-                    :name="`${key}executorActing`"
-                    v-model="executor.acting"
-                    @update:modelValue="updateActing(`${key}retire`)"
-                    value="Retire"
-                    >Retire as an executor?</BaseRadio
-                >
+                <yes-no
+                    class="mb-4"
+                    label-class="flashit"
+                    :label="formData[8].query"
+                    v-model="formData[8].answer">
+                </yes-no>
+
                 <BCollapse
-                    ref="actingCollapse"
-                    :identifier="`${key}retire`"
-                    :visible="executor.acting == 'Retire'">
-                    <p class="text-gray-500">
-                        This executor will need to sign a Renunciation. Download
-                        a copy below.
-                    </p>
-                    <BaseButton
-                        tag="a"
-                        href="#"
-                        type="primary"
-                        outline
-                        class="me-3"
-                        >Download Copy <i class="fa-solid fa-arrow-down"></i
-                    ></BaseButton>
-                    <ClientFileUpload
-                        v-model="executor.renunciation"
-                        uploadText="Upload Doc +"
-                        class="mb-3"
-                        changeText="Change Doc" />
-                </BCollapse>
-                <BaseRadio
-                    :name="`${key}executorActing`"
-                    v-model="executor.acting"
-                    @update:modelValue="updateActing(`${key}reserve`)"
-                    value="Reserve"
-                    >Have the power of Executorship reserved to them? (Standing
-                    back now but can be involved later)</BaseRadio
-                >
-                <BCollapse
-                    ref="actingCollapse"
-                    :identifier="`${key}reserve`"
-                    :visible="executor.acting == 'Reserve'">
-                    <p class="text-gray-500">
-                        This executor will receive a notice of the intention to
-                        reserve power on them. This notice can be downloaded
-                        below.
-                    </p>
-                    <BaseButton
-                        tag="a"
-                        href="#"
-                        type="primary"
-                        outline
-                        class="me-3"
-                        >Download Copy <i class="fa-solid fa-arrow-down"></i
-                    ></BaseButton>
-                    <ClientFileUpload
-                        v-model="executor.reserveIntent"
-                        uploadText="Upload Doc +"
-                        class="mb-3"
-                        changeText="Change Doc" />
-                </BCollapse>
-                <BaseRadio
-                    :name="`${key}executorActing`"
-                    v-model="executor.acting"
-                    @update:modelValue="updateActing(`${key}appoint`)"
-                    value="Appoint"
-                    >Appoint someone to take on the responsibility on their
-                    behalf?</BaseRadio
-                >
-                <BCollapse
-                    ref="actingCollapse"
-                    :identifier="`${key}appoint`"
-                    :visible="executor.acting == 'Appoint'">
-                    <p class="text-gray-500">
-                        If this Executor wants to appoint an Attorney to act for
-                        them, you will need to contact us. Use the button below.
-                    </p>
-                    <a href="#">Create alternative Attorney</a>
+                    ref="collapse2"
+                    :visible="formData[7].answer === true">
+                    <base-input
+                        :label="formData[7].onTrue[0].query"
+                        placeholder="France"
+                        v-model="formData[7].onTrue[0].answer"></base-input>
+                    <base-input
+                        :label="formData[7].onTrue[1].query"
+                        placeholder="French"
+                        v-model="formData[7].onTrue[1].answer"></base-input>
+                    <base-input
+                        :label="formData[7].onTrue[2].query"
+                        placeholder="French"
+                        v-model="formData[7].onTrue[2].answer"></base-input>
                 </BCollapse>
             </div>
+            <div v-show="slide === 6">
+                <div class="mb-4">
+                    <label class="flashit">{{ formData[9].query }}</label>
+                    <textarea
+                        class="form-control"
+                        rows="4"
+                        placeholder="Please include a full overview of relevant details to this question"
+                        v-model="formData[9].answer"></textarea>
+                </div>
+            </div>
+            <div v-show="slide === 7">
+                <div class="mb-4">
+                    <label class="flashit">{{ formData[10].query }}</label>
+                    <textarea
+                        class="form-control"
+                        rows="4"
+                        placeholder="Please include a full overview of relevant details to this question"
+                        v-model="formData[10].answer"></textarea>
+                </div>
+
+                <div class="mb-4">
+                    <button-group
+                        cssGrid
+                        :gridColsize="100"
+                        class="mb-4"
+                        :label="formData[11].query"
+                        :options="['Yes', 'No', 'Unsure']"
+                        v-model="formData[11].answer"></button-group>
+                </div>
+            </div>
+
+            <div class="d-sm-flex align-items-center">
+                <div class="flex-grow-1">Step {{ slide }}/7</div>
+                <base-button
+                    v-if="slide > 1"
+                    type="default"
+                    outline
+                    @click="prevSlide"
+                    >Previous</base-button
+                >
+                <base-button
+                    v-if="slide < 7"
+                    type="default"
+                    outline
+                    @click="nextSlide"
+                    >Next</base-button
+                >
+            </div>
+
+            <!-- <BaseButton @click="collapse3.toggle()" class="pointer" size="sm"
+                >Tip<i class="icon-xs fas fa-chevron-down ms-2"></i
+            ></BaseButton>
+            <BCollapse ref="collapse3">
+                <p class="text-gray-500 mt-2">
+                    Domicile and residence is relevant because it affects the
+                    law that governs succession. Since 17.8.2016 a new European
+                    Regulation affects succession within EU member states. The
+                    UK and Eire have not opted in to the Regulation (Denmark has
+                    opted out) but it will nonetheless affect individuals
+                    connected with the EU. If you are a beneficiary of this
+                    estate and there are non-UK assets involved, you should
+                    consider your own Will now. Do not wait until the estate has
+                    been administered.
+                </p>
+            </BCollapse> -->
         </content-box>
 
         <content-box class="p-0 text-end" :shadow="false" :whiteBg="false">
-            <div
-                class="d-flex mb-4 align-items-center"
-                :class="[
-                    { 'justify-content-between': formData.length < 4 },
-                    { 'justify-content-end': formData.length == 4 }
-                ]">
-                <BaseButton
-                    outline
-                    type="default"
-                    @click.prevent="addExecutor"
-                    v-show="formData.length < 4"
-                    >Add executor +</BaseButton
-                >
-                <button
-                    class="btn btn-primary shadow"
-                    @click="
-                        saveData('executors', formData);
-                        router.push({ name: 'section3' });
-                    ">
-                    Next section
-                </button>
-            </div>
+            <button
+                class="btn btn-primary shadow"
+                @click="
+                    saveData('powers_of_attorney', formData);
+                    router.push({ name: 'Section3' });
+                ">
+                Next section
+            </button>
         </content-box>
     </div>
 </template>
 <script setup>
-import BaseRadio from '@/components/simple/BaseRadio.vue';
 import BCollapse from '@/components/simple/BCollapse.vue';
-import BaseSwitch from '@/components/simple/BaseSwitch.vue';
-import Honorific from '@/components/forms/form-snippets/Honorific.vue';
-import ContentBox from '@/components/simple/ContentBox.vue';
-import { useClientStore } from '@/stores/client.js';
-import { onBeforeMount, ref, reactive } from 'vue';
-import { useRouter } from 'vue-router';
-import { useSaveData as saveData } from '@/composables/helper.js';
 import ClientFileUpload from '@/components/forms/form-snippets/ClientFileUpload.vue';
-
+import YesNo from '@/components/forms/form-snippets/YesNo.vue';
+import ContentBox from '@/components/simple/ContentBox.vue';
+import ButtonGroup from '@/components/forms/form-snippets/ButtonGroup.vue';
+import { ref, reactive, onBeforeMount } from 'vue';
+import {
+    useFlashLabel as flashLabel,
+    useSaveData as saveData
+} from '@/composables/helper.js';
+import { useRouter } from 'vue-router';
+import { useClientStore } from '@/stores/client.js';
 const router = useRouter();
 const store = useClientStore();
 
-const relationshipCollapse = ref(null);
-const actingCollapse = ref(null);
-
+const slide = ref(1);
+const collapse1 = ref(null);
+const collapse2 = ref(null);
+const collapse3 = ref(null);
 let formData = reactive([
     {
-        honorific: '',
-        forename: '',
-        surname: '',
-        addressLine1: '',
-        addressLine2: '',
-        town: '',
-        postcode: '',
-        niNumber: '',
-        phone: '',
-        email: '',
-        relationship: '',
-        relationshipOther: '',
-        acting: '',
-        renunciation: '',
-        reserveIntent: '',
-        addressInputType: 'Add manually'
+        query: 'Did the deceased make an ENDURING power of attorney?',
+        answer: null,
+        document: null
+    },
+    {
+        query: 'Did the deceased make a Property & Financial Affairs LASTING power of attorney?',
+        answer: null,
+        document: null
+    },
+    {
+        query: 'Was the deceased born in the UK and did they spend all of their life as a UK resident?',
+        answer: null,
+        onFalse: [
+            {
+                query: 'In what City/Country was the deceased born?',
+                answer: ''
+            },
+            {
+                query: 'What was their father’s domicile when the deceased was born?',
+                answer: ''
+            },
+            {
+                query: 'Was the deceased treated as a UK resident for Income Tax purposes?',
+                answer: null
+            },
+            {
+                query: 'Do you know if Sharia Law applies to this estate?',
+                answer: null
+            }
+        ]
+    },
+    {
+        query: 'Education history',
+        answer: ''
+    },
+    {
+        query: 'Employment history',
+        answer: ''
+    },
+    {
+        query: 'Nationality at Birth',
+        answer: ''
+    },
+    {
+        query: 'Nationality at Death',
+        answer: ''
+    },
+    {
+        query: 'Was the deceased female?',
+        answer: null,
+        onTrue: [
+            {
+                query: 'Where was their husband born?',
+                answer: ''
+            },
+            {
+                query: 'What was his nationality at birth?',
+                answer: ''
+            },
+            {
+                query: 'What was his nationality at death?',
+                answer: ''
+            }
+        ]
+    },
+    {
+        query: 'Was the deceased born before 1/2/1974?',
+        answer: null
+    },
+    {
+        query: 'Details of visits to the UK and the length of those visits',
+        answer: ''
+    },
+    {
+        query: 'The countries the deceased lived in',
+        answer: ''
+    },
+    {
+        query: 'Do you know if the deceased intended to live in the UK for the rest of their life?',
+        answer: null
     }
 ]);
-
-const addExecutor = () => {
-    formData.push({
-        honorific: '',
-        forename: '',
-        surname: '',
-        addressLine1: '',
-        addressLine2: '',
-        town: '',
-        postcode: '',
-        niNumber: '',
-        phone: '',
-        email: '',
-        relationship: '',
-        relationshipOther: '',
-        acting: '',
-        renunciation: '',
-        addressInputType: 'Add manually'
-    });
-};
-const removeExecutor = (i) => {
-    formData.splice(i, 1);
-};
-
-const clickRelationship = (relationship, i) => {
-    formData[i].relationship = relationship;
-    if (relationship == 'Other') {
-        relationshipCollapse.value[i].show();
-    } else {
-        relationshipCollapse.value[i].hide();
+const nextSlide = () => {
+    if (slide.value < 7) {
+        slide.value++;
+        flashLabel();
     }
 };
-
-const updateActing = (collapseIdentifier) => {
-    actingCollapse.value.forEach((x) => {
-        if (x.identifier === collapseIdentifier) {
-            x.show();
-        } else {
-            x.hide();
-        }
-    });
+const prevSlide = () => {
+    if (slide.value > 1) {
+        slide.value--;
+        flashLabel();
+    }
 };
-
 onBeforeMount(() => {
     if (store.client) {
-        if (store.client.executors) {
-            formData = reactive(JSON.parse(store.client.executors.the_data));
+        if (store.client.powers_of_attorney) {
+            formData = reactive(
+                JSON.parse(store.client.powers_of_attorney.the_data)
+            );
         }
     }
 });
 </script>
 
-<style lang="scss" scoped>
-@import '@sass/vue_sfc.scss';
-
-.relative {
-    position: relative;
-}
-
-.remove-executor {
-    position: absolute;
-    top: 40px;
-
-    @include media-breakpoint-down(sm) {
-        top: 5px;
-    }
-}
-</style>
+<style lang="scss" scoped></style>

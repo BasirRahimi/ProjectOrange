@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
-import Section1 from '@/components/forms/probate/Section1.vue';
+import AboutTheDeceased from '@/components/forms/probate/AboutTheDeceased.vue';
+import Executors from '@/components/forms/probate/Executors.vue';
 import Section2 from '@/components/forms/probate/Section2.vue';
 import Section3 from '@/components/forms/probate/Section3.vue';
 import Section4 from '@/components/forms/probate/Section4.vue';
@@ -20,117 +21,116 @@ import Section17 from '@/components/forms/probate/Section17.vue';
 import Section18 from '@/components/forms/probate/Section18.vue';
 import Section19 from '@/components/forms/probate/Section19.vue';
 import Section20 from '@/components/forms/probate/Section20.vue';
-import Section21 from '@/components/forms/probate/Section21.vue';
 import Overview from '@/components/forms/probate/Overview.vue';
 
 let clientRoutes = [
     {
-        name: 'section1',
+        name: 'AboutTheDeceased',
         path: '/clients/:id',
-        component: Section1
+        component: AboutTheDeceased
     },
     {
-        name: 'section2',
+        name: 'Executors',
         path: '/clients/:id/executors',
+        component: Executors
+    },
+    {
+        name: 'Section2',
+        path: '/clients/:id/powers-of-attorney',
         component: Section2
     },
     {
-        name: 'section3',
-        path: '/clients/:id/powers-of-attorney',
+        name: 'Section3',
+        path: '/clients/:id/will-and-marital-status',
         component: Section3
     },
     {
-        name: 'section4',
-        path: '/clients/:id/will-and-marital-status',
+        name: 'Section4',
+        path: '/clients/:id/lifetime-gifts',
         component: Section4
     },
     {
-        name: 'section5',
-        path: '/clients/:id/lifetime-gifts',
+        name: 'Section5',
+        path: '/clients/:id/gifts',
         component: Section5
     },
     {
-        name: 'section6',
-        path: '/clients/:id/gifts',
+        name: 'Section6',
+        path: '/clients/:id/uk-and-british-isles',
         component: Section6
     },
     {
-        name: 'section7',
-        path: '/clients/:id/uk-and-british-isles',
+        name: 'Section7',
+        path: '/clients/:id/tax-havens',
         component: Section7
     },
     {
-        name: 'section8',
-        path: '/clients/:id/tax-havens',
+        name: 'Section8',
+        path: '/clients/:id/nil-rate-band',
         component: Section8
     },
     {
-        name: 'section9',
-        path: '/clients/:id/nil-rate-band',
+        name: 'Section9',
+        path: '/clients/:id/business-interests',
         component: Section9
     },
     {
-        name: 'section10',
-        path: '/clients/:id/business-interests',
+        name: 'Section10',
+        path: '/clients/:id/recieved-inheritence',
         component: Section10
     },
     {
-        name: 'section11',
-        path: '/clients/:id/recieved-inheritence',
+        name: 'Section11',
+        path: '/clients/:id/trusts',
         component: Section11
     },
     {
-        name: 'section12',
-        path: '/clients/:id/trusts',
+        name: 'Section12',
+        path: '/clients/:id/pensions',
         component: Section12
     },
     {
-        name: 'section13',
-        path: '/clients/:id/pensions',
+        name: 'Section13',
+        path: '/clients/:id/life-assurance',
         component: Section13
     },
     {
-        name: 'section14',
-        path: '/clients/:id/life-assurance',
+        name: 'Section14',
+        path: '/clients/:id/joint-held-assets',
         component: Section14
     },
     {
-        name: 'section15',
-        path: '/clients/:id/joint-held-assets',
+        name: 'Section15',
+        path: '/clients/:id/stocks-and-shares',
         component: Section15
     },
     {
-        name: 'section16',
-        path: '/clients/:id/stocks-and-shares',
+        name: 'Section16',
+        path: '/clients/:id/bank-and-savings',
         component: Section16
     },
     {
-        name: 'section17',
-        path: '/clients/:id/bank-and-savings',
+        name: 'Section17',
+        path: '/clients/:id/personal-belongings',
         component: Section17
     },
     {
-        name: 'section18',
-        path: '/clients/:id/personal-belongings',
+        name: 'Section18',
+        path: '/clients/:id/assets',
         component: Section18
     },
     {
-        name: 'section19',
-        path: '/clients/:id/assets',
+        name: 'Section19',
+        path: '/clients/:id/liabilities',
         component: Section19
     },
     {
-        name: 'section20',
-        path: '/clients/:id/liabilities',
+        name: 'Section20',
+        path: '/clients/:id/other-information',
         component: Section20
     },
     {
-        name: 'section21',
-        path: '/clients/:id/other-information',
-        component: Section21
-    },
-    {
-        name: 'overview',
+        name: 'Overview',
         path: '/clients/:id/overview',
         component: Overview
     }

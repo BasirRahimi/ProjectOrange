@@ -1,161 +1,41 @@
 <template>
     <div class="container">
-        <content-box title="Section 4 - Lifetime Gifs">
+        <content-box title="Section 5 - Gifts with reservation of benefit">
             <p class="text-gray-500">
-                There is an obligation upon the Executors to make the fullest
-                enquiries as appear to be relevant to establish whether any
-                lifetime gifts were made on of after 18th March 1986. The
-                Executors need to be able to prove that they made fullest
-                enquiries and so this means that the Executors should seek
-                information from those individuals who appear to be obvious
-                recipients of gifts from the deceased (e.g. close relative, etc)
-                but also consider less obvious recipients of gifts (e.g. friend,
-                employee, housekeeper, distant relative, etc).
+                There is established anti-avoidance legislation which removes
+                any tax advantage if a person has given away an asset but
+                retained an interest in it. An example of this is where a parent
+                might transfer the title of their home to a son or daughter but
+                remain in occupation of it after the transfer takes place. This
+                is known as a ‘gift with reservation of benefit’ (GWRoB) and
+                Executors have a duty to make fullest enquiries and make full
+                disclosure to HMRC.
             </p>
             <p class="text-gray-500">
-                <b
-                    >HMRC has made it clear that it will, in some circumstances,
-                    examine closely the activities of an Executor making
-                    enquiries and will hold them to account for failure to
-                    disclose gifts.</b
-                >
+                It does not matter whether seven-years have elapsed since the
+                original transfer of the title.
             </p>
-            <p class="text-gray-500">
-                The principle is that a gift of an asset will reduce the value
-                of a person’s estate. Since Inheritance Tax could have been
-                payable if the asset was retained, there are rules which allow
-                HMRC to take gifts, normally made within seven years of death,
-                to be taken into account in determining whether Inheritance tax
-                is due.
-            </p>
-            <ul class="text-gray-500 m-0 pl-4">
-                <li>
-                    Gifts to spouses or civil partners do not need to be
-                    disclosed.
-                </li>
-                <li>Small cash gifts of £250 do not need to be disclosed.</li>
-                <li>
-                    Other gifts in total of £3,000 do not need to be disclosed.
-                </li>
-            </ul>
         </content-box>
 
-        <content-box title="4.1 Details of lifetime gifts">
+        <content-box title="5.1 Anti-avoidance legislation">
             <yes-no
-                v-show="slide === 1"
-                class="mb-4"
-                label-class="flashit"
                 :label="formData[0].query"
                 v-model="formData[0].answer"
                 collapse>
                 <textarea
+                    v-model="formData[0].onTrue"
                     class="form-control mt-3"
                     rows="4"
-                    placeholder="Please include a full overview of relevant details to this question"
-                    v-model="formData[0].onTrue"></textarea>
+                    placeholder="We shall review this information and ask for further details as appropriate to ensure you make full disclosure to HMRC."></textarea>
             </yes-no>
-
-            <yes-no
-                v-show="slide === 2"
-                class="mb-4"
-                label-class="flashit"
-                :label="formData[1].query"
-                v-model="formData[1].answer"
-                collapse>
-                <textarea
-                    class="form-control mt-3"
-                    rows="4"
-                    placeholder="Please include a full overview of relevant details to this question"
-                    v-model="formData[1].onTrue"></textarea>
-            </yes-no>
-
-            <yes-no
-                v-show="slide === 3"
-                class="mb-4"
-                label-class="flashit"
-                :label="formData[2].query"
-                v-model="formData[2].answer"
-                collapse>
-                <textarea
-                    class="form-control mt-3"
-                    rows="4"
-                    placeholder="Please include a full overview of relevant details to this question"
-                    v-model="formData[2].onTrue"></textarea>
-            </yes-no>
-
-            <yes-no
-                v-show="slide === 4"
-                class="mb-4"
-                label-class="flashit"
-                :label="formData[3].query"
-                v-model="formData[3].answer"
-                collapse>
-                <textarea
-                    class="form-control mt-3"
-                    rows="4"
-                    placeholder="Please include a full overview of relevant details to this question"
-                    v-model="formData[3].onTrue"></textarea>
-            </yes-no>
-
-            <yes-no
-                v-show="slide === 5"
-                class="mb-4"
-                label-class="flashit"
-                :label="formData[4].query"
-                v-model="formData[4].answer"
-                collapse>
-                <textarea
-                    class="form-control mt-3"
-                    rows="4"
-                    placeholder="Please include a full overview of relevant details to this question"
-                    v-model="formData[4].onTrue"></textarea>
-            </yes-no>
-
-            <div class="d-sm-flex align-items-center">
-                <div class="flex-grow-1">Step {{ slide }}/5</div>
-                <base-button
-                    v-if="slide > 1"
-                    type="default"
-                    outline
-                    @click="prevSlide"
-                    >Previous</base-button
-                >
-                <base-button
-                    v-if="slide < 5"
-                    type="default"
-                    outline
-                    @click="nextSlide"
-                    >Next</base-button
-                >
-            </div>
-
-            <!-- <BaseButton
-                @click="collapse.collapse1 = !collapse.collapse1"
-                class="pointer"
-                size="sm">
-                Tip<i class="icon-xs fas fa-chevron-down ms-2"></i>
-            </BaseButton>
-            <BCollapse :visible="collapse.collapse1" id="collapse2">
-                <p class="text-gray-500 mt-2">
-                    Domicile and residence is relevant because it affects the
-                    law that governs succession. Since 17.8.2016 a new European
-                    Regulation affects succession within EU member states. The
-                    UK and Eire have not opted in to the Regulation (Denmark has
-                    opted out) but it will nonetheless affect individuals
-                    connected with the EU. If you are a beneficiary of this
-                    estate and there are non-UK assets involved, you should
-                    consider your own Will now. Do not wait until the estate has
-                    been administered.
-                </p>
-            </BCollapse> -->
         </content-box>
 
         <content-box class="p-0 text-end" :shadow="false" :whiteBg="false">
             <button
                 class="btn btn-primary shadow"
                 @click="
-                    saveData('lifetime_gifts', formData);
-                    router.push({ name: 'section6' });
+                    saveData('gifts', formData);
+                    router.push({ name: 'Section6' });
                 ">
                 Next section
             </button>
@@ -163,70 +43,28 @@
     </div>
 </template>
 <script setup>
-// import BCollapse from '@/components/simple/BCollapse.vue';
-import ContentBox from '@/components/simple/ContentBox.vue';
 import YesNo from '@/components/forms/form-snippets/YesNo.vue';
-import { reactive, onBeforeMount, ref } from 'vue';
-import {
-    useSaveData as saveData,
-    useFlashLabel as flashLabel
-} from '@/composables/helper.js';
+import ContentBox from '@/components/simple/ContentBox.vue';
+import { reactive, onBeforeMount } from 'vue';
+import { useSaveData as saveData } from '@/composables/helper.js';
 import { useRouter } from 'vue-router';
 import { useClientStore } from '@/stores/client.js';
 const router = useRouter();
 const store = useClientStore();
-const collapse = ref({ collapse1: false });
 let formData = reactive([
     {
-        query: 'Did the deceased make any gifts or transfer assets to or for the benefit of another individual, charity or other organisation?',
-        answer: null,
-        onTrue: ''
-    },
-    {
-        query: 'Did the deceased create a trust or settlement?',
-        answer: null,
-        onTrue: ''
-    },
-    {
-        query: 'Did the deceased transfer/gift additional assets to an existing trust or settlement?',
-        answer: null,
-        onTrue: ''
-    },
-    {
-        query: 'Did the deceased pay a premium on any life insurance policy to for the benefit of someone else?',
-        answer: null,
-        onTrue: ''
-    },
-    {
-        query: 'Was the deceased entitled to benefit from any assets held in trust or in a settlement which during their life had come to an end either in whole or in part?',
+        query: 'Did the deceased transfer any assets to any individual, trust, company or other organisation during their lifetime where the recipient did not take full possession of them?',
         answer: null,
         onTrue: ''
     }
 ]);
-const slide = ref(1);
-
 onBeforeMount(() => {
     if (store.client) {
-        if (store.client.lifetime_gifts) {
-            formData = reactive(
-                JSON.parse(store.client.lifetime_gifts.the_data)
-            );
+        if (store.client.gifts) {
+            formData = reactive(JSON.parse(store.client.gifts.the_data));
         }
     }
 });
-
-const nextSlide = () => {
-    if (slide.value < 5) {
-        slide.value++;
-        flashLabel();
-    }
-};
-const prevSlide = () => {
-    if (slide.value > 1) {
-        slide.value--;
-        flashLabel();
-    }
-};
 </script>
 
 <style lang="scss" scoped></style>

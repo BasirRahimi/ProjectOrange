@@ -1,14 +1,13 @@
 <template>
     <div class="container">
         <content-box
-            title="Section 15 - Stocks and shares (in the sole name of the deceased)">
+            title="Section 16 - Bank and saving accounts (in the sole name of the deceased)">
             <p class="text-gray-500 m-0">
-                HMRC requires information about stocks and shares held by the
-                deceased.
+                HMRC requires information about all assets held by the deceased.
             </p>
         </content-box>
 
-        <content-box title="15.1 Stocks Information">
+        <content-box title="16.1 Banking">
             <yes-no
                 collapse
                 :label="formData[0].query"
@@ -16,14 +15,10 @@
                 class="mb-4">
                 <div class="asset-table mt-4">
                     <div class="row no-gutters">
-                        <div class="col-3 cell-header">Name of company</div>
-                        <div class="col-3 cell-header">
-                            Number of shares held
-                        </div>
-                        <div class="col-3 cell-header">Shareholder no.</div>
-                        <div class="col-3 cell-header">
-                            Share price at D.O.D (£)
-                        </div>
+                        <div class="col-3 cell-header">Name of institution</div>
+                        <div class="col-3 cell-header">Account number</div>
+                        <div class="col-3 cell-header">Type of account</div>
+                        <div class="col-3 cell-header">Value at D.O.D (£)</div>
                     </div>
                     <div
                         class="row no-gutters table-row"
@@ -39,24 +34,16 @@
                                 @click="removeRow(i)"></base-button>
                         </div>
                         <div class="col-3 cell">
-                            <input type="text" v-model="row.company" />
+                            <input type="text" v-model="row.institution" />
                         </div>
                         <div class="col-3 cell">
-                            <input
-                                type="number"
-                                step="5"
-                                min="0"
-                                v-model="row.shares" />
+                            <input type="number" v-model="row.accountNumber" />
                         </div>
                         <div class="col-3 cell">
-                            <input type="text" v-model="row.shareNumber" />
+                            <input type="text" v-model="row.accountType" />
                         </div>
                         <div class="col-3 cell">
-                            <input
-                                type="number"
-                                step="5"
-                                min="0"
-                                v-model="row.price" />
+                            <input type="number" v-model="row.value" />
                         </div>
                     </div>
                 </div>
@@ -85,8 +72,8 @@
             <button
                 class="btn btn-primary shadow"
                 @click="
-                    saveData('stocks_shares', formData);
-                    router.push({ name: 'section17' });
+                    saveData('banks_savings', formData);
+                    router.push({ name: 'Section17' });
                 ">
                 Next section
             </button>
@@ -105,32 +92,33 @@ const store = useClientStore();
 const rowSettings = ref(false);
 let formData = reactive([
     {
-        query: 'Did the deceased own any stocks and shares in companies registered in the stock exchange?',
+        query: 'Did the deceased have any bank or building society accounts etc?',
         answer: null,
         onTrue: []
     }
 ]);
 
+onBeforeMount(() => {
+    if (store.client) {
+        if (store.client.banks_savings) {
+            formData = reactive(
+                JSON.parse(store.client.banks_savings.the_data)
+            );
+        }
+    }
+});
+
 const addRow = () => {
     formData[0].onTrue.push({
-        company: '',
-        shares: '',
-        shareNumber: '',
-        price: ''
+        institution: '',
+        accountNumber: '',
+        accountType: '',
+        value: ''
     });
 };
 const removeRow = (i) => {
     formData[0].onTrue.splice(i, 1);
 };
-onBeforeMount(() => {
-    if (store.client) {
-        if (store.client.stocks_shares) {
-            formData = reactive(
-                JSON.parse(store.client.stocks_shares.the_data)
-            );
-        }
-    }
-});
 </script>
 
 <style lang="scss" scoped></style>

@@ -90,8 +90,10 @@
             <ul class="fa-ul mb-0">
                 <li
                     class="py-2 section-link"
-                    :class="{ active: 'section1' == currentRouteName }">
-                    <a href="#" @click.prevent="sectionClick('section1')">
+                    :class="{ active: 'AboutTheDeceased' == currentRouteName }">
+                    <a
+                        href="#"
+                        @click.prevent="sectionClick('AboutTheDeceased')">
                         <span class="fa-li">
                             <i class="me-2 po-icon-person"></i>
                         </span>
@@ -100,8 +102,8 @@
                 </li>
                 <li
                     class="py-2 section-link"
-                    :class="{ active: 'section2' == currentRouteName }">
-                    <a href="#" @click.prevent="sectionClick('section2')">
+                    :class="{ active: 'Executors' == currentRouteName }">
+                    <a href="#" @click.prevent="sectionClick('Executors')">
                         <span class="fa-li">
                             <i class="fas fa-user-tie me-2"></i>
                         </span>
@@ -174,97 +176,97 @@ const sections = [
     {
         label: 'Powers of Attorney',
         icon: 'fas fa-pen-nib',
-        routeName: 'section3'
+        routeName: 'Section2'
     },
     {
         label: 'Will & Marital Status',
         icon: 'po-icon-ring',
-        routeName: 'section4'
+        routeName: 'Section3'
     },
     {
         label: 'Lifetime gifts',
         icon: 'po-icon-present',
-        routeName: 'section5'
+        routeName: 'Section4'
     },
     {
         label: 'Gifts',
         icon: 'fas fa-gifts',
-        routeName: 'section6'
+        routeName: 'Section5'
     },
     {
         label: 'UK & British Isles',
         icon: 'po-icon-flag',
-        routeName: 'section7'
+        routeName: 'Section6'
     },
     {
         label: 'Tax Havens',
         icon: 'po-icon-world',
-        routeName: 'section8'
+        routeName: 'Section7'
     },
     {
         label: 'Nil-Rate band',
         icon: 'po-icon-pound',
-        routeName: 'section9'
+        routeName: 'Section8'
     },
     {
         label: 'Business interests',
         icon: 'po-icon-briefcase',
-        routeName: 'section10'
+        routeName: 'Section9'
     },
     {
         label: 'Received inheritance',
         icon: 'po-icon-debit-card',
-        routeName: 'section11'
+        routeName: 'Section10'
     },
     {
         label: 'Trusts',
         icon: 'po-icon-handshake',
-        routeName: 'section12'
+        routeName: 'Section11'
     },
     {
         label: 'Pensions',
         icon: 'po-icon-piggybank',
-        routeName: 'section13'
+        routeName: 'Section12'
     },
     {
         label: 'Life Assurance',
         icon: 'po-icon-lifebuoy',
-        routeName: 'section14'
+        routeName: 'Section13'
     },
     {
         label: 'Joint held assets',
         icon: 'po-icon-people',
-        routeName: 'section15'
+        routeName: 'Section14'
     },
     {
         label: 'Stocks & Shares',
         icon: 'po-icon-graph',
-        routeName: 'section16'
+        routeName: 'Section15'
     },
     {
         label: 'Bank and savings',
         icon: 'po-icon-dollar',
-        routeName: 'section17'
+        routeName: 'Section16'
     },
     {
         label: 'Personal belongings',
         icon: 'po-icon-tv',
-        routeName: 'section18'
+        routeName: 'Section17'
     },
     {
         label: 'Assets',
         icon: 'po-icon-house',
-        routeName: 'section19'
+        routeName: 'Section18'
     },
     {
         label: 'Liabilities',
         icon: 'po-icon-car',
-        routeName: 'section20'
+        routeName: 'Section19'
     },
     {
         label: 'Other information',
         icon: 'po-icon-information',
-        routeName: 'section21'
+        routeName: 'Section20'
     }
 ];
 

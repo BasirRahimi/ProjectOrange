@@ -1,13 +1,14 @@
 <template>
     <div class="container">
         <content-box
-            title="Section 16 - Bank and saving accounts (in the sole name of the deceased)">
+            title="Section 17 - Personal belongings (owned solely by the deceased)">
             <p class="text-gray-500 m-0">
-                HMRC requires information about all assets held by the deceased.
+                HMRC requires information about all chattels held by the
+                deceased.
             </p>
         </content-box>
 
-        <content-box title="16.1 Banking">
+        <content-box title="17.1 Chattels">
             <yes-no
                 collapse
                 :label="formData[0].query"
@@ -15,10 +16,10 @@
                 class="mb-4">
                 <div class="asset-table mt-4">
                     <div class="row no-gutters">
-                        <div class="col-3 cell-header">Name of institution</div>
-                        <div class="col-3 cell-header">Account number</div>
-                        <div class="col-3 cell-header">Type of account</div>
-                        <div class="col-3 cell-header">Value at D.O.D (£)</div>
+                        <div class="col-9 cell-header">
+                            Description of Chattels
+                        </div>
+                        <div class="col-3 cell-header">Value (£)</div>
                     </div>
                     <div
                         class="row no-gutters table-row"
@@ -33,17 +34,11 @@
                                 icon-only
                                 @click="removeRow(i)"></base-button>
                         </div>
-                        <div class="col-3 cell">
-                            <input type="text" v-model="row.institution" />
+                        <div class="col-9 cell">
+                            <input type="text" v-model="row.description" />
                         </div>
                         <div class="col-3 cell">
-                            <input type="number" v-model="row.accountNumber" />
-                        </div>
-                        <div class="col-3 cell">
-                            <input type="text" v-model="row.accountType" />
-                        </div>
-                        <div class="col-3 cell">
-                            <input type="number" v-model="row.value" />
+                            <input type="number" min="0" v-model="row.value" />
                         </div>
                     </div>
                 </div>
@@ -66,14 +61,30 @@
                     >
                 </div>
             </yes-no>
+
+            <BaseButton @click="collapse1.toggle()" size="sm" class="pointer"
+                >Tip<i class="icon-xs fas fa-chevron-down ms-2"></i
+            ></BaseButton>
+            <BCollapse ref="collapse1">
+                <p class="text-gray-500 mt-2 mb-0">
+                    If the deceased was, for example, married and acquired
+                    furniture and household effects with their spouse, it could
+                    be the case that such items were owned jointly and so you
+                    should include jointly owned possessions in section 14.
+                    Unless the total value of the Chattels owned by the deceased
+                    is likely to exceed £1,000 there is usually no need to
+                    obtain a formal valuation. Include below Items such as cars,
+                    jewellery, etc.
+                </p>
+            </BCollapse>
         </content-box>
 
         <content-box class="p-0 text-end" :shadow="false" :whiteBg="false">
             <button
                 class="btn btn-primary shadow"
                 @click="
-                    saveData('banks_savings', formData);
-                    router.push({ name: 'section18' });
+                    saveData('personal_belongings', formData);
+                    router.push({ name: 'Section18' });
                 ">
                 Next section
             </button>
@@ -81,6 +92,7 @@
     </div>
 </template>
 <script setup>
+import BCollapse from '@/components/simple/BCollapse.vue';
 import ContentBox from '@/components/simple/ContentBox.vue';
 import YesNo from '@/components/forms/form-snippets/YesNo.vue';
 import { reactive, onBeforeMount, ref } from 'vue';
@@ -90,35 +102,34 @@ import { useClientStore } from '@/stores/client.js';
 const router = useRouter();
 const store = useClientStore();
 const rowSettings = ref(false);
+const collapse1 = ref(null);
 let formData = reactive([
     {
-        query: 'Did the deceased have any bank or building society accounts etc?',
+        query: 'Did the deceased own any Chattels of particular value?',
         answer: null,
         onTrue: []
     }
 ]);
 
-onBeforeMount(() => {
-    if (store.client) {
-        if (store.client.banks_savings) {
-            formData = reactive(
-                JSON.parse(store.client.banks_savings.the_data)
-            );
-        }
-    }
-});
-
 const addRow = () => {
     formData[0].onTrue.push({
-        institution: '',
-        accountNumber: '',
-        accountType: '',
+        description: '',
         value: ''
     });
 };
 const removeRow = (i) => {
     formData[0].onTrue.splice(i, 1);
 };
+
+onBeforeMount(() => {
+    if (store.client) {
+        if (store.client.personal_belongings) {
+            formData = reactive(
+                JSON.parse(store.client.personal_belongings.the_data)
+            );
+        }
+    }
+});
 </script>
 
 <style lang="scss" scoped></style>

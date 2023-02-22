@@ -1,127 +1,168 @@
 <template>
     <div class="container">
-        <content-box title="Section 8 - Nil Rate Band Discretionary Trusts">
-            <p class="text-gray-500">
-                The nil rate band is also called the Inheritance tax threshold.
-                It represents the first part of the estate which is taxed at 0%.
-            </p>
-            <p class="text-gray-500">
-                If the deceased was a widow or widower, you have been asked in
-                section 3.3 to give details of the estate of the first spouse to
-                die. This is necessary to claim both the deceased’s nil-rate
-                band plus the nil rate band of the first spouse to die.<br />
-                Therefore, up to £650,000 of the estate can pass free of tax,
-                but this is not always so.<br />
-                If the first spouse to die created a Nil Rate Band Discretionary
-                Trust in their Will, the transferrable nil rate band may not be
-                available.<br />
-                If you have provided a copy of the Will of the first spouse to
-                die in response to the questions in 3.3 then details of any
-                Trust will be seen.
-            </p>
-        </content-box>
-
-        <content-box
-            title="8.1 - Nil Rate Band Discretionary relative"
-            class="relative"
-            v-for="(trust, key) in formData"
-            :key="key">
-            <a
-                class="remove-trustee"
-                href="#"
-                v-if="formData.length > 1"
-                @click.prevent="removeTrustee(key)"
-                >Remove Trustee</a
-            >
-            <p class="text-gray-500">
-                If you know details of any Nil Rate Band Discretionary Trust,
-                then please provide the following information:-
-            </p>
-            <honorific v-model="trust.honorific" />
-            <base-input
-                label="Forenames"
-                placeholder="John"
-                v-model="trust.forename"></base-input>
-            <base-input
-                label="Surname"
-                placeholder="Doe"
-                v-model="trust.surname"></base-input>
-
+        <content-box title="Section 9 - Business interests or partnerships">
             <yes-no
                 class="mb-4"
-                :label="trust.query1.query"
-                v-model="trust.query1.answer"
+                :label="formData[0].query"
+                v-model="formData[0].answer"
                 collapse>
-                <textarea
-                    v-model="trust.query1.onTrue"
-                    class="form-control mt-3"
-                    rows="4"
-                    placeholder="Please include a full overview of relevant details to this question"></textarea>
-            </yes-no>
+                <base-input
+                    label="Company name"
+                    class="mt-4"
+                    placeholder="John Appleseed Ltd"
+                    v-model="formData[0].onTrue.company_name"></base-input>
+                <base-input
+                    label="Company number"
+                    placeholder="1235 1235 08311"
+                    v-model="formData[0].onTrue.company_number"></base-input>
+                <base-input
+                    label="Business activity"
+                    placeholder="Import & export"
+                    v-model="formData[0].onTrue.business_activity"></base-input>
 
-            <div class="mb-4">
-                <label>{{ trust.query2.query }}</label>
-                <BaseSwitch
-                    @update:modelValue="
-                        (val) => {
-                            val == 'The trustee’s solicitors or accountants'
-                                ? formDataRefs[key].show()
-                                : formDataRefs[key].hide();
-                        }
-                    "
-                    v-model="trust.query2.answer"
-                    left-text="The Trustee"
-                    label="The trustee’s solicitors or accountants" />
-            </div>
-            <BCollapse
-                :visible="
-                    trust.query2.answer ==
-                    'The trustee’s solicitors or accountants'
-                "
-                ref="formDataRefs">
-                <honorific v-model="trust.query2.onTrue.honorific" />
+                <label>Company accountant details</label>
+                <honorific v-model="formData[0].onTrue.accountant.honorific" />
                 <base-input
                     label="Forenames"
                     placeholder="John"
-                    v-model="trust.query2.onTrue.forename"></base-input>
+                    v-model="
+                        formData[0].onTrue.accountant.forename
+                    "></base-input>
                 <base-input
                     label="Surname"
                     placeholder="Doe"
-                    v-model="trust.query2.onTrue.surname"></base-input>
-            </BCollapse>
+                    v-model="
+                        formData[0].onTrue.accountant.surname
+                    "></base-input>
 
-            <div class="row">
-                <div class="col-12 col-lg-6">
-                    <base-input
-                        label="Phone number"
-                        placeholder="+44 012345 67890"
-                        v-model="trust.phone"></base-input>
+                <div class="row">
+                    <div class="col-12 col-lg-6">
+                        <base-input
+                            label="Phone number"
+                            placeholder="+44 012345 67890"
+                            v-model="
+                                formData[0].onTrue.accountant.phone
+                            "></base-input>
+                    </div>
+                    <div class="col-12 col-lg-6">
+                        <base-input
+                            label="Email Address"
+                            placeholder="John.doe@doe.co.uk"
+                            v-model="
+                                formData[0].onTrue.accountant.email
+                            "></base-input>
+                    </div>
                 </div>
-                <div class="col-12 col-lg-6">
-                    <base-input
-                        label="Email Address"
-                        placeholder="John.doe@doe.co.uk"
-                        v-model="trust.email"></base-input>
-                </div>
-            </div>
+
+                <label
+                    >If the company accountants have valued the shares in the
+                    business in line with HMRC guidelines then please provide a
+                    copy</label
+                ><br />
+                <client-file-upload
+                    v-model="formData[0].onTrue.valuation"
+                    @input="saveData" />
+                <a
+                    v-if="formData[0].onTrue.valuation"
+                    :href="formData[0].onTrue.valuation.path"
+                    >{{ formData[0].onTrue.valuation.filename }}</a
+                >
+            </yes-no>
+
+            <!-- <BaseButton @click="collapse1.toggle()" size="sm" class="pointer"
+                >Tip<i class="icon-xs fas fa-chevron-down ms-2"></i
+            ></BaseButton>
+            <BCollapse ref="collapse1">
+                <p class="text-gray-500 mt-2 mb-0">
+                    You should take care that the deceased had regularised their
+                    affairs with HMRC. For example, the Jersey Disclosure
+                    Facility provides for a voluntary disclosure facility to UK
+                    residents from 6 April 2013 to 30 September 2016 for UK
+                    residents with a beneficial interest in Jersey “relevant
+                    property”, with undisclosed UK tax liabilities, with a
+                    chance to regularise their UK tax affairs in a controlled
+                    manner on beneficial terms.
+                </p>
+            </BCollapse> -->
         </content-box>
 
-        <content-box
-            title="8.1 - Nil Rate Band Discretionary Trusts"
-            v-if="formData.length < 4">
-            <div class="text-center">
-                <base-button type="default" outline @click="addTrustee"
-                    >Add trustee<i class="fas fa-plus ms-3"></i
-                ></base-button>
-            </div>
+        <content-box title="9.2 Partnerships">
+            <yes-no
+                :label="formData[1].query"
+                v-model="formData[1].answer"
+                collapse>
+                <base-input
+                    label="Partnership name"
+                    class="mt-4"
+                    placeholder="John Appleseed Ltd"
+                    v-model="formData[1].onTrue.partnership_name"></base-input>
+                <base-input
+                    label="Partnership number"
+                    placeholder="1235 1235 08311"
+                    v-model="
+                        formData[1].onTrue.partnership_number
+                    "></base-input>
+                <base-input
+                    label="Business activity"
+                    placeholder="Import & export"
+                    v-model="formData[1].onTrue.business_activity"></base-input>
+
+                <label>Partnership accountant details</label>
+                <honorific v-model="formData[1].onTrue.accountant.honorific" />
+                <base-input
+                    label="Forenames"
+                    placeholder="John"
+                    v-model="
+                        formData[1].onTrue.accountant.forename
+                    "></base-input>
+                <base-input
+                    label="Surname"
+                    placeholder="Doe"
+                    v-model="
+                        formData[1].onTrue.accountant.surname
+                    "></base-input>
+
+                <div class="row">
+                    <div class="col-12 col-lg-6">
+                        <base-input
+                            label="Phone number"
+                            placeholder="+44 012345 67890"
+                            v-model="
+                                formData[1].onTrue.accountant.phone
+                            "></base-input>
+                    </div>
+                    <div class="col-12 col-lg-6">
+                        <base-input
+                            label="Email Address"
+                            placeholder="John.doe@doe.co.uk"
+                            v-model="
+                                formData[1].onTrue.accountant.email
+                            "></base-input>
+                    </div>
+                </div>
+
+                <label
+                    >If the Partnership accountants have valued the shares in
+                    the business in line with HMRC guidelines then please
+                    provide a copy</label
+                ><br />
+                <client-file-upload
+                    v-model="formData[1].onTrue.valuation"
+                    @input="saveData" />
+                <a
+                    v-if="formData[1].onTrue.valuation"
+                    :href="formData[1].onTrue.valuation.path"
+                    >{{ formData[1].onTrue.valuation.filename }}</a
+                >
+            </yes-no>
         </content-box>
 
         <content-box class="p-0 text-end" :shadow="false" :whiteBg="false">
             <button
                 class="btn btn-primary shadow"
                 @click="
-                    saveData('nil_rate_band', formData);
-                    router.push({ name: 'section10' });
+                    saveData('business_interests', formData);
+                    router.push({ name: 'Section10' });
                 ">
                 Next section
             </button>
@@ -129,9 +170,9 @@
     </div>
 </template>
 <script setup>
-import BCollapse from '@/components/simple/BCollapse.vue';
-import BaseSwitch from '@/components/simple/BaseSwitch.vue';
+// import BCollapse from '@/components/simple/BCollapse.vue';
 import ContentBox from '@/components/simple/ContentBox.vue';
+import ClientFileUpload from '@/components/forms/form-snippets/ClientFileUpload.vue';
 import YesNo from '@/components/forms/form-snippets/YesNo.vue';
 import Honorific from '@/components/forms/form-snippets/Honorific.vue';
 import { reactive, onBeforeMount, ref } from 'vue';
@@ -140,61 +181,53 @@ import { useRouter } from 'vue-router';
 import { useClientStore } from '@/stores/client.js';
 const router = useRouter();
 const store = useClientStore();
-const formDataRefs = ref(null);
-
-let formData = reactive([]);
-
-const addTrustee = () => {
-    formData.push({
-        honorific: '',
-        forename: '',
-        surname: '',
-        query1: {
-            query: 'Did the deceased have any charge/debit arrangements with this trustee?',
-            answer: null,
-            onTrue: ''
-        },
-        query2: {
-            query: 'Select dependent on which contact details you know:',
-            answer: 'The Trustee',
-            onTrue: {
+const collapse1 = ref(null);
+let formData = reactive([
+    {
+        query: 'Did the deceased own shares in a private company?',
+        answer: null,
+        onTrue: {
+            company_name: '',
+            company_number: '',
+            business_activity: '',
+            accountant: {
                 honorific: '',
                 forename: '',
-                surname: ''
-            }
-        },
-        phone: '',
-        email: ''
-    });
-};
-const removeTrustee = (i) => {
-    formData.splice(i, 1);
-};
+                surname: '',
+                phone: '',
+                email: ''
+            },
+            valuation: null
+        }
+    },
+    {
+        query: 'Was the deceased a member of a partnership?',
+        answer: null,
+        onTrue: {
+            partnership_name: '',
+            partnership_number: '',
+            business_activity: '',
+            accountant: {
+                honorific: '',
+                forename: '',
+                surname: '',
+                phone: '',
+                email: ''
+            },
+            valuation: null
+        }
+    }
+]);
 
 onBeforeMount(() => {
     if (store.client) {
-        if (store.client.nil_rate_band) {
+        if (store.client.business_interests) {
             formData = reactive(
-                JSON.parse(store.client.nil_rate_band.the_data)
+                JSON.parse(store.client.business_interests.the_data)
             );
         }
     }
 });
 </script>
 
-<style lang="scss" scoped>
-@import '@sass/vue_sfc.scss';
-
-.relative {
-    position: relative;
-}
-
-.remove-trustee {
-    position: absolute;
-    top: 40px;
-
-    @include media-breakpoint-down(sm) {
-        top: 5px;
-    }
-}
-</style>
+<style lang="scss" scoped></style>

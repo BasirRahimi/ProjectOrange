@@ -1,125 +1,137 @@
 <template>
     <div class="container">
-        <content-box
-            title="Section 19 - Liabilities (owed solely by the deceased)">
+        <content-box title="Section 20 - Other information">
             <p class="text-gray-500 m-0">
-                Use this section to include liabilities owed by the deceased.
+                Use this section as an opportunity to provide any extra
+                information you believe relevant.
             </p>
         </content-box>
 
-        <content-box title="19.1 Liabilities">
-            <yes-no
-                collapse
-                :label="formData[0].query"
-                v-model="formData[0].answer"
-                class="mb-4">
-                <div class="asset-table mt-4">
-                    <div class="row no-gutters">
-                        <div class="col-9 cell-header">
-                            Description of liability
-                        </div>
-                        <div class="col-3 cell-header">Value (£)</div>
-                    </div>
-                    <div
-                        class="row no-gutters table-row"
-                        v-for="(row, i) in formData[0].onTrue"
-                        :key="i">
-                        <div
-                            class="row-settings"
-                            :class="{ active: rowSettings }">
-                            <base-button
-                                type="danger"
-                                icon="fas fa-window-close"
-                                icon-only
-                                @click="removeRow(i)"></base-button>
-                        </div>
-                        <div class="col-9 cell">
-                            <input type="text" v-model="row.description" />
-                        </div>
-                        <div class="col-3 cell">
-                            <input type="number" min="0" v-model="row.value" />
-                        </div>
+        <content-box
+            title="20.1 Other information"
+            v-for="(row, i) in formData"
+            :key="`otherInfo${i}`"
+            class="relative">
+            <a
+                class="remove-info"
+                href="#"
+                v-if="formData.length > 1"
+                @click.prevent="removeInfo(i)"
+                >Remove</a
+            >
+            <label>Subject</label>
+            <base-input
+                placeholder="e.g. Section 13 - policy information finished on it’s way"
+                v-model="row.subject"></base-input>
+
+            <label>Description</label>
+            <textarea
+                v-model="row.description"
+                class="form-control mb-4"></textarea>
+
+            <label>Upload relevant documents:</label><br />
+            <div class="row mb-2" v-for="(doc, j) in row.docs" :key="j">
+                <div class="col-12 file-row">
+                    <client-file-upload
+                        class="mb-0"
+                        v-model="formData[i].docs[j]"
+                        @input="saveData"></client-file-upload>
+                    <div class="file-rem-hidden d-inline-block ms-3">
+                        <base-button
+                            type="danger"
+                            icon="fas fa-window-close"
+                            icon-only
+                            @click="removeDoc(i, j)"></base-button>
                     </div>
                 </div>
-
-                <div class="text-end mt-2">
-                    <base-button
-                        type="default"
-                        outline
-                        :class="{ active: rowSettings }"
-                        icon="fas fa-cog"
-                        icon-only
-                        @click="rowSettings = !rowSettings"></base-button>
-                    <base-button
-                        type="default"
-                        outline
-                        class="ms-auto"
-                        @click="addRow"
-                        v-if="formData[0].onTrue.length < 20"
-                        >Add</base-button
-                    >
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <client-file-upload
+                        class="mb-0"
+                        v-model="formData[i].docs[formData[i].docs.length]"
+                        @input="saveData"
+                        wipeAfterInput
+                        :show-file="false"></client-file-upload>
                 </div>
-            </yes-no>
+            </div>
+        </content-box>
 
-            <BaseButton @click="collapse1.toggle()" size="sm" class="pointer"
-                >Tip<i class="icon-xs fas fa-chevron-down ms-2"></i
-            ></BaseButton>
-            <BCollapse ref="collapse1">
-                <p class="text-gray-500 mt-2 mb-0">
-                    When you do not know the value of a liability at the time of
-                    completing this section, note ‘approximately’ by the figure
-                </p>
-            </BCollapse>
+        <content-box class="p-0 text-center" :shadow="false" :whiteBg="false">
+            <button class="btn btn-primary shadow" @click="addRow">
+                Add information<i
+                    data-v-c216df9e=""
+                    class="fas fa-plus ms-3"></i>
+            </button>
         </content-box>
 
         <content-box class="p-0 text-end" :shadow="false" :whiteBg="false">
             <button
                 class="btn btn-primary shadow"
                 @click="
-                    saveData('liabilities', formData);
-                    router.push({ name: 'section21' });
+                    saveData('other_information', formData);
+                    router.push({ name: 'Overview' });
                 ">
-                Next section
+                Review
             </button>
         </content-box>
     </div>
 </template>
 <script setup>
-import BCollapse from '@/components/simple/BCollapse.vue';
 import ContentBox from '@/components/simple/ContentBox.vue';
-import YesNo from '@/components/forms/form-snippets/YesNo.vue';
-import { reactive, onBeforeMount, ref } from 'vue';
+import ClientFileUpload from '@/components/forms/form-snippets/ClientFileUpload.vue';
+import { reactive, onBeforeMount, onMounted } from 'vue';
 import { useSaveData as saveData } from '@/composables/helper.js';
 import { useRouter } from 'vue-router';
 import { useClientStore } from '@/stores/client.js';
 const router = useRouter();
 const store = useClientStore();
-const rowSettings = ref(false);
-const collapse1 = ref();
-let formData = reactive([
-    {
-        query: 'Are there any liabilities owed by the deceased?',
-        answer: null,
-        onTrue: []
-    }
-]);
+let formData = reactive([]);
+
 const addRow = () => {
-    formData[0].onTrue.push({
+    formData.push({
+        subject: '',
         description: '',
-        value: ''
+        docs: []
     });
 };
-const removeRow = (i) => {
-    formData[0].onTrue.splice(i, 1);
+const removeInfo = (i) => {
+    formData.splice(i, 1);
+};
+const removeDoc = (i, j) => {
+    formData[i].docs.splice(j, 1);
 };
 
 onBeforeMount(() => {
     if (store.client) {
-        if (store.client.liabilities) {
-            formData = reactive(JSON.parse(store.client.liabilities.the_data));
+        if (store.client.other_information) {
+            formData = reactive(
+                JSON.parse(store.client.other_information.the_data)
+            );
         }
+    }
+});
+
+onMounted(() => {
+    if (formData.length < 1) {
+        addRow();
     }
 });
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+@import '@sass/vue_sfc.scss';
+
+.relative {
+    position: relative;
+}
+
+.remove-info {
+    position: absolute;
+    top: 40px;
+
+    @include media-breakpoint-down(sm) {
+        top: 5px;
+    }
+}
+</style>

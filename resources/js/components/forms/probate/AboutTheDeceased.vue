@@ -418,7 +418,7 @@ const updateSurvivingRelatives = (relative) => {
 };
 const nextSection = () => {
     saveData();
-    router.push({ name: 'section2' });
+    router.push({ name: 'Executors' });
 };
 const saveData = () => {
     let date_of_death = null;

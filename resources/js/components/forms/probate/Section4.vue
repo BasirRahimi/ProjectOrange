@@ -1,336 +1,232 @@
 <template>
     <div class="container">
-        <content-box title="Section 3 - Other Information">
+        <content-box title="Section 4 - Lifetime Gifs">
+            <p class="text-gray-500">
+                There is an obligation upon the Executors to make the fullest
+                enquiries as appear to be relevant to establish whether any
+                lifetime gifts were made on of after 18th March 1986. The
+                Executors need to be able to prove that they made fullest
+                enquiries and so this means that the Executors should seek
+                information from those individuals who appear to be obvious
+                recipients of gifts from the deceased (e.g. close relative, etc)
+                but also consider less obvious recipients of gifts (e.g. friend,
+                employee, housekeeper, distant relative, etc).
+            </p>
+            <p class="text-gray-500">
+                <b
+                    >HMRC has made it clear that it will, in some circumstances,
+                    examine closely the activities of an Executor making
+                    enquiries and will hold them to account for failure to
+                    disclose gifts.</b
+                >
+            </p>
+            <p class="text-gray-500">
+                The principle is that a gift of an asset will reduce the value
+                of a person’s estate. Since Inheritance Tax could have been
+                payable if the asset was retained, there are rules which allow
+                HMRC to take gifts, normally made within seven years of death,
+                to be taken into account in determining whether Inheritance tax
+                is due.
+            </p>
+            <ul class="text-gray-500 m-0 pl-4">
+                <li>
+                    Gifts to spouses or civil partners do not need to be
+                    disclosed.
+                </li>
+                <li>Small cash gifts of £250 do not need to be disclosed.</li>
+                <li>
+                    Other gifts in total of £3,000 do not need to be disclosed.
+                </li>
+            </ul>
+        </content-box>
+
+        <content-box title="4.1 Details of lifetime gifts">
             <yes-no
+                v-show="slide === 1"
                 class="mb-4"
-                collapse
+                label-class="flashit"
                 :label="formData[0].query"
-                v-model="formData[0].answer">
-                <client-file-upload
-                    class="mt-3"
-                    v-model="formData[0].document"
-                    @input="saveData" />
-                <a
-                    v-if="formData[0].document"
-                    :href="formData[0].document.path"
-                    >{{ formData[0].document.filename }}</a
-                >
-            </yes-no>
-            <yes-no
-                class="mb-4"
-                collapse
-                :label="formData[1].query"
-                v-model="formData[1].answer">
-                <client-file-upload
-                    class="mt-3"
-                    v-model="formData[1].document"
-                    @input="saveData" />
-                <a
-                    v-if="formData[1].document"
-                    :href="formData[1].document.path"
-                    >{{ formData[1].document.filename }}</a
-                >
+                v-model="formData[0].answer"
+                collapse>
+                <textarea
+                    class="form-control mt-3"
+                    rows="4"
+                    placeholder="Please include a full overview of relevant details to this question"
+                    v-model="formData[0].onTrue"></textarea>
             </yes-no>
 
-            <BaseButton
+            <yes-no
+                v-show="slide === 2"
+                class="mb-4"
+                label-class="flashit"
+                :label="formData[1].query"
+                v-model="formData[1].answer"
+                collapse>
+                <textarea
+                    class="form-control mt-3"
+                    rows="4"
+                    placeholder="Please include a full overview of relevant details to this question"
+                    v-model="formData[1].onTrue"></textarea>
+            </yes-no>
+
+            <yes-no
+                v-show="slide === 3"
+                class="mb-4"
+                label-class="flashit"
+                :label="formData[2].query"
+                v-model="formData[2].answer"
+                collapse>
+                <textarea
+                    class="form-control mt-3"
+                    rows="4"
+                    placeholder="Please include a full overview of relevant details to this question"
+                    v-model="formData[2].onTrue"></textarea>
+            </yes-no>
+
+            <yes-no
+                v-show="slide === 4"
+                class="mb-4"
+                label-class="flashit"
+                :label="formData[3].query"
+                v-model="formData[3].answer"
+                collapse>
+                <textarea
+                    class="form-control mt-3"
+                    rows="4"
+                    placeholder="Please include a full overview of relevant details to this question"
+                    v-model="formData[3].onTrue"></textarea>
+            </yes-no>
+
+            <yes-no
+                v-show="slide === 5"
+                class="mb-4"
+                label-class="flashit"
+                :label="formData[4].query"
+                v-model="formData[4].answer"
+                collapse>
+                <textarea
+                    class="form-control mt-3"
+                    rows="4"
+                    placeholder="Please include a full overview of relevant details to this question"
+                    v-model="formData[4].onTrue"></textarea>
+            </yes-no>
+
+            <div class="d-sm-flex align-items-center">
+                <div class="flex-grow-1">Step {{ slide }}/5</div>
+                <base-button
+                    v-if="slide > 1"
+                    type="default"
+                    outline
+                    @click="prevSlide"
+                    >Previous</base-button
+                >
+                <base-button
+                    v-if="slide < 5"
+                    type="default"
+                    outline
+                    @click="nextSlide"
+                    >Next</base-button
+                >
+            </div>
+
+            <!-- <BaseButton
                 @click="collapse.collapse1 = !collapse.collapse1"
                 class="pointer"
-                size="sm"
-                >Tip<i class="icon-xs fas fa-chevron-down ms-2"></i
-            ></BaseButton>
-            <BCollapse :visible="collapse.collapse1" id="collapse1">
+                size="sm">
+                Tip<i class="icon-xs fas fa-chevron-down ms-2"></i>
+            </BaseButton>
+            <BCollapse :visible="collapse.collapse1" id="collapse2">
                 <p class="text-gray-500 mt-2">
-                    If you hold the original Will (and any codicils), nothing
-                    should be pinned, clipped or fastened to it at any time.
+                    Domicile and residence is relevant because it affects the
+                    law that governs succession. Since 17.8.2016 a new European
+                    Regulation affects succession within EU member states. The
+                    UK and Eire have not opted in to the Regulation (Denmark has
+                    opted out) but it will nonetheless affect individuals
+                    connected with the EU. If you are a beneficiary of this
+                    estate and there are non-UK assets involved, you should
+                    consider your own Will now. Do not wait until the estate has
+                    been administered.
                 </p>
-            </BCollapse>
+            </BCollapse> -->
         </content-box>
 
-        <content-box title="3.2 The Will (‘Foreign Wills’)">
-            <yes-no
-                collapse
-                :label="formData[2].query"
-                v-model="formData[2].answer">
-                <yes-no
-                    class="mt-4"
-                    collapse
-                    :label="formData[2].onTrue.query"
-                    v-model="formData[2].onTrue.answer">
-                    <honorific
-                        v-model="formData[2].onTrue.onTrue.honorific"
-                        class="mt-4" />
-                    <base-input
-                        label="Forenames"
-                        placeholder="John"
-                        v-model="
-                            formData[2].onTrue.onTrue.forename
-                        "></base-input>
-                    <base-input
-                        label="Surname"
-                        placeholder="Doe"
-                        v-model="
-                            formData[2].onTrue.onTrue.surname
-                        "></base-input>
-                    <div class="row">
-                        <div class="col-12 col-lg-6">
-                            <base-input
-                                label="Phone number"
-                                placeholder="+44 012345 67890"
-                                v-model="
-                                    formData[2].onTrue.onTrue.phone
-                                "></base-input>
-                        </div>
-                        <div class="col-12 col-lg-6">
-                            <base-input
-                                label="Email Address"
-                                placeholder="John.doe@doe.co.uk"
-                                :mb-4="false"
-                                v-model="
-                                    formData[2].onTrue.onTrue.email
-                                "></base-input>
-                        </div>
-                    </div>
-                </yes-no>
-            </yes-no>
-        </content-box>
-
-        <content-box title="3.3 If the deceased was a widow or widower">
-            <yes-no
-                collapse
-                :label="formData[3].query"
-                v-model="formData[3].answer">
-                <label class="my-4"
-                    >Please add the following details of the spouse who died
-                    first:</label
-                >
-                <div class="row">
-                    <div class="col-lg-4 mb-4">
-                        <label>Date of death</label>
-                        <datepicker
-                            class="form-control bg-white"
-                            v-model="formData[3].onTrue.date_of_death"
-                            placeholder="Date"
-                            format="dd / MM / yy"
-                            :upper-limit="new Date()"></datepicker>
-                    </div>
-                    <div class="col-lg-4 mb-4">
-                        <label>Date of marriage</label>
-                        <datepicker
-                            class="form-control bg-white"
-                            v-model="formData[3].onTrue.date_of_marriage"
-                            placeholder="Date"
-                            format="dd / MM / yy"
-                            :upper-limit="new Date()"></datepicker>
-                    </div>
-                </div>
-                <base-input
-                    label="Forenames"
-                    placeholder="John"
-                    v-model="formData[3].onTrue.forename"></base-input>
-                <base-input
-                    label="Surname"
-                    placeholder="Doe"
-                    v-model="formData[3].onTrue.surname"></base-input>
-
-                <label
-                    >Please attach the following documents related to the first
-                    spouse:</label
-                >
-                <p class="text-gray-500 mb-3">
-                    It may be the case that a Grant of Probate/Letters of
-                    Administration was not applied for.
-                </p>
-
-                <div class="row mb-2">
-                    <div class="col-12 col-lg-3 d-flex align-items-center mb-1">
-                        A marriage certificate
-                    </div>
-                    <div class="col d-flex align-items-center">
-                        <client-file-upload
-                            class="mb-0"
-                            v-model="formData[3].onTrue.marriage_cert"
-                            @input="saveData" />
-                        <a
-                            v-if="formData[3].onTrue.marriage_cert"
-                            :href="formData[3].onTrue.marriage_cert.path"
-                            >{{ formData[3].onTrue.marriage_cert.filename }}</a
-                        >
-                    </div>
-                </div>
-                <div class="row mb-2">
-                    <div class="col-12 col-lg-3 d-flex align-items-center mb-1">
-                        Death certificate
-                    </div>
-                    <div class="col d-flex align-items-center">
-                        <client-file-upload
-                            class="mb-0"
-                            v-model="formData[3].onTrue.death_cert"
-                            @input="saveData" />
-                        <a
-                            v-if="formData[3].onTrue.death_cert"
-                            :href="formData[3].onTrue.death_cert.path"
-                            >{{ formData[3].onTrue.death_cert.filename }}</a
-                        >
-                    </div>
-                </div>
-                <div class="row mb-2">
-                    <div class="col-12 col-lg-3 d-flex align-items-center mb-1">
-                        Copy of Will
-                    </div>
-                    <div class="col d-flex align-items-center">
-                        <client-file-upload
-                            class="mb-0"
-                            v-model="formData[3].onTrue.will"
-                            @input="saveData" />
-                        <a
-                            v-if="formData[3].onTrue.will"
-                            :href="formData[3].onTrue.will.path"
-                            >{{ formData[3].onTrue.will.filename }}</a
-                        >
-                    </div>
-                </div>
-                <div class="row mb-2">
-                    <div class="col-12 col-lg-3 d-flex align-items-center mb-1">
-                        Copy of Codicil(s)
-                    </div>
-                    <div class="col d-flex align-items-center">
-                        <client-file-upload
-                            class="mb-0"
-                            v-model="formData[3].onTrue.condicils"
-                            @input="saveData" />
-                        <a
-                            v-if="formData[3].onTrue.condicils"
-                            :href="formData[3].onTrue.condicils.path"
-                            >{{ formData[3].onTrue.condicils.filename }}</a
-                        >
-                    </div>
-                </div>
-                <div class="row mb-2">
-                    <div class="col-12 col-lg-3 d-flex align-items-center mb-1">
-                        Grant of Representation
-                    </div>
-                    <div class="col d-flex align-items-center">
-                        <client-file-upload
-                            class="mb-0"
-                            v-model="formData[3].onTrue.grant_of_probate"
-                            @input="saveData" />
-                        <a
-                            v-if="formData[3].onTrue.grant_of_probate"
-                            :href="formData[3].onTrue.grant_of_probate.path"
-                            >{{
-                                formData[3].onTrue.grant_of_probate.filename
-                            }}</a
-                        >
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12 col-lg-3 d-flex align-items-center mb-1">
-                        Estate accounts
-                    </div>
-                    <div class="col d-flex align-items-center">
-                        <client-file-upload
-                            class="mb-0"
-                            v-model="formData[3].onTrue.estate_accounts"
-                            @input="saveData" />
-                        <a
-                            v-if="formData[3].onTrue.estate_accounts"
-                            :href="formData[3].onTrue.estate_accounts.path"
-                            >{{
-                                formData[3].onTrue.estate_accounts.filename
-                            }}</a
-                        >
-                    </div>
-                </div>
-            </yes-no>
-        </content-box>
         <content-box class="p-0 text-end" :shadow="false" :whiteBg="false">
             <button
                 class="btn btn-primary shadow"
                 @click="
-                    saveData('will', formData);
-                    router.push({ name: 'section5' });
+                    saveData('lifetime_gifts', formData);
+                    router.push({ name: 'Section5' });
                 ">
                 Next section
             </button>
         </content-box>
     </div>
 </template>
-
 <script setup>
+// import BCollapse from '@/components/simple/BCollapse.vue';
 import ContentBox from '@/components/simple/ContentBox.vue';
-import BCollapse from '@/components/simple/BCollapse.vue';
-import ClientFileUpload from '@/components/forms/form-snippets/ClientFileUpload.vue';
-import Honorific from '@/components/forms/form-snippets/Honorific.vue';
-import Datepicker from 'vue3-datepicker';
 import YesNo from '@/components/forms/form-snippets/YesNo.vue';
 import { reactive, onBeforeMount, ref } from 'vue';
-import { useSaveData as saveData } from '@/composables/helper.js';
+import {
+    useSaveData as saveData,
+    useFlashLabel as flashLabel
+} from '@/composables/helper.js';
 import { useRouter } from 'vue-router';
 import { useClientStore } from '@/stores/client.js';
 const router = useRouter();
 const store = useClientStore();
-const collapse = ref({
-    collapse1: false
-});
+const collapse = ref({ collapse1: false });
 let formData = reactive([
     {
-        query: 'Did the deceased make a Will?',
+        query: 'Did the deceased make any gifts or transfer assets to or for the benefit of another individual, charity or other organisation?',
         answer: null,
-        document: null
+        onTrue: ''
     },
     {
-        query: 'Did the deceased make any Codicils?',
+        query: 'Did the deceased create a trust or settlement?',
         answer: null,
-        document: null
+        onTrue: ''
     },
     {
-        query: 'Did the deceased make a Will under a different law?',
+        query: 'Did the deceased transfer/gift additional assets to an existing trust or settlement?',
         answer: null,
-        onTrue: {
-            query: 'Is there another lawyer advising on the non-UK process?',
-            answer: null,
-            onTrue: {
-                honorific: '',
-                forename: '',
-                surname: '',
-                phone: '',
-                email: ''
-            }
-        }
+        onTrue: ''
     },
     {
-        query: 'Was the deceased a widow or widower?',
+        query: 'Did the deceased pay a premium on any life insurance policy to for the benefit of someone else?',
         answer: null,
-        onTrue: {
-            date_of_death: null,
-            date_of_marriage: null,
-            forename: '',
-            surname: '',
-            marriage_cert: null,
-            death_cert: null,
-            will: null,
-            condicils: null,
-            grant_of_probate: null,
-            estate_accounts: null
-        }
+        onTrue: ''
+    },
+    {
+        query: 'Was the deceased entitled to benefit from any assets held in trust or in a settlement which during their life had come to an end either in whole or in part?',
+        answer: null,
+        onTrue: ''
     }
 ]);
+const slide = ref(1);
 
 onBeforeMount(() => {
     if (store.client) {
-        if (store.client.will) {
-            formData = reactive(JSON.parse(store.client.will.the_data));
-            let date_of_death = formData[3].onTrue.date_of_death;
-            let date_of_marriage = formData[3].onTrue.date_of_marriage;
-            formData[3].onTrue.date_of_death = date_of_death
-                ? new Date(date_of_death)
-                : null;
-            formData[3].onTrue.date_of_marriage = date_of_marriage
-                ? new Date(date_of_marriage)
-                : null;
+        if (store.client.lifetime_gifts) {
+            formData = reactive(
+                JSON.parse(store.client.lifetime_gifts.the_data)
+            );
         }
     }
 });
+
+const nextSlide = () => {
+    if (slide.value < 5) {
+        slide.value++;
+        flashLabel();
+    }
+};
+const prevSlide = () => {
+    if (slide.value > 1) {
+        slide.value--;
+        flashLabel();
+    }
+};
 </script>
 
 <style lang="scss" scoped></style>
