@@ -100,7 +100,24 @@ let formData = reactive([
     {
         query: 'Are there any liabilities owed by the deceased?',
         answer: null,
-        onTrue: []
+        onTrue: [
+            {
+                description: 'Funeral account',
+                value: ''
+            },
+            {
+                description: 'Other funeral expenses',
+                value: ''
+            },
+            {
+                description: 'Headstone or memorial account',
+                value: ''
+            },
+            {
+                description: '',
+                value: ''
+            }
+        ]
     }
 ]);
 const addRow = () => {
