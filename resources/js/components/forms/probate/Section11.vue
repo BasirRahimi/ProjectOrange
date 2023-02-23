@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <content-box
+        <ContentBox
             title="Section 11 - Trusts in which the deceased had an interest">
             <yes-no
                 collapse
@@ -192,9 +192,9 @@
                     </p>
                 </BCollapse> -->
             </yes-no>
-        </content-box>
+        </ContentBox>
 
-        <content-box class="p-0 text-end" :shadow="false" :whiteBg="false">
+        <ContentBox class="p-0 text-end" :shadow="false" :whiteBg="false">
             <button
                 class="btn btn-primary shadow"
                 @click="
@@ -203,7 +203,7 @@
                 ">
                 Next section
             </button>
-        </content-box>
+        </ContentBox>
     </div>
 </template>
 <script setup>

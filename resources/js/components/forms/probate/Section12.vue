@@ -1,21 +1,21 @@
 <template>
     <div class="container">
-        <content-box title="Section 12 - Pensions">
+        <ContentBox title="Section 12 - Pensions">
             <p class="text-gray-500 m-0">
                 If the deceased received, or had made provision for, a pension
                 or benefit from an employer or under a personal pension policy
                 (other than the State Pension) you are required to submit
                 details to HMRC.
             </p>
-        </content-box>
+        </ContentBox>
 
-        <content-box title="12.1 Pension Details">
+        <ContentBox title="12.1 Pension Details">
             <yes-no
                 collapse
                 :label="formData[0].query"
                 v-model="formData[0].answer">
-                <div class="mt-4"></div>
                 <base-input
+                    labelClasses="mt-4"
                     label="Name of pension scheme or title of pension policy"
                     placeholder="Personal pension programme"
                     v-model="formData[0].onTrue.name_of_pension"></base-input>
@@ -57,15 +57,15 @@
                     </div>
                 </div>
             </yes-no>
-        </content-box>
+        </ContentBox>
 
-        <content-box title="12.2 Pension Payment">
+        <ContentBox title="12.2 Pension Payment">
             <yes-no
                 collapse
                 :label="formData[1].query"
                 v-model="formData[1].answer">
-                <div class="mt-4"></div>
                 <base-input
+                    labelClasses="mt-4"
                     label="Name of pension scheme or title of pension policy"
                     placeholder="Personal pension programme"
                     v-model="formData[1].onTrue.name_of_pension"></base-input>
@@ -84,15 +84,15 @@
                     min="0"
                     v-model="formData[1].onTrue.value"></base-input>
             </yes-no>
-        </content-box>
+        </ContentBox>
 
-        <content-box title="12.3 Pension Payment">
+        <ContentBox title="12.3 Pension Payment">
             <yes-no
                 collapse
                 :label="formData[2].query"
                 v-model="formData[2].answer">
-                <div class="mt-4"></div>
                 <base-input
+                    labelClasses="mt-4"
                     label="Name of pension scheme or title of pension policy"
                     placeholder="Personal pension programme"
                     v-model="formData[2].onTrue.name_of_pension"></base-input>
@@ -104,9 +104,9 @@
                     rows="4"
                     placeholder="Please include a full overview of relevant details to this question"></textarea>
             </yes-no>
-        </content-box>
+        </ContentBox>
 
-        <content-box class="p-0 text-end" :shadow="false" :whiteBg="false">
+        <ContentBox class="p-0 text-end" :shadow="false" :whiteBg="false">
             <button
                 class="btn btn-primary shadow"
                 @click="
@@ -115,7 +115,7 @@
                 ">
                 Next section
             </button>
-        </content-box>
+        </ContentBox>
     </div>
 </template>
 <script setup>

@@ -1,13 +1,13 @@
 <template>
     <div class="container">
-        <content-box
+        <ContentBox
             title="Section 16 - Bank and saving accounts (in the sole name of the deceased)">
             <p class="text-gray-500 m-0">
                 HMRC requires information about all assets held by the deceased.
             </p>
-        </content-box>
+        </ContentBox>
 
-        <content-box title="16.1 Banking">
+        <ContentBox title="16.1 Banking">
             <yes-no
                 collapse
                 :label="formData[0].query"
@@ -66,9 +66,9 @@
                     >
                 </div>
             </yes-no>
-        </content-box>
+        </ContentBox>
 
-        <content-box class="p-0 text-end" :shadow="false" :whiteBg="false">
+        <ContentBox class="p-0 text-end" :shadow="false" :whiteBg="false">
             <button
                 class="btn btn-primary shadow"
                 @click="
@@ -77,7 +77,7 @@
                 ">
                 Next section
             </button>
-        </content-box>
+        </ContentBox>
     </div>
 </template>
 <script setup>

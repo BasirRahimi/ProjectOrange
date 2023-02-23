@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <content-box title="Overview"> </content-box>
+        <ContentBox title="Overview"> </ContentBox>
     </div>
 </template>
 

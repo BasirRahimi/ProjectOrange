@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <content-box
+        <ContentBox
             title="Section 6 - England & Wales and the rest of the UK and British Isles">
             <div class="mb-3">
                 <BaseButton @click="tip1.toggle()" size="sm" class="pointer"
@@ -32,9 +32,9 @@
                     </p>
                 </BCollapse>
             </div>
-        </content-box>
+        </ContentBox>
 
-        <content-box
+        <ContentBox
             title="6.1 - England & Wales and the rest of the UK and British Isles">
             <yes-no
                 v-for="(row, i) in formData"
@@ -49,9 +49,9 @@
                     rows="4"
                     placeholder="Please include a full overview of relevant details to this question"></textarea>
             </yes-no>
-        </content-box>
+        </ContentBox>
 
-        <content-box class="p-0 text-end" :shadow="false" :whiteBg="false">
+        <ContentBox class="p-0 text-end" :shadow="false" :whiteBg="false">
             <button
                 class="btn btn-primary shadow"
                 @click="
@@ -60,7 +60,7 @@
                 ">
                 Next section
             </button>
-        </content-box>
+        </ContentBox>
     </div>
 </template>
 <script setup>

@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <content-box title="Adding Executors">
+        <ContentBox title="Adding Executors">
             <p class="text-gray-500">
                 Not every Executor may want to take on their role as an Executor
                 for personal or other reasons. When this happens an Executor can
@@ -19,9 +19,9 @@
                 who may wish to take the Grant of Probate. In this case, click
                 ‘add executor’ to add more.
             </p>
-        </content-box>
+        </ContentBox>
 
-        <content-box
+        <ContentBox
             class="relative"
             v-for="(executor, key) in formData"
             :key="key"
@@ -288,9 +288,9 @@
                     <a href="#">Create alternative Attorney</a>
                 </BCollapse>
             </div>
-        </content-box>
+        </ContentBox>
 
-        <content-box class="p-0 text-end" :shadow="false" :whiteBg="false">
+        <ContentBox class="p-0 text-end" :shadow="false" :whiteBg="false">
             <div
                 class="d-flex mb-4 align-items-center"
                 :class="[
@@ -313,7 +313,7 @@
                     Next section
                 </button>
             </div>
-        </content-box>
+        </ContentBox>
     </div>
 </template>
 <script setup>

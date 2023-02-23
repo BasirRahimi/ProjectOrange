@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <content-box title="Section 4 - Lifetime Gifs">
+        <ContentBox title="Section 4 - Lifetime Gifs">
             <p class="text-gray-500">
                 There is an obligation upon the Executors to make the fullest
                 enquiries as appear to be relevant to establish whether any
@@ -38,9 +38,9 @@
                     Other gifts in total of £3,000 do not need to be disclosed.
                 </li>
             </ul>
-        </content-box>
+        </ContentBox>
 
-        <content-box title="4.1 Details of lifetime gifts">
+        <ContentBox title="4.1 Details of lifetime gifts">
             <yes-no
                 v-show="slide === 1"
                 class="mb-4"
@@ -148,9 +148,9 @@
                     been administered.
                 </p>
             </BCollapse> -->
-        </content-box>
+        </ContentBox>
 
-        <content-box class="p-0 text-end" :shadow="false" :whiteBg="false">
+        <ContentBox class="p-0 text-end" :shadow="false" :whiteBg="false">
             <button
                 class="btn btn-primary shadow"
                 @click="
@@ -159,7 +159,7 @@
                 ">
                 Next section
             </button>
-        </content-box>
+        </ContentBox>
     </div>
 </template>
 <script setup>

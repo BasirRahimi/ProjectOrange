@@ -1,14 +1,14 @@
 <template>
     <div class="container">
-        <content-box
+        <ContentBox
             title="Section 17 - Personal belongings (owned solely by the deceased)">
             <p class="text-gray-500 m-0">
                 HMRC requires information about all chattels held by the
                 deceased.
             </p>
-        </content-box>
+        </ContentBox>
 
-        <content-box title="17.1 Chattels">
+        <ContentBox title="17.1 Chattels">
             <yes-no
                 collapse
                 :label="formData[0].query"
@@ -77,9 +77,9 @@
                     jewellery, etc.
                 </p>
             </BCollapse>
-        </content-box>
+        </ContentBox>
 
-        <content-box class="p-0 text-end" :shadow="false" :whiteBg="false">
+        <ContentBox class="p-0 text-end" :shadow="false" :whiteBg="false">
             <button
                 class="btn btn-primary shadow"
                 @click="
@@ -88,7 +88,7 @@
                 ">
                 Next section
             </button>
-        </content-box>
+        </ContentBox>
     </div>
 </template>
 <script setup>

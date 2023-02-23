@@ -1,13 +1,13 @@
 <template>
     <div class="container">
-        <content-box title="Section 18 - Houses, flats and all other realty">
+        <ContentBox title="Section 18 - Houses, flats and all other realty">
             <p class="text-gray-500 m-0">
                 Use this section to include assets which are known to you but
                 not otherwise included in this form.
             </p>
-        </content-box>
+        </ContentBox>
 
-        <content-box title="18.1 Realty">
+        <ContentBox title="18.1 Realty">
             <yes-no
                 collapse
                 :label="formData[0].query"
@@ -17,64 +17,51 @@
                 <div
                     class="mt-4 accordion-asset-table"
                     v-show="viewData == false">
-                    <template
-                        v-for="(row, i) in formData[0].onTrue"
-                        :key="`toggle${i}`">
-                        <base-button
-                            :class="{ active: activeTab == i }"
-                            type="default"
-                            outline
-                            class="d-block mb-2 asset-toggle"
-                            @click="changeActiveTab(i)"
-                            >{{ i + 1 }} - {{ row.description }}</base-button
-                        >
-                        <BCollapse
-                            :id="`accordion${i}`"
-                            role="tabpanel"
-                            :visible="activeTab == i"
-                            ref="tabPanels">
-                            <Card shadow class="mb-2 relative">
-                                <div class="d-flex">
-                                    <label class="d-lock"
-                                        >Description of asset</label
-                                    >
-                                    <a
-                                        class="ms-auto d-block"
-                                        href="#"
-                                        v-if="formData[0].onTrue.length > 1"
-                                        @click.prevent="removeRow(i)"
-                                        >Remove asset</a
-                                    >
-                                </div>
-                                <textarea
-                                    placeholder="e.g. The deceased’s freehold home at 12 Acacia Avenue London, England, EW1 123"
-                                    rows="2"
-                                    class="form-control mb-4"
-                                    v-model="row.description"></textarea>
+                    <AccordionTabs
+                        :tabs="formData[0].onTrue"
+                        toggleKey="description"
+                        ref="accordion">
+                        <template
+                            v-for="(row, i) in formData[0].onTrue"
+                            v-slot:[accordion.slotName(i)]>
+                            <div class="d-flex">
+                                <label class="d-lock"
+                                    >Description of asset</label
+                                >
+                                <a
+                                    class="ms-auto d-block"
+                                    href="#"
+                                    v-if="formData[0].onTrue.length > 1"
+                                    @click.prevent="removeRow(i)"
+                                    >Remove asset</a
+                                >
+                            </div>
+                            <textarea
+                                placeholder="e.g. The deceased’s freehold home at 12 Acacia Avenue London, England, EW1 123"
+                                rows="2"
+                                class="form-control mb-4"
+                                v-model="row.description"></textarea>
 
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label
-                                            >Mortgage if applicable (£)</label
-                                        >
-                                        <base-input
-                                            placeholder="£300,000"
-                                            v-model="row.mortgage"
-                                            type="number"
-                                            min="0"></base-input>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label>Value (£)</label>
-                                        <base-input
-                                            placeholder="£740,000"
-                                            v-model="row.value"
-                                            type="number"
-                                            min="0"></base-input>
-                                    </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Mortgage if applicable (£)</label>
+                                    <base-input
+                                        placeholder="£300,000"
+                                        v-model="row.mortgage"
+                                        type="number"
+                                        min="0"></base-input>
                                 </div>
-                            </Card>
-                        </BCollapse>
-                    </template>
+                                <div class="col-md-6">
+                                    <label>Value (£)</label>
+                                    <base-input
+                                        placeholder="£740,000"
+                                        v-model="row.value"
+                                        type="number"
+                                        min="0"></base-input>
+                                </div>
+                            </div>
+                        </template>
+                    </AccordionTabs>
                 </div>
                 <div class="asset-table mt-4" v-if="viewData == true">
                     <div class="row no-gutters">
@@ -127,9 +114,9 @@
                     >
                 </div>
             </yes-no>
-        </content-box>
+        </ContentBox>
 
-        <content-box class="p-0 text-end" :shadow="false" :whiteBg="false">
+        <ContentBox class="p-0 text-end" :shadow="false" :whiteBg="false">
             <button
                 class="btn btn-primary shadow"
                 @click="
@@ -138,10 +125,11 @@
                 ">
                 Next section
             </button>
-        </content-box>
+        </ContentBox>
     </div>
 </template>
 <script setup>
+import AccordionTabs from '@/components/AccordionTabs.vue';
 import BCollapse from '@/components/simple/BCollapse.vue';
 import ContentBox from '@/components/simple/ContentBox.vue';
 import YesNo from '@/components/forms/form-snippets/YesNo.vue';
@@ -153,7 +141,7 @@ import { useClientStore } from '@/stores/client.js';
 const router = useRouter();
 const store = useClientStore();
 const viewData = ref(false);
-
+const accordion = ref(null);
 const activeTab = ref(null);
 const tabPanels = ref(null);
 const changeActiveTab = (i) => {
@@ -166,7 +154,6 @@ const changeActiveTab = (i) => {
         tabPanels.value[i].show();
     }
 };
-
 let formData = reactive([
     {
         query: 'Did the deceased own IN THEIR SOLE NAME, houses, flats or other realty?',

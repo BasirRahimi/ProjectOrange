@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <content-box title="Section 5 - Gifts with reservation of benefit">
+        <ContentBox title="Section 5 - Gifts with reservation of benefit">
             <p class="text-gray-500">
                 There is established anti-avoidance legislation which removes
                 any tax advantage if a person has given away an asset but
@@ -15,9 +15,9 @@
                 It does not matter whether seven-years have elapsed since the
                 original transfer of the title.
             </p>
-        </content-box>
+        </ContentBox>
 
-        <content-box title="5.1 Anti-avoidance legislation">
+        <ContentBox title="5.1 Anti-avoidance legislation">
             <yes-no
                 :label="formData[0].query"
                 v-model="formData[0].answer"
@@ -28,9 +28,9 @@
                     rows="4"
                     placeholder="We shall review this information and ask for further details as appropriate to ensure you make full disclosure to HMRC."></textarea>
             </yes-no>
-        </content-box>
+        </ContentBox>
 
-        <content-box class="p-0 text-end" :shadow="false" :whiteBg="false">
+        <ContentBox class="p-0 text-end" :shadow="false" :whiteBg="false">
             <button
                 class="btn btn-primary shadow"
                 @click="
@@ -39,7 +39,7 @@
                 ">
                 Next section
             </button>
-        </content-box>
+        </ContentBox>
     </div>
 </template>
 <script setup>

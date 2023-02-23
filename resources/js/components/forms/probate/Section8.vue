@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <content-box title="Section 8 - Nil Rate Band Discretionary Trusts">
+        <ContentBox title="Section 8 - Nil Rate Band Discretionary Trusts">
             <p class="text-gray-500">
                 The nil rate band is also called the Inheritance tax threshold.
                 It represents the first part of the estate which is taxed at 0%.
@@ -19,9 +19,9 @@
                 die in response to the questions in 3.3 then details of any
                 Trust will be seen.
             </p>
-        </content-box>
+        </ContentBox>
 
-        <content-box
+        <ContentBox
             title="8.1 - Nil Rate Band Discretionary relative"
             class="relative"
             v-for="(trust, key) in formData"
@@ -104,9 +104,9 @@
                         v-model="trust.email"></base-input>
                 </div>
             </div>
-        </content-box>
+        </ContentBox>
 
-        <content-box
+        <ContentBox
             title="8.1 - Nil Rate Band Discretionary Trusts"
             v-if="formData.length < 4">
             <div class="text-center">
@@ -114,9 +114,9 @@
                     >Add trustee<i class="fas fa-plus ms-3"></i
                 ></base-button>
             </div>
-        </content-box>
+        </ContentBox>
 
-        <content-box class="p-0 text-end" :shadow="false" :whiteBg="false">
+        <ContentBox class="p-0 text-end" :shadow="false" :whiteBg="false">
             <button
                 class="btn btn-primary shadow"
                 @click="
@@ -125,7 +125,7 @@
                 ">
                 Next section
             </button>
-        </content-box>
+        </ContentBox>
     </div>
 </template>
 <script setup>

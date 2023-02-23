@@ -1,13 +1,13 @@
 <template>
     <div class="container">
-        <content-box
+        <ContentBox
             title="Section 19 - Liabilities (owed solely by the deceased)">
             <p class="text-gray-500 m-0">
                 Use this section to include liabilities owed by the deceased.
             </p>
-        </content-box>
+        </ContentBox>
 
-        <content-box title="19.1 Liabilities">
+        <ContentBox title="19.1 Liabilities">
             <yes-no
                 collapse
                 :label="formData[0].query"
@@ -70,9 +70,9 @@
                     completing this section, note ‘approximately’ by the figure
                 </p>
             </BCollapse>
-        </content-box>
+        </ContentBox>
 
-        <content-box class="p-0 text-end" :shadow="false" :whiteBg="false">
+        <ContentBox class="p-0 text-end" :shadow="false" :whiteBg="false">
             <button
                 class="btn btn-primary shadow"
                 @click="
@@ -81,7 +81,7 @@
                 ">
                 Next section
             </button>
-        </content-box>
+        </ContentBox>
     </div>
 </template>
 <script setup>

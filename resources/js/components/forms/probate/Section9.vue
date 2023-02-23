@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <content-box title="Section 9 - Business interests or partnerships">
+        <ContentBox title="Section 9 - Business interests or partnerships">
             <yes-no
                 class="mb-4"
                 :label="formData[0].query"
@@ -84,9 +84,9 @@
                     manner on beneficial terms.
                 </p>
             </BCollapse> -->
-        </content-box>
+        </ContentBox>
 
-        <content-box title="9.2 Partnerships">
+        <ContentBox title="9.2 Partnerships">
             <yes-no
                 :label="formData[1].query"
                 v-model="formData[1].answer"
@@ -155,9 +155,9 @@
                     >{{ formData[1].onTrue.valuation.filename }}</a
                 >
             </yes-no>
-        </content-box>
+        </ContentBox>
 
-        <content-box class="p-0 text-end" :shadow="false" :whiteBg="false">
+        <ContentBox class="p-0 text-end" :shadow="false" :whiteBg="false">
             <button
                 class="btn btn-primary shadow"
                 @click="
@@ -166,7 +166,7 @@
                 ">
                 Next section
             </button>
-        </content-box>
+        </ContentBox>
     </div>
 </template>
 <script setup>

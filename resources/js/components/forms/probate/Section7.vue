@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <content-box title="Section 7 - Swiss and assets in other ‘tax havens’">
+        <ContentBox title="Section 7 - Swiss and assets in other ‘tax havens’">
             <!-- <BaseButton
                 @click="collapse.collapse1 = !collapse.collapse1"
                 size="sm"
@@ -20,9 +20,9 @@
                     been administered.
                 </p>
             </BCollapse> -->
-        </content-box>
+        </ContentBox>
 
-        <content-box title="7.1 Swiss and assets in other ‘tax havens’">
+        <ContentBox title="7.1 Swiss and assets in other ‘tax havens’">
             <yes-no
                 v-for="(row, i) in formData"
                 :key="i"
@@ -36,9 +36,9 @@
                     rows="4"
                     placeholder="Please include a full overview of relevant details to this question"></textarea>
             </yes-no>
-        </content-box>
+        </ContentBox>
 
-        <content-box class="p-0 text-end" :shadow="false" :whiteBg="false">
+        <ContentBox class="p-0 text-end" :shadow="false" :whiteBg="false">
             <button
                 class="btn btn-primary shadow"
                 @click="
@@ -47,7 +47,7 @@
                 ">
                 Next section
             </button>
-        </content-box>
+        </ContentBox>
     </div>
 </template>
 

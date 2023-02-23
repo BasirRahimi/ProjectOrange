@@ -1,14 +1,14 @@
 <template>
     <div class="container">
-        <content-box title="Section 10 - Inheritance from other people">
+        <ContentBox title="Section 10 - Inheritance from other people">
             <p class="text-gray-500">
                 If the deceased received a legacy of money or of an asset from
                 another person in the last five years then please be alert to
                 the details below.
             </p>
-        </content-box>
+        </ContentBox>
 
-        <content-box title="10.1 Inheritance">
+        <ContentBox title="10.1 Inheritance">
             <yes-no
                 :label="formData[0].query"
                 v-model="formData[0].answer"
@@ -134,9 +134,9 @@
                     </div>
                 </yes-no>
             </yes-no>
-        </content-box>
+        </ContentBox>
 
-        <content-box class="p-0 text-end" :shadow="false" :whiteBg="false">
+        <ContentBox class="p-0 text-end" :shadow="false" :whiteBg="false">
             <button
                 class="btn btn-primary shadow"
                 @click="
@@ -145,7 +145,7 @@
                 ">
                 Next section
             </button>
-        </content-box>
+        </ContentBox>
     </div>
 </template>
 <script setup>

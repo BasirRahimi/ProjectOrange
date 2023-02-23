@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <content-box title="Section 2 - Powers of Attorney and non-UK elements">
+        <ContentBox title="Section 2 - Powers of Attorney and non-UK elements">
             <yes-no
                 class="mb-4"
                 :label="formData[0].query"
@@ -32,9 +32,9 @@
                     certificate must be registered with that office.
                 </p>
             </BCollapse>
-        </content-box>
+        </ContentBox>
 
-        <content-box title="2.2 Domicile, residence and non-UK assets">
+        <ContentBox title="2.2 Domicile, residence and non-UK assets">
             <yes-no
                 collapse
                 :openOn="false"
@@ -66,9 +66,9 @@
                     :options="['Yes', 'No', 'Unsure']"
                     v-model="formData[2].onFalse[3].answer"></button-group>
             </yes-no>
-        </content-box>
+        </ContentBox>
 
-        <content-box title="2.3 A brief narrative of the life of the deceased">
+        <ContentBox title="2.3 A brief narrative of the life of the deceased">
             <div v-show="slide === 1">
                 <div class="mb-4">
                     <label class="flashit">{{ formData[3].query }}</label>
@@ -206,9 +206,9 @@
                     been administered.
                 </p>
             </BCollapse> -->
-        </content-box>
+        </ContentBox>
 
-        <content-box class="p-0 text-end" :shadow="false" :whiteBg="false">
+        <ContentBox class="p-0 text-end" :shadow="false" :whiteBg="false">
             <button
                 class="btn btn-primary shadow"
                 @click="
@@ -217,7 +217,7 @@
                 ">
                 Next section
             </button>
-        </content-box>
+        </ContentBox>
     </div>
 </template>
 <script setup>

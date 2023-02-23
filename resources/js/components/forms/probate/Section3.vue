@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <content-box title="Section 3 - Other Information">
+        <ContentBox title="Section 3 - Other Information">
             <yes-no
                 class="mb-4"
                 collapse
@@ -44,9 +44,9 @@
                     should be pinned, clipped or fastened to it at any time.
                 </p>
             </BCollapse>
-        </content-box>
+        </ContentBox>
 
-        <content-box title="3.2 The Will (‘Foreign Wills’)">
+        <ContentBox title="3.2 The Will (‘Foreign Wills’)">
             <yes-no
                 collapse
                 :label="formData[2].query"
@@ -92,9 +92,9 @@
                     </div>
                 </yes-no>
             </yes-no>
-        </content-box>
+        </ContentBox>
 
-        <content-box title="3.3 If the deceased was a widow or widower">
+        <ContentBox title="3.3 If the deceased was a widow or widower">
             <yes-no
                 collapse
                 :label="formData[3].query"
@@ -242,8 +242,8 @@
                     </div>
                 </div>
             </yes-no>
-        </content-box>
-        <content-box class="p-0 text-end" :shadow="false" :whiteBg="false">
+        </ContentBox>
+        <ContentBox class="p-0 text-end" :shadow="false" :whiteBg="false">
             <button
                 class="btn btn-primary shadow"
                 @click="
@@ -252,7 +252,7 @@
                 ">
                 Next section
             </button>
-        </content-box>
+        </ContentBox>
     </div>
 </template>
 

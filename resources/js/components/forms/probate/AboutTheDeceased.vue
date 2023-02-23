@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <content-box title="The Advisor Fact-Find" class="text-muted">
+        <ContentBox title="The Advisor Fact-Find" class="text-muted">
             <p>
                 Please work through this fact find and complete as much
                 information as possible. You may not have all of the information
@@ -11,8 +11,8 @@
                 Once the Executors have approved the fact find, please click the
                 submit button.
             </p>
-        </content-box>
-        <content-box title="About the Deceased">
+        </ContentBox>
+        <ContentBox title="About the Deceased">
             <Honorific v-model="formData.honorific" />
 
             <base-input
@@ -110,8 +110,8 @@
                         :upper-limit="date"></Datepicker>
                 </div>
             </div>
-        </content-box>
-        <content-box title="1.2 Key Information">
+        </ContentBox>
+        <ContentBox title="1.2 Key Information">
             <div class="row">
                 <div class="col-12 col-lg-6">
                     <base-input
@@ -129,8 +129,8 @@
                         :mb-4="false"></base-input>
                 </div>
             </div>
-        </content-box>
-        <content-box title="1.3 Marital Status">
+        </ContentBox>
+        <ContentBox title="1.3 Marital Status">
             <div class="button-grid">
                 <base-button
                     type="default"
@@ -168,8 +168,8 @@
                     >Spinster</base-button
                 >
             </div>
-        </content-box>
-        <content-box title="1.4 Surviving Relatives">
+        </ContentBox>
+        <ContentBox title="1.4 Surviving Relatives">
             <div class="button-grid">
                 <base-button
                     type="default"
@@ -273,8 +273,8 @@
                     </div>
                 </div>
             </BCollapse>
-        </content-box>
-        <content-box title="1.5 Income tax details">
+        </ContentBox>
+        <ContentBox title="1.5 Income tax details">
             <div class="row">
                 <div class="col-12 col-lg-6 mb-4">
                     <label for="NInumber">National insurance number</label>
@@ -318,12 +318,12 @@
                         v-model="formData.accountant_email" />
                 </div>
             </div>
-        </content-box>
-        <content-box class="p-0 text-end" :shadow="false" :whiteBg="false">
+        </ContentBox>
+        <ContentBox class="p-0 text-end" :shadow="false" :whiteBg="false">
             <button class="btn btn-primary shadow" @click="nextSection">
                 Next section
             </button>
-        </content-box>
+        </ContentBox>
     </div>
 </template>
 <script setup>

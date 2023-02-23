@@ -1,13 +1,13 @@
 <template>
     <div class="container">
-        <content-box title="Section 20 - Other information">
+        <ContentBox title="Section 20 - Other information">
             <p class="text-gray-500 m-0">
                 Use this section as an opportunity to provide any extra
                 information you believe relevant.
             </p>
-        </content-box>
+        </ContentBox>
 
-        <content-box
+        <ContentBox
             title="20.1 Other information"
             v-for="(row, i) in formData"
             :key="`otherInfo${i}`"
@@ -55,17 +55,17 @@
                         :show-file="false"></client-file-upload>
                 </div>
             </div>
-        </content-box>
+        </ContentBox>
 
-        <content-box class="p-0 text-center" :shadow="false" :whiteBg="false">
+        <ContentBox class="p-0 text-center" :shadow="false" :whiteBg="false">
             <button class="btn btn-primary shadow" @click="addRow">
                 Add information<i
                     data-v-c216df9e=""
                     class="fas fa-plus ms-3"></i>
             </button>
-        </content-box>
+        </ContentBox>
 
-        <content-box class="p-0 text-end" :shadow="false" :whiteBg="false">
+        <ContentBox class="p-0 text-end" :shadow="false" :whiteBg="false">
             <button
                 class="btn btn-primary shadow"
                 @click="
@@ -74,7 +74,7 @@
                 ">
                 Review
             </button>
-        </content-box>
+        </ContentBox>
     </div>
 </template>
 <script setup>
