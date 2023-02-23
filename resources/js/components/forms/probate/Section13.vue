@@ -19,6 +19,12 @@
                     <template
                         v-for="(item, itemKey) in formData[key].onTrue"
                         v-slot:[slotName(itemKey)]>
+                        <BaseButton
+                            type="link"
+                            class="d-block ms-auto p-0"
+                            @click="removePolicy(key, itemKey)"
+                            >Remove policy</BaseButton
+                        >
                         <BaseInput
                             label="Company name"
                             placeholder="Insurance Company"
@@ -117,7 +123,9 @@ const addRow = (partKey) => {
         docs: []
     });
 };
-
+const removePolicy = (partKey, i) => {
+    formData[partKey].onTrue.splice(i, 1);
+};
 const parts = [
     '13.1 Sums payable from insurance companies',
     '13.2 Investment Bonds',
