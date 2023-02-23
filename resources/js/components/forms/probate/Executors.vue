@@ -14,10 +14,8 @@
                 behalf (appoint an ‘Attorney’).
             </p>
             <p class="text-gray-500">
-                Below is provision for the details of one executor to be
-                inserted but there may be as many as four named in the Will and
-                who may wish to take the Grant of Probate. In this case, click
-                ‘add executor’ to add more.
+                Insert the details of all surviving Executors and check the
+                relevant box whether they intend to apply for Probate.
             </p>
         </ContentBox>
 
