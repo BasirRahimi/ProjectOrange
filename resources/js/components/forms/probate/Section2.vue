@@ -65,147 +65,135 @@
                     :label="formData[2].onFalse[3].query"
                     :options="['Yes', 'No', 'Unsure']"
                     v-model="formData[2].onFalse[3].answer"></button-group>
-            </yes-no>
-        </ContentBox>
 
-        <ContentBox title="2.3 A brief narrative of the life of the deceased">
-            <div v-show="slide === 1">
-                <div class="mb-4">
-                    <label class="flashit">{{ formData[3].query }}</label>
-                    <textarea
-                        class="form-control"
-                        rows="4"
-                        placeholder="Please include a full overview of relevant details to this question"
-                        v-model="formData[3].answer"></textarea>
+                <div v-show="slide === 1">
+                    <div class="mb-4">
+                        <label class="flashit">{{ formData[3].query }}</label>
+                        <textarea
+                            class="form-control"
+                            rows="4"
+                            placeholder="Please include a full overview of relevant details to this question"
+                            v-model="formData[3].answer"></textarea>
+                    </div>
                 </div>
-            </div>
-            <div v-show="slide === 2">
-                <div class="mb-4">
-                    <label class="flashit">{{ formData[4].query }}</label>
-                    <textarea
-                        class="form-control"
-                        rows="4"
-                        placeholder="Please include a full overview of relevant details to this question"
-                        v-model="formData[4].answer"></textarea>
+                <div v-show="slide === 2">
+                    <div class="mb-4">
+                        <label class="flashit">{{ formData[4].query }}</label>
+                        <textarea
+                            class="form-control"
+                            rows="4"
+                            placeholder="Please include a full overview of relevant details to this question"
+                            v-model="formData[4].answer"></textarea>
+                    </div>
                 </div>
-            </div>
-            <div v-show="slide === 3">
-                <div class="mb-4">
-                    <label class="flashit">{{ formData[5].query }}</label>
-                    <textarea
-                        class="form-control"
-                        rows="4"
-                        placeholder="Please include a full overview of relevant details to this question"
-                        v-model="formData[5].answer"></textarea>
+                <div v-show="slide === 3">
+                    <div class="mb-4">
+                        <label class="flashit">{{ formData[5].query }}</label>
+                        <textarea
+                            class="form-control"
+                            rows="4"
+                            placeholder="Please include a full overview of relevant details to this question"
+                            v-model="formData[5].answer"></textarea>
+                    </div>
                 </div>
-            </div>
-            <div v-show="slide === 4">
-                <div class="mb-4">
-                    <label class="flashit">{{ formData[6].query }}</label>
-                    <textarea
-                        class="form-control"
-                        rows="4"
-                        placeholder="Please include a full overview of relevant details to this question"
-                        v-model="formData[6].answer"></textarea>
+                <div v-show="slide === 4">
+                    <div class="mb-4">
+                        <label class="flashit">{{ formData[6].query }}</label>
+                        <textarea
+                            class="form-control"
+                            rows="4"
+                            placeholder="Please include a full overview of relevant details to this question"
+                            v-model="formData[6].answer"></textarea>
+                    </div>
                 </div>
-            </div>
-            <div v-show="slide === 5">
-                <yes-no
-                    class="mb-4"
-                    label-class="flashit"
-                    :label="formData[7].query"
-                    v-model="formData[7].answer">
-                </yes-no>
-
-                <yes-no
-                    class="mb-4"
-                    label-class="flashit"
-                    :label="formData[8].query"
-                    v-model="formData[8].answer">
-                </yes-no>
-
-                <BCollapse
-                    ref="collapse2"
-                    :visible="formData[7].answer === true">
-                    <base-input
-                        :label="formData[7].onTrue[0].query"
-                        placeholder="France"
-                        v-model="formData[7].onTrue[0].answer"></base-input>
-                    <base-input
-                        :label="formData[7].onTrue[1].query"
-                        placeholder="French"
-                        v-model="formData[7].onTrue[1].answer"></base-input>
-                    <base-input
-                        :label="formData[7].onTrue[2].query"
-                        placeholder="French"
-                        v-model="formData[7].onTrue[2].answer"></base-input>
-                </BCollapse>
-            </div>
-            <div v-show="slide === 6">
-                <div class="mb-4">
-                    <label class="flashit">{{ formData[9].query }}</label>
-                    <textarea
-                        class="form-control"
-                        rows="4"
-                        placeholder="Please include a full overview of relevant details to this question"
-                        v-model="formData[9].answer"></textarea>
-                </div>
-            </div>
-            <div v-show="slide === 7">
-                <div class="mb-4">
-                    <label class="flashit">{{ formData[10].query }}</label>
-                    <textarea
-                        class="form-control"
-                        rows="4"
-                        placeholder="Please include a full overview of relevant details to this question"
-                        v-model="formData[10].answer"></textarea>
-                </div>
-
-                <div class="mb-4">
-                    <button-group
-                        cssGrid
-                        :gridColsize="100"
+                <div v-show="slide === 5">
+                    <yes-no
                         class="mb-4"
-                        :label="formData[11].query"
-                        :options="['Yes', 'No', 'Unsure']"
-                        v-model="formData[11].answer"></button-group>
+                        label-class="flashit"
+                        :label="formData[7].query"
+                        v-model="formData[7].answer"
+                        @update:model-value="
+                            (x) => {
+                                x ? collapse2.show() : collapse2.hide();
+                            }
+                        ">
+                    </yes-no>
+
+                    <yes-no
+                        class="mb-4"
+                        label-class="flashit"
+                        :label="formData[8].query"
+                        v-model="formData[8].answer">
+                    </yes-no>
+
+                    <BCollapse
+                        ref="collapse2"
+                        :visible="formData[7].answer === true">
+                        <base-input
+                            :label="formData[7].onTrue[0].query"
+                            placeholder="France"
+                            v-model="formData[7].onTrue[0].answer"></base-input>
+                        <base-input
+                            :label="formData[7].onTrue[1].query"
+                            placeholder="French"
+                            v-model="formData[7].onTrue[1].answer"></base-input>
+                        <base-input
+                            :label="formData[7].onTrue[2].query"
+                            placeholder="French"
+                            v-model="formData[7].onTrue[2].answer"></base-input>
+                    </BCollapse>
                 </div>
-            </div>
+                <div v-show="slide === 6">
+                    <div class="mb-4">
+                        <label class="flashit">{{ formData[9].query }}</label>
+                        <textarea
+                            class="form-control"
+                            rows="4"
+                            placeholder="Please include a full overview of relevant details to this question"
+                            v-model="formData[9].answer"></textarea>
+                    </div>
+                </div>
+                <div v-show="slide === 7">
+                    <div class="mb-4">
+                        <label class="flashit">{{ formData[10].query }}</label>
+                        <textarea
+                            class="form-control"
+                            rows="4"
+                            placeholder="Please include a full overview of relevant details to this question"
+                            v-model="formData[10].answer"></textarea>
+                    </div>
 
-            <div class="d-sm-flex align-items-center">
-                <div class="flex-grow-1">Step {{ slide }}/7</div>
-                <base-button
-                    v-if="slide > 1"
-                    type="default"
-                    outline
-                    @click="prevSlide"
-                    >Previous</base-button
-                >
-                <base-button
-                    v-if="slide < 7"
-                    type="default"
-                    outline
-                    @click="nextSlide"
-                    >Next</base-button
-                >
-            </div>
+                    <div class="mb-4">
+                        <button-group
+                            cssGrid
+                            :gridColsize="100"
+                            class="mb-4"
+                            :label="formData[11].query"
+                            :options="['Yes', 'No', 'Unsure']"
+                            v-model="formData[11].answer"></button-group>
+                    </div>
+                </div>
 
-            <!-- <BaseButton @click="collapse3.toggle()" class="pointer" size="sm"
-                >Tip<i class="icon-xs fas fa-chevron-down ms-2"></i
-            ></BaseButton>
-            <BCollapse ref="collapse3">
-                <p class="text-gray-500 mt-2">
-                    Domicile and residence is relevant because it affects the
-                    law that governs succession. Since 17.8.2016 a new European
-                    Regulation affects succession within EU member states. The
-                    UK and Eire have not opted in to the Regulation (Denmark has
-                    opted out) but it will nonetheless affect individuals
-                    connected with the EU. If you are a beneficiary of this
-                    estate and there are non-UK assets involved, you should
-                    consider your own Will now. Do not wait until the estate has
-                    been administered.
-                </p>
-            </BCollapse> -->
+                <div
+                    class="d-sm-flex align-items-center"
+                    v-if="formData[2].answer === false">
+                    <div class="flex-grow-1">Step {{ slide }}/7</div>
+                    <base-button
+                        v-if="slide > 1"
+                        type="default"
+                        outline
+                        @click="prevSlide"
+                        >Previous</base-button
+                    >
+                    <base-button
+                        v-if="slide < 7"
+                        type="default"
+                        outline
+                        @click="nextSlide"
+                        >Next</base-button
+                    >
+                </div>
+            </yes-no>
         </ContentBox>
 
         <ContentBox class="p-0 text-end" :shadow="false" :whiteBg="false">
@@ -237,9 +225,9 @@ const router = useRouter();
 const store = useClientStore();
 
 const slide = ref(1);
+
 const collapse1 = ref(null);
 const collapse2 = ref(null);
-const collapse3 = ref(null);
 let formData = reactive([
     {
         query: 'Did the deceased make an ENDURING power of attorney?',
@@ -335,6 +323,18 @@ const prevSlide = () => {
         slide.value--;
         flashLabel();
     }
+};
+const slides = [
+    formData[3],
+    formData[4],
+    formData[5],
+    formData[6],
+    [formData[7], formData[8]],
+    formData[9],
+    [formData[10], formData[11]]
+];
+const slotName = (i) => {
+    return `slide${i}`;
 };
 onBeforeMount(() => {
     if (store.client) {

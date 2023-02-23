@@ -55,12 +55,16 @@ const props = defineProps({
 const emit = defineEmits(['update:modelValue']);
 
 const yes = () => {
-    props.openOn ? collapse1.value.show() : collapse1.value.hide();
+    if (props.collapse) {
+        props.openOn ? collapse1.value.show() : collapse1.value.hide();
+    }
     emit('update:modelValue', true);
 };
 
 const no = () => {
-    props.openOn ? collapse1.value.hide() : collapse1.value.show();
+    if (props.collapse) {
+        props.openOn ? collapse1.value.hide() : collapse1.value.show();
+    }
     emit('update:modelValue', false);
 };
 </script>
