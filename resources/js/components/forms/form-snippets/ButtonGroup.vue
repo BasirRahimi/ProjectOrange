@@ -13,6 +13,12 @@
                 >{{ option.value }}</base-button
             >
         </div>
+        <BCollapse
+            :visible="option.active"
+            v-for="(option, key) in optionsCopy"
+            ref="collapse">
+            <slot :name="`collapse${key}`"></slot>
+        </BCollapse>
     </div>
 
     <div v-else>
@@ -46,69 +52,67 @@
         </template>
     </div>
 </template>
+<script setup>
+import { ref, onBeforeMount } from 'vue';
+import BCollapse from '@/components/simple/BCollapse.vue';
+const props = defineProps({
+    label: {
+        type: String,
+        default: null
+    },
+    options: {
+        type: Array,
+        default: () => ['Yes', 'No']
+    },
+    multichoice: {
+        type: Boolean,
+        default: false
+    },
+    sameWidthButtons: {
+        type: Boolean,
+        default: false
+    },
+    cssGrid: {
+        type: Boolean,
+        default: false
+    },
+    gridColsize: {
+        type: Number,
+        default: 150
+    },
+    modelValue: {}
+});
 
-<script>
-export default {
-    name: 'ButtonGroup',
-    props: {
-        label: {
-            type: String,
-            default: null
-        },
-        options: {
-            type: Array,
-            default: () => ['Yes', 'No']
-        },
-        multichoice: {
-            type: Boolean,
-            default: false
-        },
-        sameWidthButtons: {
-            type: Boolean,
-            default: false
-        },
-        cssGrid: {
-            type: Boolean,
-            default: false
-        },
-        gridColsize: {
-            type: Number,
-            default: 150
-        },
-        modelValue: {}
-    },
-    data() {
+const optionsCopy = ref([]);
+onBeforeMount(() => {
+    optionsCopy.value = props.options.map((x) => {
         return {
-            optionsCopy: []
+            value: x,
+            active: props.modelValue === x ? true : false
         };
-    },
-    beforeMount() {
-        this.optionsCopy = this.options.map((x) => {
-            return {
-                value: x,
-                active: this.modelValue === x ? true : false
-            };
-        });
-    },
-    methods: {
-        update(index) {
-            if (!this.multichoice) {
-                this.optionsCopy.forEach((x, i) => {
-                    if (i === index) {
-                        x.active = true;
-                        this.$emit('update:modelValue', x.value);
-                    } else {
-                        x.active = false;
-                    }
-                });
+    });
+});
+const emit = defineEmits(['update:modelValue']);
+const update = (index) => {
+    if (!props.multichoice) {
+        optionsCopy.value.forEach((x, i) => {
+            if (i === index) {
+                x.active = true;
+                collapse.value[i].show();
+                emit('update:modelValue', x.value);
             } else {
-                this.optionsCopy[index].active =
-                    !this.optionsCopy[index].active;
-                this.$emit('update:modelValue', this.optionsCopy);
+                x.active = false;
+                collapse.value[i].hide();
             }
-        }
+        });
+    } else {
+        optionsCopy.value[index].active = !optionsCopy.value[index].active;
+        optionsCopy.value[index].active
+            ? collapse.value[index].show()
+            : collapse.value[index].hide();
+        emit('update:modelValue', optionsCopy.value);
     }
 };
-</script>
 
-<style scoped lang="scss"></style>
+const collapse = ref(null);
+</script>

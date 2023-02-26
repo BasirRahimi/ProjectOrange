@@ -42,7 +42,7 @@
 
                 <label>What was the value of the inheritance received?</label>
                 <div class="row">
-                    <div class="col-md-4 mb-4">
+                    <div class="col-md-4">
                         <base-input
                             type="number"
                             placeholder="£240,000"
@@ -108,7 +108,7 @@
                     v-for="(doc, index) in formData[0].onTrue.docs"
                     v-show="activeDoc === index"
                     :key="index">
-                    <div class="row no-gutters mt-4 mb-4" :key="index">
+                    <div class="row no-gutters mb-4" :key="index">
                         <div class="col-md-4 me-md-2 mb-2 mb-md-0">
                             <base-input
                                 placeholder="Document title e.g ‘The Will’"

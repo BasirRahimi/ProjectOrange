@@ -46,6 +46,7 @@
         </div>
         <div class="col-12 col-lg-6">
             <base-input
+                :mb-4="false"
                 placeholder="Other"
                 v-model="customHonorific"
                 :formGroup="false"></base-input>

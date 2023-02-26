@@ -2,13 +2,12 @@
     <div class="container">
         <ContentBox title="Section 9 - Business interests or partnerships">
             <yes-no
-                class="mb-4"
                 :label="formData[0].query"
                 v-model="formData[0].answer"
                 collapse>
                 <base-input
                     label="Company name"
-                    class="mt-4"
+                    label-classes="mt-4"
                     placeholder="John Appleseed Ltd"
                     v-model="formData[0].onTrue.company_name"></base-input>
                 <base-input
@@ -77,7 +76,7 @@
                 collapse>
                 <base-input
                     label="Partnership name"
-                    class="mt-4"
+                    label-classes="mt-4"
                     placeholder="John Appleseed Ltd"
                     v-model="formData[1].onTrue.partnership_name"></base-input>
                 <base-input

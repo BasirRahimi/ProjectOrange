@@ -29,7 +29,7 @@
                 label="Any aliases in which they held assets?"></BaseInput>
             <div class="row mb-4">
                 <div class="col-lg-5">
-                    <label for="aliases">Date of Death</label>
+                    <label>Date of Death</label>
                     <Datepicker
                         class="form-control bg-white"
                         v-model="formData.date_of_death"
@@ -130,43 +130,88 @@
             </div>
         </ContentBox>
         <ContentBox title="1.3 Marital Status">
-            <div class="button-grid">
-                <base-button
-                    type="default"
-                    outline
-                    :class="{ active: formData.marital_status == 'Married' }"
-                    @click="formData.marital_status = 'Married'"
-                    >Married</base-button
-                >
-                <base-button
-                    type="default"
-                    outline
-                    :class="{ active: formData.marital_status == 'Batchelor' }"
-                    @click="formData.marital_status = 'Batchelor'"
-                    >Batchelor</base-button
-                >
-                <base-button
-                    type="default"
-                    outline
-                    :class="{ active: formData.marital_status == 'Divorced' }"
-                    @click="formData.marital_status = 'Divorced'"
-                    >Divorced</base-button
-                >
-                <base-button
-                    type="default"
-                    outline
-                    :class="{ active: formData.marital_status == 'Widowed' }"
-                    @click="formData.marital_status = 'Widowed'"
-                    >Widowed</base-button
-                >
-                <base-button
-                    type="default"
-                    outline
-                    :class="{ active: formData.marital_status == 'Spinster' }"
-                    @click="formData.marital_status = 'Spinster'"
-                    >Spinster</base-button
-                >
-            </div>
+            <ButtonGroup
+                cssGrid
+                :gridColsize="150"
+                :options="[
+                    'Married / CP',
+                    'Batchelor',
+                    'Divorced',
+                    'Widowed',
+                    'Spinster'
+                ]"
+                v-model="formData.marital_status">
+                <template v-slot:collapse0>
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <BaseInput
+                                label="Full Name of Spouse / CP"
+                                placeholder="Jane Sally Doe"
+                                v-model="formData.spouse_name" />
+                        </div>
+                        <div class="col-md-6"></div>
+                        <div class="col-md-6">
+                            <BaseInput
+                                label="Place of marriage / CP"
+                                placeholder="Wandsworth, London"
+                                v-model="formData.place_of_marriage" />
+                        </div>
+                        <div class="col-md-6">
+                            <label>Date of marriage / CP</label>
+                            <Datepicker
+                                class="form-control bg-white"
+                                v-model="formData.date_of_marriage"
+                                placeholder="21 / 04 / 2010"
+                                input-format="dd / MM / yy"
+                                :upper-limit="date"></Datepicker>
+                        </div>
+                        <div class="col-md-6">
+                            <label
+                                >Upload a copy of the marriage / CP
+                                certificate</label
+                            >
+                            <ClientFileUpload
+                                v-model="formData.marriage_cert" />
+                        </div>
+                    </div>
+                </template>
+                <template v-slot:collapse2>
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <label>Date of marriage</label>
+                            <Datepicker
+                                class="form-control bg-white mb-4"
+                                v-model="formData.date_of_marriage"
+                                placeholder="21 / 04 / 2010"
+                                input-format="dd / MM / yy"
+                                :upper-limit="date"></Datepicker>
+                        </div>
+                        <div class="col-md-6">
+                            <label>Date the marriage officially ended</label>
+                            <Datepicker
+                                class="form-control bg-white mb-4"
+                                v-model="formData.date_of_divorce"
+                                placeholder="21 / 04 / 2010"
+                                input-format="dd / MM / yy"
+                                :upper-limit="date"></Datepicker>
+                        </div>
+                        <div class="col-md-6">
+                            <BaseInput
+                                label="Place of marriage"
+                                placeholder="Wandsworth, London"
+                                v-model="formData.place_of_marriage" />
+                        </div>
+                        <div class="col-md-6"></div>
+                        <div class="col-md-6">
+                            <label>
+                                Upload a copy of the marriage / CP certificate
+                            </label>
+                            <ClientFileUpload
+                                v-model="formData.marriage_cert" />
+                        </div>
+                    </div>
+                </template>
+            </ButtonGroup>
         </ContentBox>
         <ContentBox title="1.4 Surviving Relatives">
             <div class="button-grid">
@@ -326,6 +371,8 @@
     </div>
 </template>
 <script setup>
+import ClientFileUpload from '@/components/forms/form-snippets/ClientFileUpload.vue';
+import ButtonGroup from '@/components/forms/form-snippets/ButtonGroup.vue';
 import BaseInput from '@/components/simple/BaseInput.vue';
 import BCollapse from '@/components/simple/BCollapse.vue';
 import BaseSwitch from '@/components/simple/BaseSwitch.vue';
@@ -356,6 +403,11 @@ const formData = reactive({
     place_of_birth: null,
     place_of_death: null,
     marital_status: null,
+    date_of_marriage: null,
+    date_of_divorce: null,
+    place_of_marriage: null,
+    marriage_cert: null,
+    spouse_name: null,
     spouse: false,
     parents: 0,
     siblings: 0,
@@ -427,9 +479,17 @@ const saveData = () => {
             formData.date_of_death.getMonth() + 1
         }-${formData.date_of_death.getDate()}`;
     }
+
+    let date_of_marriage = null;
+    if (formData.date_of_marriage) {
+        date_of_marriage = `${formData.date_of_marriage.getFullYear()}-${
+            formData.date_of_marriage.getMonth() + 1
+        }-${formData.date_of_marriage.getDate()}`;
+    }
     let data = {
         ...formData,
-        date_of_death: date_of_death
+        date_of_death,
+        date_of_marriage
     };
     saveSectionData(data, store.client.id).then((response) => {
         console.log(response);
@@ -439,8 +499,20 @@ const saveData = () => {
 onBeforeMount(() => {
     if (store.client) {
         Object.keys(formData).forEach((key, index) => {
-            if (key === 'date_of_death' && store.client[key]) {
+            if (
+                [
+                    'date_of_divorce',
+                    'date_of_death',
+                    'date_of_marriage'
+                ].indexOf(key) >= 0 &&
+                store.client[key]
+            ) {
                 formData[key] = new Date(store.client[key]);
+            } else if (
+                key === 'marriage_cert' &&
+                typeof store.client[key] === 'string'
+            ) {
+                formData[key] = JSON.parse(store.client[key]);
             } else {
                 formData[key] = store.client[key];
             }

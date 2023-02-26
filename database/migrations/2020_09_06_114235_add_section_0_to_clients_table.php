@@ -51,31 +51,29 @@ class AddSection0ToClientsTable extends Migration
     public function down()
     {
         Schema::table('clients', function (Blueprint $table) {
-            $table->dropColumn('honorific');
-            $table->dropColumn('forename');
-            $table->dropColumn('surname');
-            $table->dropColumn('aliases');
-            $table->dropColumn('addressline1');
-            $table->dropColumn('addressline2');
-            $table->dropColumn('city');
-            $table->dropColumn('postcode');
-            $table->dropColumn('date_of_death');
-
-            $table->dropColumn('place_of_birth');
-            $table->dropColumn('place_of_death');
-
-            $table->dropColumn('marital_status');
-
-            $table->dropColumn('spouse');
-            $table->dropColumn('parents');
-            $table->dropColumn('siblings');
-            $table->dropColumn('children');
-            $table->dropColumn('grand_children');
-
-            $table->dropColumn('national_insurance_number');
-            $table->dropColumn('income_tax_reference');
-            $table->dropColumn('accountant_phone');
-            $table->dropColumn('accountant_email');
+            $table->dropColumn([
+                'honorific',
+                'forename',
+                'surname',
+                'aliases',
+                'addressline1',
+                'addressline2',
+                'city',
+                'postcode',
+                'date_of_death',
+                'place_of_birth',
+                'place_of_death',
+                'marital_status',
+                'spouse',
+                'parents',
+                'siblings',
+                'children',
+                'grand_children',
+                'national_insurance_number',
+                'income_tax_reference',
+                'accountant_phone',
+                'accountant_email'
+            ]);
         });
     }
 }
