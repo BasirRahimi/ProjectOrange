@@ -130,11 +130,9 @@
 </template>
 <script setup>
 import AccordionTabs from '@/components/AccordionTabs.vue';
-import BCollapse from '@/components/simple/BCollapse.vue';
 import ContentBox from '@/components/simple/ContentBox.vue';
 import YesNo from '@/components/forms/form-snippets/YesNo.vue';
-import Card from '@/components/simple/Card.vue';
-import { reactive, onBeforeMount, ref } from 'vue';
+import { reactive, onBeforeMount, ref, nextTick } from 'vue';
 import { useSaveData as saveData } from '@/composables/helper.js';
 import { useRouter } from 'vue-router';
 import { useClientStore } from '@/stores/client.js';
@@ -142,18 +140,6 @@ const router = useRouter();
 const store = useClientStore();
 const viewData = ref(false);
 const accordion = ref(null);
-const activeTab = ref(null);
-const tabPanels = ref(null);
-const changeActiveTab = (i) => {
-    if (activeTab.value == i) {
-        tabPanels.value[i].hide();
-        activeTab.value = null;
-    } else {
-        activeTab.value = i;
-        tabPanels.value.forEach((x) => x.hide());
-        tabPanels.value[i].show();
-    }
-};
 let formData = reactive([
     {
         query: 'Did the deceased own IN THEIR SOLE NAME, houses, flats or other realty?',
@@ -162,16 +148,19 @@ let formData = reactive([
     }
 ]);
 
-const addRow = () => {
+const addRow = async () => {
     formData[0].onTrue.push({
         description: '',
         mortgage: '',
         value: ''
     });
-    activeTab.value = formData[0].onTrue.length - 1;
+
+    await nextTick();
+    accordion.value.setActiveTab(formData[0].onTrue.length - 1);
 };
 const removeRow = (i) => {
     formData[0].onTrue.splice(i, 1);
+    accordion.value.setActiveTab(i);
 };
 const addRowIfNone = (data) => {
     if (data && formData[0].onTrue.length < 1) {

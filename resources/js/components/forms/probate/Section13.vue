@@ -15,7 +15,8 @@
                 <AccordionTabs
                     class="mt-4"
                     :tabs="formData[key].onTrue"
-                    toggle-key="company_name">
+                    toggle-key="company_name"
+                    ref="accordion">
                     <template
                         v-for="(item, itemKey) in formData[key].onTrue"
                         v-slot:[slotName(itemKey)]>
@@ -105,7 +106,7 @@
 import ClientFileUpload from '@/components/forms/form-snippets/ClientFileUpload.vue';
 import ContentBox from '@/components/simple/ContentBox.vue';
 import YesNo from '@/components/forms/form-snippets/YesNo.vue';
-import { reactive, onBeforeMount } from 'vue';
+import { reactive, onBeforeMount, ref, nextTick } from 'vue';
 import { useSaveData as saveData } from '@/composables/helper.js';
 import { useRouter } from 'vue-router';
 import { useClientStore } from '@/stores/client.js';
@@ -115,16 +116,20 @@ const store = useClientStore();
 const slotName = (i) => {
     return `tab${i}`;
 };
-const addRow = (partKey) => {
+const accordion = ref(null);
+const addRow = async (partKey) => {
     formData[partKey].onTrue.push({
         company_name: '',
         policies: '',
         value: '',
         docs: []
     });
+    await nextTick();
+    accordion.value[partKey].setActiveTab(formData[partKey].onTrue.length - 1);
 };
 const removePolicy = (partKey, i) => {
     formData[partKey].onTrue.splice(i, 1);
+    accordion.value[partKey].setActiveTab(i);
 };
 const parts = [
     '13.1 Sums payable from insurance companies',

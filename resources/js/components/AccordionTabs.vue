@@ -48,7 +48,8 @@ const setActiveTab = (i) => {
 const slotName = (i) => {
     return `tab${i}`;
 };
-defineExpose({ slotName });
+
+defineExpose({ slotName, setActiveTab });
 </script>
 
 <style lang="scss" scoped>
