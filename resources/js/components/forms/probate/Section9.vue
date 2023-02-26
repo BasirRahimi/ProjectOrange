@@ -68,22 +68,6 @@
                     >{{ formData[0].onTrue.valuation.filename }}</a
                 >
             </yes-no>
-
-            <!-- <BaseButton @click="collapse1.toggle()" size="sm" class="pointer"
-                >Tip<i class="icon-xs fas fa-chevron-down ms-2"></i
-            ></BaseButton>
-            <BCollapse ref="collapse1">
-                <p class="text-gray-500 mt-2 mb-0">
-                    You should take care that the deceased had regularised their
-                    affairs with HMRC. For example, the Jersey Disclosure
-                    Facility provides for a voluntary disclosure facility to UK
-                    residents from 6 April 2013 to 30 September 2016 for UK
-                    residents with a beneficial interest in Jersey “relevant
-                    property”, with undisclosed UK tax liabilities, with a
-                    chance to regularise their UK tax affairs in a controlled
-                    manner on beneficial terms.
-                </p>
-            </BCollapse> -->
         </ContentBox>
 
         <ContentBox title="9.2 Partnerships">
@@ -170,7 +154,6 @@
     </div>
 </template>
 <script setup>
-// import BCollapse from '@/components/simple/BCollapse.vue';
 import ContentBox from '@/components/simple/ContentBox.vue';
 import ClientFileUpload from '@/components/forms/form-snippets/ClientFileUpload.vue';
 import YesNo from '@/components/forms/form-snippets/YesNo.vue';
@@ -181,7 +164,6 @@ import { useRouter } from 'vue-router';
 import { useClientStore } from '@/stores/client.js';
 const router = useRouter();
 const store = useClientStore();
-const collapse1 = ref(null);
 let formData = reactive([
     {
         query: 'Did the deceased own shares in a private company?',

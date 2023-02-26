@@ -81,10 +81,7 @@
                 </div>
             </yes-no>
 
-            <BaseButton @click="collapse1.toggle()" size="sm" class="pointer"
-                >Tip<i class="icon-xs fas fa-chevron-down ms-2"></i
-            ></BaseButton>
-            <BCollapse ref="collapse1">
+            <BCollapse toggle-button toggle-text="Tip">
                 <p class="text-gray-500 mt-2 mb-0">
                     If the deceased owned a property jointly with another
                     person, include it here. If there is a mortgage on the
@@ -115,7 +112,6 @@ import { useRouter } from 'vue-router';
 import { useClientStore } from '@/stores/client.js';
 const router = useRouter();
 const store = useClientStore();
-const collapse1 = ref(null);
 const rowSettings = ref(false);
 let formData = reactive([
     {

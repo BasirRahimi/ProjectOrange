@@ -15,18 +15,29 @@
         <ContentBox title="About the Deceased">
             <Honorific v-model="formData.honorific" />
 
-            <base-input
+            <BaseInput
                 placeholder="John"
                 v-model="formData.forename"
-                label="Forenames"></base-input>
-            <base-input
+                label="Forenames"></BaseInput>
+            <BaseInput
                 placeholder="Doe"
                 v-model="formData.surname"
-                label="Surname"></base-input>
-            <base-input
+                label="Surname"></BaseInput>
+            <BaseInput
                 placeholder="Johnathan Doe"
                 v-model="formData.aliases"
-                label="Any aliases in which they held assets?"></base-input>
+                label="Any aliases in which they held assets?"></BaseInput>
+            <div class="row mb-4">
+                <div class="col-lg-5">
+                    <label for="aliases">Date of Death</label>
+                    <Datepicker
+                        class="form-control bg-white"
+                        v-model="formData.date_of_death"
+                        placeholder="21 / 9 / 2020"
+                        input-format="dd / MM / yy"
+                        :upper-limit="date"></Datepicker>
+                </div>
+            </div>
 
             <div class="mb-4">
                 <label>Last usual address</label>
@@ -87,7 +98,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-5 mb-4">
+                        <div class="col-lg-5">
                             <label for="postcode">Postcode</label>
                             <input
                                 type="text"
@@ -99,34 +110,22 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-5">
-                    <label for="aliases">Date of Death</label>
-                    <Datepicker
-                        class="form-control bg-white"
-                        v-model="formData.date_of_death"
-                        placeholder="21 / 9 / 2020"
-                        input-format="dd / MM / yy"
-                        :upper-limit="date"></Datepicker>
-                </div>
-            </div>
         </ContentBox>
         <ContentBox title="1.2 Key Information">
             <div class="row">
-                <div class="col-12 col-lg-6">
-                    <base-input
-                        class="mb-3 mb-lg-0"
+                <div class="col-12 col-lg-6 mb-4 mb-lg-0">
+                    <BaseInput
                         label="Place of Birth"
                         placeholder="Maidstone, Kent"
                         v-model="formData.place_of_birth"
-                        :mb-4="false"></base-input>
+                        :mb-4="false"></BaseInput>
                 </div>
                 <div class="col-12 col-lg-6">
-                    <base-input
+                    <BaseInput
                         label="Place of Death"
                         placeholder="Wandsworth, London"
                         v-model="formData.place_of_death"
-                        :mb-4="false"></base-input>
+                        :mb-4="false"></BaseInput>
                 </div>
             </div>
         </ContentBox>
@@ -299,7 +298,7 @@
                         >The contact details of the deceased’s accountant</label
                     >
                 </div>
-                <div class="col-12 col-lg-6 mb-4">
+                <div class="col-12 col-lg-6 mb-4 mb-lg-0">
                     <label for="phone">Phone number</label>
                     <input
                         type="text"
@@ -308,7 +307,7 @@
                         placeholder="+44 012345 67890"
                         v-model="formData.accountant_phone" />
                 </div>
-                <div class="col-12 col-lg-6 mb-4">
+                <div class="col-12 col-lg-6 mb-4 mb-lg-0">
                     <label for="email">Email Address</label>
                     <input
                         type="text"
@@ -327,6 +326,7 @@
     </div>
 </template>
 <script setup>
+import BaseInput from '@/components/simple/BaseInput.vue';
 import BCollapse from '@/components/simple/BCollapse.vue';
 import BaseSwitch from '@/components/simple/BaseSwitch.vue';
 import ContentBox from '@/components/simple/ContentBox.vue';

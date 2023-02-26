@@ -32,13 +32,7 @@
                 >
             </yes-no>
 
-            <BaseButton
-                @click="collapse.collapse1 = !collapse.collapse1"
-                class="pointer"
-                size="sm"
-                >Tip<i class="icon-xs fas fa-chevron-down ms-2"></i
-            ></BaseButton>
-            <BCollapse :visible="collapse.collapse1" id="collapse1">
+            <BCollapse toggle-button toggle-text="Tip">
                 <p class="text-gray-500 mt-2">
                     If you hold the original Will (and any codicils), nothing
                     should be pinned, clipped or fastened to it at any time.
@@ -269,9 +263,7 @@ import { useRouter } from 'vue-router';
 import { useClientStore } from '@/stores/client.js';
 const router = useRouter();
 const store = useClientStore();
-const collapse = ref({
-    collapse1: false
-});
+
 let formData = reactive([
     {
         query: 'Did the deceased make a Will?',

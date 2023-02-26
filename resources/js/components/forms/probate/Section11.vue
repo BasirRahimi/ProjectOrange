@@ -170,27 +170,6 @@
                         >Next</base-button
                     >
                 </div>
-
-                <!-- <BaseButton
-                    @click="collapse1.toggle()"
-                    size="sm"
-                    class="pointer"
-                    >Tip<i class="icon-xs fas fa-chevron-down ms-2"></i
-                ></BaseButton>
-                <BCollapse ref="collapse1">
-                    <p class="text-gray-500 mt-2 mb-0">
-                        Domicile and residence is relevant because it affects
-                        the law that governs succession. Since 17.8.2016 a new
-                        European Regulation affects succession within EU member
-                        states. The UK and Eire have not opted in to the
-                        Regulation (Denmark has opted out) but it will
-                        nonetheless affect individuals connected with the EU. If
-                        you are a beneficiary of this estate and there are
-                        non-UK assets involved, you should consider your own
-                        Will now. Do not wait until the estate has been
-                        administered.
-                    </p>
-                </BCollapse> -->
             </yes-no>
         </ContentBox>
 
@@ -207,7 +186,6 @@
     </div>
 </template>
 <script setup>
-// import BCollapse from '@/components/simple/BCollapse.vue';
 import BaseSwitch from '@/components/simple/BaseSwitch.vue';
 import ContentBox from '@/components/simple/ContentBox.vue';
 import Datepicker from 'vue3-datepicker';
@@ -221,7 +199,6 @@ import { useClientStore } from '@/stores/client.js';
 const router = useRouter();
 const store = useClientStore();
 const activeDoc = ref(0);
-const collapse1 = ref(null);
 let formData = reactive([
     {
         query: 'Was the deceased entitled to benefit from a trust that was created by a Deed or under another’s person’s Will (or intestacy)?',

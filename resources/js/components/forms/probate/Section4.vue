@@ -128,26 +128,6 @@
                     >Next</base-button
                 >
             </div>
-
-            <!-- <BaseButton
-                @click="collapse.collapse1 = !collapse.collapse1"
-                class="pointer"
-                size="sm">
-                Tip<i class="icon-xs fas fa-chevron-down ms-2"></i>
-            </BaseButton>
-            <BCollapse :visible="collapse.collapse1" id="collapse2">
-                <p class="text-gray-500 mt-2">
-                    Domicile and residence is relevant because it affects the
-                    law that governs succession. Since 17.8.2016 a new European
-                    Regulation affects succession within EU member states. The
-                    UK and Eire have not opted in to the Regulation (Denmark has
-                    opted out) but it will nonetheless affect individuals
-                    connected with the EU. If you are a beneficiary of this
-                    estate and there are non-UK assets involved, you should
-                    consider your own Will now. Do not wait until the estate has
-                    been administered.
-                </p>
-            </BCollapse> -->
         </ContentBox>
 
         <ContentBox class="p-0 text-end" :shadow="false" :whiteBg="false">

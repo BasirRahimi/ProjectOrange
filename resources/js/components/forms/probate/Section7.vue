@@ -1,25 +1,6 @@
 <template>
     <div class="container">
         <ContentBox title="Section 7 - Swiss and assets in other ‘tax havens’">
-            <!-- <BaseButton
-                @click="collapse.collapse1 = !collapse.collapse1"
-                size="sm"
-                class="pointer"
-                >Tip<i class="icon-xs fas fa-chevron-down ms-2"></i
-            ></BaseButton>
-            <BCollapse :visible="collapse.collapse1">
-                <p class="text-gray-500 mt-2 mb-0">
-                    Domicile and residence is relevant because it affects the
-                    law that governs succession. Since 17.8.2016 a new European
-                    Regulation affects succession within EU member states. The
-                    UK and Eire have not opted in to the Regulation (Denmark has
-                    opted out) but it will nonetheless affect individuals
-                    connected with the EU. If you are a beneficiary of this
-                    estate and there are non-UK assets involved, you should
-                    consider your own Will now. Do not wait until the estate has
-                    been administered.
-                </p>
-            </BCollapse> -->
         </ContentBox>
 
         <ContentBox title="7.1 Swiss and assets in other ‘tax havens’">
@@ -52,7 +33,6 @@
 </template>
 
 <script setup>
-// import BCollapse from '@/components/simple/BCollapse.vue';
 import ContentBox from '@/components/simple/ContentBox.vue';
 import YesNo from '@/components/forms/form-snippets/YesNo.vue';
 import { reactive, onBeforeMount, ref } from 'vue';
@@ -61,7 +41,6 @@ import { useRouter } from 'vue-router';
 import { useClientStore } from '@/stores/client.js';
 const router = useRouter();
 const store = useClientStore();
-const collapse = ref({ collapse1: false });
 
 let formData = reactive([
     {

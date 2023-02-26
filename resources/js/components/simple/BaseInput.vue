@@ -1,12 +1,11 @@
 <template>
     <div
         :class="[
-            { 'mb-4': formGroup },
+            { 'mb-4': mb4 },
             { 'input-group': hasIcon },
             { 'has-danger': error },
             { focused: focused },
             { 'input-group-alternative': alternative },
-            { 'has-label': label || $slots.label },
             { 'has-success': valid === true },
             { 'has-danger': valid === false }
         ]">
@@ -109,7 +108,7 @@ export default {
             type: String
         },
         addonRightClasses: { type: String },
-        formGroup: {
+        mb4: {
             type: Boolean,
             default: true
         }

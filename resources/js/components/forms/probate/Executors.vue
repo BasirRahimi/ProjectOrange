@@ -33,14 +33,14 @@
             >
             <honorific v-model="executor.honorific" />
 
-            <base-input
+            <BaseInput
                 label="Forenames"
                 placeholder="John"
-                v-model="executor.forename"></base-input>
-            <base-input
+                v-model="executor.forename"></BaseInput>
+            <BaseInput
                 label="Surname"
                 placeholder="Doe"
-                v-model="executor.surname"></base-input>
+                v-model="executor.surname"></BaseInput>
 
             <div class="mb-4">
                 <label>Last usual address</label>
@@ -65,34 +65,34 @@
                     v-show="executor.addressInputType == 'Add manually'">
                     <div class="row">
                         <div class="col-lg-5">
-                            <base-input
+                            <BaseInput
                                 label="Address Line 1"
                                 placeholder="23 Acacia Avenue"
-                                v-model="executor.addressLine1"></base-input>
+                                v-model="executor.addressLine1"></BaseInput>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-5">
-                            <base-input
+                            <BaseInput
                                 label="Address Line 2"
                                 placeholder="Acacia Road"
-                                v-model="executor.addressLine2"></base-input>
+                                v-model="executor.addressLine2"></BaseInput>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-5">
-                            <base-input
+                            <BaseInput
                                 label="Town / City"
                                 placeholder="Acacia"
-                                v-model="executor.town"></base-input>
+                                v-model="executor.town"></BaseInput>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-5">
-                            <base-input
+                            <BaseInput
                                 label="Postcode"
                                 placeholder="TN28 PJ13"
-                                v-model="executor.postcode"></base-input>
+                                v-model="executor.postcode"></BaseInput>
                         </div>
                     </div>
                 </div>
@@ -100,25 +100,25 @@
 
             <div class="row">
                 <div class="col-12 col-lg-6">
-                    <base-input
+                    <BaseInput
                         label="National insurance number"
                         placeholder="576HDIW7 IE"
-                        v-model="executor.niNumber"></base-input>
+                        v-model="executor.niNumber"></BaseInput>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-12 col-lg-6">
-                    <base-input
+                    <BaseInput
                         label="Phone number"
                         placeholder="+44 012345 67890"
-                        v-model="executor.phone"></base-input>
+                        v-model="executor.phone"></BaseInput>
                 </div>
                 <div class="col-12 col-lg-6">
-                    <base-input
+                    <BaseInput
                         label="Email Address"
                         placeholder="John.doe@doe.co.uk"
-                        v-model="executor.email"></base-input>
+                        v-model="executor.email"></BaseInput>
                 </div>
             </div>
 
@@ -268,6 +268,7 @@
                         changeText="Change Doc" />
                 </BCollapse>
                 <BaseRadio
+                    class="mb-0"
                     :name="`${key}executorActing`"
                     v-model="executor.acting"
                     @update:modelValue="updateActing(`${key}appoint`)"
@@ -279,7 +280,7 @@
                     ref="actingCollapse"
                     :identifier="`${key}appoint`"
                     :visible="executor.acting == 'Appoint'">
-                    <p class="text-gray-500">
+                    <p class="text-gray-500 mt-3">
                         If this Executor wants to appoint an Attorney to act for
                         them, you will need to contact us. Use the button below.
                     </p>
@@ -315,6 +316,7 @@
     </div>
 </template>
 <script setup>
+import BaseInput from '@/components/simple/BaseInput.vue';
 import BaseRadio from '@/components/simple/BaseRadio.vue';
 import BCollapse from '@/components/simple/BCollapse.vue';
 import BaseSwitch from '@/components/simple/BaseSwitch.vue';

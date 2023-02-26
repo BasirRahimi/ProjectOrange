@@ -62,10 +62,7 @@
                 </div>
             </yes-no>
 
-            <BaseButton @click="collapse1.toggle()" size="sm" class="pointer"
-                >Tip<i class="icon-xs fas fa-chevron-down ms-2"></i
-            ></BaseButton>
-            <BCollapse ref="collapse1">
+            <BCollapse toggle-button toggle-text="Tip">
                 <p class="text-gray-500 mt-2 mb-0">
                     If the deceased was, for example, married and acquired
                     furniture and household effects with their spouse, it could
@@ -102,7 +99,6 @@ import { useClientStore } from '@/stores/client.js';
 const router = useRouter();
 const store = useClientStore();
 const rowSettings = ref(false);
-const collapse1 = ref(null);
 let formData = reactive([
     {
         query: 'Did the deceased own any Chattels of particular value?',

@@ -3,10 +3,7 @@
         <ContentBox
             title="Section 6 - England & Wales and the rest of the UK and British Isles">
             <div class="mb-3">
-                <BaseButton @click="tip1.toggle()" size="sm" class="pointer"
-                    >Tip<i class="icon-xs fas fa-chevron-down ms-2"></i
-                ></BaseButton>
-                <BCollapse ref="tip1">
+                <BCollapse toggle-button toggle-text="Tip">
                     <p class="text-gray-500 mt-2 mb-0">
                         Certain investments can be placed with investment
                         institutions in these jurisdictions. They each have
@@ -16,10 +13,7 @@
                 </BCollapse>
             </div>
             <div>
-                <BaseButton @click="tip2.toggle()" size="sm" class="pointer"
-                    >Tip<i class="icon-xs fas fa-chevron-down ms-2"></i
-                ></BaseButton>
-                <BCollapse ref="tip2">
+                <BCollapse toggle-button toggle-text="Tip">
                     <p class="text-gray-500 mt-2 mb-0">
                         You should take care that the deceased had regularised
                         their affairs with HMRC. For example, the Jersey
@@ -74,8 +68,6 @@ import { useClientStore } from '@/stores/client.js';
 const router = useRouter();
 const store = useClientStore();
 
-const tip1 = ref(null);
-const tip2 = ref(null);
 let formData = reactive([
     {
         query: 'Did the deceased have any assets in Jersey?',

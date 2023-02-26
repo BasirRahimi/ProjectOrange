@@ -20,10 +20,7 @@
                     v-model="formData[1].document"></client-file-upload>
             </yes-no>
 
-            <BaseButton @click="collapse1.toggle()" size="sm"
-                >Tip<i class="icon-xs fa-solid fa-chevron-down ms-2"></i>
-            </BaseButton>
-            <BCollapse ref="collapse1">
+            <BCollapse toggle-button toggle-text="Tip">
                 <p class="text-gray-500 mt-2">
                     When a person dies, the Power of Attorney ceases to have
                     effect. The Attorney must hand over their responsibilities
@@ -226,7 +223,6 @@ const store = useClientStore();
 
 const slide = ref(1);
 
-const collapse1 = ref(null);
 const collapse2 = ref(null);
 let formData = reactive([
     {
