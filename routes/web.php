@@ -42,9 +42,10 @@ Auth::routes(['verify' => true, 'register' => false]);
 
 Route::middleware(['has.access'])->group(function () {
 
-    Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
-
-    Route::get('/dashboard/{route}', [HomeController::class, 'index'])->name('dashboard');
+    Route::controller(HomeController::class)->group(function () {
+        Route::get('/dashboard', 'index');
+        Route::get('/dashboard/{route}', 'index');
+    });
 
     Route::resource('clients', ClientController::class);
 
