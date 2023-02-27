@@ -1,68 +1,26 @@
 <template>
-    <div class="header bg-white shadow">
-        <div class="brand">Project Orange</div>
-        <div class="title">JOHN DOE DECEASED</div>
-        <div class="toolbar">
-            <a href="" class="me-2">
-                <i class="fas fa-comment-dots"></i>
-            </a>
-            <a href="" class="me-2">
-                <i class="fas fa-bell"></i>
-            </a>
-            <a href="" class="me-2">
-                <i class="fas fa-cog"></i>
-            </a>
+    <nav
+        id="AppHeader"
+        class="navbar sticky-top bg-white shadow p-0 justify-content-start"
+        ref="el">
+        <div
+            class="px-4 py-3 d-none d-md-block"
+            :style="{ width: `${appSideNavWidth}px` }">
+            <div class="fw-bold">Hi, John Doe</div>
+            <div class="text-gray-500">Company Name Ltd</div>
         </div>
-    </div>
+        <div
+            class="d-flex align-items-center px-4 py-3 align-self-stretch border-start">
+            <span class="fs-5 d-block me-3 fw-bold">Your Succession Cases</span>
+            &#x2022;
+            <span class="text-gray-500 d-block ms-3">
+                Manage existing, or open new succession cases here
+            </span>
+        </div>
+    </nav>
 </template>
 
-<script>
-export default {
-    name: 'AppHeader'
-};
+<script setup>
+const props = defineProps({ appSideNavWidth: Number });
 </script>
-<style lang="scss" scoped>
-.header {
-    position: fixed;
-    width: 100%;
-    height: 60px;
-    z-index: 2;
-    display: flex;
-    align-items: center;
-
-    .brand {
-        display: inline-block;
-        font-size: 18px;
-        font-weight: 600;
-        width: 210px;
-        height: 100%;
-        padding: 20px 0;
-        text-align: center;
-        box-sizing: border-box;
-        border-right: 1px solid #f0f0f0;
-    }
-
-    .title {
-        display: inline-block;
-        font-size: 18px;
-        font-weight: 600;
-        padding-left: 64px;
-        flex-grow: 1;
-    }
-
-    .toolbar {
-        display: inline-block;
-        margin-left: auto;
-        padding-right: 64px;
-
-        a {
-            color: #4c4c4c;
-            transition: 0.25s;
-
-            &:hover {
-                color: #fb952c;
-            }
-        }
-    }
-}
-</style>
+<style lang="scss" scoped></style>

@@ -44,6 +44,8 @@ Route::middleware(['has.access'])->group(function () {
 
     Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
 
+    Route::get('/dashboard/{route}', [HomeController::class, 'index'])->name('dashboard');
+
     Route::resource('clients', ClientController::class);
 
     Route::get('/clients/{id}/{vue_capture?}', [ClientController::class, 'show'])->where('vue_capture', '[\/\w\.-]*');

@@ -19,8 +19,12 @@ app.directive('click-outside', clickOutside);
 
 // Router
 import clientRouter from './clientRouter';
+import router from './router';
 if (clientRouter.inUse) {
     app.use(clientRouter.router);
+}
+if (router.inUse) {
+    app.use(router.router);
 }
 
 // Store
