@@ -7,7 +7,8 @@
             { focused: focused },
             { 'input-group-alternative': alternative },
             { 'has-success': valid === true },
-            { 'has-danger': valid === false }
+            { 'has-danger': valid === false },
+            wrapperClasses
         ]">
         <slot name="label">
             <label v-if="label" :class="labelClasses">
@@ -111,6 +112,9 @@ export default {
         mb4: {
             type: Boolean,
             default: true
+        },
+        wrapperClasses: {
+            type: String
         }
     },
     data() {

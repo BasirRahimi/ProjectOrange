@@ -10,6 +10,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ReminderController;
 use App\Http\Controllers\AccessController;
+use App\Http\Controllers\CaseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,6 +59,11 @@ Route::middleware(['has.access'])->group(function () {
 
     //Reminders
     Route::post('/reminders/{client_id}', [ReminderController::class, 'store']);
+
+    // Cases are to replace clients completely
+    Route::controller(CaseController::class)->group(function () {
+        Route::get('/cases/{case_type}', 'index');
+    });
 });
 
 Route::middleware(['is.admin'])->group(function () {

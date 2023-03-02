@@ -17,7 +17,7 @@
 </head>
 <body>
     <div id="app">
-        <router-view></router-view>
+        <router-view :user="{{Auth::user()}}"></router-view>
     </div>
 </body>
 </html>
