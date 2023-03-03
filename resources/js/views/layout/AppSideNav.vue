@@ -3,11 +3,10 @@
         id="AppSideNav"
         class="bg-white px-3 py-4"
         :style="{
-            width: '300px',
             height: `calc(100vh - ${appHeaderHeight}px`
         }">
         <nav class="d-flex flex-column h-100">
-            <div class="px-3 pb-4 mb-4 border-bottom">
+            <div id="branding" class="px-3 pb-4 mb-4 border-bottom">
                 <span class="text-gray-500">You're using</span><br />
                 <a href="#" class="fs-5 fw-bold">ATPS By Mabain</a>
             </div>

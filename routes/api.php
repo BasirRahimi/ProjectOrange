@@ -18,3 +18,13 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::middleware('has.access')->group(function () {
+    // Cases are to replace clients completely
+    Route::controller(CaseController::class)->group(function () {
+        Route::get('/cases/{case_id?}', 'index'); // gets all user cases. Can filter by ?case-type=case_type
+        Route::post('/cases/{case_type}', 'store'); // requires initial data to create the case
+        Route::patch('/cases/{case_id}', 'update'); // updates part of a case
+        Route::delete('/cases/{case_id}', 'delete'); // soft delete
+    });
+});

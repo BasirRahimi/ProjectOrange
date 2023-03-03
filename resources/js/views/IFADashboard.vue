@@ -1,12 +1,18 @@
 <template>
     <AppHeader :app-side-nav-width="appSideNavWidth" />
     <AppSideNav :app-header-height="appHeaderHeight" />
-    <main :style="{ 'margin-left': `${appSideNavWidth}px` }">
-        <RouterView v-slot="{ Component }">
-            <Transition>
-                <component :is="Component" />
-            </Transition>
-        </RouterView>
+    <main
+        :style="{
+            'margin-left': `${appSideNavWidth}px`,
+            'padding-top': `${paddingTop}px`
+        }">
+        <div class="container">
+            <RouterView v-slot="{ Component }">
+                <Transition>
+                    <component :is="Component" />
+                </Transition>
+            </RouterView>
+        </div>
     </main>
 </template>
 
@@ -23,9 +29,18 @@ userStore.setUser(props.user);
 
 const appHeaderHeight = ref(80);
 const appSideNavWidth = ref(300);
+const paddingTop = ref(100);
+
 onMounted(() => {
-    appSideNavWidth.value = document.querySelector('#AppSideNav').clientWidth;
-    appHeaderHeight.value = document.querySelector('#AppHeader').clientHeight;
+    let sideNav = document.querySelector('#AppSideNav');
+    let appHeader = document.querySelector('#AppHeader');
+    let branding = document.querySelector('#branding');
+    appSideNavWidth.value = sideNav.clientWidth;
+    appHeaderHeight.value = appHeader.clientHeight;
+
+    let x = getComputedStyle(sideNav).paddingTop;
+    paddingTop.value =
+        parseInt(x.slice(0, x.length - 2)) + parseInt(branding.clientHeight);
 });
 </script>
 <style lang="scss" scoped>
