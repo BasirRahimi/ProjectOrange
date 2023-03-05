@@ -1,4 +1,5 @@
 import { useClientStore } from '@/stores/client.js';
+import { customRef } from 'vue';
 
 export function useValidateEmail(email) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -47,4 +48,23 @@ export function randomString(length = 7) {
         );
 
     return text;
+}
+
+export function useDebouncedRef(value, delay = 200) {
+    let timeout;
+    return customRef((track, trigger) => {
+        return {
+            get() {
+                track();
+                return value;
+            },
+            set(newValue) {
+                clearTimeout(timeout);
+                timeout = setTimeout(() => {
+                    value = newValue;
+                    trigger();
+                }, delay);
+            }
+        };
+    });
 }

@@ -1,5 +1,5 @@
 <template>
-    <div class="desk">
+    <div>
         <div class="search mb-4 d-flex">
             <BaseInput
                 wrapperClasses="shadow me-3"

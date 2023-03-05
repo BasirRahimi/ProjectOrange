@@ -1,5 +1,5 @@
 <template>
-    <div class="desk">
+    <div>
         <div class="row">
             <div class="col-lg-6">
                 <Card shadow>

@@ -11,34 +11,43 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
-class CaseController2 extends Controller
+class CaseController extends Controller
 {
     /**
      * Get all cases
      */
-    public function index(Request $request, string $case_id = null): JsonResponse
+    public function index(Request $request, int $case_id = null): JsonResponse
     {
+        // TODO: Paginate results
         $user = Auth::user();
-
-        // TODO: Phase out the use of clients by removing/renaming clients to probate cases
-        return response()->json($user->clients);
-
+        $case_type_id = null;
         if ($case_id) {
             $case = POCase::findOrFail($case_id);
             return response()->json($case);
         }
 
-        // new cases implementation
-        $case_type_id = CaseType::where('name', $request['case_type'])->firstOrFail();
+        if ($request['case-type']) {
+            $case_type_id = CaseType::where('name', $request['case-type'])->firstOrFail()->id;
+        }
 
-        // TODO: Paginate results
-        $page = $request['page'];
-        $per_page = $request['per-page'];
+        $cases = POCase::where('user_id', $user->id);
 
-        return response()->json($user->cases($case_type_id)->paginate($per_page));
+        if ($case_type_id) {
+            $cases = $cases->where('case_type_id', $case_type_id);
+        }
+
+        if ($request['search']) {
+            $cases = $cases->where('name', 'like', '%' . $request['search'] . '%');
+        }
+
+        $cases = $cases->orderBy($request['order-by'], $request['order']);
+        $cases = $cases->paginate($request['per-page']);
+
+        return response()->json($cases);
     }
 
     /**

@@ -46,14 +46,17 @@ const routeUpdated = (newRoute) => {
             title.value = 'Dashboard';
             subtitle.value = '';
             break;
-        case 'SuccessionDesk':
-            title.value = 'Your Succession Cases';
-            subtitle.value =
-                'Manage existing, or open new succession cases here';
-            break;
-        case 'ProbateDesk':
-            title.value = 'Your Probate Cases';
-            subtitle.value = 'Manage existing, or open new probate cases here';
+        case 'CaseFlows':
+            if (newRoute.params.caseType === 'succession') {
+                title.value = 'Your Succession Cases';
+                subtitle.value =
+                    'Manage existing, or open new succession cases here';
+            } else if (newRoute.params.caseType === 'probate') {
+                title.value = 'Your Probate Cases';
+                subtitle.value =
+                    'Manage existing, or open new probate cases here';
+            }
+
             break;
         case 'DocumentLibrary':
             title.value = 'Document Library';

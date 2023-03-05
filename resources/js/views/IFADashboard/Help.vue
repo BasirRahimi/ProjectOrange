@@ -1,5 +1,5 @@
 <template>
-    <div class="desk">
+    <div>
         <Card shadow class="mb-4">
             <p><b>Contact</b></p>
             <p class="text-gray-500">

@@ -1,8 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
 import IFADashboard from './views/IFADashboard.vue';
-import SuccessionDesk from './views/IFADashboard/SuccessionDesk.vue';
-import ProbateDesk from './views/IFADashboard/ProbateDesk.vue';
+import CaseFlows from './views/IFADashboard/Caseflows.vue';
 import DocumentLibrary from './views/IFADashboard/DocumentLibrary.vue';
 import KnowledgeBase from './views/IFADashboard/KnowledgeBase.vue';
 import Help from './views/IFADashboard/Help.vue';
@@ -16,14 +15,10 @@ const routes = [
         component: IFADashboard,
         children: [
             {
-                name: 'SuccessionDesk',
-                path: 'succession',
-                component: SuccessionDesk
-            },
-            {
-                name: 'ProbateDesk',
-                path: 'probate',
-                component: ProbateDesk
+                name: 'CaseFlows',
+                path: 'cases/:caseType',
+                component: CaseFlows,
+                props: true
             },
             {
                 name: 'DocumentLibrary',

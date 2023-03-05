@@ -7,7 +7,7 @@
             'padding-top': `${paddingTop}px`
         }">
         <div class="container">
-            <RouterView v-slot="{ Component }">
+            <RouterView v-slot="{ Component }" :key="route.fullPath">
                 <Transition>
                     <component :is="Component" />
                 </Transition>
@@ -20,9 +20,10 @@
 import AppHeader from '@/views/layout/AppHeader.vue';
 import AppSideNav from '@/views/layout/AppSideNav.vue';
 import { ref, onMounted } from 'vue';
-
+import { useRoute } from 'vue-router';
 import { useUserStore } from '@/stores/user.js';
 const userStore = useUserStore();
+const route = useRoute();
 
 const props = defineProps(['user']);
 userStore.setUser(props.user);

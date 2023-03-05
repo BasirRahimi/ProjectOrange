@@ -46,6 +46,7 @@ Route::middleware(['has.access'])->group(function () {
     Route::controller(HomeController::class)->group(function () {
         Route::get('/dashboard', 'index')->name('dashboard');
         Route::get('/dashboard/{route}', 'index');
+        Route::get('/dashboard/{route}/{subroute}', 'index');
     });
 
     Route::resource('clients', ClientController::class);
