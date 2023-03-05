@@ -40,6 +40,10 @@ class CaseController extends Controller
             $cases = $cases->where('case_type_id', $case_type_id);
         }
 
+        if ($request['count-only']) {
+            return response()->json($cases->count());
+        }
+
         if ($request['search']) {
             $cases = $cases->where('name', 'like', '%' . $request['search'] . '%');
         }

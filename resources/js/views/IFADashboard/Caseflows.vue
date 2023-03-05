@@ -107,6 +107,21 @@
                             >{{ singleCase.status }}
                         </td>
                     </tr>
+                    <tr class="no-cases" v-if="noCases">
+                        <td colspan="4" class="pt-5">
+                            <img
+                                src="@images/step_1.png"
+                                alt="no cases"
+                                class="d-block m-auto mb-5" />
+                            <div class="text-center">
+                                <p class="mb-2">You have no cases yet</p>
+                                <a href="#" @click.prevent="createNewCase"
+                                    >Get started with your first succession case
+                                    <i class="fa-solid fa-plus"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -158,6 +173,8 @@ import moment from 'moment';
 const props = defineProps({
     caseType: String
 });
+
+const noCases = ref(false);
 
 /**
  * Search
@@ -262,6 +279,13 @@ const updateOrder = (newOrderBy) => {
 
 onMounted(() => {
     getCases();
+    axios
+        .get(`/api/cases?case-type=${props.caseType}&count-only=true`)
+        .then((response) => {
+            if (response.data == 0) {
+                noCases.value = true;
+            }
+        });
 });
 
 const openCase = (id) => {
@@ -298,10 +322,19 @@ const createNewCase = () => {
 }
 
 tbody tr {
-    cursor: pointer;
-    transition: $transition-base;
-    &:hover {
-        background-color: $gray-200;
+    &:not(.no-cases) {
+        cursor: pointer;
+        transition: $transition-base;
+        &:hover {
+            background-color: $gray-200;
+        }
+    }
+
+    &.no-cases {
+        img {
+            max-width: 300px;
+            width: 100%;
+        }
     }
 }
 
