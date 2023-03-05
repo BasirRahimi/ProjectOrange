@@ -208,6 +208,7 @@ const getCases = async () => {
 
 watch(searchText, () => {
     if (isSearching.value) return;
+    currentPage.value = 1;
     getCases();
 });
 
