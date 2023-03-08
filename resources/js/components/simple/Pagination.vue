@@ -82,7 +82,7 @@ onMounted(() => {
     // });
 });
 </script>
-<style lang="scss" scoped id="caseFlowsStyle">
+<style lang="scss" scoped>
 @import '@sass/vue_sfc.scss';
 #pageNav {
     display: flex;

@@ -1,18 +1,20 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
-import IFADashboard from './views/IFADashboard.vue';
-import CaseFlows from './views/IFADashboard/Caseflows.vue';
-import DocumentLibrary from './views/IFADashboard/DocumentLibrary.vue';
-import KnowledgeBase from './views/IFADashboard/KnowledgeBase.vue';
-import Help from './views/IFADashboard/Help.vue';
-import Settings from './views/IFADashboard/Settings.vue';
-import Terms from './views/IFADashboard/Terms.vue';
+import Dashboard from './views/Dashboard.vue';
+import CaseFlows from './views/Dashboard/Caseflows.vue';
+import DocumentLibrary from './views/Dashboard/DocumentLibrary.vue';
+import KnowledgeBase from './views/Dashboard/KnowledgeBase.vue';
+import Help from './views/Dashboard/Help.vue';
+import Settings from './views/Dashboard/Settings.vue';
+import Terms from './views/Dashboard/Terms.vue';
+import NewCase from './views/Cases/NewCase.vue';
+import EditCase from './views/Cases/EditCase.vue';
 
 const routes = [
     {
         name: 'Dashboard',
         path: '/dashboard',
-        component: IFADashboard,
+        component: Dashboard,
         children: [
             {
                 name: 'CaseFlows',
@@ -44,6 +46,24 @@ const routes = [
                 name: 'Terms',
                 path: 'terms',
                 component: Terms
+            }
+        ]
+    },
+    {
+        name: 'Cases',
+        path: '/cases',
+        component: Dashboard,
+        children: [
+            {
+                name: 'NewCase',
+                path: 'new-case',
+                component: NewCase
+            },
+            {
+                name: 'EditCase',
+                path: ':id/:section',
+                component: EditCase,
+                props: true
             }
         ]
     }

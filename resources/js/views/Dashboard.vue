@@ -7,7 +7,7 @@
             'padding-top': `${paddingTop}px`
         }">
         <div class="container">
-            <RouterView v-slot="{ Component }" :key="route.fullPath">
+            <RouterView v-slot="{ Component }">
                 <Transition>
                     <component :is="Component" />
                 </Transition>
@@ -46,7 +46,7 @@ onMounted(() => {
 </script>
 <style lang="scss" scoped>
 @import '@sass/vue_sfc.scss';
-// .v-leave-active
+// .v-leave-active,
 .v-enter-active {
     transition: $transition-base;
     transition-property: opacity;

@@ -22,7 +22,6 @@ class CaseController extends Controller
      */
     public function index(Request $request, int $case_id = null): JsonResponse
     {
-        // TODO: Paginate results
         $user = Auth::user();
         $case_type_id = null;
         if ($case_id) {
@@ -40,10 +39,6 @@ class CaseController extends Controller
             $cases = $cases->where('case_type_id', $case_type_id);
         }
 
-        if ($request['count-only']) {
-            return response()->json($cases->count());
-        }
-
         if ($request['search']) {
             $cases = $cases->where('name', 'like', '%' . $request['search'] . '%');
         }
@@ -57,9 +52,9 @@ class CaseController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, string $case_type): Response
+    public function store(Request $request, string $case_type): JsonResponse
     {
-        $case_type_id = CaseType::where('name', $case_type)->firstOrFail();
+        $case_type_id = CaseType::where('name', $case_type)->firstOrFail()->id;
 
         $user = Auth::user();
 
@@ -67,9 +62,11 @@ class CaseController extends Controller
         $case->user_id = $user->id;
         $case->case_type_id = $case_type_id;
 
-        $case->name = $request['body']['forename'] . $request['body']['surname'];
+        $case->name = $request['case-name'];
 
-        return response('case created');
+        $case->save();
+
+        return response()->json($case);
     }
 
     /**

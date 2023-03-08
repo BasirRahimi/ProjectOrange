@@ -19,6 +19,7 @@ app.directive('click-outside', clickOutside);
 
 // Router
 import clientRouter from './clientRouter';
+// router to replace clientRouter after clients refactored to cases
 import router from './router';
 if (clientRouter.inUse) {
     app.use(clientRouter.router);
