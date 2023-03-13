@@ -14,13 +14,20 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Illuminate\View\View;
 
 class CaseController extends Controller
 {
     /**
      * Get all cases
      */
-    public function index(Request $request, int $case_id = null): JsonResponse
+    public function index(Request $request): View
+    {
+        $page_title = 'Cases';
+        return view('home', ['page_title' => $page_title]);
+    }
+
+    public function getCases(Request $request, int $case_id = null): JsonResponse
     {
         $user = Auth::user();
         $case_type_id = null;
@@ -61,6 +68,12 @@ class CaseController extends Controller
         $case = new POCase();
         $case->user_id = $user->id;
         $case->case_type_id = $case_type_id;
+
+        Log::info($request);
+        if (empty($request['case-name'])) {
+            return response('case name is required', 400);
+        }
+
 
         $case->name = $request['case-name'];
 

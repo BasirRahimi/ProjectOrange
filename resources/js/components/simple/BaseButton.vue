@@ -5,7 +5,7 @@
         class="btn"
         :class="classes">
         <span
-            class="btn-inner--icon"
+            class="btn-inner--icon me-2"
             v-if="$slots.icon || (icon && $slots.default)">
             <slot name="icon">
                 <i :class="icon"></i>
@@ -101,4 +101,4 @@ export default {
     }
 };
 </script>
-<style></style>
+<style lang="scss" scoped></style>

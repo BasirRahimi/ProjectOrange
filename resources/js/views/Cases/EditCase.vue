@@ -5,10 +5,10 @@
         </Transition>
     </div>
 </template>
-<script>
+<script setup>
 import AboutTheDeceased from '@/components/forms/probate/AboutTheDeceased.vue';
 import Executors from '@/components/forms/probate/Executors.vue';
-import { computed } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 
 const route = useRoute();

@@ -1,140 +1,68 @@
 <template>
     <div class="container">
         <ContentBox>
-            What type of case is this?
-            <BaseButton icon="po-icon-person"> Succession Case </BaseButton>
+            <h2>What type of case is this?</h2>
+            <BaseButton
+                icon="po-icon-person"
+                outline
+                class="w-100"
+                :class="{ active: caseStore.caseType === 'succession' }">
+                Succession Case
+                <i class="fa-solid fa-arrow-right ms-auto"></i>
+            </BaseButton>
+            <BaseButton
+                icon="po-icon-person"
+                outline
+                class="w-100"
+                :class="{ active: caseStore.caseType === 'probate' }"
+                >Probate Case <i class="fa-solid fa-arrow-right"></i
+            ></BaseButton>
         </ContentBox>
+        <ContentBox>
+            <h2>
+                Name this
+                <span class="text-capitalize">{{ caseStore.caseType }}</span>
+                case
+            </h2>
+            What do you want this case to be called?
+            <div class="text-muted">
+                We recommend sticking to the name of the deceased, but we
+                recommend anything that's best for you & your team to remember.
+            </div>
+            <BaseInput v-model="caseName"></BaseInput>
+        </ContentBox>
+
+        <div class="d-flex justify-content-end">
+            <BaseButton type="primary" outline @click="createNewCase"
+                >Open Case <i class="fa-solid fa-arrow-right ms-auto"></i
+            ></BaseButton>
+        </div>
     </div>
 </template>
 
 <script setup>
 import axios from 'axios';
 import { ref, onMounted, computed, watch } from 'vue';
-import { useDebouncedRef } from '@/composables/helper.js';
-import moment from 'moment';
+import { useCaseStore } from '@/stores/case';
+import { useRouter } from 'vue-router';
 import ContentBox from '@/components/simple/ContentBox.vue';
 import BaseButton from '@/components/simple/BaseButton.vue';
+import BaseInput from '@/components/simple/BaseInput.vue';
 
-const props = defineProps({
-    caseType: String
-});
+const router = useRouter();
+const caseStore = useCaseStore();
+const caseName = ref('');
 
-const noCases = ref(false);
-
-/**
- * Search
- * - api call updating listing array
- */
-const searchText = useDebouncedRef('', 500);
-const order = ref('desc');
-const orderBy = ref('created_at');
-const currentPage = ref(1);
-const perPage = ref(10);
-const searchResult = ref({ data: [] });
-const isSearching = ref(false);
-const getCases = async () => {
-    if (isSearching.value) return;
-    isSearching.value = true;
-    const data = await axios({
-        method: 'get',
-        url: '/api/cases',
-        params: {
-            search: searchText.value.trim(),
-            'case-type': props.caseType,
-            order: order.value,
-            'order-by': orderBy.value,
-            'per-page': perPage.value,
-            page: currentPage.value
-        }
-    });
-    searchResult.value = data.data;
-    isSearching.value = false;
-};
-
-watch(searchText, () => {
-    if (isSearching.value) return;
-    currentPage.value = 1;
-    getCases();
-});
-
-/**
- * Pagination
- */
-const navItems = computed(() => {
-    const scale = 2;
-    let start = currentPage.value - scale;
-    let end = currentPage.value + scale;
-    const prevItems = [];
-    const nextItems = [];
-    const items = [];
-
-    if (start <= scale) {
-        start = 1;
-    } else if (start > scale) {
-        for (let i = 2; i < start; i++) {
-            prevItems.push(i);
-        }
-    }
-
-    if (end >= searchResult.value.last_page - 1) {
-        end = searchResult.value.last_page;
-    } else if (end < searchResult.value.last_page) {
-        for (let i = end + 1; i < searchResult.value.last_page; i++) {
-            nextItems.push(i);
-        }
-    }
-
-    for (let i = start; i <= end; i++) {
-        items.push(i);
-    }
-
-    return {
-        visiblePages: items,
-        hiddenPrev: prevItems,
-        hiddenNext: nextItems,
-        scale
-    };
-});
-const updatePage = (pageNumber) => {
-    if (currentPage.value === pageNumber || isSearching.value) return;
-    currentPage.value = pageNumber;
-    getCases();
-};
-
-/**
- * Ordering
- */
-const updateOrder = (newOrderBy) => {
-    if (isSearching.value) return;
-    if (orderBy.value === newOrderBy) {
-        order.value = order.value === 'asc' ? 'desc' : 'asc';
-    } else {
-        orderBy.value = newOrderBy;
-        switch (newOrderBy) {
-            case 'created_at':
-                order.value = 'desc';
-                break;
-            default:
-                order.value = 'asc';
-                break;
-        }
-    }
-    getCases();
-};
-
-onMounted(async () => {
-    await getCases();
-});
+onMounted(async () => {});
 
 const openCase = (id) => {
-    //TODO: Enable When Case Web Routes Are Working or Case SPA is working.
-    return;
-    window.location = `${window.location.origin}/cases/${id}`;
+    caseStore.openCase(id);
 };
 
-const createNewCase = async (caseName) => {
-    let response = await axios.post(`/api/cases/${props.caseType}`, {
-        'case-name': caseName
+const createNewCase = async () => {
+    if (!caseName.value.length) return;
+    let response = await axios.post(`/api/cases/${caseStore.caseType}`, {
+        'case-name': caseName.value
     });
     openCase(response.data.id);
 };

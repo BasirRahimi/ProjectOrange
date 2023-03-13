@@ -63,7 +63,10 @@ const routes = [
                 name: 'EditCase',
                 path: ':id/:section',
                 component: EditCase,
-                props: true
+                props: (route) => ({
+                    ...route.params,
+                    id: parseInt(route.params.id)
+                })
             }
         ]
     }

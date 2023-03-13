@@ -17,7 +17,7 @@
             ></BaseButton>
         </div>
         <Transition>
-            <div class="card shadow p-4 mb-3" :key="caseTypeCopy">
+            <div class="card shadow p-4 mb-3" :key="caseStore.caseType">
                 <table class="table text-gray-500 table-borderless">
                     <thead class="border-bottom">
                         <tr>
@@ -182,15 +182,16 @@
 <script setup>
 import axios from 'axios';
 import { ref, onMounted, computed, watch } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
+import { useCaseStore } from '@/stores/case';
 import { useDebouncedRef } from '@/composables/helper.js';
 import moment from 'moment';
 
+const caseStore = useCaseStore();
+const router = useRouter();
 const props = defineProps({
     caseType: String
 });
-
-const caseTypeCopy = ref(props.caseType);
 const hasCases = ref(true);
 
 /**
@@ -212,7 +213,7 @@ const getCases = async (caseType) => {
         url: '/api/cases',
         params: {
             search: searchText.value.trim(),
-            'case-type': caseType ? caseType : caseTypeCopy.value,
+            'case-type': caseType ? caseType : caseStore.caseType,
             order: order.value,
             'order-by': orderBy.value,
             'per-page': perPage.value,
@@ -222,7 +223,7 @@ const getCases = async (caseType) => {
     searchResult.value = data.data;
     isSearching.value = false;
     if (caseType) {
-        caseTypeCopy.value = caseType;
+        caseStore.setCaseType(caseType);
     }
 };
 
@@ -311,21 +312,23 @@ watch(route, async (newVal) => {
 });
 
 onMounted(async () => {
+    caseStore.setCaseType(props.caseType);
     await getCases();
     hasCases.value = searchResult.value.total > 0;
 });
 
 const openCase = (id) => {
-    //TODO: Enable When Case Web Routes Are Working or Case SPA is working.
-    return;
-    window.location = `${window.location.origin}/cases/${id}`;
+    caseStore.openCase(id);
 };
 
-const createNewCase = async (caseName) => {
-    let response = await axios.post(`/api/cases/${caseTypeCopy.value}`, {
-        'case-name': caseName
-    });
-    openCase(response.data.id);
+const createNewCase = async () => {
+    router.push({ name: 'NewCase' });
+
+    // console.log(caseName);
+    // let response = await axios.post(`/api/cases/${caseStore.caseType}`, {
+    //     'case-name': caseName
+    // });
+    // openCase(response.data.id);
 };
 </script>
 <style lang="scss" scoped>

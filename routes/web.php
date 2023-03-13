@@ -43,11 +43,14 @@ Auth::routes(['verify' => true, 'register' => false]);
 
 Route::middleware(['has.access'])->group(function () {
 
-    Route::controller(HomeController::class)->group(function () {
-        Route::get('/dashboard', 'index')->name('dashboard');
-        Route::get('/dashboard/{route}', 'index');
-        Route::get('/dashboard/{route}/{subroute}', 'index');
-    });
+    Route::redirect('/dashboard', '/dashboard/cases/succession');
+    Route::get('/dashboard/{vue_capture}', [HomeController::class, 'index'])->name('dashboard')->where('vue_capture', '[\/\w\.-]*');
+    Route::get('/cases/{vue_capture}', [CaseController::class, 'index'])->name('edit-case')->where('vue_capture', '[\/\w\.-]*');
+
+
+
+
+
 
     Route::resource('clients', ClientController::class);
 

@@ -24,7 +24,7 @@ class HomeController extends Controller
      */
     public function index(string $route = ""): View
     {
-        // get forms created by this user
-        return view('home');
+        $page_title = 'Dashboard';
+        return view('home', ['page_title' => $page_title]);
     }
 }
