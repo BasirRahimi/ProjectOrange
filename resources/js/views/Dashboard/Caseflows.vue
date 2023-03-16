@@ -1,20 +1,10 @@
 <template>
     <div class="container">
         <div class="search mb-4 d-flex">
-            <BaseInput
-                wrapperClasses="shadow me-3"
-                class="border-0 p-2"
-                placeholder="Search for a case..."
-                addonLeftIcon="fa-solid fa-magnifying-glass"
-                :mb-4="false"
-                v-model="searchText" />
-            <BaseButton
-                type="primary"
-                outline
-                class="text-nowrap shadow"
-                @click="createNewCase"
-                >New case <i class="fa-solid fa-plus"></i
-            ></BaseButton>
+            <BaseInput wrapperClasses="shadow me-3" class="border-0 p-2" placeholder="Search for a case..."
+                addonLeftIcon="fa-solid fa-magnifying-glass" :mb-4="false" v-model="searchText" />
+            <BaseButton type="primary" outline class="text-nowrap shadow" @click="createNewCase">New case <i
+                    class="fa-solid fa-plus"></i></BaseButton>
         </div>
         <Transition>
             <div class="card shadow p-4 mb-3" :key="caseStore.caseType">
@@ -22,67 +12,47 @@
                     <thead class="border-bottom">
                         <tr>
                             <th scope="col" class="fw-normal">
-                                <a
-                                    href="#"
-                                    class="text-gray-500"
-                                    @click.prevent="updateOrder('name')">
+                                <a href="#" class="text-gray-500" @click.prevent="updateOrder('name')">
                                     <div class="d-flex align-items-center">
                                         Case Name
                                         <div class="sort ms-3">
-                                            <i
-                                                class="fa-solid fa-chevron-up"></i>
-                                            <i
-                                                class="fa-solid fa-chevron-down"></i>
+                                            <i class="fa-solid fa-chevron-up"></i>
+                                            <i class="fa-solid fa-chevron-down"></i>
                                         </div>
                                     </div>
                                 </a>
                             </th>
                             <th scope="col" class="fw-normal">
-                                <a
-                                    href="#"
-                                    class="text-gray-500"
-                                    @click.prevent="updateOrder('created_at')">
+                                <a href="#" class="text-gray-500" @click.prevent="updateOrder('created_at')">
                                     <div class="d-flex align-items-center">
                                         Date created
                                         <div class="sort ms-3">
-                                            <i
-                                                class="fa-solid fa-chevron-up"></i>
-                                            <i
-                                                class="fa-solid fa-chevron-down"></i>
+                                            <i class="fa-solid fa-chevron-up"></i>
+                                            <i class="fa-solid fa-chevron-down"></i>
                                         </div>
                                     </div>
                                 </a>
                             </th>
                             <th scope="col" class="fw-normal">
-                                <a
-                                    href="#"
-                                    class="text-gray-500"
-                                    @click.prevent="
-                                        updateOrder('pre_submitted')
-                                    ">
+                                <a href="#" class="text-gray-500" @click.prevent="
+                                    updateOrder('pre_submitted')
+                                ">
                                     <div class="d-flex align-items-center">
                                         Pre-submitted?
                                         <div class="sort ms-3">
-                                            <i
-                                                class="fa-solid fa-chevron-up"></i>
-                                            <i
-                                                class="fa-solid fa-chevron-down"></i>
+                                            <i class="fa-solid fa-chevron-up"></i>
+                                            <i class="fa-solid fa-chevron-down"></i>
                                         </div>
                                     </div>
                                 </a>
                             </th>
                             <th scope="col" class="fw-normal">
-                                <a
-                                    href="#"
-                                    class="text-gray-500"
-                                    @click.prevent="updateOrder('status')">
+                                <a href="#" class="text-gray-500" @click.prevent="updateOrder('status')">
                                     <div class="d-flex align-items-center">
                                         Status
                                         <div class="sort ms-3">
-                                            <i
-                                                class="fa-solid fa-chevron-up"></i>
-                                            <i
-                                                class="fa-solid fa-chevron-down"></i>
+                                            <i class="fa-solid fa-chevron-up"></i>
+                                            <i class="fa-solid fa-chevron-down"></i>
                                         </div>
                                     </div>
                                 </a>
@@ -90,12 +60,8 @@
                         </tr>
                     </thead>
                     <tbody class="position-relative">
-                        <div
-                            class="frosted-glass"
-                            :class="{ active: isSearching }"></div>
-                        <tr
-                            v-for="singleCase in searchResult.data"
-                            @click="openCase(singleCase.id)">
+                        <div class="frosted-glass" :class="{ active: isSearching }"></div>
+                        <tr v-for="singleCase in searchResult.data" @click="openCase(singleCase.id)">
                             <td>{{ singleCase.name }}</td>
                             <td>
                                 {{
@@ -104,29 +70,22 @@
                                     )
                                 }}
                             </td>
-                            <td
-                                :class="{
-                                    Yes: singleCase.pre_submitted,
-                                    No: !singleCase.pre_submitted
-                                }">
-                                <i class="fa-solid fa-circle me-2"></i
-                                >{{ singleCase.pre_submitted ? 'Yes' : 'No' }}
+                            <td :class="{
+                                Yes: singleCase.pre_submitted,
+                                No: !singleCase.pre_submitted
+                            }">
+                                <i class="fa-solid fa-circle me-2"></i>{{ singleCase.pre_submitted ? 'Yes' : 'No' }}
                             </td>
                             <td :class="singleCase.status.replace(/ /g, '')">
-                                <i class="fa-solid fa-circle me-2"></i
-                                >{{ singleCase.status }}
+                                <i class="fa-solid fa-circle me-2"></i>{{ singleCase.status }}
                             </td>
                         </tr>
                         <tr class="no-cases" v-if="searchResult.total == 0">
                             <td colspan="4" class="pt-5">
-                                <img
-                                    src="@images/step_1.png"
-                                    alt="no cases"
-                                    class="d-block m-auto mb-5" />
+                                <img src="@images/step_1.png" alt="no cases" class="d-block m-auto mb-5" />
                                 <div class="text-center">
                                     <p class="mb-2">You have no cases yet</p>
-                                    <a href="#" @click.prevent="createNewCase"
-                                        >Get started with your first succession
+                                    <a href="#" @click.prevent="createNewCase">Get started with your first succession
                                         case
                                         <i class="fa-solid fa-plus"></i>
                                     </a>
@@ -138,9 +97,7 @@
             </div>
         </Transition>
 
-        <div
-            class="d-flex justify-content-between px-2 mb-5"
-            v-if="searchResult.last_page > 1">
+        <div class="d-flex justify-content-between px-2 mb-5" v-if="searchResult.last_page > 1">
             <div class="text-gray-600">
                 Showing
                 <b>{{ searchResult.from }} to {{ searchResult.to }}</b> of
@@ -150,25 +107,16 @@
                 <a href="#" @click.prevent="updatePage(currentPage - 1)">
                     <i class="fa-solid fa-arrow-left"></i>
                 </a>
-                <a
-                    v-if="navItems.hiddenPrev.length"
-                    href="#"
-                    @click.prevent="updatePage(1)">
+                <a v-if="navItems.hiddenPrev.length" href="#" @click.prevent="updatePage(1)">
                     1
                 </a>
                 <span v-if="navItems.hiddenPrev.length" class="px-1">...</span>
-                <a
-                    v-for="pageNumber in navItems.visiblePages"
-                    href="#"
-                    @click.prevent="updatePage(pageNumber)"
+                <a v-for="pageNumber in navItems.visiblePages" href="#" @click.prevent="updatePage(pageNumber)"
                     :class="{ 'fw-bold': pageNumber === currentPage }">
                     {{ pageNumber }}
                 </a>
                 <span v-if="navItems.hiddenNext.length" class="px-1">...</span>
-                <a
-                    v-if="navItems.hiddenNext.length"
-                    href="#"
-                    @click.prevent="updatePage(searchResult.last_page)">
+                <a v-if="navItems.hiddenNext.length" href="#" @click.prevent="updatePage(searchResult.last_page)">
                     {{ searchResult.last_page }}
                 </a>
                 <a href="#" @click.prevent="updatePage(currentPage + 1)">
@@ -185,6 +133,8 @@ import { ref, onMounted, computed, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useCaseStore } from '@/stores/case';
 import { useDebouncedRef } from '@/composables/helper.js';
+import CssGrid from '@/components/CssGrid.vue';
+
 import moment from 'moment';
 
 const caseStore = useCaseStore();
@@ -365,6 +315,7 @@ tbody tr {
     &:not(.no-cases) {
         cursor: pointer;
         transition: $transition-base;
+
         &:hover {
             background-color: $gray-200;
         }
@@ -386,10 +337,12 @@ tbody tr {
 
 #pageNav {
     display: flex;
+
     a {
         color: $gray-600;
         padding: 0 0.25rem;
     }
+
     .dots {
         padding: 0 0.5rem;
     }
@@ -402,17 +355,20 @@ td {
         top: -1px;
     }
 }
+
 .InputRequired {
     i {
         color: $primary;
     }
 }
+
 .Approved,
 .Yes {
     i {
         color: $green;
     }
 }
+
 .No {
     i {
         color: $red;
@@ -435,6 +391,7 @@ td {
     &.active {
         display: block;
     }
+
     z-index: 10;
 }
 </style>

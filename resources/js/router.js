@@ -9,6 +9,8 @@ import Settings from './views/Dashboard/Settings.vue';
 import Terms from './views/Dashboard/Terms.vue';
 import NewCase from './views/Cases/NewCase.vue';
 import EditCase from './views/Cases/EditCase.vue';
+import DashboardSideNav from './views/Dashboard/SideNav.vue';
+import CasesSideNav from './views/Cases/SideNav.vue';
 
 const routes = [
     {
@@ -19,33 +21,51 @@ const routes = [
             {
                 name: 'CaseFlows',
                 path: 'cases/:caseType',
-                component: CaseFlows,
+                components: {
+                    default: CaseFlows,
+                    LeftSideBar: DashboardSideNav
+                },
                 props: true
             },
             {
                 name: 'DocumentLibrary',
                 path: 'document-library',
-                component: DocumentLibrary
+                components: {
+                    default: DocumentLibrary,
+                    LeftSideBar: DashboardSideNav
+                }
             },
             {
                 name: 'KnowledgeBase',
                 path: 'knowledge-base',
-                component: KnowledgeBase
+                components: {
+                    default: KnowledgeBase,
+                    LeftSideBar: DashboardSideNav
+                }
             },
             {
                 name: 'Help',
                 path: 'help',
-                component: Help
+                components: {
+                    default: Help,
+                    LeftSideBar: DashboardSideNav
+                }
             },
             {
                 name: 'Settings',
                 path: 'settings',
-                component: Settings
+                components: {
+                    default: Settings,
+                    LeftSideBar: DashboardSideNav
+                }
             },
             {
                 name: 'Terms',
                 path: 'terms',
-                component: Terms
+                components: {
+                    default: Terms,
+                    LeftSideBar: DashboardSideNav
+                }
             }
         ]
     },
@@ -57,16 +77,24 @@ const routes = [
             {
                 name: 'NewCase',
                 path: 'new-case',
-                component: NewCase
+                components: {
+                    default: NewCase,
+                    LeftSideBar: CasesSideNav
+                }
             },
             {
                 name: 'EditCase',
                 path: ':id/:section',
-                component: EditCase,
-                props: (route) => ({
-                    ...route.params,
-                    id: parseInt(route.params.id)
-                })
+                components: {
+                    default: EditCase,
+                    LeftSideBar: CasesSideNav
+                },
+                props: {
+                    default: (route) => ({
+                        ...route.params,
+                        id: parseInt(route.params.id)
+                    })
+                } 
             }
         ]
     }

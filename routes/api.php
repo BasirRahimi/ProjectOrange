@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CaseController;
+use App\Http\Controllers\CaseDataController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -26,5 +27,10 @@ Route::middleware('has.access')->group(function () {
         Route::post('/cases/{case_type}', 'store'); // requires initial data to create the case
         Route::patch('/cases/{case_id}', 'update'); // updates part of a case
         Route::delete('/cases/{case_id}', 'softDelete'); // soft delete
+    });
+
+    Route::controller(CaseDataController::class)->group(function () {
+        Route::get('/case-data/{case_id?}', 'get');
+        Route::post('/case-data/{case_id}', 'store');
     });
 });

@@ -1,4 +1,4 @@
-import { useClientStore } from '@/stores/client.js';
+import { useCaseStore } from '@/stores/case';
 import { customRef } from 'vue';
 
 export function useValidateEmail(email) {
@@ -6,9 +6,8 @@ export function useValidateEmail(email) {
 }
 
 export async function useSaveSectionData(data, clientId) {
-    let result;
-    await axios
-        .patch(`/clients/${clientId}`, data)
+    let result = await axios
+        .post(`/case-data`, data)
         .then((response) => {
             result = [true, response];
         })
@@ -27,10 +26,12 @@ export function useFlashLabel() {
 }
 
 export function useSaveData(section, formData) {
-    const store = useClientStore();
-    let data = {};
-    data[section] = JSON.stringify(formData);
-    useSaveSectionData(data, store.client.id).then((response) => {
+    const store = useCaseStore();
+    let data = {
+        section,
+        data: JSON.stringify(formData)
+    };
+    useSaveSectionData(data, store.activeCase.id).then((response) => {
         if (response[0]) {
             console.log(response);
             store.updateClient(response[1].data);

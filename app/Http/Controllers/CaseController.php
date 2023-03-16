@@ -69,11 +69,9 @@ class CaseController extends Controller
         $case->user_id = $user->id;
         $case->case_type_id = $case_type_id;
 
-        Log::info($request);
         if (empty($request['case-name'])) {
             return response('case name is required', 400);
         }
-
 
         $case->name = $request['case-name'];
 
@@ -83,41 +81,10 @@ class CaseController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Status updates
      */
-    public function update(Request $request, string $case_id): Response
+    public function update(Request $request, string $case_id): JsonResponse
     {
-        POCase::findOrFail($case_id);
-
-        $section = $request['body']['section'];
-        if (!isset($section)) {
-            return new BadRequestException('Missing form section name', 400);
-        }
-
-        $case_datas = CaseData::where('case_id', '=', $case_id);
-
-        $case_data = null;
-
-        for ($i = 0; $i < count($case_datas); $i++) {
-            if (json_decode($case_datas[$i]->the_data)['section'] === $section) {
-                $case_data = $case_datas[$i];
-                break;
-            }
-        }
-
-        if ($case_data) {
-            $case_data->the_data = $request['body'];
-        } else {
-            $case_data = new CaseData();
-            $case_data->case_id = $case_id;
-            $case_data->the_data = $request['body'];
-        }
-
-        if ($case_data->save()) {
-            return response('case updated');
-        } else {
-            return new Exception('Failed to save section data', 500);
-        }
     }
 
     /**

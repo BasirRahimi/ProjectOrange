@@ -2,21 +2,10 @@
     <div v-if="cssGrid">
         <label v-if="label">{{ label }}</label>
         <div class="button-grid" :class="`colsize-${gridColsize}`">
-            <base-button
-                v-for="(option, key) in optionsCopy"
-                :key="key"
-                type="default"
-                outline
-                class="m-0"
-                :class="{ active: option.active === true }"
-                @click="update(key)"
-                >{{ option.value }}</base-button
-            >
+            <base-button v-for="(option, key) in optionsCopy" :key="key" type="default" outline class="m-0"
+                :class="{ active: option.active === true }" @click="update(key)">{{ option.value }}</base-button>
         </div>
-        <BCollapse
-            :visible="option.active"
-            v-for="(option, key) in optionsCopy"
-            ref="collapse">
+        <BCollapse v-model="option.active" v-for="(option, key) in optionsCopy" ref="collapse">
             <slot :name="`collapse${key}`"></slot>
         </BCollapse>
     </div>
@@ -24,31 +13,15 @@
     <div v-else>
         <label v-if="label">{{ label }}</label>
         <div v-if="sameWidthButtons" class="row no-gutters flex-wrap">
-            <base-button
-                v-for="(option, key) in optionsCopy"
-                :key="key"
-                type="default"
-                outline
-                class="col"
-                :class="[
-                    { active: option.active === true },
-                    { 'me-3': key != optionsCopy.length - 1 }
-                ]"
-                @click="update(key)"
-                >{{ option.value }}</base-button
-            >
+            <base-button v-for="(option, key) in optionsCopy" :key="key" type="default" outline class="col" :class="[
+                { active: option.active === true },
+                { 'me-3': key != optionsCopy.length - 1 }
+            ]" @click="update(key)">{{ option.value }}</base-button>
         </div>
         <template v-else>
             <br />
-            <base-button
-                v-for="(option, key) in optionsCopy"
-                :key="key"
-                type="default"
-                outline
-                :class="{ active: option.active === true }"
-                @click="update(key)"
-                >{{ option.value }}</base-button
-            >
+            <base-button v-for="(option, key) in optionsCopy" :key="key" type="default" outline
+                :class="{ active: option.active === true }" @click="update(key)">{{ option.value }}</base-button>
         </template>
     </div>
 </template>

@@ -1,83 +1,19 @@
 <template>
-    <div
-        id="AppSideNav"
-        class="bg-white px-3 py-4"
-        :style="{
-            height: `calc(100vh - ${appHeaderHeight}px`
-        }">
-        <nav class="d-flex flex-column h-100">
+    <div id="AppSideNav" class="bg-white" :style="{
+        height: `calc(100vh - ${appHeaderHeight}px`
+    }">
+        <nav class="d-flex flex-column h-100 px-3 py-4">
             <div id="branding" class="px-3 pb-4 mb-4 border-bottom">
                 <span class="text-gray-500">You're using</span><br />
                 <a href="#" class="fs-5 fw-bold">ATPS By Mabain</a>
             </div>
-            <div class="mb-4">
-                <div class="text-gray-500 mb-3 text-uppercase">
-                    Your Caseflows
-                </div>
-                <ul class="fa-ul">
-                    <li class="mb-3">
-                        <RouterLink
-                            :to="{
-                                name: 'CaseFlows',
-                                params: { caseType: 'succession' }
-                            }"
-                            class="router-link">
-                            <span class="fa-li">
-                                <i class="me-2 po-icon-person"></i>
-                            </span>
-                            Succession Desk
-                        </RouterLink>
-                    </li>
-                    <li>
-                        <RouterLink
-                            :to="{
-                                name: 'CaseFlows',
-                                params: { caseType: 'probate' }
-                            }"
-                            class="router-link">
-                            <span class="fa-li">
-                                <i class="fas fa-pen-nib me-2"></i>
-                            </span>
-                            Probate Desk
-                        </RouterLink>
-                    </li>
-                </ul>
-            </div>
-            <div class="mb-4">
-                <RouterLink
-                    class="router-link text-uppercase"
-                    to="/dashboard/document-library">
-                    Document Library
-                </RouterLink>
-            </div>
-            <div class="mb-4">
-                <RouterLink
-                    class="router-link text-uppercase"
-                    to="/dashboard/knowledge-base">
-                    Knowledge Base
-                </RouterLink>
-            </div>
-            <div class="mb-4">
-                <RouterLink
-                    class="router-link text-uppercase"
-                    to="/dashboard/help"
-                    >Help & Contact</RouterLink
-                >
-            </div>
+            <slot></slot>
             <div class="mt-auto">
                 <div class="mb-3">
-                    <RouterLink
-                        class="router-link text-uppercase"
-                        to="/dashboard/settings"
-                        >Settings</RouterLink
-                    >
+                    <RouterLink class="router-link text-uppercase" to="/dashboard/settings">Settings</RouterLink>
                 </div>
                 <div>
-                    <RouterLink
-                        class="router-link text-uppercase"
-                        to="/dashboard/terms"
-                        >Terms</RouterLink
-                    >
+                    <RouterLink class="router-link text-uppercase" to="/dashboard/terms">Terms</RouterLink>
                 </div>
             </div>
         </nav>
@@ -101,9 +37,11 @@ const props = defineProps({ appHeaderHeight: Number });
 
         .router-link {
             color: $default;
+
             &.router-link-exact-active {
                 color: $primary;
                 margin-left: 0.5rem;
+
                 &::before {
                     content: '';
                     background-color: $primary;
@@ -121,8 +59,27 @@ const props = defineProps({ appHeaderHeight: Number });
         color: $gray-500;
         transition: $transition-base;
         position: relative;
+
         &:hover {
             color: $primary;
+        }
+    }
+
+    nav {
+        overflow-y: scroll;
+
+        &::-webkit-scrollbar {
+            width: 0.25rem;
+        }
+
+        &::-webkit-scrollbar-track {
+            background-color: $white;
+            border-radius: 0.25rem;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: rgba($color: $black, $alpha: 0.2);
+            border-radius: 0.25rem;
         }
     }
 }

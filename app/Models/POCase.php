@@ -3,8 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\CaseType;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class POCase extends Model
@@ -17,5 +17,11 @@ class POCase extends Model
     public function caseType(): BelongsTo
     {
         return $this->belongsTo(CaseType::class);
+    }
+
+    // Get the case data
+    public function caseData(): HasMany
+    {
+        return $this->hasMany(CaseData::class);
     }
 }

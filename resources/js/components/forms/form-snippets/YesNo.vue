@@ -2,25 +2,10 @@
     <div>
         <label :class="labelClass">{{ label }}</label>
         <div class="button-grid colsize-100">
-            <base-button
-                type="default"
-                outline
-                :class="{ active: modelValue === true }"
-                @click="yes()"
-                >Yes</base-button
-            >
-            <base-button
-                type="default"
-                outline
-                :class="{ active: modelValue === false }"
-                @click="no()"
-                >No</base-button
-            >
+            <base-button type="default" outline :class="{ active: props.modelValue }" @click="yes()">Yes</base-button>
+            <base-button type="default" outline :class="{ active: !props.modelValue }" @click="no()">No</base-button>
         </div>
-        <BCollapse
-            v-if="collapse"
-            ref="collapse1"
-            :visible="openOn === modelValue">
+        <BCollapse v-if="collapse" ref="collapse1" v-model="props.modelValue">
             <slot></slot>
         </BCollapse>
     </div>

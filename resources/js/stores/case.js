@@ -3,12 +3,18 @@ import { defineStore } from 'pinia';
 import { useRouter } from 'vue-router';
 
 export const useCaseStore = defineStore('case', () => {
+    // globals
+    const router = useRouter();
+
+    // store state
     const caseType = ref('succession');
+    const activeCase = ref({id: null});
+    
+    // actions
     function setCaseType(newVal) {
         caseType.value = newVal;
     }
 
-    const router = useRouter();
     function openCase(id) {
         let section = '';
         switch (caseType.value) {
@@ -28,5 +34,9 @@ export const useCaseStore = defineStore('case', () => {
         });
     }
 
-    return { caseType, setCaseType, openCase };
+    function setActiveCase(id) {
+        activeCase.value.id = id;
+    }
+
+    return { caseType, activeCase, setCaseType, openCase, setActiveCase };
 });
