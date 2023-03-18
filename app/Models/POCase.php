@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Log;
 
 class POCase extends Model
 {
@@ -20,8 +21,13 @@ class POCase extends Model
     }
 
     // Get the case data
-    public function caseData(): HasMany
+    public function caseData($section)
     {
-        return $this->hasMany(CaseData::class);
+        $case_datas = $this->hasMany(CaseData::class, 'case_id');
+        if (isset($section)) {
+            return $case_datas->where('section', $section)->first();
+        } else {
+            return $case_datas;
+        }
     }
 }

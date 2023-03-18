@@ -6,10 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class CaseData extends Model
 {
-    /**
-     * Get a specific section given POCase and section name
-     */
-    public static function section(POCase $case, $section)
-    {
-    }
+    protected $casts = [
+        'the_data' => 'array',
+    ];
 }

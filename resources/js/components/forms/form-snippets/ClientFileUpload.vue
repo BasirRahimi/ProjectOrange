@@ -17,8 +17,8 @@
 
 <script setup>
 import { ref } from 'vue';
-import { useClientStore } from '@/stores/client.js';
-const store = useClientStore();
+import { useCaseStore } from '@/stores/case';
+const store = useCaseStore();
 const fileInput = ref(null);
 const emit = defineEmits(['update:modelValue']);
 const props = defineProps({
@@ -55,7 +55,7 @@ const uploadFile = (file) => {
     let formData = new FormData();
     formData.append('file', file);
     axios
-        .post(`/clients/${store.client.id}/upload`, formData)
+        .post(`/api/cases/${store.activeCase.id}/upload`, formData)
         .then((response) => {
             console.log(response.data);
             emit('update:modelValue', response.data);

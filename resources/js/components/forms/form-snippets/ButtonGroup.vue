@@ -1,32 +1,28 @@
 <template>
-    <div v-if="cssGrid">
+    <div>
         <label v-if="label">{{ label }}</label>
         <div class="button-grid" :class="`colsize-${gridColsize}`">
-            <base-button v-for="(option, key) in optionsCopy" :key="key" type="default" outline class="m-0"
-                :class="{ active: option.active === true }" @click="update(key)">{{ option.value }}</base-button>
+            <base-button
+                v-for="option in props.options"
+                :key="option"
+                type="default"
+                outline
+                class="m-0"
+                :class="{ active: option === props.modelValue }"
+                @click="update(option)"
+                >{{ option }}</base-button
+            >
         </div>
-        <BCollapse v-model="option.active" v-for="(option, key) in optionsCopy" ref="collapse">
+        <BCollapse
+            v-for="(option, key) in props.options"
+            :model-value="option === props.modelValue"
+            ref="collapse">
             <slot :name="`collapse${key}`"></slot>
         </BCollapse>
     </div>
-
-    <div v-else>
-        <label v-if="label">{{ label }}</label>
-        <div v-if="sameWidthButtons" class="row no-gutters flex-wrap">
-            <base-button v-for="(option, key) in optionsCopy" :key="key" type="default" outline class="col" :class="[
-                { active: option.active === true },
-                { 'me-3': key != optionsCopy.length - 1 }
-            ]" @click="update(key)">{{ option.value }}</base-button>
-        </div>
-        <template v-else>
-            <br />
-            <base-button v-for="(option, key) in optionsCopy" :key="key" type="default" outline
-                :class="{ active: option.active === true }" @click="update(key)">{{ option.value }}</base-button>
-        </template>
-    </div>
 </template>
 <script setup>
-import { ref, onBeforeMount } from 'vue';
+import { ref, onMounted } from 'vue';
 import BCollapse from '@/components/simple/BCollapse.vue';
 const props = defineProps({
     label: {
@@ -37,18 +33,6 @@ const props = defineProps({
         type: Array,
         default: () => ['Yes', 'No']
     },
-    multichoice: {
-        type: Boolean,
-        default: false
-    },
-    sameWidthButtons: {
-        type: Boolean,
-        default: false
-    },
-    cssGrid: {
-        type: Boolean,
-        default: false
-    },
     gridColsize: {
         type: Number,
         default: 150
@@ -56,36 +40,25 @@ const props = defineProps({
     modelValue: {}
 });
 
-const optionsCopy = ref([]);
-onBeforeMount(() => {
-    optionsCopy.value = props.options.map((x) => {
-        return {
-            value: x,
-            active: props.modelValue === x ? true : false
-        };
+const emit = defineEmits(['update:modelValue']);
+const update = (option) => {
+    props.options.forEach((x, i) => {
+        if (x === option) {
+            collapse.value[i].show();
+            emit('update:modelValue', option);
+        } else {
+            collapse.value[i].hide();
+        }
+    });
+};
+
+onMounted(() => {
+    props.options.forEach((x, i) => {
+        if (x === props.modelValue) {
+            collapse.value[i].show();
+        }
     });
 });
-const emit = defineEmits(['update:modelValue']);
-const update = (index) => {
-    if (!props.multichoice) {
-        optionsCopy.value.forEach((x, i) => {
-            if (i === index) {
-                x.active = true;
-                collapse.value[i].show();
-                emit('update:modelValue', x.value);
-            } else {
-                x.active = false;
-                collapse.value[i].hide();
-            }
-        });
-    } else {
-        optionsCopy.value[index].active = !optionsCopy.value[index].active;
-        optionsCopy.value[index].active
-            ? collapse.value[index].show()
-            : collapse.value[index].hide();
-        emit('update:modelValue', optionsCopy.value);
-    }
-};
 
 const collapse = ref(null);
 </script>

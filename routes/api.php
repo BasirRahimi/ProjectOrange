@@ -30,7 +30,7 @@ Route::middleware('has.access')->group(function () {
     });
 
     Route::controller(CaseDataController::class)->group(function () {
-        Route::get('/case-data/{case_id?}', 'get');
+        Route::get('/case-data/{case_id}', 'get');
         Route::post('/case-data/{case_id}', 'store');
     });
 });

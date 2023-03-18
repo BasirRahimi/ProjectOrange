@@ -8,8 +8,8 @@ export const useCaseStore = defineStore('case', () => {
 
     // store state
     const caseType = ref('probate');
-    const activeCase = ref({id: null});
-    
+    const activeCase = ref({ id: null });
+
     // actions
     function setCaseType(newVal) {
         caseType.value = newVal;
@@ -35,5 +35,35 @@ export const useCaseStore = defineStore('case', () => {
         activeCase.value.id = id;
     }
 
-    return { caseType, activeCase, setCaseType, openCase, setActiveCase };
+    async function saveCaseData(id, section, data) {
+        if (!id) {
+            id = activeCase.value.id;
+        }
+        let response = await axios.post(`/api/case-data/${id}`, {
+            section,
+            data
+        });
+        return response;
+    }
+    async function fetchCaseData(id, section) {
+        if (!id) {
+            id = activeCase.value.id;
+        }
+        let response = await axios.get(`/api/case-data/${id}`, {
+            params: { section }
+        });
+        if (response.status === 200) {
+            return response.data.the_data;
+        }
+    }
+
+    return {
+        caseType,
+        activeCase,
+        setCaseType,
+        openCase,
+        setActiveCase,
+        saveCaseData,
+        fetchCaseData
+    };
 });

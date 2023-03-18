@@ -380,14 +380,13 @@ import BCollapse from '@/components/simple/BCollapse.vue';
 import BaseSwitch from '@/components/simple/BaseSwitch.vue';
 import ContentBox from '@/components/simple/ContentBox.vue';
 import Honorific from '@/components/forms/form-snippets/Honorific.vue';
-import { useClientStore } from '@/stores/client.js';
 import Datepicker from 'vue3-datepicker';
 import { onBeforeMount, ref, reactive } from 'vue';
 import { useRouter } from 'vue-router';
-import { useSaveSectionData as saveSectionData } from '@/composables/helper.js';
+import { useCaseStore } from '@/stores/case';
 
 const router = useRouter();
-const store = useClientStore();
+const store = useCaseStore();
 const collapse1 = ref(null);
 const collapse2 = ref(null);
 const collapse3 = ref(null);
@@ -470,11 +469,15 @@ const updateSurvivingRelatives = (relative) => {
             break;
     }
 };
-const nextSection = () => {
-    saveData();
-    router.push({ name: 'Executors' });
+const nextSection = async () => {
+    let response = await saveData();
+    if (response.status === 200) {
+        router.push({ name: 'Executors' });
+    } else {
+        alert('There has been an error, please contact a Mabain admin');
+    }
 };
-const saveData = () => {
+const saveData = async () => {
     let date_of_death = null;
     if (formData.date_of_death) {
         date_of_death = `${formData.date_of_death.getFullYear()}-${
@@ -488,38 +491,49 @@ const saveData = () => {
             formData.date_of_marriage.getMonth() + 1
         }-${formData.date_of_marriage.getDate()}`;
     }
+
+    let date_of_divorce = null;
+    if (formData.date_of_divorce) {
+        date_of_divorce = `${formData.date_of_divorce.getFullYear()}-${
+            formData.date_of_divorce.getMonth() + 1
+        }-${formData.date_of_divorce.getDate()}`;
+    }
+
     let data = {
         ...formData,
         date_of_death,
-        date_of_marriage
+        date_of_marriage,
+        date_of_divorce
     };
-    saveSectionData(data, store.client.id).then((response) => {
-        console.log(response);
-        store.updateClient(response[1].data);
-    });
+    let response = await store.saveCaseData(null, 'about-the-deceased', data);
+    return response;
+    // saveSectionData(data, store.client.id).then((response) => {
+    //     console.log(response);
+    //     store.updateClient(response[1].data);
+    // });
 };
-onBeforeMount(() => {
-    if (store.client) {
+const fetchCaseData = async () => {
+    let response = await store.fetchCaseData(null, 'about-the-deceased');
+    if (response) {
         Object.keys(formData).forEach((key, index) => {
             if (
                 [
                     'date_of_divorce',
                     'date_of_death',
                     'date_of_marriage'
-                ].indexOf(key) >= 0 &&
-                store.client[key]
+                ].indexOf(key) >= 0
             ) {
-                formData[key] = new Date(store.client[key]);
-            } else if (
-                key === 'marriage_cert' &&
-                typeof store.client[key] === 'string'
-            ) {
-                formData[key] = JSON.parse(store.client[key]);
+                formData[key] = new Date(response[key]);
+            } else if (key === 'marriage_cert') {
+                formData[key] = JSON.parse(response[key]);
             } else {
-                formData[key] = store.client[key];
+                formData[key] = response[key];
             }
         });
     }
+};
+onBeforeMount(() => {
+    fetchCaseData();
 });
 </script>
 

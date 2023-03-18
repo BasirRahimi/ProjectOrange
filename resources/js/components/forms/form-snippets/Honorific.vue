@@ -5,7 +5,7 @@
                 <div class="col-6 col-md-3 mb-2 mb-md-0">
                     <base-button
                         @click="updateHonorific('Mr.')"
-                        :class="{ active: honorific == 'Mr.' }"
+                        :class="{ active: modelValue == 'Mr.' }"
                         class="w-100 px-0 h-100"
                         outline
                         type="default"
@@ -15,7 +15,7 @@
                 <div class="col-6 col-md-3 mb-2 mb-md-0">
                     <base-button
                         @click="updateHonorific('Mrs.')"
-                        :class="{ active: honorific == 'Mrs.' }"
+                        :class="{ active: modelValue == 'Mrs.' }"
                         class="w-100 px-0 h-100"
                         outline
                         type="default"
@@ -25,7 +25,7 @@
                 <div class="col-6 col-md-3 mb-2 mb-md-0">
                     <base-button
                         @click="updateHonorific('Miss')"
-                        :class="{ active: honorific == 'Miss' }"
+                        :class="{ active: modelValue == 'Miss' }"
                         class="w-100 px-0 h-100"
                         outline
                         type="default"
@@ -35,7 +35,7 @@
                 <div class="col-6 col-md-3 mb-2 mb-md-0">
                     <base-button
                         @click="updateHonorific('Ms')"
-                        :class="{ active: honorific == 'Ms' }"
+                        :class="{ active: modelValue == 'Ms' }"
                         class="w-100 px-0 h-100"
                         outline
                         type="default"
@@ -65,21 +65,18 @@ export default {
     },
     data() {
         return {
-            honorific: '',
             customHonorific: ''
         };
     },
     methods: {
         updateHonorific(val) {
-            this.honorific = val;
-            if (this.honorific !== this.customHonorific) {
+            if (['Mr.', 'Mrs.', 'Miss', 'Ms'].includes(val)) {
                 this.customHonorific = '';
             }
-            this.$emit('update:modelValue', this.honorific);
+            this.$emit('update:modelValue', val);
         }
     },
-    beforeMount() {
-        this.honorific = this.modelValue;
+    mounted() {
         if (!['Mr.', 'Mrs.', 'Miss', 'Ms'].includes(this.modelValue)) {
             this.customHonorific = this.modelValue;
         }

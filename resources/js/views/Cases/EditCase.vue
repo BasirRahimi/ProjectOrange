@@ -7,7 +7,7 @@
 </template>
 <script setup>
 import * as probateSections from '@/components/forms/probate.js';
-import { computed } from 'vue';
+import { computed, onBeforeMount } from 'vue';
 import { useRoute } from 'vue-router';
 import { useCaseStore } from '@/stores/case';
 
@@ -30,6 +30,10 @@ const activeSection = computed(() => {
             }
         }
     }
+});
+
+onBeforeMount(() => {
+    caseStore.setActiveCase(props.id);
 });
 </script>
 <style scoped lang="scss">
