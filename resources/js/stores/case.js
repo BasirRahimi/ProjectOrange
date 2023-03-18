@@ -7,7 +7,7 @@ export const useCaseStore = defineStore('case', () => {
     const router = useRouter();
 
     // store state
-    const caseType = ref('succession');
+    const caseType = ref('probate');
     const activeCase = ref({id: null});
     
     // actions
@@ -20,9 +20,6 @@ export const useCaseStore = defineStore('case', () => {
         switch (caseType.value) {
             case 'probate':
                 section = 'about-the-deceased';
-                break;
-            case 'succession':
-                section = 'about-the-successor';
                 break;
             default:
                 break;

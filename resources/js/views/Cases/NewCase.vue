@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <ContentBox>
+        <!-- <ContentBox>
             <h2>What type of case is this?</h2>
             <BaseButton
                 icon="po-icon-person"
@@ -17,7 +17,7 @@
                 :class="{ active: caseStore.caseType === 'probate' }"
                 >Probate Case <i class="fa-solid fa-arrow-right"></i
             ></BaseButton>
-        </ContentBox>
+        </ContentBox> -->
         <ContentBox>
             <h2>
                 Name this
@@ -33,9 +33,8 @@
         </ContentBox>
 
         <div class="d-flex justify-content-end">
-            <BaseButton type="primary" outline @click="createNewCase"
-                >Open Case <i class="fa-solid fa-arrow-right ms-auto"></i
-            ></BaseButton>
+            <BaseButton type="primary" outline @click="createNewCase">Open Case <i
+                    class="fa-solid fa-arrow-right ms-auto"></i></BaseButton>
         </div>
     </div>
 </template>
@@ -53,7 +52,7 @@ const router = useRouter();
 const caseStore = useCaseStore();
 const caseName = ref('');
 
-onMounted(async () => {});
+onMounted(async () => { });
 
 const openCase = (id) => {
     caseStore.openCase(id);

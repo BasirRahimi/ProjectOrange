@@ -85,7 +85,8 @@
                                 <img src="@images/step_1.png" alt="no cases" class="d-block m-auto mb-5" />
                                 <div class="text-center">
                                     <p class="mb-2">You have no cases yet</p>
-                                    <a href="#" @click.prevent="createNewCase">Get started with your first succession
+                                    <a href="#" @click.prevent="createNewCase">Get started with your first
+                                        {{ props.caseType }}
                                         case
                                         <i class="fa-solid fa-plus"></i>
                                     </a>

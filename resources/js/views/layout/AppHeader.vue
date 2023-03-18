@@ -1,16 +1,10 @@
 <template>
-    <nav
-        id="AppHeader"
-        class="navbar sticky-top bg-white shadow p-0 justify-content-start"
-        ref="el">
-        <div
-            class="px-4 py-3 d-none d-md-block"
-            :style="{ width: `${appSideNavWidth}px` }">
+    <nav id="AppHeader" class="navbar sticky-top bg-white shadow p-0 justify-content-start" ref="el">
+        <div class="px-4 py-3 d-none d-md-block" :style="{ width: `${appSideNavWidth}px` }">
             <div class="fw-bold">Hi, {{ userStore.user.name }}</div>
             <div class="text-gray-500">{{ userStore.user.company }}</div>
         </div>
-        <div
-            class="d-flex align-items-center px-4 py-3 align-self-stretch border-start">
+        <div class="d-flex align-items-center px-4 py-3 align-self-stretch border-start">
             <span class="fs-5 d-block me-3 fw-bold">{{ title }}</span>
             <template v-if="subtitle">&#x2022;</template>
             <span class="text-gray-500 d-block ms-3">
@@ -47,16 +41,11 @@ const routeUpdated = (newRoute) => {
             subtitle.value = '';
             break;
         case 'CaseFlows':
-            if (newRoute.params.caseType === 'succession') {
-                title.value = 'Your Succession Cases';
-                subtitle.value =
-                    'Manage existing, or open new succession cases here';
-            } else if (newRoute.params.caseType === 'probate') {
+            if (newRoute.params.caseType === 'probate') {
                 title.value = 'Your Probate Cases';
                 subtitle.value =
                     'Manage existing, or open new probate cases here';
             }
-
             break;
         case 'DocumentLibrary':
             title.value = 'Document Library';

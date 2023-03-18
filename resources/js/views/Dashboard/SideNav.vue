@@ -6,17 +6,6 @@
                 Your Caseflows
             </div>
             <ul class="fa-ul">
-                <li class="mb-3">
-                    <RouterLink :to="{
-                        name: 'CaseFlows',
-                        params: { caseType: 'succession' }
-                    }" class="router-link">
-                        <span class="fa-li">
-                            <i class="me-2 po-icon-person"></i>
-                        </span>
-                        Succession Desk
-                    </RouterLink>
-                </li>
                 <li>
                     <RouterLink :to="{
                         name: 'CaseFlows',
