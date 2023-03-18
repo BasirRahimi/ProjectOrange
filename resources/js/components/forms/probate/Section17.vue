@@ -127,5 +127,14 @@ onBeforeMount(() => {
     }
 });
 </script>
+<script>
+// URL route for :section parameter
 
+export default {
+    routerSectionParam: 'personal-belongings',
+    navIcon: 'po-icon-tv',
+    navLabel: 'Personal belongings',
+    order: 18
+};
+</script>
 <style lang="scss" scoped></style>

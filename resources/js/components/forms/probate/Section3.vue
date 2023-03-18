@@ -325,4 +325,14 @@ onBeforeMount(() => {
 });
 </script>
 
+<script>
+// URL route for :section parameter
+export default {
+    routerSectionParam: 'will-and-marital-status',
+    navIcon: 'po-icon-ring',
+    navLabel: 'Will & Marital Status',
+    order: 4
+};
+</script>
+
 <style lang="scss" scoped></style>

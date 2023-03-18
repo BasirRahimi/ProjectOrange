@@ -21,65 +21,108 @@
             </p>
         </ContentBox>
 
-        <ContentBox title="8.1 - Nil Rate Band Discretionary relative" class="relative" v-for="(trust, key) in formData"
+        <ContentBox
+            title="8.1 - Nil Rate Band Discretionary relative"
+            class="relative"
+            v-for="(trust, key) in formData"
             :key="key">
-            <a class="remove-trustee" href="#" v-if="formData.length > 1" @click.prevent="removeTrustee(key)">Remove
-                Trustee</a>
+            <a
+                class="remove-trustee"
+                href="#"
+                v-if="formData.length > 1"
+                @click.prevent="removeTrustee(key)"
+                >Remove Trustee</a
+            >
             <p class="text-gray-500">
                 If you know details of any Nil Rate Band Discretionary Trust,
                 then please provide the following information:-
             </p>
             <honorific v-model="trust.honorific" />
-            <base-input label="Forenames" placeholder="John" v-model="trust.forename"></base-input>
-            <base-input label="Surname" placeholder="Doe" v-model="trust.surname"></base-input>
+            <base-input
+                label="Forenames"
+                placeholder="John"
+                v-model="trust.forename"></base-input>
+            <base-input
+                label="Surname"
+                placeholder="Doe"
+                v-model="trust.surname"></base-input>
 
-            <yes-no class="mb-4" :label="trust.query1.query" v-model="trust.query1.answer" collapse>
-                <textarea v-model="trust.query1.onTrue" class="form-control mt-3" rows="4"
+            <yes-no
+                class="mb-4"
+                :label="trust.query1.query"
+                v-model="trust.query1.answer"
+                collapse>
+                <textarea
+                    v-model="trust.query1.onTrue"
+                    class="form-control mt-3"
+                    rows="4"
                     placeholder="Please include a full overview of relevant details to this question"></textarea>
             </yes-no>
 
             <div class="mb-4">
                 <label>{{ trust.query2.query }}</label>
-                <BaseSwitch @update:modelValue="
-                    (val) => {
-                        val == 'The trustee’s solicitors or accountants'
-                            ? formDataRefs[key].show()
-                            : formDataRefs[key].hide();
-                    }
-                " v-model="trust.query2.answer" left-text="The Trustee"
+                <BaseSwitch
+                    @update:modelValue="
+                        (val) => {
+                            val == 'The trustee’s solicitors or accountants'
+                                ? formDataRefs[key].show()
+                                : formDataRefs[key].hide();
+                        }
+                    "
+                    v-model="trust.query2.answer"
+                    left-text="The Trustee"
                     label="The trustee’s solicitors or accountants" />
             </div>
-            <BCollapse :model-value="
-                trust.query2.answer ==
-                'The trustee’s solicitors or accountants'
-            " ref="formDataRefs">
+            <BCollapse
+                :model-value="
+                    trust.query2.answer ==
+                    'The trustee’s solicitors or accountants'
+                "
+                ref="formDataRefs">
                 <honorific v-model="trust.query2.onTrue.honorific" />
-                <base-input label="Forenames" placeholder="John" v-model="trust.query2.onTrue.forename"></base-input>
-                <base-input label="Surname" placeholder="Doe" v-model="trust.query2.onTrue.surname"></base-input>
+                <base-input
+                    label="Forenames"
+                    placeholder="John"
+                    v-model="trust.query2.onTrue.forename"></base-input>
+                <base-input
+                    label="Surname"
+                    placeholder="Doe"
+                    v-model="trust.query2.onTrue.surname"></base-input>
             </BCollapse>
 
             <div class="row">
                 <div class="col-12 col-lg-6">
-                    <base-input label="Phone number" placeholder="+44 012345 67890" v-model="trust.phone"></base-input>
+                    <base-input
+                        label="Phone number"
+                        placeholder="+44 012345 67890"
+                        v-model="trust.phone"></base-input>
                 </div>
                 <div class="col-12 col-lg-6">
-                    <base-input label="Email Address" placeholder="John.doe@doe.co.uk" v-model="trust.email"></base-input>
+                    <base-input
+                        label="Email Address"
+                        placeholder="John.doe@doe.co.uk"
+                        v-model="trust.email"></base-input>
                 </div>
             </div>
         </ContentBox>
 
-        <ContentBox title="8.1 - Nil Rate Band Discretionary Trusts" v-if="formData.length < 4">
+        <ContentBox
+            title="8.1 - Nil Rate Band Discretionary Trusts"
+            v-if="formData.length < 4">
             <div class="text-center">
-                <base-button type="default" outline @click="addTrustee">Add trustee<i
-                        class="fas fa-plus ms-3"></i></base-button>
+                <base-button type="default" outline @click="addTrustee"
+                    >Add trustee<i class="fas fa-plus ms-3"></i
+                ></base-button>
             </div>
         </ContentBox>
 
         <ContentBox class="p-0 text-end" :shadow="false" :whiteBg="false">
-            <button class="btn btn-primary shadow" @click="
-                saveData('nil_rate_band', formData);
-            router.push({ name: 'Section9' });
-                                ">
+            <button
+                class="btn btn-primary shadow"
+                @click="
+                    saveData('nil_rate_band', formData);
+                    router.push({ name: 'Section9' });
+                ">
                 Next section
             </button>
         </ContentBox>
@@ -138,7 +181,15 @@ onBeforeMount(() => {
     }
 });
 </script>
-
+<script>
+// URL route for :section parameter
+export default {
+    routerSectionParam: 'nil-rate-band',
+    navIcon: 'po-icon-pound',
+    navLabel: 'Nil-Rate band',
+    order: 9
+};
+</script>
 <style lang="scss" scoped>
 @import '@sass/vue_sfc.scss';
 

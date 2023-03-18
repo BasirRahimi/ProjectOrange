@@ -6,31 +6,43 @@
     </div>
 </template>
 <script setup>
-import AboutTheDeceased from '@/components/forms/probate/AboutTheDeceased.vue';
-import Executors from '@/components/forms/probate/Executors.vue';
-import { computed, ref, watch } from 'vue';
+import * as probateSections from '@/components/forms/probate.js';
+import { computed } from 'vue';
 import { useRoute } from 'vue-router';
+import { useCaseStore } from '@/stores/case';
 
 const route = useRoute();
 const props = defineProps({
     id: Number,
     section: String
 });
-
-// Watch Route and update section variable or use route inside computed?
-const sectionCopy = ref(props.section);
-watch(route, (newRoute) => {
-    if (newRoute.params.section) {
-        sectionCopy.value = newRoute.params.section;
-    }
-});
+const caseStore = useCaseStore();
 
 const activeSection = computed(() => {
-    switch (route.params.section) {
-        case 'about-the-deceased':
-            return AboutTheDeceased;
-        case 'executors':
-            return Executors;
+    if (caseStore.caseType === 'probate') {
+        let sections = Object.keys(probateSections);
+        for (let i = 0; i < sections.length; i++) {
+            if (
+                route.params.section ===
+                probateSections[sections[i]].routerSectionParam
+            ) {
+                return probateSections[sections[i]];
+            }
+        }
     }
 });
 </script>
+<style scoped lang="scss">
+@import '@sass/vue_sfc.scss';
+
+.v-enter-active {
+    transition: $transition-base;
+    transition-property: opacity;
+    transition-duration: 1s;
+}
+
+.v-enter-from,
+.v-leave-to {
+    opacity: 0;
+}
+</style>

@@ -95,5 +95,14 @@ onBeforeMount(() => {
     }
 });
 </script>
+<script>
+// URL route for :section parameter
 
+export default {
+    routerSectionParam: 'uk-and-british-isles',
+    navIcon: 'po-icon-flag',
+    navLabel: 'UK & British Isles',
+    order: 7
+};
+</script>
 <style lang="scss" scoped></style>

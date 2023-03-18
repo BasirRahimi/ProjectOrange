@@ -176,7 +176,16 @@ onBeforeMount(() => {
     }
 });
 </script>
+<script>
+// URL route for :section parameter
 
+export default {
+    routerSectionParam: 'assets',
+    navIcon: 'po-icon-house',
+    navLabel: 'Assets',
+    order: 19
+};
+</script>
 <style lang="scss" scoped>
 @import '@sass/vue_sfc.scss';
 

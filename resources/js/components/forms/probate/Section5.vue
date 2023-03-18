@@ -66,5 +66,14 @@ onBeforeMount(() => {
     }
 });
 </script>
+<script>
+// URL route for :section parameter
 
+export default {
+    routerSectionParam: 'gifts',
+    navIcon: 'fas fa-gifts',
+    navLabel: 'Gifts',
+    order: 6
+};
+</script>
 <style lang="scss" scoped></style>

@@ -1,57 +1,65 @@
 <template>
-    <div>
-
-        <button class="section-toggle" :class="{ 'text-center': navCollapsed }" @click="caseDetailsCollapse.toggle()">
-            <span v-if="!navCollapsed">CASE DETAILS</span><i class="fas fa-chevron-right" :class="[
-                { active: caseDetailsOpen },
-                { 'ms-2': !navCollapsed }
-            ]"></i>
+    <div class="mb-3">
+        <button
+            class="section-toggle"
+            :class="{ 'text-center': navCollapsed }"
+            @click="caseDetailsCollapse.toggle()">
+            <span v-if="!navCollapsed">CASE DETAILS</span
+            ><i
+                class="fas fa-chevron-right"
+                :class="[
+                    { active: caseDetailsOpen },
+                    { 'ms-2': !navCollapsed }
+                ]"></i>
         </button>
         <BCollapse v-model="caseDetailsOpen" ref="caseDetailsCollapse">
-            <!-- :style="{height: `${caseDetailsOpenHeight}px`}" -->
             <ul class="fa-ul mb-0">
-                <li class="py-2 section-link" :class="{ active: 'AboutTheDeceased' == currentRouteName }">
-                    <a href="#" @click.prevent="sectionClick('AboutTheDeceased')">
+                <li class="py-2 section-link">
+                    <RouterLink :to="getRouterLink('about-the-deceased')">
                         <span class="fa-li">
                             <i class="me-2 po-icon-person"></i>
                         </span>
                         About the deceased
-                    </a>
+                    </RouterLink>
                 </li>
-                <li class="py-2 section-link" :class="{ active: 'Executors' == currentRouteName }">
-                    <a href="#" @click.prevent="sectionClick('Executors')">
+                <li class="py-2 section-link">
+                    <RouterLink :to="getRouterLink('executors')">
                         <span class="fa-li">
                             <i class="fas fa-user-tie me-2"></i>
                         </span>
                         Executors
-                    </a>
+                    </RouterLink>
                 </li>
             </ul>
         </BCollapse>
-        <!-- <div class="section-collapse" :class="{ collapsed: !caseDetailsOpen }">
-        </div> -->
 
-        <button class="section-toggle" :class="{ 'text-center': navCollapsed }" @click="sectionsCollapse.toggle()">
-            <span v-if="!navCollapsed">SECTIONS</span><i class="fas fa-chevron-right" :class="[
-                { active: sectionsOpen },
-                { 'ms-2': !navCollapsed }
-            ]"></i>
+        <button
+            class="section-toggle"
+            :class="{ 'text-center': navCollapsed }"
+            @click="sectionsCollapse.toggle()">
+            <span v-if="!navCollapsed">SECTIONS</span
+            ><i
+                class="fas fa-chevron-right"
+                :class="[
+                    { active: sectionsOpen },
+                    { 'ms-2': !navCollapsed }
+                ]"></i>
         </button>
         <BCollapse ref="sectionsCollapse" v-model="sectionsOpen">
-            <!-- :style="{height: `${sectionsOpenHeight}px`}" -->
             <ul class="fa-ul mb-0">
-                <li class="py-2 section-link" :class="{ active: section.routeName == currentRouteName }"
-                    v-for="(section, index) in sections" :key="index">
-                    <a :tabindex="sectionsOpen ? 0 : -1" href="#" @click.prevent="sectionClick(section.routeName)">
+                <li
+                    class="py-2 section-link"
+                    v-for="(section, index) in sections"
+                    :key="index">
+                    <RouterLink :to="getRouterLink(section.routerSectionParam)">
                         <span class="fa-li">
-                            <i :class="section.icon" class="me-2"></i>
+                            <i :class="section.navIcon" class="me-2"></i>
                         </span>
-                        {{ section.label }}
-                    </a>
+                        {{ section.navLabel }}
+                    </RouterLink>
                 </li>
             </ul>
         </BCollapse>
-        <!-- <div class="section-collapse" :class="{ collapsed: !sectionsOpen }" ref="sectionCollapse"></div> -->
     </div>
 </template>
 
@@ -59,7 +67,8 @@
 import { computed, ref, onMounted, watch } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import BCollapse from '@/components/simple/BCollapse.vue';
-
+import { propsToAttrMap } from '@vue/shared';
+import * as probateSections from '@/components/forms/probate.js';
 const router = useRouter();
 const route = useRoute();
 
@@ -68,103 +77,23 @@ const sectionsCollapse = ref();
 const caseDetailsOpen = ref(true);
 const sectionsOpen = ref(true);
 
-const sections = [
-    {
-        label: 'Powers of Attorney',
-        icon: 'fas fa-pen-nib',
-        routeName: 'Section2'
-    },
-    {
-        label: 'Will & Marital Status',
-        icon: 'po-icon-ring',
-        routeName: 'Section3'
-    },
-    {
-        label: 'Lifetime gifts',
-        icon: 'po-icon-present',
-        routeName: 'Section4'
-    },
-    {
-        label: 'Gifts',
-        icon: 'fas fa-gifts',
-        routeName: 'Section5'
-    },
-    {
-        label: 'UK & British Isles',
-        icon: 'po-icon-flag',
-        routeName: 'Section6'
-    },
-    {
-        label: 'Tax Havens',
-        icon: 'po-icon-world',
-        routeName: 'Section7'
-    },
-    {
-        label: 'Nil-Rate band',
-        icon: 'po-icon-pound',
-        routeName: 'Section8'
-    },
-    {
-        label: 'Business interests',
-        icon: 'po-icon-briefcase',
-        routeName: 'Section9'
-    },
-    {
-        label: 'Received inheritance',
-        icon: 'po-icon-debit-card',
-        routeName: 'Section10'
-    },
-    {
-        label: 'Trusts',
-        icon: 'po-icon-handshake',
-        routeName: 'Section11'
-    },
-    {
-        label: 'Pensions',
-        icon: 'po-icon-piggybank',
-        routeName: 'Section12'
-    },
-    {
-        label: 'Life Assurance',
-        icon: 'po-icon-lifebuoy',
-        routeName: 'Section13'
-    },
-    {
-        label: 'Joint held assets',
-        icon: 'po-icon-people',
-        routeName: 'Section14'
-    },
-    {
-        label: 'Stocks & Shares',
-        icon: 'po-icon-graph',
-        routeName: 'Section15'
-    },
-    {
-        label: 'Bank and savings',
-        icon: 'po-icon-dollar',
-        routeName: 'Section16'
-    },
-    {
-        label: 'Personal belongings',
-        icon: 'po-icon-tv',
-        routeName: 'Section17'
-    },
-    {
-        label: 'Assets',
-        icon: 'po-icon-house',
-        routeName: 'Section18'
-    },
-    {
-        label: 'Liabilities',
-        icon: 'po-icon-car',
-        routeName: 'Section19'
-    },
-    {
-        label: 'Other information',
-        icon: 'po-icon-information',
-        routeName: 'Section20'
+const sections = computed(() => {
+    let sections = Object.keys(probateSections).filter(
+        (x) => x != 'AboutTheDeceased' && x != 'Executors' && x != 'Overview'
+    );
+    let x = [];
+    for (let i = 0; i < sections.length; i++) {
+        x.push(probateSections[sections[i]]);
     }
-];
+    x.sort((a, b) => {
+        if (a.order < b.order) {
+            return -1;
+        } else {
+            return 1;
+        }
+    });
+    return x;
+});
 
 // const sectionsOpenHeight = '620';
 // const toolsOpenHeight = '60';
@@ -197,8 +126,11 @@ const currentRouteName = computed(() => {
 //     }
 // });
 
-const sectionClick = (routeName) => {
-    router.push({ name: routeName });
+const getRouterLink = (url) => {
+    return {
+        name: 'EditCase',
+        params: { id: route.params.id, section: url }
+    };
 };
 const emit = defineEmits(['toggleNav']);
 watch(navCollapsed, (newVal) => {
@@ -256,10 +188,7 @@ watch(navCollapsed, (newVal) => {
                 color: $body-color;
             }
         }
-    }
-
-    &.active {
-        a {
+        &.router-link-exact-active {
             color: $primary;
 
             //po icons

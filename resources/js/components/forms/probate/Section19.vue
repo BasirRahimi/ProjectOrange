@@ -134,5 +134,14 @@ onBeforeMount(() => {
     }
 });
 </script>
+<script>
+// URL route for :section parameter
 
+export default {
+    routerSectionParam: 'liabilities',
+    navIcon: 'po-icon-car',
+    navLabel: 'Liabilities',
+    order: 20
+};
+</script>
 <style lang="scss" scoped></style>

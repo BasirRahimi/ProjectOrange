@@ -120,5 +120,14 @@ const removeRow = (i) => {
     formData[0].onTrue.splice(i, 1);
 };
 </script>
+<script>
+// URL route for :section parameter
 
+export default {
+    routerSectionParam: 'bank-and-savings',
+    navIcon: 'po-icon-dollar',
+    navLabel: 'Bank and savings',
+    order: 17
+};
+</script>
 <style lang="scss" scoped></style>

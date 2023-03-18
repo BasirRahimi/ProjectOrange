@@ -132,5 +132,14 @@ onBeforeMount(() => {
     }
 });
 </script>
+<script>
+// URL route for :section parameter
 
+export default {
+    routerSectionParam: 'stocks-and-shares',
+    navIcon: 'po-icon-graph',
+    navLabel: 'Stocks & Shares',
+    order: 16
+};
+</script>
 <style lang="scss" scoped></style>

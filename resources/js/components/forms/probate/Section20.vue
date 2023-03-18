@@ -118,7 +118,16 @@ onMounted(() => {
     }
 });
 </script>
+<script>
+// URL route for :section parameter
 
+export default {
+    routerSectionParam: 'other-information',
+    navIcon: 'po-icon-information',
+    navLabel: 'Other information',
+    order: 21
+};
+</script>
 <style lang="scss" scoped>
 @import '@sass/vue_sfc.scss';
 

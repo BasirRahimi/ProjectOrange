@@ -208,5 +208,13 @@ const prevSlide = () => {
     }
 };
 </script>
-
+<script>
+// URL route for :section parameter
+export default {
+    routerSectionParam: 'lifetime-gifts',
+    navIcon: 'po-icon-present',
+    navLabel: 'Lifetime gifts',
+    order: 5
+};
+</script>
 <style lang="scss" scoped></style>

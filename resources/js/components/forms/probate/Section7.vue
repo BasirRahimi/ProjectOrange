@@ -62,5 +62,14 @@ onBeforeMount(() => {
     }
 });
 </script>
+<script>
+// URL route for :section parameter
 
+export default {
+    routerSectionParam: 'tax-havens',
+    navIcon: 'po-icon-world',
+    navLabel: 'Tax Havens',
+    order: 8
+};
+</script>
 <style lang="scss" scoped></style>

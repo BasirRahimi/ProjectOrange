@@ -1,5 +1,11 @@
 <template>
-    <AppHeader :app-side-nav-width="appSideNavWidth" />
+    <AppHeader :app-side-nav-width="appSideNavWidth">
+        <RouterView name="AppHeader" v-slot="{ Component }">
+            <Transition>
+                <component :is="Component" />
+            </Transition>
+        </RouterView>
+    </AppHeader>
     <AppSideNav :app-header-height="appHeaderHeight">
         <RouterView name="LeftSideBar" v-slot="{ Component }">
             <Transition>
@@ -7,10 +13,11 @@
             </Transition>
         </RouterView>
     </AppSideNav>
-    <main :style="{
-        'margin-left': `${appSideNavWidth}px`,
-        'padding-top': `${paddingTop}px`
-    }">
+    <main
+        :style="{
+            'margin-left': `${appSideNavWidth}px`,
+            'padding-top': `${paddingTop}px`
+        }">
         <div class="container">
             <RouterView v-slot="{ Component }">
                 <Transition>
@@ -48,8 +55,9 @@ onMounted(() => {
 
         let x = getComputedStyle(sideNav).paddingTop;
         paddingTop.value =
-            parseInt(x.slice(0, x.length - 2)) + parseInt(branding.clientHeight);
-    })
+            parseInt(x.slice(0, x.length - 2)) +
+            parseInt(branding.clientHeight);
+    });
 });
 </script>
 <style lang="scss" scoped>

@@ -169,5 +169,14 @@ onBeforeMount(() => {
     }
 });
 </script>
+<script>
+// URL route for :section parameter
 
+export default {
+    routerSectionParam: 'pensions',
+    navIcon: 'po-icon-piggybank',
+    navLabel: 'Pensions',
+    order: 13
+};
+</script>
 <style lang="scss" scoped></style>

@@ -143,5 +143,14 @@ onBeforeMount(() => {
     }
 });
 </script>
+<script>
+// URL route for :section parameter
 
+export default {
+    routerSectionParam: 'joint-held-assets',
+    navIcon: 'po-icon-people',
+    navLabel: 'Joint held assets',
+    order: 15
+};
+</script>
 <style lang="scss" scoped></style>

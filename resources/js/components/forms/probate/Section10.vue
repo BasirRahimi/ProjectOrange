@@ -214,5 +214,14 @@ onBeforeMount(() => {
     }
 });
 </script>
+<script>
+// URL route for :section parameter
 
+export default {
+    routerSectionParam: 'recieved-inheritence',
+    navIcon: 'po-icon-debit-card',
+    navLabel: 'Received inheritance',
+    order: 11
+};
+</script>
 <style lang="scss" scoped></style>
