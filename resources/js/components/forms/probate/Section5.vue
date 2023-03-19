@@ -58,11 +58,17 @@ let formData = reactive([
         onTrue: ''
     }
 ]);
-onBeforeMount(() => {
-    if (store.client) {
-        if (store.client.gifts) {
-            formData = reactive(JSON.parse(store.client.gifts.the_data));
-        }
+const nextSection = async () => {
+    let response = await store.saveCaseData(null, 'gifts', formData.value);
+    if (response.status === 200) {
+        store.navigateToSection('gifts');
+    }
+};
+
+onBeforeMount(async () => {
+    let response = await store.fetchCaseData(null, 'uk-and-british-isles');
+    if (response) {
+        formData.value = response;
     }
 });
 </script>

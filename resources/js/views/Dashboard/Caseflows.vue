@@ -183,7 +183,6 @@ import { ref, onMounted, computed, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useCaseStore } from '@/stores/case';
 import { useDebouncedRef } from '@/composables/helper.js';
-import CssGrid from '@/components/CssGrid.vue';
 
 import moment from 'moment';
 

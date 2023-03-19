@@ -364,16 +364,16 @@ const clickRelationship = (relationship, i) => {
 };
 
 const fetchCaseData = async () => {
-    let response = await store.fetchCaseData(null, 'executors');
+    let response = await store.fetchCaseData();
     if (response) {
         formData.value = response;
     }
 };
 
 const nextSection = async () => {
-    let response = await store.saveCaseData(null, 'executors', formData.value);
+    let response = await store.saveCaseData(formData.value);
     if (response.status === 200) {
-        store.navigateToSection('powers-of-attorney');
+        store.nextSection();
     }
 };
 

@@ -458,7 +458,7 @@ const updateSurvivingRelatives = (relative) => {
 const nextSection = async () => {
     let response = await saveData();
     if (response.status === 200) {
-        store.navigateToSection('executors');
+        store.nextSection();
     } else {
         alert('There has been an error, please contact a Mabain admin');
     }
@@ -491,11 +491,11 @@ const saveData = async () => {
         date_of_marriage,
         date_of_divorce
     };
-    let response = await store.saveCaseData(null, 'about-the-deceased', data);
+    let response = await store.saveCaseData(data);
     return response;
 };
 const fetchCaseData = async () => {
-    let response = await store.fetchCaseData(null, 'about-the-deceased');
+    let response = await store.fetchCaseData();
     if (response) {
         Object.keys(formData).forEach((key, index) => {
             if (

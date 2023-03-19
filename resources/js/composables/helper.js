@@ -31,7 +31,7 @@ export function useSaveData(section, formData) {
         section,
         data: JSON.stringify(formData)
     };
-    useSaveSectionData(data, store.activeCase.id).then((response) => {
+    useSaveSectionData(data, store.activeCase).then((response) => {
         if (response[0]) {
             console.log(response);
             store.updateClient(response[1].data);

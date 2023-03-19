@@ -1,65 +1,41 @@
 <template>
     <div class="mb-3" v-if="route.params.id">
-        <button
-            class="section-toggle"
-            :class="{ 'text-center': navCollapsed }"
-            @click="caseDetailsOpen = !caseDetailsOpen">
-            <span v-if="!navCollapsed">CASE DETAILS</span
-            ><i
-                class="fas fa-chevron-right"
-                :class="[
-                    { active: caseDetailsOpen },
-                    { 'ms-2': !navCollapsed }
-                ]"></i>
-        </button>
-        <BCollapse :visible="caseDetailsOpen">
-            <ul class="fa-ul mb-0">
-                <li class="py-2 section-link">
-                    <RouterLink :to="getRouterLink('about-the-deceased')">
-                        <span class="fa-li">
-                            <i class="me-2 po-icon-person"></i>
-                        </span>
-                        About the deceased
-                    </RouterLink>
-                </li>
-                <li class="py-2 section-link">
-                    <RouterLink :to="getRouterLink('executors')">
-                        <span class="fa-li">
-                            <i class="fas fa-user-tie me-2"></i>
-                        </span>
-                        Executors
-                    </RouterLink>
-                </li>
-            </ul>
-        </BCollapse>
-
-        <button
-            class="section-toggle"
-            :class="{ 'text-center': navCollapsed }"
-            @click="sectionsOpen = !sectionsOpen">
-            <span v-if="!navCollapsed">SECTIONS</span
-            ><i
-                class="fas fa-chevron-right"
-                :class="[
-                    { active: sectionsOpen },
-                    { 'ms-2': !navCollapsed }
-                ]"></i>
-        </button>
-        <BCollapse :visible="sectionsOpen">
-            <ul class="fa-ul mb-0">
-                <li
-                    class="py-2 section-link"
-                    v-for="(section, index) in sections"
-                    :key="index">
-                    <RouterLink :to="getRouterLink(section.routerSectionParam)">
-                        <span class="fa-li">
-                            <i :class="section.navIcon" class="me-2"></i>
-                        </span>
-                        {{ section.navLabel }}
-                    </RouterLink>
-                </li>
-            </ul>
-        </BCollapse>
+        <template v-for="section in sections">
+            <button
+                class="section-toggle"
+                :class="{ 'text-center': navCollapsed }"
+                @click="section.collapsed = !section.collapsed">
+                <span v-if="!navCollapsed">{{ section.title }}</span>
+                <i
+                    class="fas fa-chevron-right"
+                    :class="[
+                        { active: !section.collapsed },
+                        { 'ms-2': !navCollapsed }
+                    ]"></i>
+            </button>
+            <BCollapse :visible="!section.collapsed">
+                <ul class="fa-ul mb-0">
+                    <li
+                        class="py-2 section-link"
+                        v-for="(sectionComponent, index) in section.sections"
+                        :key="index">
+                        <RouterLink
+                            :to="
+                                getRouterLink(
+                                    sectionComponent.routerSectionParam
+                                )
+                            ">
+                            <span class="fa-li">
+                                <i
+                                    :class="sectionComponent.navIcon"
+                                    class="me-2"></i>
+                            </span>
+                            {{ sectionComponent.navLabel }}
+                        </RouterLink>
+                    </li>
+                </ul>
+            </BCollapse>
+        </template>
     </div>
 </template>
 
@@ -67,29 +43,22 @@
 import { computed, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import BCollapse from '@/components/simple/BCollapse.vue';
-import * as probateSections from '@/components/forms/probate.js';
+import { formSections as probateSections } from '@/components/forms/probate.js';
+
 const route = useRoute();
 
-const caseDetailsOpen = ref(true);
-const sectionsOpen = ref(true);
-
-const sections = computed(() => {
-    let sections = Object.keys(probateSections).filter(
-        (x) => x != 'AboutTheDeceased' && x != 'Executors' && x != 'Overview'
-    );
-    let x = [];
-    for (let i = 0; i < sections.length; i++) {
-        x.push(probateSections[sections[i]]);
+const sections = ref([
+    {
+        title: 'CASE DETAILS',
+        sections: probateSections.slice(0, 2),
+        collapsed: false
+    },
+    {
+        title: 'SECTIONS',
+        sections: probateSections.slice(2),
+        collapsed: false
     }
-    x.sort((a, b) => {
-        if (a.order < b.order) {
-            return -1;
-        } else {
-            return 1;
-        }
-    });
-    return x;
-});
+]);
 
 // const sectionsOpenHeight = '620';
 // const toolsOpenHeight = '60';

@@ -21,7 +21,7 @@ import Section19 from './probate/Section19.vue';
 import Section20 from './probate/Section20.vue';
 import Overview from './probate/Overview.vue';
 
-export {
+export const formSections = [
     AboutTheDeceased,
     Executors,
     Section2,
@@ -44,4 +44,4 @@ export {
     Section19,
     Section20,
     Overview
-};
+];

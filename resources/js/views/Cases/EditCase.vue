@@ -6,7 +6,7 @@
     </div>
 </template>
 <script setup>
-import * as probateSections from '@/components/forms/probate.js';
+import { formSections as probateSections } from '@/components/forms/probate.js';
 import { computed, onBeforeMount } from 'vue';
 import { useRoute } from 'vue-router';
 import { useCaseStore } from '@/stores/case';
@@ -19,21 +19,15 @@ const props = defineProps({
 const caseStore = useCaseStore();
 
 const activeSection = computed(() => {
-    if (caseStore.caseType === 'probate') {
-        let sections = Object.keys(probateSections);
-        for (let i = 0; i < sections.length; i++) {
-            if (
-                route.params.section ===
-                probateSections[sections[i]].routerSectionParam
-            ) {
-                return probateSections[sections[i]];
-            }
+    for (let i = 0; i < probateSections.length; i++) {
+        if (route.params.section === probateSections[i].routerSectionParam) {
+            return probateSections[i];
         }
     }
 });
 
 onBeforeMount(() => {
-    caseStore.setActiveCase(props.id);
+    caseStore.setActiveCaseId(props.id);
 });
 </script>
 <style scoped lang="scss">
