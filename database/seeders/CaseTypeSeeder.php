@@ -14,8 +14,7 @@ class CaseTypeSeeder extends Seeder
     public function run(): void
     {
         DB::table('case_types')->insert([
-            ['name' => 'probate'],
-            ['name' => 'succession']
+            ['name' => 'probate']
         ]);
     }
 }

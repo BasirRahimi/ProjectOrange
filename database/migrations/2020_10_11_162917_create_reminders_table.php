@@ -16,7 +16,7 @@ class CreateRemindersTable extends Migration
         Schema::create('reminders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
-            $table->foreignId('client_id');
+            $table->foreignId('case_id');
             $table->text('subject');
             $table->text('notes');
             $table->timestamps();
