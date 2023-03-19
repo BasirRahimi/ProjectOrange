@@ -81,7 +81,7 @@
                 </div>
             </yes-no>
 
-            <BCollapse toggle-button toggle-text="Tip">
+            <BCollapse toggle-button>
                 <p class="text-gray-500 mt-2 mb-0">
                     If the deceased owned a property jointly with another
                     person, include it here. If there is a mortgage on the

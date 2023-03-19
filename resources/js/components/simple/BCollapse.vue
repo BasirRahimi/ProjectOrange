@@ -51,13 +51,13 @@ const hide = () => {
     collapse.hide();
 };
 
-// const isCollapsed = () => {
-//     return collapseEl.value.classList.contains('show');
-// };
+const isCollapsed = () => {
+    return collapseEl.value.classList.contains('show');
+};
 
-// const identifier = props.identifier;
+const identifier = props.identifier;
 
-// defineExpose({ toggle, show, hide, identifier, isCollapsed });
+defineExpose({ toggle, show, hide, identifier, isCollapsed });
 
 onMounted(() => {
     collapse = new BsCollapse(collapseEl.value, {

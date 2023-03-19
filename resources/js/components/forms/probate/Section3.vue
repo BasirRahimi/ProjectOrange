@@ -32,7 +32,7 @@
                 >
             </yes-no>
 
-            <BCollapse toggle-button toggle-text="Tip">
+            <BCollapse toggle-button>
                 <p class="text-gray-500 mt-2">
                     If you hold the original Will (and any codicils), nothing
                     should be pinned, clipped or fastened to it at any time.

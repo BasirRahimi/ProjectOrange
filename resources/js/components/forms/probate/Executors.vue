@@ -162,9 +162,7 @@
                     >Other</BaseButton
                 >
             </div>
-            <BCollapse
-                ref="relationshipCollapse"
-                :model-value="executor.relationship == 'Other'">
+            <BCollapse :visible="executor.relationship == 'Other'">
                 <textarea
                     class="form-control mb-4"
                     rows="3"
@@ -216,10 +214,7 @@
                     value="Retire"
                     >Retire as an executor?</BaseRadio
                 >
-                <BCollapse
-                    ref="actingCollapse"
-                    :identifier="`${key}retire`"
-                    :model-value="executor.acting == 'Retire'">
+                <BCollapse :visible="executor.acting == 'Retire'">
                     <p class="text-gray-500">
                         This executor will need to sign a Renunciation. Download
                         a copy below.
@@ -246,10 +241,7 @@
                     >Have the power of Executorship reserved to them? (Standing
                     back now but can be involved later)</BaseRadio
                 >
-                <BCollapse
-                    ref="actingCollapse"
-                    :identifier="`${key}reserve`"
-                    :model-value="executor.acting == 'Reserve'">
+                <BCollapse :visible="executor.acting == 'Reserve'">
                     <p class="text-gray-500">
                         This executor will receive a notice of the intention to
                         reserve power on them. This notice can be downloaded
@@ -278,10 +270,7 @@
                     >Appoint someone to take on the responsibility on their
                     behalf?</BaseRadio
                 >
-                <BCollapse
-                    ref="actingCollapse"
-                    :identifier="`${key}appoint`"
-                    :model-value="executor.acting == 'Appoint'">
+                <BCollapse :visible="executor.acting == 'Appoint'">
                     <p class="text-gray-500 mt-3">
                         If this Executor wants to appoint an Attorney to act for
                         them, you will need to contact us. Use the button below.
@@ -333,7 +322,6 @@ import ClientFileUpload from '@/components/forms/form-snippets/ClientFileUpload.
 const router = useRouter();
 const store = useClientStore();
 
-const relationshipCollapse = ref(null);
 const actingCollapse = ref(null);
 
 let formData = reactive([
@@ -382,11 +370,6 @@ const removeExecutor = (i) => {
 
 const clickRelationship = (relationship, i) => {
     formData[i].relationship = relationship;
-    if (relationship == 'Other') {
-        relationshipCollapse.value[i].show();
-    } else {
-        relationshipCollapse.value[i].hide();
-    }
 };
 
 const updateActing = (collapseIdentifier) => {
@@ -398,13 +381,14 @@ const updateActing = (collapseIdentifier) => {
         }
     });
 };
-
-onBeforeMount(() => {
-    if (store.client) {
-        if (store.client.executors) {
-            formData = reactive(JSON.parse(store.client.executors.the_data));
-        }
+const fetchCaseData = async () => {
+    let response = await store.fetchCaseData(null, 'executors');
+    if (response) {
+        formData = response;
     }
+};
+onBeforeMount(() => {
+    fetchCaseData();
 });
 </script>
 <script>

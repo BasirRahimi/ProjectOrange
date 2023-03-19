@@ -61,7 +61,7 @@
                 </div>
             </yes-no>
 
-            <BCollapse toggle-button toggle-text="Tip">
+            <BCollapse toggle-button>
                 <p class="text-gray-500 mt-2 mb-0">
                     When you do not know the value of a liability at the time of
                     completing this section, note ‘approximately’ by the figure

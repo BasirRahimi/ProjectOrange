@@ -62,7 +62,7 @@
                 </div>
             </yes-no>
 
-            <BCollapse toggle-button toggle-text="Tip">
+            <BCollapse toggle-button>
                 <p class="text-gray-500 mt-2 mb-0">
                     If the deceased was, for example, married and acquired
                     furniture and household effects with their spouse, it could

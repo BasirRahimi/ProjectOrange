@@ -458,7 +458,10 @@ const updateSurvivingRelatives = (relative) => {
 const nextSection = async () => {
     let response = await saveData();
     if (response.status === 200) {
-        router.push({ name: 'Executors' });
+        router.push({
+            name: 'EditCase',
+            params: { id: store.activeCase.id, section: 'executors' }
+        });
     } else {
         alert('There has been an error, please contact a Mabain admin');
     }
@@ -493,10 +496,6 @@ const saveData = async () => {
     };
     let response = await store.saveCaseData(null, 'about-the-deceased', data);
     return response;
-    // saveSectionData(data, store.client.id).then((response) => {
-    //     console.log(response);
-    //     store.updateClient(response[1].data);
-    // });
 };
 const fetchCaseData = async () => {
     let response = await store.fetchCaseData(null, 'about-the-deceased');

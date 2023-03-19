@@ -62,23 +62,15 @@
             <div class="mb-4">
                 <label>{{ trust.query2.query }}</label>
                 <BaseSwitch
-                    @update:modelValue="
-                        (val) => {
-                            val == 'The trustee’s solicitors or accountants'
-                                ? formDataRefs[key].show()
-                                : formDataRefs[key].hide();
-                        }
-                    "
                     v-model="trust.query2.answer"
                     left-text="The Trustee"
                     label="The trustee’s solicitors or accountants" />
             </div>
             <BCollapse
-                :model-value="
+                :visible="
                     trust.query2.answer ==
                     'The trustee’s solicitors or accountants'
-                "
-                ref="formDataRefs">
+                ">
                 <honorific v-model="trust.query2.onTrue.honorific" />
                 <base-input
                     label="Forenames"

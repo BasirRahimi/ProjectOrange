@@ -43,6 +43,7 @@ export const useCaseStore = defineStore('case', () => {
             section,
             data
         });
+        console.log(response);
         return response;
     }
     async function fetchCaseData(id, section) {

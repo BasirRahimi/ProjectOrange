@@ -3,7 +3,7 @@
         <ContentBox
             title="Section 6 - England & Wales and the rest of the UK and British Isles">
             <div class="mb-3">
-                <BCollapse toggle-button toggle-text="Tip">
+                <BCollapse toggle-button>
                     <p class="text-gray-500 mt-2 mb-0">
                         Certain investments can be placed with investment
                         institutions in these jurisdictions. They each have
@@ -13,7 +13,7 @@
                 </BCollapse>
             </div>
             <div>
-                <BCollapse toggle-button toggle-text="Tip">
+                <BCollapse toggle-button>
                     <p class="text-gray-500 mt-2 mb-0">
                         You should take care that the deceased had regularised
                         their affairs with HMRC. For example, the Jersey
