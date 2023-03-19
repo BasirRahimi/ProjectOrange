@@ -1,5 +1,5 @@
 <template>
-    <div class="mb-3">
+    <div class="mb-3" v-if="route.params.id">
         <button
             class="section-toggle"
             :class="{ 'text-center': navCollapsed }"
@@ -64,7 +64,7 @@
 </template>
 
 <script setup>
-import { computed, ref, onMounted, watch } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import BCollapse from '@/components/simple/BCollapse.vue';
 import * as probateSections from '@/components/forms/probate.js';
