@@ -40,6 +40,8 @@ export const useCaseStore = defineStore('case', () => {
             name: 'EditCase',
             params: { id: activeCase.value.id, section }
         });
+
+        window.scrollTo(0, 0);
     }
 
     async function saveCaseData(id, section, data) {

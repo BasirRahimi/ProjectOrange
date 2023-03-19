@@ -12,12 +12,12 @@
             <base-button
                 type="default"
                 outline
-                :class="{ active: !props.modelValue }"
+                :class="{ active: props.modelValue === false }"
                 @click="no()"
                 >No</base-button
             >
         </div>
-        <BCollapse v-if="collapse" :visible="props.modelValue">
+        <BCollapse v-if="collapse" :visible="props.modelValue === props.openOn">
             <slot></slot>
         </BCollapse>
     </div>

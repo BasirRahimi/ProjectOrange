@@ -74,12 +74,18 @@ export default {
                 this.customHonorific = '';
             }
             this.$emit('update:modelValue', val);
+        },
+        setCustomHonorific(val) {
+            if (!['Mr.', 'Mrs.', 'Miss', 'Ms'].includes(val)) {
+                this.customHonorific = val;
+            }
         }
     },
     mounted() {
-        if (!['Mr.', 'Mrs.', 'Miss', 'Ms'].includes(this.modelValue)) {
-            this.customHonorific = this.modelValue;
-        }
+        this.setCustomHonorific(this.modelValue);
+    },
+    updated() {
+        this.setCustomHonorific(this.modelValue);
     },
     watch: {
         customHonorific(val) {

@@ -108,12 +108,7 @@
                         class="mb-4"
                         label-class="flashit"
                         :label="formData[7].query"
-                        v-model="formData[7].answer"
-                        @update:model-value="
-                            (x) => {
-                                x ? collapse2.show() : collapse2.hide();
-                            }
-                        ">
+                        v-model="formData[7].answer">
                     </yes-no>
 
                     <yes-no
@@ -123,9 +118,7 @@
                         v-model="formData[8].answer">
                     </yes-no>
 
-                    <BCollapse
-                        ref="collapse2"
-                        :model-value="formData[7].answer === true">
+                    <BCollapse :visible="formData[7].answer === true">
                         <base-input
                             :label="formData[7].onTrue[0].query"
                             placeholder="France"
@@ -173,7 +166,7 @@
 
                 <div
                     class="d-sm-flex align-items-center"
-                    v-if="formData[2].answer === false">
+                    v-if="formData[2].answer == false">
                     <div class="flex-grow-1">Step {{ slide }}/7</div>
                     <base-button
                         v-if="slide > 1"
@@ -194,12 +187,7 @@
         </ContentBox>
 
         <ContentBox class="p-0 text-end" :shadow="false" :whiteBg="false">
-            <button
-                class="btn btn-primary shadow"
-                @click="
-                    saveData('powers_of_attorney', formData);
-                    router.push({ name: 'Section3' });
-                ">
+            <button class="btn btn-primary shadow" @click="nextSection">
                 Next section
             </button>
         </ContentBox>
@@ -211,20 +199,14 @@ import ClientFileUpload from '@/components/forms/form-snippets/ClientFileUpload.
 import YesNo from '@/components/forms/form-snippets/YesNo.vue';
 import ContentBox from '@/components/simple/ContentBox.vue';
 import ButtonGroup from '@/components/forms/form-snippets/ButtonGroup.vue';
-import { ref, reactive, onBeforeMount } from 'vue';
-import {
-    useFlashLabel as flashLabel,
-    useSaveData as saveData
-} from '@/composables/helper.js';
-import { useRouter } from 'vue-router';
-import { useClientStore } from '@/stores/client.js';
-const router = useRouter();
-const store = useClientStore();
+import { ref, onBeforeMount } from 'vue';
+import { useFlashLabel as flashLabel } from '@/composables/helper.js';
+import { useCaseStore } from '@/stores/case';
+const store = useCaseStore();
 
 const slide = ref(1);
 
-const collapse2 = ref(null);
-let formData = reactive([
+let formData = ref([
     {
         query: 'Did the deceased make an ENDURING power of attorney?',
         answer: null,
@@ -320,25 +302,21 @@ const prevSlide = () => {
         flashLabel();
     }
 };
-const slides = [
-    formData[3],
-    formData[4],
-    formData[5],
-    formData[6],
-    [formData[7], formData[8]],
-    formData[9],
-    [formData[10], formData[11]]
-];
-const slotName = (i) => {
-    return `slide${i}`;
+const nextSection = async () => {
+    let response = await store.saveCaseData(
+        null,
+        'powers-of-attorney',
+        formData.value
+    );
+    if (response.status === 200) {
+        store.navigateToSection('will-and-marital-status');
+    }
 };
-onBeforeMount(() => {
-    if (store.client) {
-        if (store.client.powers_of_attorney) {
-            formData = reactive(
-                JSON.parse(store.client.powers_of_attorney.the_data)
-            );
-        }
+
+onBeforeMount(async () => {
+    let response = await store.fetchCaseData(null, 'powers-of-attorney');
+    if (response) {
+        formData.value = response;
     }
 });
 </script>
