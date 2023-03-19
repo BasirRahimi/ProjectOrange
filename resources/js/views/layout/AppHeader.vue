@@ -10,25 +10,52 @@
             <div class="text-gray-500">{{ userStore.user.company }}</div>
         </div>
         <div
-            class="d-flex align-items-center px-4 py-3 align-self-stretch border-start">
-            <span class="fs-5 d-block me-3 fw-bold">{{ title }}</span>
+            class="d-flex align-items-center px-4 py-3 align-self-stretch border-start flex-grow-1">
+            <div class="fs-5 me-3 fw-bold">{{ title }}</div>
             <template v-if="subtitle">&#x2022;</template>
-            <span class="text-gray-500 d-block ms-3">
+            <div class="text-gray-500 ms-3">
                 {{ subtitle }}
-            </span>
+            </div>
+            <BaseDropdown
+                menu-classes="shadow"
+                position="right"
+                tag="div"
+                class="ms-auto">
+                <template v-slot:title>
+                    <base-button
+                        type="link"
+                        class="dropdown-toggle m-0 nav-link">
+                        {{ userStore.user.name }} <span class="caret"></span>
+                    </base-button>
+                </template>
+
+                <RouterLink :to="{ name: 'Dashboard' }" class="dropdown-item">
+                    Dashboard
+                </RouterLink>
+
+                <a
+                    v-if="userStore.user.role < 2"
+                    href="/grant-access"
+                    class="dropdown-item">
+                    Access control
+                </a>
+
+                <a class="dropdown-item" href="/logout" @click.prevent="logout">
+                    Logout
+                </a>
+            </BaseDropdown>
         </div>
     </nav>
 </template>
 
 <script setup>
 import { useUserStore } from '@/stores/user.js';
-import { useCaseStore } from '@/stores/case.js';
 import { useRoute } from 'vue-router';
 import { watch, ref, onBeforeMount } from 'vue';
+import BaseDropdown from '@/components/simple/BaseDropdown.vue';
 
 const props = defineProps({ appSideNavWidth: Number });
 const userStore = useUserStore();
-const caseStore = useCaseStore();
 const route = useRoute();
 
 const title = ref('');
@@ -41,6 +68,11 @@ onBeforeMount(() => {
 watch(route, (newVal) => {
     routeUpdated(newVal);
 });
+
+const logout = async () => {
+    await axios.post('/logout');
+    window.location.href = '/';
+};
 
 const routeUpdated = (newRoute) => {
     switch (newRoute.name) {
