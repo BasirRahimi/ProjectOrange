@@ -25,7 +25,9 @@ host('157.245.39.48')
 
 after('deploy:failed', 'deploy:unlock');
 
-task('deploy:assets', function() {
+// Not running deploy:assets because the server runs out of memory.
+// Intead just run npm run build before each push to live
+task('deploy:assets', function () {
     // run('sudo systemctl stop mysql');
     run('cd {{release_or_current_path}} && npm install');
     run('cd {{release_or_current_path}} && npm run build');
@@ -35,7 +37,7 @@ task('deploy:assets', function() {
 task('deploy', [
     'deploy:prepare',
     'deploy:vendors',
-    'deploy:assets',
+    // 'deploy:assets',
     'artisan:storage:link',
     'artisan:config:cache',
     'artisan:route:cache',
