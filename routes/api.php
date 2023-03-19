@@ -27,6 +27,8 @@ Route::middleware('has.access')->group(function () {
         Route::post('/cases/{case_type}', 'store'); // requires initial data to create the case
         Route::patch('/cases/{case_id}', 'update'); // updates part of a case
         Route::delete('/cases/{case_id}', 'softDelete'); // soft delete
+
+        Route::post('/cases/{case_id}/upload', 'uploadFile');
     });
 
     Route::controller(CaseDataController::class)->group(function () {

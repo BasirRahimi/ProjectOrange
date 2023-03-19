@@ -511,7 +511,7 @@ const fetchCaseData = async () => {
             ) {
                 formData[key] = new Date(response[key]);
             } else if (key === 'marriage_cert') {
-                formData[key] = JSON.parse(response[key]);
+                formData[key] = response[key];
             } else {
                 formData[key] = response[key];
             }

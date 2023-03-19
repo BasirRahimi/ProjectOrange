@@ -2,18 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CaseData;
 use App\Models\CaseType;
 use App\Models\POCase;
-use Exception;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
-use Symfony\Component\HttpFoundation\Exception\BadRequestException;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class CaseController extends Controller
@@ -21,7 +16,7 @@ class CaseController extends Controller
     /**
      * Get all cases
      */
-    public function index(Request $request): View
+    public function index(): View
     {
         $page_title = 'Cases';
         return view('home', ['page_title' => $page_title]);
@@ -97,5 +92,23 @@ class CaseController extends Controller
         $case->softDeletes();
 
         return response('case_deleted', 200);
+    }
+
+    /**
+     * upload file
+     */
+    public function uploadFile(Request $request, string $case_id): JsonResponse
+    {
+        $case = POCase::findOrFail($case_id);
+
+        $path = '/userUploads/' . Auth::id() . '/caseFiles/' . $case_id;
+        $file = $request->file('file');
+        $filename = $file->getClientOriginalName();
+        $file_path = $file->storeAs($path, $filename);
+
+        return response()->json([
+            'path' => asset(Storage::url($file_path)),
+            'filename' => $filename
+        ]);
     }
 }
