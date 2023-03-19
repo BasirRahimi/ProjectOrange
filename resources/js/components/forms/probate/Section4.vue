@@ -131,12 +131,7 @@
         </ContentBox>
 
         <ContentBox class="p-0 text-end" :shadow="false" :whiteBg="false">
-            <button
-                class="btn btn-primary shadow"
-                @click="
-                    saveData('lifetime_gifts', formData);
-                    router.push({ name: 'Section5' });
-                ">
+            <button class="btn btn-primary shadow" @click="nextSection">
                 Next section
             </button>
         </ContentBox>
@@ -146,17 +141,16 @@
 // import BCollapse from '@/components/simple/BCollapse.vue';
 import ContentBox from '@/components/simple/ContentBox.vue';
 import YesNo from '@/components/forms/form-snippets/YesNo.vue';
-import { reactive, onBeforeMount, ref } from 'vue';
+import { onBeforeMount, ref } from 'vue';
 import {
     useSaveData as saveData,
     useFlashLabel as flashLabel
 } from '@/composables/helper.js';
 import { useRouter } from 'vue-router';
-import { useClientStore } from '@/stores/client.js';
+import { useCaseStore } from '@/stores/case.js';
 const router = useRouter();
-const store = useClientStore();
-const collapse = ref({ collapse1: false });
-let formData = reactive([
+const store = useCaseStore();
+let formData = ref([
     {
         query: 'Did the deceased make any gifts or transfer assets to or for the benefit of another individual, charity or other organisation?',
         answer: null,
@@ -185,16 +179,6 @@ let formData = reactive([
 ]);
 const slide = ref(1);
 
-onBeforeMount(() => {
-    if (store.client) {
-        if (store.client.lifetime_gifts) {
-            formData = reactive(
-                JSON.parse(store.client.lifetime_gifts.the_data)
-            );
-        }
-    }
-});
-
 const nextSlide = () => {
     if (slide.value < 5) {
         slide.value++;
@@ -207,6 +191,24 @@ const prevSlide = () => {
         flashLabel();
     }
 };
+
+const nextSection = async () => {
+    let response = await store.saveCaseData(
+        null,
+        'lifetime-gifts',
+        formData.value
+    );
+    if (response.status === 200) {
+        store.navigateToSection('gifts');
+    }
+};
+
+onBeforeMount(async () => {
+    let response = await store.fetchCaseData(null, 'lifetime-gifts');
+    if (response) {
+        formData.value = response;
+    }
+});
 </script>
 <script>
 // URL route for :section parameter
