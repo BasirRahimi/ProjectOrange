@@ -3,7 +3,7 @@
         <button
             class="section-toggle"
             :class="{ 'text-center': navCollapsed }"
-            @click="caseDetailsCollapse.toggle()">
+            @click="caseDetailsOpen = !caseDetailsOpen">
             <span v-if="!navCollapsed">CASE DETAILS</span
             ><i
                 class="fas fa-chevron-right"
@@ -12,7 +12,7 @@
                     { 'ms-2': !navCollapsed }
                 ]"></i>
         </button>
-        <BCollapse v-model="caseDetailsOpen" ref="caseDetailsCollapse">
+        <BCollapse :visible="caseDetailsOpen">
             <ul class="fa-ul mb-0">
                 <li class="py-2 section-link">
                     <RouterLink :to="getRouterLink('about-the-deceased')">
@@ -36,7 +36,7 @@
         <button
             class="section-toggle"
             :class="{ 'text-center': navCollapsed }"
-            @click="sectionsCollapse.toggle()">
+            @click="sectionsOpen = !sectionsOpen">
             <span v-if="!navCollapsed">SECTIONS</span
             ><i
                 class="fas fa-chevron-right"
@@ -45,7 +45,7 @@
                     { 'ms-2': !navCollapsed }
                 ]"></i>
         </button>
-        <BCollapse ref="sectionsCollapse" v-model="sectionsOpen">
+        <BCollapse :visible="sectionsOpen">
             <ul class="fa-ul mb-0">
                 <li
                     class="py-2 section-link"
@@ -65,15 +65,11 @@
 
 <script setup>
 import { computed, ref, onMounted, watch } from 'vue';
-import { useRouter, useRoute } from 'vue-router';
+import { useRoute } from 'vue-router';
 import BCollapse from '@/components/simple/BCollapse.vue';
-import { propsToAttrMap } from '@vue/shared';
 import * as probateSections from '@/components/forms/probate.js';
-const router = useRouter();
 const route = useRoute();
 
-const caseDetailsCollapse = ref();
-const sectionsCollapse = ref();
 const caseDetailsOpen = ref(true);
 const sectionsOpen = ref(true);
 

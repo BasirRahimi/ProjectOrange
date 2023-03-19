@@ -20,7 +20,7 @@
                     v-model="formData[1].document"></client-file-upload>
             </yes-no>
 
-            <BCollapse toggle-button toggle-text="Tip">
+            <BCollapse toggle-button>
                 <p class="text-gray-500 mt-2">
                     When a person dies, the Power of Attorney ceases to have
                     effect. The Attorney must hand over their responsibilities

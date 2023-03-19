@@ -220,7 +220,7 @@
                     outline
                     @click="updateSurvivingRelatives('spouse')"
                     :class="{ active: formData.spouse }"
-                    class="col me-3"
+                    class="col"
                     >Spouse</base-button
                 >
                 <base-button
@@ -228,7 +228,7 @@
                     outline
                     @click="updateSurvivingRelatives('parents')"
                     :class="{ active: formData.parents > 0 }"
-                    class="col me-3"
+                    class="col"
                     >Parents</base-button
                 >
                 <base-button
@@ -236,7 +236,7 @@
                     outline
                     @click="updateSurvivingRelatives('siblings')"
                     :class="{ active: formData.siblings > 0 }"
-                    class="col me-3"
+                    class="col"
                     >Siblings</base-button
                 >
                 <base-button
@@ -244,7 +244,7 @@
                     outline
                     @click="updateSurvivingRelatives('children')"
                     :class="{ active: formData.children > 0 }"
-                    class="col me-3"
+                    class="col"
                     >Children</base-button
                 >
                 <base-button
@@ -256,7 +256,7 @@
                     >Grand Children</base-button
                 >
             </div>
-            <BCollapse ref="collapse1" :model-value="formData.parents > 0">
+            <BCollapse :visible="formData.parents > 0">
                 <div class="row mt-4">
                     <div class="col-lg-6">
                         <label for="noOfParents"
@@ -272,7 +272,7 @@
                     </div>
                 </div>
             </BCollapse>
-            <BCollapse ref="collapse2" :model-value="formData.siblings > 0">
+            <BCollapse :visible="formData.siblings > 0">
                 <div class="row mt-4">
                     <div class="col-lg-6">
                         <label for="noOfSiblings"
@@ -287,7 +287,7 @@
                     </div>
                 </div>
             </BCollapse>
-            <BCollapse ref="collapse3" :model-value="formData.children > 0">
+            <BCollapse :visible="formData.children > 0">
                 <div class="row mt-4">
                     <div class="col-lg-6">
                         <label for="noOfChildren"
@@ -302,9 +302,7 @@
                     </div>
                 </div>
             </BCollapse>
-            <BCollapse
-                ref="collapse4"
-                :model-value="formData.grand_children > 0">
+            <BCollapse :visible="formData.grand_children > 0">
                 <div class="row mt-4">
                     <div class="col-lg-6">
                         <label for="noOfGrandChildren"
@@ -387,10 +385,6 @@ import { useCaseStore } from '@/stores/case';
 
 const router = useRouter();
 const store = useCaseStore();
-const collapse1 = ref(null);
-const collapse2 = ref(null);
-const collapse3 = ref(null);
-const collapse4 = ref(null);
 const formData = reactive({
     honorific: '',
     forename: '',
@@ -431,37 +425,29 @@ const updateSurvivingRelatives = (relative) => {
         case 'parents':
             if (formData[relative] === 0 || formData[relative] === null) {
                 formData[relative] = 1;
-                collapse1.value.show();
             } else {
                 formData[relative] = 0;
-                collapse1.value.hide();
             }
             break;
         case 'siblings':
             if (formData[relative] === 0 || formData[relative] === null) {
                 formData[relative] = 1;
-                collapse2.value.show();
             } else {
                 formData[relative] = 0;
-                collapse2.value.hide();
             }
             break;
         case 'children':
             if (formData[relative] === 0 || formData[relative] === null) {
                 formData[relative] = 1;
-                collapse3.value.show();
             } else {
                 formData[relative] = 0;
-                collapse3.value.hide();
             }
             break;
         case 'grand_children':
             if (formData[relative] === 0 || formData[relative] === null) {
                 formData[relative] = 1;
-                collapse4.value.show();
             } else {
                 formData[relative] = 0;
-                collapse4.value.hide();
             }
             break;
 
