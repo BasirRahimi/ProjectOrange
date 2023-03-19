@@ -363,13 +363,6 @@ const clickRelationship = (relationship, i) => {
     formData.value[i].relationship = relationship;
 };
 
-const fetchCaseData = async () => {
-    let response = await store.fetchCaseData();
-    if (response) {
-        formData.value = response;
-    }
-};
-
 const nextSection = async () => {
     let response = await store.saveCaseData(formData.value);
     if (response.status === 200) {
@@ -377,8 +370,11 @@ const nextSection = async () => {
     }
 };
 
-onBeforeMount(() => {
-    fetchCaseData();
+onBeforeMount(async () => {
+    let response = await store.fetchCaseData();
+    if (response) {
+        formData.value = response;
+    }
 });
 </script>
 <script>

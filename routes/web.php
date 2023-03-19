@@ -43,7 +43,6 @@ Auth::routes(['verify' => true, 'register' => false]);
 
 Route::middleware(['has.access'])->group(function () {
 
-    Route::redirect('/dashboard', '/dashboard/cases/probate');
     Route::get('/dashboard/{vue_capture?}', [HomeController::class, 'index'])->name('dashboard')->where('vue_capture', '[\/\w\.-]*');
     Route::get('/cases/{vue_capture}', [CaseController::class, 'index'])->name('edit-case')->where('vue_capture', '[\/\w\.-]*');
 

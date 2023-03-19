@@ -66,7 +66,7 @@
                     following</label
                 >
                 <BaseSwitch
-                    left-text="Their Solicitors"
+                    left-text="Their solicitors"
                     label="Their accountants"
                     class="mb-4"
                     v-model="formData[0].onTrue.contact" />
@@ -118,11 +118,7 @@
                         <div class="col">
                             <client-file-upload
                                 v-model="doc.document"
-                                @input="saveData"
                                 class="m-0" />
-                            <a v-if="doc.document" :href="doc.document.path">{{
-                                doc.document.filename
-                            }}</a>
                         </div>
                     </div>
 
@@ -174,12 +170,7 @@
         </ContentBox>
 
         <ContentBox class="p-0 text-end" :shadow="false" :whiteBg="false">
-            <button
-                class="btn btn-primary shadow"
-                @click="
-                    saveData('trusts', formData);
-                    router.push({ name: 'Section12' });
-                ">
+            <button class="btn btn-primary shadow" @click="nextSection">
                 Next section
             </button>
         </ContentBox>
@@ -192,14 +183,11 @@ import Datepicker from 'vue3-datepicker';
 import YesNo from '@/components/forms/form-snippets/YesNo.vue';
 import Honorific from '@/components/forms/form-snippets/Honorific.vue';
 import ClientFileUpload from '@/components/forms/form-snippets/ClientFileUpload.vue';
-import { reactive, onBeforeMount, ref } from 'vue';
-import { useSaveData as saveData } from '@/composables/helper.js';
-import { useRouter } from 'vue-router';
-import { useClientStore } from '@/stores/client.js';
-const router = useRouter();
-const store = useClientStore();
+import { onBeforeMount, ref } from 'vue';
+import { useCaseStore } from '@/stores/case.js';
+const store = useCaseStore();
 const activeDoc = ref(0);
-let formData = reactive([
+let formData = ref([
     {
         query: 'Was the deceased entitled to benefit from a trust that was created by a Deed or under another’s person’s Will (or intestacy)?',
         answer: null,
@@ -229,7 +217,7 @@ let formData = reactive([
 ]);
 
 const addDoc = () => {
-    formData[0].onTrue.docs.push({
+    formData.value[0].onTrue.docs.push({
         document_title: '',
         document: '',
         extra_details: ''
@@ -237,20 +225,26 @@ const addDoc = () => {
     activeDoc.value++;
 };
 const removeDoc = (i) => {
-    if (i + 1 == formData[0].onTrue.docs.length) {
+    if (i + 1 == formData.value[0].onTrue.docs.length) {
         activeDoc.value--;
     }
-    formData[0].onTrue.docs.splice(i, 1);
+    formData.value[0].onTrue.docs.splice(i, 1);
 };
-onBeforeMount(() => {
-    if (store.client) {
-        if (store.client.trusts) {
-            formData = reactive(JSON.parse(store.client.trusts.the_data));
-            let trust_date_created = formData[0].onTrue.trust_date_created;
-            formData[0].onTrue.trust_date_created = trust_date_created
-                ? new Date(trust_date_created)
-                : null;
-        }
+const nextSection = async () => {
+    let response = await store.saveCaseData(formData.value);
+    if (response.status === 200) {
+        store.nextSection();
+    }
+};
+
+onBeforeMount(async () => {
+    let response = await store.fetchCaseData();
+    if (response) {
+        formData.value = response;
+        let trust_date_created = formData.value[0].onTrue.trust_date_created;
+        formData.value[0].onTrue.trust_date_created = trust_date_created
+            ? new Date(trust_date_created)
+            : null;
     }
 });
 </script>

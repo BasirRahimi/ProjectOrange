@@ -142,13 +142,8 @@
 import ContentBox from '@/components/simple/ContentBox.vue';
 import YesNo from '@/components/forms/form-snippets/YesNo.vue';
 import { onBeforeMount, ref } from 'vue';
-import {
-    useSaveData as saveData,
-    useFlashLabel as flashLabel
-} from '@/composables/helper.js';
-import { useRouter } from 'vue-router';
+import { useFlashLabel as flashLabel } from '@/composables/helper.js';
 import { useCaseStore } from '@/stores/case.js';
-const router = useRouter();
 const store = useCaseStore();
 let formData = ref([
     {
@@ -193,18 +188,14 @@ const prevSlide = () => {
 };
 
 const nextSection = async () => {
-    let response = await store.saveCaseData(
-        null,
-        'lifetime-gifts',
-        formData.value
-    );
+    let response = await store.saveCaseData(formData.value);
     if (response.status === 200) {
-        store.navigateToSection('gifts');
+        store.nextSection();
     }
 };
 
 onBeforeMount(async () => {
-    let response = await store.fetchCaseData(null, 'lifetime-gifts');
+    let response = await store.fetchCaseData();
     if (response) {
         formData.value = response;
     }

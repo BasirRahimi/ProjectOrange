@@ -60,7 +60,7 @@ const uploadFile = (file) => {
     formData.append('file', file);
     formData.append('prefix', props.filePrefix);
     axios
-        .post(`/api/cases/${store.activeCase}/upload`, formData)
+        .post(`/api/cases/${store.activeCaseId}/upload`, formData)
         .then((response) => {
             console.log(response.data);
             emit('update:modelValue', response.data);

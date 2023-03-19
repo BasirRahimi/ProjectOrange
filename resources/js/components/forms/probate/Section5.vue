@@ -31,12 +31,7 @@
         </ContentBox>
 
         <ContentBox class="p-0 text-end" :shadow="false" :whiteBg="false">
-            <button
-                class="btn btn-primary shadow"
-                @click="
-                    saveData('gifts', formData);
-                    router.push({ name: 'Section6' });
-                ">
+            <button class="btn btn-primary shadow" @click="nextSection">
                 Next section
             </button>
         </ContentBox>
@@ -45,13 +40,10 @@
 <script setup>
 import YesNo from '@/components/forms/form-snippets/YesNo.vue';
 import ContentBox from '@/components/simple/ContentBox.vue';
-import { reactive, onBeforeMount } from 'vue';
-import { useSaveData as saveData } from '@/composables/helper.js';
-import { useRouter } from 'vue-router';
-import { useClientStore } from '@/stores/client.js';
-const router = useRouter();
-const store = useClientStore();
-let formData = reactive([
+import { ref, onBeforeMount } from 'vue';
+import { useCaseStore } from '@/stores/case.js';
+const store = useCaseStore();
+let formData = ref([
     {
         query: 'Did the deceased transfer any assets to any individual, trust, company or other organisation during their lifetime where the recipient did not take full possession of them?',
         answer: null,
@@ -59,14 +51,14 @@ let formData = reactive([
     }
 ]);
 const nextSection = async () => {
-    let response = await store.saveCaseData(null, 'gifts', formData.value);
+    let response = await store.saveCaseData(formData.value);
     if (response.status === 200) {
-        store.navigateToSection('gifts');
+        store.nextSection();
     }
 };
 
 onBeforeMount(async () => {
-    let response = await store.fetchCaseData(null, 'uk-and-british-isles');
+    let response = await store.fetchCaseData();
     if (response) {
         formData.value = response;
     }

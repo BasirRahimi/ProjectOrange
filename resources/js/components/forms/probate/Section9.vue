@@ -58,14 +58,7 @@
                     business in line with HMRC guidelines then please provide a
                     copy</label
                 ><br />
-                <client-file-upload
-                    v-model="formData[0].onTrue.valuation"
-                    @input="saveData" />
-                <a
-                    v-if="formData[0].onTrue.valuation"
-                    :href="formData[0].onTrue.valuation.path"
-                    >{{ formData[0].onTrue.valuation.filename }}</a
-                >
+                <client-file-upload v-model="formData[0].onTrue.valuation" />
             </yes-no>
         </ContentBox>
 
@@ -129,24 +122,12 @@
                     the business in line with HMRC guidelines then please
                     provide a copy</label
                 ><br />
-                <client-file-upload
-                    v-model="formData[1].onTrue.valuation"
-                    @input="saveData" />
-                <a
-                    v-if="formData[1].onTrue.valuation"
-                    :href="formData[1].onTrue.valuation.path"
-                    >{{ formData[1].onTrue.valuation.filename }}</a
-                >
+                <client-file-upload v-model="formData[1].onTrue.valuation" />
             </yes-no>
         </ContentBox>
 
         <ContentBox class="p-0 text-end" :shadow="false" :whiteBg="false">
-            <button
-                class="btn btn-primary shadow"
-                @click="
-                    saveData('business_interests', formData);
-                    router.push({ name: 'Section10' });
-                ">
+            <button class="btn btn-primary shadow" @click="nextSection">
                 Next section
             </button>
         </ContentBox>
@@ -157,13 +138,11 @@ import ContentBox from '@/components/simple/ContentBox.vue';
 import ClientFileUpload from '@/components/forms/form-snippets/ClientFileUpload.vue';
 import YesNo from '@/components/forms/form-snippets/YesNo.vue';
 import Honorific from '@/components/forms/form-snippets/Honorific.vue';
-import { reactive, onBeforeMount, ref } from 'vue';
+import { onBeforeMount, ref } from 'vue';
 import { useSaveData as saveData } from '@/composables/helper.js';
-import { useRouter } from 'vue-router';
-import { useClientStore } from '@/stores/client.js';
-const router = useRouter();
-const store = useClientStore();
-let formData = reactive([
+import { useCaseStore } from '@/stores/case.js';
+const store = useCaseStore();
+let formData = ref([
     {
         query: 'Did the deceased own shares in a private company?',
         answer: null,
@@ -200,13 +179,17 @@ let formData = reactive([
     }
 ]);
 
-onBeforeMount(() => {
-    if (store.client) {
-        if (store.client.business_interests) {
-            formData = reactive(
-                JSON.parse(store.client.business_interests.the_data)
-            );
-        }
+const nextSection = async () => {
+    let response = await store.saveCaseData(formData.value);
+    if (response.status === 200) {
+        store.nextSection();
+    }
+};
+
+onBeforeMount(async () => {
+    let response = await store.fetchCaseData();
+    if (response) {
+        formData.value = response;
     }
 });
 </script>

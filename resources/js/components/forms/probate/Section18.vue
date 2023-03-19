@@ -117,12 +117,7 @@
         </ContentBox>
 
         <ContentBox class="p-0 text-end" :shadow="false" :whiteBg="false">
-            <button
-                class="btn btn-primary shadow"
-                @click="
-                    saveData('assets', formData);
-                    router.push({ name: 'Section19' });
-                ">
+            <button class="btn btn-primary shadow" @click="nextSection">
                 Next section
             </button>
         </ContentBox>
@@ -132,15 +127,12 @@
 import AccordionTabs from '@/components/AccordionTabs.vue';
 import ContentBox from '@/components/simple/ContentBox.vue';
 import YesNo from '@/components/forms/form-snippets/YesNo.vue';
-import { reactive, onBeforeMount, ref, nextTick } from 'vue';
-import { useSaveData as saveData } from '@/composables/helper.js';
-import { useRouter } from 'vue-router';
-import { useClientStore } from '@/stores/client.js';
-const router = useRouter();
-const store = useClientStore();
+import { onBeforeMount, ref, nextTick } from 'vue';
+import { useCaseStore } from '@/stores/case.js';
+const store = useCaseStore();
 const viewData = ref(false);
 const accordion = ref(null);
-let formData = reactive([
+let formData = ref([
     {
         query: 'Did the deceased own IN THEIR SOLE NAME, houses, flats or other realty?',
         answer: null,
@@ -149,30 +141,36 @@ let formData = reactive([
 ]);
 
 const addRow = async () => {
-    formData[0].onTrue.push({
+    formData.value[0].onTrue.push({
         description: '',
         mortgage: '',
         value: ''
     });
 
     await nextTick();
-    accordion.value.setActiveTab(formData[0].onTrue.length - 1);
+    accordion.value.setActiveTab(formData.value[0].onTrue.length - 1);
 };
 const removeRow = (i) => {
-    formData[0].onTrue.splice(i, 1);
+    formData.value[0].onTrue.splice(i, 1);
     accordion.value.setActiveTab(i);
 };
 const addRowIfNone = (data) => {
-    if (data && formData[0].onTrue.length < 1) {
+    if (data && formData.value[0].onTrue.length < 1) {
         addRow();
     }
 };
 
-onBeforeMount(() => {
-    if (store.client) {
-        if (store.client.assets) {
-            formData = reactive(JSON.parse(store.client.assets.the_data));
-        }
+const nextSection = async () => {
+    let response = await store.saveCaseData(formData.value);
+    if (response.status === 200) {
+        store.nextSection();
+    }
+};
+
+onBeforeMount(async () => {
+    let response = await store.fetchCaseData();
+    if (response) {
+        formData.value = response;
     }
 });
 </script>

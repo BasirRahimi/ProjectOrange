@@ -55,8 +55,7 @@
                             <div class="col-12 file-row">
                                 <ClientFileUpload
                                     class="mb-0"
-                                    v-model="item.docs[docKey]"
-                                    @input="saveData" />
+                                    v-model="item.docs[docKey]" />
                                 <div
                                     class="file-rem-hidden d-inline-block ms-3">
                                     <base-button
@@ -74,7 +73,6 @@
                                 <ClientFileUpload
                                     class="mb-0"
                                     v-model="item.docs[item.docs.length]"
-                                    @input="saveData"
                                     wipeAfterInput
                                     :show-file="false" />
                             </div>
@@ -91,12 +89,7 @@
         </ContentBox>
 
         <ContentBox class="p-0 text-end" :shadow="false" :whiteBg="false">
-            <button
-                class="btn btn-primary shadow"
-                @click="
-                    saveData('life_assurance', formData);
-                    router.push({ name: 'Section14' });
-                ">
+            <button class="btn btn-primary shadow" @click="nextSection">
                 Next section
             </button>
         </ContentBox>
@@ -106,29 +99,28 @@
 import ClientFileUpload from '@/components/forms/form-snippets/ClientFileUpload.vue';
 import ContentBox from '@/components/simple/ContentBox.vue';
 import YesNo from '@/components/forms/form-snippets/YesNo.vue';
-import { reactive, onBeforeMount, ref, nextTick } from 'vue';
-import { useSaveData as saveData } from '@/composables/helper.js';
-import { useRouter } from 'vue-router';
-import { useClientStore } from '@/stores/client.js';
+import { onBeforeMount, ref, nextTick } from 'vue';
+import { useCaseStore } from '@/stores/case.js';
 import AccordionTabs from '@/components/AccordionTabs.vue';
-const router = useRouter();
-const store = useClientStore();
+const store = useCaseStore();
 const slotName = (i) => {
     return `tab${i}`;
 };
 const accordion = ref(null);
 const addRow = async (partKey) => {
-    formData[partKey].onTrue.push({
+    formData.value[partKey].onTrue.push({
         company_name: '',
         policies: '',
         value: '',
         docs: []
     });
     await nextTick();
-    accordion.value[partKey].setActiveTab(formData[partKey].onTrue.length - 1);
+    accordion.value[partKey].setActiveTab(
+        formData.value[partKey].onTrue.length - 1
+    );
 };
 const removePolicy = (partKey, i) => {
-    formData[partKey].onTrue.splice(i, 1);
+    formData.value[partKey].onTrue.splice(i, 1);
     accordion.value[partKey].setActiveTab(i);
 };
 const parts = [
@@ -138,7 +130,7 @@ const parts = [
     '13.4 Unit-linked investment bonds',
     '13.5 Joint life assurances'
 ];
-let formData = reactive([
+let formData = ref([
     {
         query: 'Were any sums payable from insurance companies to the estate as a result of the death of the deceased?',
         answer: null,
@@ -202,18 +194,20 @@ let formData = reactive([
 ]);
 
 const removeDoc = (partKey, itemKey, docIndex) => {
-    formData[partKey].onTrue[itemKey].docs.splice(docIndex, 1);
+    formData.value[partKey].onTrue[itemKey].docs.splice(docIndex, 1);
 };
 
-const addAnother = () => {};
+const nextSection = async () => {
+    let response = await store.saveCaseData(formData.value);
+    if (response.status === 200) {
+        store.nextSection();
+    }
+};
 
-onBeforeMount(() => {
-    if (store.client) {
-        if (store.client.life_assurance) {
-            formData = reactive(
-                JSON.parse(store.client.life_assurance.the_data)
-            );
-        }
+onBeforeMount(async () => {
+    let response = await store.fetchCaseData();
+    if (response) {
+        formData.value = response;
     }
 });
 </script>

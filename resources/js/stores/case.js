@@ -2,6 +2,7 @@ import { ref } from 'vue';
 import { defineStore } from 'pinia';
 import { useRouter, useRoute } from 'vue-router';
 import { formSections as probateFormSections } from '@/components/forms/probate';
+import { scrollToTop } from '@/composables/helper';
 
 export const useCaseStore = defineStore('case', () => {
     // globals
@@ -43,7 +44,7 @@ export const useCaseStore = defineStore('case', () => {
             params: { id: activeCaseId.value, section }
         });
 
-        window.scrollTo(0, 0);
+        scrollToTop();
     }
 
     function nextSection() {

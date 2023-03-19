@@ -248,18 +248,14 @@ let formData = ref([
     }
 ]);
 const nextSection = async () => {
-    let response = await store.saveCaseData(
-        null,
-        'will-and-marital-status',
-        formData.value
-    );
+    let response = await store.saveCaseData(formData.value);
     if (response.status === 200) {
-        store.navigateToSection('lifetime-gifts');
+        store.nextSection();
     }
 };
 
 onBeforeMount(async () => {
-    let response = await store.fetchCaseData(null, 'will-and-marital-status');
+    let response = await store.fetchCaseData();
     if (response) {
         formData.value = response;
         let date_of_death = formData.value[3].onTrue.date_of_death;

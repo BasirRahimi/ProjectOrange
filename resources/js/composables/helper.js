@@ -25,6 +25,10 @@ export function useFlashLabel() {
     }, 100);
 }
 
+export function scrollToTop() {
+    window.scrollTo(0, 0);
+}
+
 export function useSaveData(section, formData) {
     const store = useCaseStore();
     let data = {

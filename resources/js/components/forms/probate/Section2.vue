@@ -303,18 +303,14 @@ const prevSlide = () => {
     }
 };
 const nextSection = async () => {
-    let response = await store.saveCaseData(
-        null,
-        'powers-of-attorney',
-        formData.value
-    );
+    let response = await store.saveCaseData(formData.value);
     if (response.status === 200) {
-        store.navigateToSection('will-and-marital-status');
+        store.nextSection();
     }
 };
 
 onBeforeMount(async () => {
-    let response = await store.fetchCaseData(null, 'powers-of-attorney');
+    let response = await store.fetchCaseData();
     if (response) {
         formData.value = response;
     }

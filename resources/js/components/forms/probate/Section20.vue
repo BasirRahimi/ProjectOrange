@@ -34,8 +34,7 @@
                 <div class="col-12 file-row">
                     <client-file-upload
                         class="mb-0"
-                        v-model="formData[i].docs[j]"
-                        @input="saveData"></client-file-upload>
+                        v-model="formData[i].docs[j]"></client-file-upload>
                     <div class="file-rem-hidden d-inline-block ms-3">
                         <base-button
                             type="danger"
@@ -50,7 +49,6 @@
                     <client-file-upload
                         class="mb-0"
                         v-model="formData[i].docs[formData[i].docs.length]"
-                        @input="saveData"
                         wipeAfterInput
                         :show-file="false"></client-file-upload>
                 </div>
@@ -66,12 +64,7 @@
         </ContentBox>
 
         <ContentBox class="p-0 text-end" :shadow="false" :whiteBg="false">
-            <button
-                class="btn btn-primary shadow"
-                @click="
-                    saveData('other_information', formData);
-                    router.push({ name: 'Overview' });
-                ">
+            <button class="btn btn-primary shadow" @click="nextSection">
                 Review
             </button>
         </ContentBox>
@@ -80,39 +73,38 @@
 <script setup>
 import ContentBox from '@/components/simple/ContentBox.vue';
 import ClientFileUpload from '@/components/forms/form-snippets/ClientFileUpload.vue';
-import { reactive, onBeforeMount, onMounted } from 'vue';
-import { useSaveData as saveData } from '@/composables/helper.js';
-import { useRouter } from 'vue-router';
-import { useClientStore } from '@/stores/client.js';
-const router = useRouter();
-const store = useClientStore();
-let formData = reactive([]);
+import { onBeforeMount, ref } from 'vue';
+import { useCaseStore } from '@/stores/case.js';
+const store = useCaseStore();
+let formData = ref([]);
 
 const addRow = () => {
-    formData.push({
+    formData.value.push({
         subject: '',
         description: '',
         docs: []
     });
 };
 const removeInfo = (i) => {
-    formData.splice(i, 1);
+    formData.value.splice(i, 1);
 };
 const removeDoc = (i, j) => {
-    formData[i].docs.splice(j, 1);
+    formData.value[i].docs.splice(j, 1);
 };
 
-onBeforeMount(() => {
-    if (store.client) {
-        if (store.client.other_information) {
-            formData = reactive(
-                JSON.parse(store.client.other_information.the_data)
-            );
-        }
+const nextSection = async () => {
+    let response = await store.saveCaseData(formData.value);
+    if (response.status === 200) {
+        store.nextSection();
     }
-});
+};
 
-onMounted(() => {
+onBeforeMount(async () => {
+    let response = await store.fetchCaseData();
+    if (response) {
+        formData.value = response;
+    }
+
     if (formData.length < 1) {
         addRow();
     }

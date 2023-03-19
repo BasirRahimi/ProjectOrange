@@ -107,12 +107,7 @@
         </ContentBox>
 
         <ContentBox class="p-0 text-end" :shadow="false" :whiteBg="false">
-            <button
-                class="btn btn-primary shadow"
-                @click="
-                    saveData('pensions', formData);
-                    router.push({ name: 'Section13' });
-                ">
+            <button class="btn btn-primary shadow" @click="nextSection">
                 Next section
             </button>
         </ContentBox>
@@ -122,13 +117,10 @@
 import Honorific from '@/components/forms/form-snippets/Honorific.vue';
 import ContentBox from '@/components/simple/ContentBox.vue';
 import YesNo from '@/components/forms/form-snippets/YesNo.vue';
-import { reactive, onBeforeMount } from 'vue';
-import { useSaveData as saveData } from '@/composables/helper.js';
-import { useRouter } from 'vue-router';
-import { useClientStore } from '@/stores/client.js';
-const router = useRouter();
-const store = useClientStore();
-let formData = reactive([
+import { ref, onBeforeMount } from 'vue';
+import { useCaseStore } from '@/stores/case.js';
+const store = useCaseStore();
+let formData = ref([
     {
         query: 'Other than small arrears of pension due to the date of death, did any payments under a pension scheme or personal pension policy continue after the death of the deceased?',
         answer: null,
@@ -161,11 +153,17 @@ let formData = reactive([
         }
     }
 ]);
-onBeforeMount(() => {
-    if (store.client) {
-        if (store.client.pensions) {
-            formData = reactive(JSON.parse(store.client.pensions.the_data));
-        }
+const nextSection = async () => {
+    let response = await store.saveCaseData(formData.value);
+    if (response.status === 200) {
+        store.nextSection();
+    }
+};
+
+onBeforeMount(async () => {
+    let response = await store.fetchCaseData();
+    if (response) {
+        formData.value = response;
     }
 });
 </script>

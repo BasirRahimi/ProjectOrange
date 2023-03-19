@@ -91,12 +91,7 @@
         </ContentBox>
 
         <ContentBox class="p-0 text-end" :shadow="false" :whiteBg="false">
-            <button
-                class="btn btn-primary shadow"
-                @click="
-                    saveData('joint_held_assets', formData);
-                    router.push({ name: 'Section15' });
-                ">
+            <button class="btn btn-primary shadow" @click="nextSection">
                 Next section
             </button>
         </ContentBox>
@@ -106,14 +101,11 @@
 import BCollapse from '@/components/simple/BCollapse.vue';
 import ContentBox from '@/components/simple/ContentBox.vue';
 import YesNo from '@/components/forms/form-snippets/YesNo.vue';
-import { reactive, onBeforeMount, ref } from 'vue';
-import { useSaveData as saveData } from '@/composables/helper.js';
-import { useRouter } from 'vue-router';
-import { useClientStore } from '@/stores/client.js';
-const router = useRouter();
-const store = useClientStore();
+import { onBeforeMount, ref } from 'vue';
+import { useCaseStore } from '@/stores/case.js';
+const store = useCaseStore();
 const rowSettings = ref(false);
-let formData = reactive([
+let formData = ref([
     {
         query: 'Did the deceased own any assets in the joint names with another person?',
         answer: null,
@@ -122,8 +114,8 @@ let formData = reactive([
 ]);
 
 const addRow = () => {
-    if (formData[0].onTrue.length >= 20) return;
-    formData[0].onTrue.push({
+    if (formData.value[0].onTrue.length >= 20) return;
+    formData.value[0].onTrue.push({
         desc: '',
         otherOwner: '',
         value: '',
@@ -131,15 +123,19 @@ const addRow = () => {
     });
 };
 const removeRow = (i) => {
-    formData[0].onTrue.splice(i, 1);
+    formData.value[0].onTrue.splice(i, 1);
 };
-onBeforeMount(() => {
-    if (store.client) {
-        if (store.client.joint_held_assets) {
-            formData = reactive(
-                JSON.parse(store.client.joint_held_assets.the_data)
-            );
-        }
+const nextSection = async () => {
+    let response = await store.saveCaseData(formData.value);
+    if (response.status === 200) {
+        store.nextSection();
+    }
+};
+
+onBeforeMount(async () => {
+    let response = await store.fetchCaseData();
+    if (response) {
+        formData.value = response;
     }
 });
 </script>

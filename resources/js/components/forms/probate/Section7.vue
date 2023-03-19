@@ -20,12 +20,7 @@
         </ContentBox>
 
         <ContentBox class="p-0 text-end" :shadow="false" :whiteBg="false">
-            <button
-                class="btn btn-primary shadow"
-                @click="
-                    saveData('tax_havens', formData);
-                    router.push({ name: 'Section8' });
-                ">
+            <button class="btn btn-primary shadow" @click="nextSection">
                 Next section
             </button>
         </ContentBox>
@@ -35,14 +30,12 @@
 <script setup>
 import ContentBox from '@/components/simple/ContentBox.vue';
 import YesNo from '@/components/forms/form-snippets/YesNo.vue';
-import { reactive, onBeforeMount, ref } from 'vue';
-import { useSaveData as saveData } from '@/composables/helper.js';
+import { onBeforeMount, ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { useClientStore } from '@/stores/client.js';
-const router = useRouter();
-const store = useClientStore();
+import { useCaseStore } from '@/stores/case.js';
+const store = useCaseStore();
 
-let formData = reactive([
+let formData = ref([
     {
         query: 'Did the deceased have any assets in Switzerland?',
         answer: null,
@@ -54,11 +47,17 @@ let formData = reactive([
         onTrue: ''
     }
 ]);
-onBeforeMount(() => {
-    if (store.client) {
-        if (store.client.tax_havens) {
-            formData = reactive(JSON.parse(store.client.tax_havens.the_data));
-        }
+const nextSection = async () => {
+    let response = await store.saveCaseData(formData.value);
+    if (response.status === 200) {
+        store.nextSection();
+    }
+};
+
+onBeforeMount(async () => {
+    let response = await store.fetchCaseData();
+    if (response) {
+        formData.value = response;
     }
 });
 </script>

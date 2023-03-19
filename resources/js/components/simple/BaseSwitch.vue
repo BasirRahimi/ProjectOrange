@@ -40,13 +40,13 @@ const emit = defineEmits(['update:modelValue']);
 
 const value = computed({
     get() {
-        if (typeof props.modelValue === 'string') {
+        if (props.leftText.length) {
             return props.label === props.modelValue;
         }
         return props.modelValue;
     },
     set(value) {
-        if (typeof props.modelValue === 'string') {
+        if (props.leftText.length) {
             emit('update:modelValue', value ? props.label : props.leftText);
         } else {
             emit('update:modelValue', value);

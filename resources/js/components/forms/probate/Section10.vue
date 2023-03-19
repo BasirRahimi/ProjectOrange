@@ -68,13 +68,7 @@
                             <div class="col">
                                 <client-file-upload
                                     class="m-0"
-                                    v-model="doc.document"
-                                    @input="saveData" />
-                                <a
-                                    v-if="doc.document"
-                                    :href="doc.document.path"
-                                    >{{ doc.document.filename }}</a
-                                >
+                                    v-model="doc.document" />
                             </div>
                         </div>
 
@@ -137,12 +131,7 @@
         </ContentBox>
 
         <ContentBox class="p-0 text-end" :shadow="false" :whiteBg="false">
-            <button
-                class="btn btn-primary shadow"
-                @click="
-                    saveData('received_inheritance', formData);
-                    router.push({ name: 'Section11' });
-                ">
+            <button class="btn btn-primary shadow" @click="nextSection">
                 Next section
             </button>
         </ContentBox>
@@ -154,14 +143,12 @@ import ContentBox from '@/components/simple/ContentBox.vue';
 import Honorific from '@/components/forms/form-snippets/Honorific.vue';
 import ClientFileUpload from '@/components/forms/form-snippets/ClientFileUpload.vue';
 import Datepicker from 'vue3-datepicker';
-import { reactive, onBeforeMount, ref } from 'vue';
+import { onBeforeMount, ref } from 'vue';
 import { useSaveData as saveData } from '@/composables/helper.js';
-import { useRouter } from 'vue-router';
-import { useClientStore } from '@/stores/client.js';
-const router = useRouter();
-const store = useClientStore();
+import { useCaseStore } from '@/stores/case.js';
+const store = useCaseStore();
 const activeDoc = ref(0);
-let formData = reactive([
+let formData = ref([
     {
         query: 'In the 5 years before their death, did the deceased inherit money or assets from another person’s estate on which Inheritance Tax was paid?',
         answer: null,
@@ -186,7 +173,7 @@ let formData = reactive([
 ]);
 
 const addDoc = () => {
-    formData[0].onTrue.query1.onTrue.push({
+    formData.value[0].onTrue.query1.onTrue.push({
         document_title: '',
         document: '',
         extra_details: ''
@@ -194,24 +181,28 @@ const addDoc = () => {
     activeDoc.value++;
 };
 const removeDoc = (i) => {
-    if (i + 1 == formData[0].onTrue.query1.onTrue.length) {
+    if (i + 1 == formData.value[0].onTrue.query1.onTrue.length) {
         activeDoc.value--;
     }
-    formData[0].onTrue.query1.onTrue.splice(i, 1);
+    formData.value[0].onTrue.query1.onTrue.splice(i, 1);
 };
 
-onBeforeMount(() => {
-    if (store.client) {
-        if (store.client.received_inheritance) {
-            formData = reactive(
-                JSON.parse(store.client.received_inheritance.the_data)
-            );
-            let date_of_death = formData[0].onTrue.date_of_death;
-            formData[0].onTrue.date_of_death = date_of_death
-                ? new Date(date_of_death)
-                : null;
-        }
+const nextSection = async () => {
+    let response = await store.saveCaseData(formData.value);
+    if (response.status === 200) {
+        store.nextSection();
     }
+};
+
+onBeforeMount(async () => {
+    let response = await store.fetchCaseData();
+    if (response) {
+        formData.value = response;
+    }
+    let date_of_death = formData.value[0].onTrue.date_of_death;
+    formData.value[0].onTrue.date_of_death = date_of_death
+        ? new Date(date_of_death)
+        : null;
 });
 </script>
 <script>

@@ -24,7 +24,8 @@
                                 getRouterLink(
                                     sectionComponent.routerSectionParam
                                 )
-                            ">
+                            "
+                            @click="scrollToTop">
                             <span class="fa-li">
                                 <i
                                     :class="sectionComponent.navIcon"
@@ -42,6 +43,7 @@
 <script setup>
 import { computed, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
+import { scrollToTop } from '@/composables/helper';
 import BCollapse from '@/components/simple/BCollapse.vue';
 import { formSections as probateSections } from '@/components/forms/probate.js';
 

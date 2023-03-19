@@ -1,19 +1,32 @@
 <template>
-    <div id="AppSideNav" class="bg-white" :style="{
-        height: `calc(100vh - ${appHeaderHeight}px`
-    }">
+    <div
+        id="AppSideNav"
+        class="bg-white"
+        :style="{
+            height: `calc(100vh - ${appHeaderHeight}px`
+        }">
         <nav class="d-flex flex-column h-100 px-3 py-4">
             <div id="branding" class="px-3 pb-4 mb-4 border-bottom">
                 <span class="text-gray-500">You're using</span><br />
-                <a href="#" class="fs-5 fw-bold">ATPS By Mabain</a>
+                <RouterLink class="fs-5 fw-bold" :to="{ name: 'Dashboard' }">
+                    ATPS By Mabain
+                </RouterLink>
             </div>
             <slot></slot>
             <div class="mt-auto">
                 <div class="mb-3">
-                    <RouterLink class="router-link text-uppercase" to="/dashboard/settings">Settings</RouterLink>
+                    <RouterLink
+                        class="router-link text-uppercase"
+                        to="/dashboard/settings"
+                        >Settings</RouterLink
+                    >
                 </div>
                 <div>
-                    <RouterLink class="router-link text-uppercase" to="/dashboard/terms">Terms</RouterLink>
+                    <RouterLink
+                        class="router-link text-uppercase"
+                        to="/dashboard/terms"
+                        >Terms</RouterLink
+                    >
                 </div>
             </div>
         </nav>

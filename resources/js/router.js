@@ -17,6 +17,7 @@ const routes = [
         name: 'Dashboard',
         path: '/dashboard',
         component: Dashboard,
+        redirect: { name: 'CaseFlows', params: { caseType: 'probate' } },
         children: [
             {
                 name: 'CaseFlows',
@@ -94,7 +95,7 @@ const routes = [
                         ...route.params,
                         id: parseInt(route.params.id)
                     })
-                } 
+                }
             }
         ]
     }
