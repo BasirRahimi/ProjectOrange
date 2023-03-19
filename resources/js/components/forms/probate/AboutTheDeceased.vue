@@ -458,10 +458,7 @@ const updateSurvivingRelatives = (relative) => {
 const nextSection = async () => {
     let response = await saveData();
     if (response.status === 200) {
-        router.push({
-            name: 'EditCase',
-            params: { id: store.activeCase.id, section: 'executors' }
-        });
+        store.navigateToSection('executors');
     } else {
         alert('There has been an error, please contact a Mabain admin');
     }

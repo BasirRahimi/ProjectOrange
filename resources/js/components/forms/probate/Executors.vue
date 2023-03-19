@@ -203,14 +203,12 @@
                 <BaseRadio
                     :name="`${key}executorActing`"
                     v-model="executor.acting"
-                    @update:modelValue="updateActing()"
                     value="Accept"
                     >Accept their role and act as executor?</BaseRadio
                 >
                 <BaseRadio
                     :name="`${key}executorActing`"
                     v-model="executor.acting"
-                    @update:modelValue="updateActing(`${key}retire`)"
                     value="Retire"
                     >Retire as an executor?</BaseRadio
                 >
@@ -236,7 +234,6 @@
                 <BaseRadio
                     :name="`${key}executorActing`"
                     v-model="executor.acting"
-                    @update:modelValue="updateActing(`${key}reserve`)"
                     value="Reserve"
                     >Have the power of Executorship reserved to them? (Standing
                     back now but can be involved later)</BaseRadio
@@ -265,7 +262,6 @@
                     class="mb-0"
                     :name="`${key}executorActing`"
                     v-model="executor.acting"
-                    @update:modelValue="updateActing(`${key}appoint`)"
                     value="Appoint"
                     >Appoint someone to take on the responsibility on their
                     behalf?</BaseRadio
@@ -294,12 +290,7 @@
                     v-show="formData.length < 4"
                     >Add executor +
                 </BaseButton>
-                <button
-                    class="btn btn-primary shadow"
-                    @click="
-                        saveData('executors', formData);
-                        router.push({ name: 'Section2' });
-                    ">
+                <button class="btn btn-primary shadow" @click="nextSection()">
                     Next section
                 </button>
             </div>
@@ -313,18 +304,13 @@ import BCollapse from '@/components/simple/BCollapse.vue';
 import BaseSwitch from '@/components/simple/BaseSwitch.vue';
 import Honorific from '@/components/forms/form-snippets/Honorific.vue';
 import ContentBox from '@/components/simple/ContentBox.vue';
-import { useClientStore } from '@/stores/client.js';
+import { useCaseStore } from '@/stores/case.js';
 import { onBeforeMount, ref, reactive } from 'vue';
-import { useRouter } from 'vue-router';
-import { useSaveData as saveData } from '@/composables/helper.js';
 import ClientFileUpload from '@/components/forms/form-snippets/ClientFileUpload.vue';
 
-const router = useRouter();
-const store = useClientStore();
+const store = useCaseStore();
 
-const actingCollapse = ref(null);
-
-let formData = reactive([
+let formData = ref([
     {
         honorific: '',
         forename: '',
@@ -338,6 +324,8 @@ let formData = reactive([
         email: '',
         relationship: '',
         relationshipOther: '',
+        kycType1: '',
+        kycType2: '',
         acting: '',
         renunciation: '',
         reserveIntent: '',
@@ -346,7 +334,7 @@ let formData = reactive([
 ]);
 
 const addExecutor = () => {
-    formData.push({
+    formData.value.push({
         honorific: '',
         forename: '',
         surname: '',
@@ -359,34 +347,36 @@ const addExecutor = () => {
         email: '',
         relationship: '',
         relationshipOther: '',
+        kycType1: '',
+        kycType2: '',
         acting: '',
         renunciation: '',
+        reserveIntent: '',
         addressInputType: 'Add manually'
     });
 };
 const removeExecutor = (i) => {
-    formData.splice(i, 1);
+    formData.value.splice(i, 1);
 };
 
 const clickRelationship = (relationship, i) => {
-    formData[i].relationship = relationship;
+    formData.value[i].relationship = relationship;
 };
 
-const updateActing = (collapseIdentifier) => {
-    actingCollapse.value.forEach((x) => {
-        if (x.identifier === collapseIdentifier) {
-            x.show();
-        } else {
-            x.hide();
-        }
-    });
-};
 const fetchCaseData = async () => {
     let response = await store.fetchCaseData(null, 'executors');
     if (response) {
-        formData = response;
+        formData.value = response;
     }
 };
+
+const nextSection = async () => {
+    let response = await store.saveCaseData(null, 'executors', formData.value);
+    if (response.status === 200) {
+        store.navigateToSection('powers-of-attorney');
+    }
+};
+
 onBeforeMount(() => {
     fetchCaseData();
 });

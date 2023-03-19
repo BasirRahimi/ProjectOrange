@@ -44,6 +44,10 @@ const props = defineProps({
     changeText: {
         type: String,
         default: 'Change Copy'
+    },
+    filePrefix: {
+        type: String,
+        default: ''
     }
 });
 const onFileChange = (e) => {
@@ -54,6 +58,7 @@ const onFileChange = (e) => {
 const uploadFile = (file) => {
     let formData = new FormData();
     formData.append('file', file);
+    formData.append('prefix', props.filePrefix);
     axios
         .post(`/api/cases/${store.activeCase.id}/upload`, formData)
         .then((response) => {

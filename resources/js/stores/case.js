@@ -35,6 +35,13 @@ export const useCaseStore = defineStore('case', () => {
         activeCase.value.id = id;
     }
 
+    function navigateToSection(section) {
+        router.push({
+            name: 'EditCase',
+            params: { id: activeCase.value.id, section }
+        });
+    }
+
     async function saveCaseData(id, section, data) {
         if (!id) {
             id = activeCase.value.id;
@@ -53,6 +60,7 @@ export const useCaseStore = defineStore('case', () => {
         let response = await axios.get(`/api/case-data/${id}`, {
             params: { section }
         });
+        console.log(response);
         if (response.status === 200) {
             return response.data.the_data;
         }
@@ -65,6 +73,7 @@ export const useCaseStore = defineStore('case', () => {
         openCase,
         setActiveCase,
         saveCaseData,
-        fetchCaseData
+        fetchCaseData,
+        navigateToSection
     };
 });
