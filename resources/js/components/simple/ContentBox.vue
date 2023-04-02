@@ -2,8 +2,11 @@
     <div
         class="content-box rounded mb-3"
         :class="[{ shadow: shadow }, { 'bg-white': whiteBg }]">
-        <p v-if="title" class="title h5 text-center">
-            <b>{{ title }}</b>
+        <p class="title h5 text-center fw-bold">
+            <template v-if="title">
+                {{ title }}
+            </template>
+            <slot v-else name="title"></slot>
         </p>
         <slot></slot>
     </div>
