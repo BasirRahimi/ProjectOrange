@@ -53,7 +53,7 @@ onMounted(() => {
 
         appHeaderHeight.value = appHeader.clientHeight;
 
-        let x = getComputedStyle(sideNav).paddingTop;
+        let x = getComputedStyle(sideNav.children[0]).paddingTop;
         paddingTop.value =
             parseInt(x.slice(0, x.length - 2)) +
             parseInt(branding.clientHeight);

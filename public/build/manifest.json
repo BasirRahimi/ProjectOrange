@@ -240,7 +240,7 @@
     "src": "resources/images/step_1.png"
   },
   "resources/js/app.css": {
-    "file": "assets/app-8cd0a57c.css",
+    "file": "assets/app-6222b226.css",
     "src": "resources/js/app.css"
   },
   "resources/js/app.js": {
@@ -260,9 +260,9 @@
       "assets/slick-12459f22.svg"
     ],
     "css": [
-      "assets/app-8cd0a57c.css"
+      "assets/app-6222b226.css"
     ],
-    "file": "assets/app-2a5d7c01.js",
+    "file": "assets/app-4d66c7c0.js",
     "isEntry": true,
     "src": "resources/js/app.js"
   },

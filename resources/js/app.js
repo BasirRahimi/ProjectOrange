@@ -18,12 +18,12 @@ import clickOutside from './directives/click-ouside.js';
 app.directive('click-outside', clickOutside);
 
 // Router
-import clientRouter from './clientRouter';
+// import clientRouter from './clientRouter';
 // router to replace clientRouter after clients refactored to cases
+// if (clientRouter.inUse) {
+//     app.use(clientRouter.router);
+// }
 import router from './router';
-if (clientRouter.inUse) {
-    app.use(clientRouter.router);
-}
 if (router.inUse) {
     app.use(router.router);
 }

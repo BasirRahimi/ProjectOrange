@@ -1,7 +1,7 @@
 <template>
     <nav
         id="AppHeader"
-        class="navbar sticky-top bg-white shadow p-0 justify-content-start"
+        class="navbar sticky-top bg-white shadow p-0 justify-content-start align-items-stretch"
         ref="el">
         <div
             class="px-4 py-3 d-none d-md-block"
@@ -9,41 +9,39 @@
             <div class="fw-bold">Hi, {{ userStore.user.name }}</div>
             <div class="text-gray-500">{{ userStore.user.company }}</div>
         </div>
-        <div
-            class="d-flex align-items-center px-4 py-3 align-self-stretch border-start flex-grow-1">
-            <div class="fs-5 me-3 fw-bold">{{ title }}</div>
-            <template v-if="subtitle">&#x2022;</template>
-            <div class="text-gray-500 ms-3">
-                {{ subtitle }}
+        <div class="border-start flex-grow-1">
+            <div class="d-flex align-items-center px-4 py-3 container h-100">
+                <div class="fs-5 me-3 fw-bold">{{ title }}</div>
+                <template v-if="subtitle">&#x2022;</template>
+                <div class="text-gray-500 ms-3">
+                    {{ subtitle }}
+                </div>
+                <BaseDropdown
+                    menu-classes="shadow"
+                    tag="div"
+                    class="ms-auto"
+                    :title="userStore.user.name">
+                    <RouterLink
+                        :to="{ name: 'Dashboard' }"
+                        class="dropdown-item">
+                        Dashboard
+                    </RouterLink>
+
+                    <a
+                        v-if="userStore.user.role < 2"
+                        href="/grant-access"
+                        class="dropdown-item">
+                        Access control
+                    </a>
+
+                    <a
+                        class="dropdown-item"
+                        href="/logout"
+                        @click.prevent="logout">
+                        Logout
+                    </a>
+                </BaseDropdown>
             </div>
-            <BaseDropdown
-                menu-classes="shadow"
-                position="right"
-                tag="div"
-                class="ms-auto">
-                <template v-slot:title>
-                    <base-button
-                        type="link"
-                        class="dropdown-toggle m-0 nav-link">
-                        {{ userStore.user.name }} <span class="caret"></span>
-                    </base-button>
-                </template>
-
-                <RouterLink :to="{ name: 'Dashboard' }" class="dropdown-item">
-                    Dashboard
-                </RouterLink>
-
-                <a
-                    v-if="userStore.user.role < 2"
-                    href="/grant-access"
-                    class="dropdown-item">
-                    Access control
-                </a>
-
-                <a class="dropdown-item" href="/logout" @click.prevent="logout">
-                    Logout
-                </a>
-            </BaseDropdown>
         </div>
     </nav>
 </template>
@@ -103,9 +101,6 @@ const routeUpdated = (newRoute) => {
             title.value = 'Settings';
             subtitle.value = '';
             break;
-        case 'Terms':
-            title.value = 'Terms';
-            subtitle.value = '';
             break;
         case 'EditCase':
             // if (caseStore.caseType === 'probate') {

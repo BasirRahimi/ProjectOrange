@@ -115,7 +115,9 @@
                                 >{{ singleCase.status }}
                             </td>
                         </tr>
-                        <tr class="no-cases" v-if="searchResult.total == 0">
+                        <tr
+                            class="no-cases"
+                            v-if="searchResult.total == 0 && !searchText">
                             <td colspan="4" class="pt-5">
                                 <img
                                     src="@images/step_1.png"

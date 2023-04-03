@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <ContentBox title="The Advisor Fact-Find" class="text-muted">
+        <ContentBox title="The Advisor Fact-Find" class="text-gray-500">
             <p>
                 Please work through this fact find and complete as much
                 information as possible. You may not have all of the information

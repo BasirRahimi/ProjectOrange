@@ -80,7 +80,7 @@ const routes = [
                 path: 'new-case',
                 components: {
                     default: NewCase,
-                    LeftSideBar: CasesSideNav
+                    LeftSideBar: DashboardSideNav
                 }
             },
             {

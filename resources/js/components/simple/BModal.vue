@@ -45,7 +45,7 @@
 </template>
 <script setup>
 import { ref, onMounted } from 'vue';
-import { Modal as BsModal } from 'bootstrap';
+import { Modal as BsModal } from '~bootstrap';
 
 const modalEl = ref(null);
 let modal = null;

@@ -1,87 +1,58 @@
 <template>
-    <component
-        class="dropdown"
-        :is="tag"
-        :class="[
-            { show: isOpen },
-            { dropdown: direction === 'down' },
-            { dropup: direction === 'up' }
-        ]"
-        aria-haspopup="true"
-        :aria-expanded="isOpen"
-        @click="toggleDropDown"
-        v-click-outside="closeDropDown">
-        <slot name="title">
-            <a
-                class="dropdown-toggle nav-link"
-                :class="{ 'no-caret': hideArrow }"
-                data-toggle="dropdown">
-                <i :class="icon"></i>
-                <span class="no-icon">{{ title }}</span>
-            </a>
-        </slot>
-        <ul
-            class="dropdown-menu"
-            :class="[
-                { 'dropdown-menu-right': position === 'right' },
-                { show: isOpen },
-                menuClasses
-            ]">
+    <component class="dropdown" :is="props.tag" ref="dropdownRef">
+        <base-button
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+            type="link"
+            class="dropdown-toggle nav-link"
+            :class="{ 'no-caret': props.hideArrow }">
+            {{ props.title }}
+            <span class="caret" v-if="!props.hideArrow"></span>
+        </base-button>
+        <ul class="dropdown-menu m-0 dropdown-menu-end" :class="menuClasses">
             <slot></slot>
         </ul>
     </component>
 </template>
-<script>
-export default {
-    name: 'base-dropdown',
-    props: {
-        direction: {
-            type: String,
-            default: 'down'
-        },
-        title: {
-            type: String,
-            description: 'Dropdown title'
-        },
-        icon: {
-            type: String,
-            description: 'Icon for dropdown title'
-        },
-        position: {
-            type: String,
-            description: 'Position of dropdown menu (e.g right|left)'
-        },
-        menuClasses: {
-            type: [String, Object],
-            description: 'Dropdown menu classes'
-        },
-        hideArrow: {
-            type: Boolean,
-            description: 'Whether dropdown arrow should be hidden'
-        },
-        tag: {
-            type: String,
-            default: 'li',
-            description: 'Dropdown html tag (e.g div, li etc)'
-        }
+
+<script setup>
+import { onMounted, ref } from 'vue';
+import { Dropdown as BsDropdown } from '~bootstrap';
+
+const props = defineProps({
+    title: {
+        type: String,
+        description: 'Dropdown title'
     },
-    data() {
-        return {
-            isOpen: false
-        };
+    icon: {
+        type: String,
+        description: 'Icon for dropdown title'
     },
-    methods: {
-        toggleDropDown() {
-            this.isOpen = !this.isOpen;
-            this.$emit('change', this.isOpen);
-        },
-        closeDropDown() {
-            this.isOpen = false;
-            this.$emit('change', this.isOpen);
-        }
+    hideArrow: {
+        type: Boolean,
+        description: 'Whether dropdown arrow should be hidden'
+    },
+    menuClasses: {
+        type: [String, Object],
+        description: 'Dropdown menu classes'
+    },
+    tag: {
+        type: String,
+        default: 'li',
+        description: 'Dropdown html tag (e.g div, li etc)'
     }
-};
+});
+
+const dropdownRef = ref(null);
+let dropdownInstance = null;
+
+onMounted(() => {
+    dropdownInstance = new BsDropdown(
+        dropdownRef.value.querySelector('.dropdown-toggle')
+    );
+});
 </script>
+
 <style>
 .dropdown {
     list-style-type: none;

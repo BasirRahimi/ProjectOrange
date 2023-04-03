@@ -18,7 +18,7 @@
 <script setup>
 import BaseButton from '@/components/simple/BaseButton.vue';
 import { onMounted, ref, onUpdated } from 'vue';
-import { Collapse as BsCollapse } from 'bootstrap';
+import { Collapse as BsCollapse } from '~bootstrap';
 
 const props = defineProps({
     visible: Boolean,

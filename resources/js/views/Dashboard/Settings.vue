@@ -1,3 +1,6 @@
 <template>
-    <div>Settings</div>
+    <ContentBox title="Settings"> </ContentBox>
 </template>
+<script setup>
+import ContentBox from '@/components/simple/ContentBox.vue';
+</script>

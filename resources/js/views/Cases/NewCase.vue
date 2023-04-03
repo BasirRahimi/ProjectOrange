@@ -1,25 +1,25 @@
 <template>
-    <div class="container">
+    <div>
         <ContentBox class="text-center" title="Welcome to a new case">
             <p class="mb-0 text-gray-500">
                 Let’s get you started with a new case. First thing’s first,
                 let’s get this case opened with some basic details
             </p>
             <!-- <BaseButton
-                icon="po-icon-person"
-                outline
-                class="w-100"
-                :class="{ active: caseStore.caseType === 'succession' }">
-                Succession Case
-                <i class="fa-solid fa-arrow-right ms-auto"></i>
-            </BaseButton>
-            <BaseButton
-                icon="po-icon-person"
-                outline
-                class="w-100"
-                :class="{ active: caseStore.caseType === 'probate' }"
-                >Probate Case <i class="fa-solid fa-arrow-right"></i
-            ></BaseButton> -->
+                    icon="po-icon-person"
+                    outline
+                    class="w-100"
+                    :class="{ active: caseStore.caseType === 'succession' }">
+                    Succession Case
+                    <i class="fa-solid fa-arrow-right ms-auto"></i>
+                </BaseButton>
+                <BaseButton
+                    icon="po-icon-person"
+                    outline
+                    class="w-100"
+                    :class="{ active: caseStore.caseType === 'probate' }"
+                    >Probate Case <i class="fa-solid fa-arrow-right"></i
+                ></BaseButton> -->
         </ContentBox>
         <ContentBox>
             <template #title>
