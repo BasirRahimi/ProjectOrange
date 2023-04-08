@@ -117,7 +117,11 @@
                         </tr>
                         <tr
                             class="no-cases"
-                            v-if="searchResult.total == 0 && !searchText">
+                            v-if="
+                                searchResult.total == 0 &&
+                                !searchText &&
+                                userStore.user.role_name != 'admin'
+                            ">
                             <td colspan="4" class="pt-5">
                                 <img
                                     src="@images/step_1.png"
@@ -184,11 +188,14 @@ import axios from 'axios';
 import { ref, onMounted, computed, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useCaseStore } from '@/stores/case';
+import { useUserStore } from '@/stores/user';
 import { useDebouncedRef } from '@/composables/helper.js';
 
 import moment from 'moment';
 
 const caseStore = useCaseStore();
+const userStore = useUserStore();
+await userStore.fetchUser(false);
 const router = useRouter();
 const props = defineProps({
     caseType: String
@@ -209,6 +216,7 @@ const isSearching = ref(false);
 const getCases = async (caseType) => {
     if (isSearching.value) return;
     isSearching.value = true;
+
     const data = await axios({
         method: 'get',
         url: '/api/cases',
@@ -218,7 +226,8 @@ const getCases = async (caseType) => {
             order: order.value,
             'order-by': orderBy.value,
             'per-page': perPage.value,
-            page: currentPage.value
+            page: currentPage.value,
+            'pre-submitted': userStore.user.role_name == 'admin' // For admins get pre submitted cases
         }
     });
     searchResult.value = data.data;
@@ -314,6 +323,7 @@ watch(route, async (newVal) => {
 
 onMounted(async () => {
     caseStore.setCaseType(props.caseType);
+    await userStore.fetchUser();
     await getCases();
     hasCases.value = searchResult.value.total > 0;
 });

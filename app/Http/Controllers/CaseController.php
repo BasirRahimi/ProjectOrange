@@ -8,6 +8,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
@@ -35,7 +36,11 @@ class CaseController extends Controller
             $case_type_id = CaseType::where('name', $request['case-type'])->firstOrFail()->id;
         }
 
-        $cases = POCase::where('user_id', $user->id);
+        if ($user->role_name == 'admin' && $request['pre-submitted']) {
+            $cases = POCase::where('pre_submitted', 1);
+        } else {
+            $cases = POCase::where('user_id', $user->id);
+        }
 
         if ($case_type_id) {
             $cases = $cases->where('case_type_id', $case_type_id);

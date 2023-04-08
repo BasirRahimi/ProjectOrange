@@ -21,7 +21,7 @@ const routes = [
         children: [
             {
                 name: 'CaseFlows',
-                path: 'cases/:caseType',
+                path: 'cases/:caseType?',
                 components: {
                     default: CaseFlows,
                     LeftSideBar: DashboardSideNav
@@ -105,14 +105,12 @@ let router = {
     inUse: false
 };
 
-if (!window.location.pathname.match(/^\/clients/)) {
-    router = {
-        router: createRouter({
-            history: createWebHistory(),
-            routes: routes
-        }),
-        inUse: true
-    };
-}
+router = {
+    router: createRouter({
+        history: createWebHistory(),
+        routes: routes
+    }),
+    inUse: true
+};
 
 export default router;

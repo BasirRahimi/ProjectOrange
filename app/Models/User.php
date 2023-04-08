@@ -11,6 +11,8 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Client;
 use App\Models\Reminder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Support\Facades\Log;
 
 class User extends Authenticatable
 {
@@ -54,11 +56,23 @@ class User extends Authenticatable
     ];
 
     /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = ['role_name'];
+
+    /**
      * Get the user role
      */
     public function role(): BelongsTo
     {
         return $this->belongsTo(UserRole::class);
+    }
+
+    protected function roleName(): Attribute
+    {
+        return Attribute::make(get: fn () => UserRole::find($this->role)->name);
     }
 
     /**

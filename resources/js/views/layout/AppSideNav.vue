@@ -44,6 +44,7 @@ const props = defineProps({ appHeaderHeight: Number });
 
 #AppSideNav {
     position: fixed;
+    width: 250px;
 
     .fa-ul {
         margin-left: 2rem;

@@ -47,14 +47,12 @@
 
 <script setup>
 import axios from 'axios';
-import { ref, onMounted, computed, watch } from 'vue';
+import { ref } from 'vue';
 import { useCaseStore } from '@/stores/case';
-import { useRouter } from 'vue-router';
 import ContentBox from '@/components/simple/ContentBox.vue';
 import BaseButton from '@/components/simple/BaseButton.vue';
 import BaseInput from '@/components/simple/BaseInput.vue';
 
-const router = useRouter();
 const caseStore = useCaseStore();
 const caseName = ref('');
 

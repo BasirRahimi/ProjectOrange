@@ -3,11 +3,13 @@
         id="AppHeader"
         class="navbar sticky-top bg-white shadow p-0 justify-content-start align-items-stretch"
         ref="el">
-        <div
-            class="px-4 py-3 d-none d-md-block"
-            :style="{ width: `${appSideNavWidth}px` }">
-            <div class="fw-bold">Hi, {{ userStore.user.name }}</div>
-            <div class="text-gray-500">{{ userStore.user.company }}</div>
+        <div class="px-4 py-3 d-none d-md-block welcome">
+            <div v-if="userStore.user" class="fw-bold">
+                Hi, {{ userStore.user.name }}
+            </div>
+            <div v-if="userStore.user" class="text-gray-500">
+                {{ userStore.user.company }}
+            </div>
         </div>
         <div class="border-start flex-grow-1">
             <div class="d-flex align-items-center px-4 py-3 container h-100">
@@ -17,6 +19,7 @@
                     {{ subtitle }}
                 </div>
                 <BaseDropdown
+                    v-if="userStore.user"
                     menu-classes="shadow"
                     tag="div"
                     class="ms-auto"
@@ -49,17 +52,19 @@
 <script setup>
 import { useUserStore } from '@/stores/user.js';
 import { useRoute } from 'vue-router';
-import { watch, ref, onBeforeMount } from 'vue';
+import { watch, ref, onMounted } from 'vue';
 import BaseDropdown from '@/components/simple/BaseDropdown.vue';
 
 const props = defineProps({ appSideNavWidth: Number });
-const userStore = useUserStore();
 const route = useRoute();
+
+const userStore = useUserStore();
+await userStore.fetchUser(false);
 
 const title = ref('');
 const subtitle = ref('');
 
-onBeforeMount(() => {
+onMounted(() => {
     routeUpdated(route);
 });
 
@@ -79,10 +84,15 @@ const routeUpdated = (newRoute) => {
             subtitle.value = '';
             break;
         case 'CaseFlows':
-            if (newRoute.params.caseType === 'probate') {
-                title.value = 'Your Probate Cases';
-                subtitle.value =
-                    'Manage existing, or open new probate cases here';
+            if (userStore.user.role_name == 'admin') {
+                title.value = 'Pre-Submitted Cases';
+                subtitle.value = 'Your received cases, provide feedback here';
+            } else {
+                if (newRoute.params.caseType === 'probate') {
+                    title.value = 'Your Probate Cases';
+                    subtitle.value =
+                        'Manage existing, or open new probate cases here';
+                }
             }
             break;
         case 'DocumentLibrary':
@@ -101,7 +111,6 @@ const routeUpdated = (newRoute) => {
             title.value = 'Settings';
             subtitle.value = '';
             break;
-            break;
         case 'EditCase':
             // if (caseStore.caseType === 'probate') {
             //     title.value = 'Probate Case';
@@ -116,4 +125,10 @@ const routeUpdated = (newRoute) => {
     }
 };
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+#AppHeader {
+    .welcome {
+        width: 250px;
+    }
+}
+</style>
