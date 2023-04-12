@@ -17,19 +17,12 @@ app.use(globalComponents);
 import clickOutside from './directives/click-ouside.js';
 app.directive('click-outside', clickOutside);
 
-// Router
-// import clientRouter from './clientRouter';
-// router to replace clientRouter after clients refactored to cases
-// if (clientRouter.inUse) {
-//     app.use(clientRouter.router);
-// }
-import router from './router';
-if (router.inUse) {
-    app.use(router.router);
-}
-
 // Store
 import { createPinia } from 'pinia';
 app.use(createPinia());
+
+// Router
+import router from './router';
+app.use(router);
 
 app.mount('#app');

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CaseController;
 use App\Http\Controllers\CaseDataController;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -34,5 +35,12 @@ Route::middleware('has.access')->group(function () {
     Route::controller(CaseDataController::class)->group(function () {
         Route::get('/case-data/{case_id}', 'get');
         Route::post('/case-data/{case_id}', 'store');
+    });
+});
+
+Route::middleware('is.admin')->group(function () {
+    Route::get('/users', function () {
+        $users = User::all();
+        return $users;
     });
 });

@@ -11,14 +11,34 @@ import NewCase from './views/Cases/NewCase.vue';
 import EditCase from './views/Cases/EditCase.vue';
 import DashboardSideNav from './views/Dashboard/SideNav.vue';
 import CasesSideNav from './views/Cases/SideNav.vue';
+import UserManagement from './views/Dashboard/UserManagement.vue';
+import { useUserStore } from './stores/user';
 
 const routes = [
     {
         name: 'Dashboard',
         path: '/dashboard',
         component: Dashboard,
-        redirect: { name: 'CaseFlows', params: { caseType: 'probate' } },
+        beforeEnter: async (to, from) => {
+            const userStore = useUserStore();
+            await userStore.fetchUser(false);
+
+            if (
+                userStore.user.role_name == 'superadmin' &&
+                to.name == 'Dashboard'
+            ) {
+                return { name: 'UserManagement' };
+            }
+        },
         children: [
+            {
+                name: 'UserManagement',
+                path: 'manage-users',
+                components: {
+                    default: UserManagement,
+                    LeftSideBar: DashboardSideNav
+                }
+            },
             {
                 name: 'CaseFlows',
                 path: 'cases/:caseType?',
@@ -101,16 +121,7 @@ const routes = [
     }
 ];
 
-let router = {
-    inUse: false
-};
-
-router = {
-    router: createRouter({
-        history: createWebHistory(),
-        routes: routes
-    }),
-    inUse: true
-};
-
-export default router;
+export default createRouter({
+    history: createWebHistory(),
+    routes: routes
+});
