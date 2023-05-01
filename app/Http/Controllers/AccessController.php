@@ -1,11 +1,12 @@
-<?php 
+<?php
 
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
 
-class AccessController extends Controller {
+class AccessController extends Controller
+{
 
     /**
      * Display a listing of the resource.
@@ -19,26 +20,42 @@ class AccessController extends Controller {
         return view('grant-access', ['users' => $users]);
     }
 
-    public function grantAccess(Request $request, $user_id) {
+    /**
+     * Grant access to a specific user by setting their 'has_access' property to 1.
+     * 
+     * @param Request $request
+     * @param int $user_id
+     * @return Response
+     */
+    public function grantAccess(Request $request, $user_id)
+    {
         $user = User::find($user_id);
-        
-        if(!$user) return response('User not found');
+
+        if (!$user) return response('User not found');
 
         $user->has_access = 1;
 
-        if($user->save()) {
+        if ($user->save()) {
             return response('User granted access');
         } else {
             return response('User didn\'t save', 500);
         }
     }
 
-    public function denyAccess(Request $request, $user_id) {
+    /**
+     * Deny access to a specific user by deleting their record from the database.
+     * 
+     * @param Request $request
+     * @param int $user_id
+     * @return Response
+     */
+    public function denyAccess(Request $request, $user_id)
+    {
         $user = User::find($user_id);
-        
-        if(!$user) return response('User not found');
 
-        if($user->delete()) {
+        if (!$user) return response('User not found');
+
+        if ($user->delete()) {
             return response('User deleted');
         } else {
             return response('User didn\'t delete', 500);

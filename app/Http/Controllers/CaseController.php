@@ -15,7 +15,9 @@ use Illuminate\View\View;
 class CaseController extends Controller
 {
     /**
-     * Get all cases
+     * Display the 'Cases' page.
+     *
+     * @return View
      */
     public function index(): View
     {
@@ -23,6 +25,13 @@ class CaseController extends Controller
         return view('home', ['page_title' => $page_title]);
     }
 
+    /**
+     * Retrieve cases based on the provided filters.
+     *
+     * @param Request $request
+     * @param int|null $case_id
+     * @return JsonResponse
+     */
     public function getCases(Request $request, int $case_id = null): JsonResponse
     {
         $user = Auth::user();
@@ -57,7 +66,11 @@ class CaseController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a new case in the database.
+     *
+     * @param Request $request
+     * @param string $case_type
+     * @return JsonResponse
      */
     public function store(Request $request, string $case_type): JsonResponse
     {
@@ -81,14 +94,21 @@ class CaseController extends Controller
     }
 
     /**
-     * Status updates
+     * Update the specified case in the database.
+     *
+     * @param Request $request
+     * @param string $case_id
+     * @return JsonResponse
      */
     public function update(Request $request, string $case_id): JsonResponse
     {
     }
 
     /**
-     * soft delete resource
+     * Soft delete the specified case from the database.
+     *
+     * @param string $case_id
+     * @return Response
      */
     public function softDelete(string $case_id): Response
     {
@@ -100,7 +120,11 @@ class CaseController extends Controller
     }
 
     /**
-     * upload file
+     * Upload a file for the specified case and return the file information.
+     *
+     * @param Request $request
+     * @param string $case_id
+     * @return JsonResponse
      */
     public function uploadFile(Request $request, string $case_id): JsonResponse
     {
