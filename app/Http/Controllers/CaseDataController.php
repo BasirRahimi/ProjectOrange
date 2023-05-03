@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\CaseData;
 use App\Models\POCase;
+use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
 use Spatie\FlareClient\Http\Exceptions\BadResponse;
+use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 
 class CaseDataController extends Controller
 {

@@ -59,8 +59,12 @@ class CaseController extends Controller
             $cases = $cases->where('name', 'like', '%' . $request['search'] . '%');
         }
 
-        $cases = $cases->orderBy($request['order-by'], $request['order']);
-        $cases = $cases->paginate($request['per-page']);
+        $order_by = $request['order-by'] ?? 'updated_at';
+        $order = $request['order'] ?? 'desc';
+        $perPage = $request['per-page'] ?? 10;
+
+        $cases = $cases->orderBy($order_by, $order);
+        $cases = $cases->paginate($perPage);
 
         return response()->json($cases);
     }
@@ -83,7 +87,7 @@ class CaseController extends Controller
         $case->case_type_id = $case_type_id;
 
         if (empty($request['case-name'])) {
-            return response('case name is required', 400);
+            return response()->json('case name is required', 400);
         }
 
         $case->name = $request['case-name'];
@@ -108,15 +112,15 @@ class CaseController extends Controller
      * Soft delete the specified case from the database.
      *
      * @param string $case_id
-     * @return Response
+     * @return JsonResponse
      */
-    public function softDelete(string $case_id): Response
+    public function softDelete(string $case_id): JsonResponse
     {
         $case = POCase::findOrFail($case_id);
 
-        $case->softDeletes();
+        $case->delete();
 
-        return response('case_deleted', 200);
+        return response()->json('case_deleted', 200);
     }
 
     /**
